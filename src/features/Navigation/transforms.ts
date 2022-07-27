@@ -4,16 +4,18 @@ import { NavigationQueryResponse, NavigationSectionsLinkProperty } from 'types/t
 import { Navigation, NavigationSection } from './types';
 
 export function getNavigationLinksSections(response: NavigationQueryResponse): NavigationSection[] {
-  return response.navigation.sections.map((section) => ({
-    name: section.name,
-    link: getNavigationLink(section.link as NavigationSectionsLinkProperty),
-    subsections: section.subsections
-      ? section.subsections.map((subsection) => ({
-          name: subsection.name,
-          links: subsection.links.map((link) => getNavigationLink(link as NavigationSectionsLinkProperty))
-        }))
-      : null
-  }));
+  return response.navigation?.sections
+    ? response.navigation.sections.map((section) => ({
+        name: section.name,
+        link: getNavigationLink(section.link as NavigationSectionsLinkProperty),
+        subsections: section.subsections
+          ? section.subsections.map((subsection) => ({
+              name: subsection.name,
+              links: subsection.links.map((link) => getNavigationLink(link as NavigationSectionsLinkProperty))
+            }))
+          : null
+      }))
+    : [];
 }
 
 export function getNavigation(response: NavigationQueryResponse): Navigation {

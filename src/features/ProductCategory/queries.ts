@@ -67,12 +67,6 @@ const ProductCategoryFragments = gql`
     totalVariants
     totalInventory
     sellingPlanGroupCount
-    reviews {
-      stats {
-        average
-        count
-      }
-    }
   }
 `;
 

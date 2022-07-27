@@ -16,7 +16,7 @@ export const ProductPageShopifyProductHandlesQuery = gql`
 `;
 
 export const ProductPageShopifyProductQuery = gql`
-  query ProductPageShopifyProduct($handle: String!, $reviewsPerPage: Int) {
+  query ProductPageShopifyProduct($handle: String!) {
     product: productByHandleWithTtl(handle: $handle) {
       id
       handle
@@ -58,16 +58,6 @@ export const ProductPageShopifyProductQuery = gql`
             descriptionHtml
           }
         }
-        lineItemAttributes {
-          _id
-          name
-          attributes {
-            key
-            values {
-              value
-            }
-          }
-        }
       }
       standardizedProductType {
         productTaxonomyNode {
@@ -98,33 +88,6 @@ export const ProductPageShopifyProductQuery = gql`
               }
             }
           }
-        }
-      }
-      reviews(per_page: $reviewsPerPage) {
-        stats {
-          average
-          count
-        }
-        reviews {
-          data {
-            product_review_id
-            rating
-            title
-            review
-            date_created
-            timeago
-            reviewer {
-              first_name
-              last_name
-              verified_buyer
-              address
-              profile_picture
-              gravatar
-            }
-          }
-          per_page
-          current_page
-          total
         }
       }
       featuredImage {
@@ -249,33 +212,6 @@ export const ProductPageShopifyProductQuery = gql`
   }
 `;
 
-export const ProductPageReviewPageQuery = gql`
-  query ProductPageReviewPageQuery($sku: String!, $page: Int!, $perPage: Int!) {
-    reviewData: ReviewsIo_listProductReviews(sku: $sku, page: $page, per_page: $perPage) {
-      ratings
-      reviews {
-        data {
-          reviewer {
-            profile_picture
-            gravatar
-            first_name
-            last_name
-            verified_buyer
-          }
-          title
-          rating
-          review
-          date_created
-        }
-      }
-    }
-  }
-`;
+export const ProductPageReviewPageQuery = gql``;
 
-export const CreateMyProductReviewMutation = gql`
-  mutation CreateMyProductReviewMutation($input: CreateMyProductReviewPropertiesPropertyInput!) {
-    result: createMyProductReview(input: $input) {
-      success
-    }
-  }
-`;
+export const CreateMyProductReviewMutation = gql``;

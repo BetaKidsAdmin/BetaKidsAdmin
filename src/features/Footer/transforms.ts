@@ -12,10 +12,12 @@ export function getFooter(response: FooterQueryResponse) {
     ...footer,
     navigation: {
       ...footer.navigation,
-      sections: footer.navigation.sections.map((section) => ({
-        ...section,
-        links: section.links.map((link) => getNavigationLink(link as NavigationSectionsLinkProperty))
-      }))
+      sections: footer.navigation?.sections
+        ? footer.navigation.sections.map((section) => ({
+            ...section,
+            links: section.links.map((link) => getNavigationLink(link as NavigationSectionsLinkProperty))
+          }))
+        : []
     }
   };
 }
