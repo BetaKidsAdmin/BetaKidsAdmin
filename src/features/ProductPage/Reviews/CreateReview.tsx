@@ -5,7 +5,6 @@ import Textarea from 'components/Form/Textarea/Textarea';
 import { Star } from 'components/Stars/Stars';
 import { Fragment, useCallback, useMemo } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { CreateMyProductReviewMutationResponse, CreateMyProductReviewMutationVariables } from 'types/takeshape';
 import { useAuthenticatedMutation } from 'utils/takeshape';
 import { CreateMyProductReviewMutation } from '../queries.takeshape';
 
@@ -36,8 +35,8 @@ export const CreateReview = (props: ReviewsProps) => {
   } = useForm<CreateReviewForm>();
 
   const [createProductReview, { data: createProductReviewResponse, error: mutationError }] = useAuthenticatedMutation<
-    CreateMyProductReviewMutationResponse,
-    CreateMyProductReviewMutationVariables
+    any,
+    any
   >(CreateMyProductReviewMutation);
 
   const submitCallback = useCallback(

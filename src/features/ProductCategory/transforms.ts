@@ -46,7 +46,7 @@ function getProduct(shopifyProduct: ProductCategoryShopifyProduct): ProductCateg
 function getProductListItem(shopifyProduct: ProductCategoryShopifyProduct): ProductCategoryProductListItem {
   return {
     product: getProduct(shopifyProduct),
-    reviews: getReviews(shopifyProduct.reviews)
+    reviews: getReviews({ stats: { average: null, count: 0 } })
   };
 }
 

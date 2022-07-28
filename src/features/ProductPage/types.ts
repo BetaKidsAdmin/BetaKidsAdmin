@@ -3,12 +3,7 @@ import { SetRequired } from 'type-fest';
 import { ProductBase } from 'types/product';
 import { Review, ReviewHighlights, ReviewList, ReviewRollup, ReviewStats } from 'types/review';
 import { ProductPageRelatedProductsQueryResponse } from 'types/storefront';
-import {
-  ProductPageShopifyProductResponse,
-  ReviewsIo_ListProductReviewsResponse,
-  Shopify_Product,
-  Shopify_ProductConnection
-} from 'types/takeshape';
+import { ProductPageShopifyProductResponse, Shopify_Product, Shopify_ProductConnection } from 'types/takeshape';
 
 export type ProductPageShopifyProductHandleNode = Pick<Shopify_Product, 'id' | 'handle'>;
 export type ProductPageShopifyProductHandleConnection = Pick<Shopify_ProductConnection, 'pageInfo'> & {
@@ -73,7 +68,7 @@ export type ProductPageProduct = SetRequired<
   | 'hasStock'
   | 'lineItemAttributes'
 >;
-export type ProductPageReviewsIoReviews = ReviewsIo_ListProductReviewsResponse;
+export type ProductPageReviewsIoReviews = any;
 export type ProductPageReviewsReviewList = ReviewList;
 export type ProductPageReviewsReview = Review;
 export type ProductPageReviewHighlights = ReviewHighlights;

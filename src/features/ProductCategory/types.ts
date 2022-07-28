@@ -5,7 +5,6 @@ import { ProductBase } from 'types/product';
 import { ReviewStats } from 'types/review';
 import {
   ProductCategoryShopifyCollectionQueryResponse,
-  ReviewsIo_ListProductReviewsResponse,
   Shopify_Collection,
   Shopify_CollectionConnection
 } from 'types/takeshape';
@@ -19,7 +18,7 @@ export type ProductCategoryShopifyCollection = ProductCategoryShopifyCollectionQ
 
 export type ProductCategoryShopifyProduct = ProductCategoryShopifyCollection['products']['nodes'][0];
 
-export type ProductCategoryReviewsIoReviews = Pick<ReviewsIo_ListProductReviewsResponse, 'stats'>;
+export type ProductCategoryReviewsIoReviews = any;
 
 export type ProductCategoryProduct = ProductBase;
 

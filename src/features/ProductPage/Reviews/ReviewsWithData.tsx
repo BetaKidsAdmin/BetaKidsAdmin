@@ -5,7 +5,6 @@ import { getProductReviewsPage, getReviewList } from 'features/ProductPage/trans
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Review } from 'types/review';
-import { ProductPageReviewPageQueryResponse, ProductPageReviewPageQueryVariables } from 'types/takeshape';
 import { ProductPageReviewsReviewList } from '../types';
 import { Reviews } from './Reviews';
 
@@ -17,16 +16,16 @@ export interface ReviewsWithDataProps {
 }
 
 export const ReviewsWithData = ({ productName, sku, reviewList, reviewsPerPage }: ReviewsWithDataProps) => {
+  return null;
+
+  /* eslint-disable no-unreachable */
   const { stats, rollup, items, currentPage: initialPage, totalPages } = reviewList ?? getReviewList();
 
   const { isReady, query } = useRouter();
   const [currentPage, setCurrentPage] = useState(initialPage);
   const [isCreateReviewOpen, setIsCreateReviewOpen] = useState(false);
 
-  const [loadReviews, { data: pageData, loading, error }] = useLazyQuery<
-    ProductPageReviewPageQueryResponse,
-    ProductPageReviewPageQueryVariables
-  >(ProductPageReviewPageQuery, {
+  const [loadReviews, { data: pageData, loading, error }] = useLazyQuery<any, any>(ProductPageReviewPageQuery, {
     variables: {
       sku,
       page: currentPage,

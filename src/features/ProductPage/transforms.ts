@@ -13,7 +13,6 @@ import {
 } from 'transforms/shopify';
 import { ProductPageRelatedProductsQueryResponse } from 'types/storefront';
 import {
-  ProductPageReviewPageQueryResponse,
   ProductPageShopifyProductHandlesQueryResponse,
   ProductPageShopifyProductResponse,
   Shopify_MoneyV2
@@ -33,7 +32,7 @@ import {
   ProductPageReviewsReviewList
 } from './types';
 
-type Shopify_Collection = ProductPageShopifyProductResponse['product']['collections']['nodes'][0];
+type Shopify_Collection = any;
 
 export function getProduct(response: ProductPageShopifyProductResponse): ProductPageProduct {
   const shopifyProduct = response?.product;
@@ -64,7 +63,7 @@ export function getProduct(response: ProductPageShopifyProductResponse): Product
     hasSubscriptionPurchaseOption: shopifyProduct.sellingPlanGroupCount > 0,
     hasStock: shopifyProduct.totalInventory > 0,
     variantOptions: getProductVariantOptions(shopifyProduct.options, variants),
-    lineItemAttributes: getProductLineItemAttributes(shopifyProduct.takeshape.lineItemAttributes)
+    lineItemAttributes: getProductLineItemAttributes(null)
   };
 }
 
@@ -82,28 +81,16 @@ export function getReviewList(
   };
 }
 
-export function getProductReviewsPage(response: ProductPageReviewPageQueryResponse): ProductPageReviewsReviewList {
-  const reviews = response?.reviewData;
-
-  if (!reviews) {
-    return null;
-  }
-
-  return getReviewList(reviews);
+export function getProductReviewsPage(response: any): ProductPageReviewsReviewList {
+  return null;
 }
 
 export function getProductReviews(response: ProductPageShopifyProductResponse): ProductPageReviewsReviewList {
-  const reviews = response?.product?.reviews;
-
-  if (!reviews) {
-    return null;
-  }
-
-  return getReviewList(reviews);
+  return null;
 }
 
 export function getReviewHighlights(response: ProductPageShopifyProductResponse): ProductPageReviewHighlights {
-  const { stats, reviews } = response?.product?.reviews ?? {};
+  const [stats, reviews] = [null, null];
 
   return {
     stats: getStats(stats),
@@ -245,7 +232,7 @@ function collectionHasRules(collection: Shopify_Collection) {
 
 export function getBreadcrumbs(response: ProductPageShopifyProductResponse): ProductPageBreadcrumbs {
   const product = response?.product;
-  const collections = product?.collections;
+  const collections = null;
 
   if (!collections) {
     return null;

@@ -74,13 +74,7 @@ function getDiscount(amount: number, { adjustmentType, adjustmentValue }: Shopif
   }
 }
 
-function getSubscriptionInterval({
-  interval,
-  intervalCount,
-  maxCycles,
-  minCycles,
-  anchors
-}: Shopify_SellingPlanRecurringBillingPolicy) {
+function getSubscriptionInterval({ interval, intervalCount, maxCycles, minCycles, anchors }: any) {
   const subscriptionInterval = {
     anchor: anchors[0],
     intervalCount,

@@ -87,8 +87,8 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     return apolloClient.query<ProductPageShopifyProductResponse, ProductPageShopifyProductVariables>({
       query: ProductPageShopifyProductQuery,
       variables: {
-        handle,
-        reviewsPerPage: productReviewsPerPage
+        handle
+        // reviewsPerPage: productReviewsPerPage
       }
     });
   });
@@ -138,15 +138,18 @@ export const getStaticPaths: GetStaticPaths = async () => {
       }
     });
 
+    // get products that present in takeshape
+    data.products.nodes = data.products.nodes.filter((node) => node?.takeshape?._id);
+
     paths = [...paths, ...getProductPageParams(data)];
     hasNextPage = data.products.pageInfo.hasNextPage;
     endCursor = data.products.pageInfo.endCursor;
   }
 
   // Add the lighthouse testing path, if configured
-  if (lighthouseProductHandle) {
-    paths.push({ params: { product: [lighthouseHandle] } });
-  }
+  // if (lighthouseProductHandle) {
+  //   paths.push({ params: { product: [lighthouseHandle] } });
+  // }
 
   return {
     paths,

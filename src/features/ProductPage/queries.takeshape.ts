@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 export const ProductPageShopifyProductHandlesQuery = gql`
   query ProductPageShopifyProductHandlesQuery($first: Int!, $after: String) {
-    products: productsWithTtl(first: $first, after: $after, sortKey: ID) {
+    products: productsWithTtl(first: $first, after: $after, sortKey: ID, query: "status:ACTIVE") {
       pageInfo {
         hasNextPage
         endCursor
@@ -10,6 +10,9 @@ export const ProductPageShopifyProductHandlesQuery = gql`
       nodes {
         id
         handle
+        takeshape {
+          _id
+        }
       }
     }
   }
@@ -64,32 +67,32 @@ export const ProductPageShopifyProductQuery = gql`
           name
         }
       }
-      collections(first: 25) {
-        nodes {
-          id
-          handle
-          title
-          productsCount
-          ruleSet {
-            rules {
-              column
-              condition
-              relation
-            }
-          }
-          takeshape {
-            breadcrumbTitle
-            parent {
-              breadcrumbTitle
-              shopifyCollection {
-                id
-                handle
-                title
-              }
-            }
-          }
-        }
-      }
+      # collections(first: 25) {
+      #   nodes {
+      #     id
+      #     handle
+      #     title
+      #     productsCount
+      #     ruleSet {
+      #       rules {
+      #         column
+      #         condition
+      #         relation
+      #       }
+      #     }
+      #     takeshape {
+      #       breadcrumbTitle
+      #       parent {
+      #         breadcrumbTitle
+      #         shopifyCollection {
+      #           id
+      #           handle
+      #           title
+      #         }
+      #       }
+      #     }
+      #   }
+      # }
       featuredImage {
         id
         url(transform: { maxWidth: 800, maxHeight: 800, preferredContentType: WEBP })
@@ -212,6 +215,14 @@ export const ProductPageShopifyProductQuery = gql`
   }
 `;
 
-export const ProductPageReviewPageQuery = gql``;
+export const ProductPageReviewPageQuery = gql`
+  query {
+    __typename
+  }
+`;
 
-export const CreateMyProductReviewMutation = gql``;
+export const CreateMyProductReviewMutation = gql`
+  mutation {
+    __typename
+  }
+`;

@@ -1,10 +1,6 @@
 import { SetRequired } from 'type-fest';
 import { ProductBase } from 'types/product';
-import {
-  ReviewsIo_ListProductReviewsResponse,
-  Shopify_Product,
-  Shopify_ProductVariantConnection
-} from 'types/takeshape';
+import { Shopify_Product, Shopify_ProductVariantConnection } from 'types/takeshape';
 
 export type QuickAddShopifyProduct = Pick<
   Shopify_Product,
@@ -27,7 +23,7 @@ export type QuickAddShopifyProduct = Pick<
 };
 
 export type QuickAddProduct = SetRequired<ProductBase, 'variants'>;
-export type QuickAddReviewsIoReviews = Pick<ReviewsIo_ListProductReviewsResponse, 'stats'>;
+export type QuickAddReviewsIoReviews = any;
 
 export type QuickAdd = {
   productHandle: string;
