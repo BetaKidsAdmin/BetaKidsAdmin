@@ -11,7 +11,7 @@ const AccountRewardsPage: NextPage = ({ navigation, footer }: InferGetStaticProp
   const { data } = useAuthenticatedQuery<GetMyLoyaltyCardQueryResponse>(GetMyLoyaltyCardQuery);
 
   if (!data) {
-    return null;
+    return <Layout navigation={navigation} footer={footer} seo={{ title: 'Rewards' }}></Layout>;
   }
 
   return (

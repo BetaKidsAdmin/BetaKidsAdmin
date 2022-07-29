@@ -73,8 +73,8 @@ export const NavigationTop = ({ message, sections, currencies }: NavigationTopPr
                 <div className="hidden lg:flex lg:items-center">
                   <NextLink href="/">
                     <span className="sr-only">Workflow</span>
-                    <div className="h-8 w-8 relative">
-                      <NextImage src={siteLogo} height={32} width={32} alt="" className="w-auto h-8" priority />
+                    <div className="h-8 w-32 relative">
+                      <NextImage src={siteLogo} height={32} width={128} alt="" className="w-auto h-8" priority />
                     </div>
                   </NextLink>
                 </div>
@@ -102,8 +102,8 @@ export const NavigationTop = ({ message, sections, currencies }: NavigationTopPr
                 {/* Logo (lg-) */}
                 <NextLink href="/" className="lg:hidden">
                   <span className="sr-only">Workflow</span>
-                  <div className="h-8 w-8 relative">
-                    <NextImage src={siteLogo} height={32} width={32} alt="" className="w-auto h-8" priority />
+                  <div className="h-8 w-32 relative">
+                    <NextImage src={siteLogo} height={32} width={128} alt="" className="w-auto h-8" priority />
                   </div>
                 </NextLink>
 
