@@ -2,7 +2,6 @@ import * as Icons from 'components/Icons/Icons';
 import { NavigationProps } from 'features/Footer/Navigation/Navigation';
 import { NewsletterProps } from 'features/Footer/Newsletter/Newsletter';
 import { Navigation } from './Navigation/Navigation';
-import { Newsletter } from './Newsletter/Newsletter';
 import { Social, SocialProps } from './Social/Social';
 
 const social: SocialProps = {
@@ -50,9 +49,9 @@ export const Footer = ({ navigation, newsletter }: FooterProps) => {
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <Navigation sections={navigation?.sections} />
-          <div className="mt-8 xl:mt-0">
+          {/* <div className="mt-8 xl:mt-0">
             <Newsletter text={newsletter?.text} />
-          </div>
+          </div> */}
         </div>
         <div className="mt-8 border-t border-gray-200 pt-8 md:flex md:items-center md:justify-between">
           <Social {...social} />

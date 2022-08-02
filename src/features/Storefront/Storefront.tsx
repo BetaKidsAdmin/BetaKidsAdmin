@@ -6,6 +6,7 @@ import { Hero } from './Hero/Hero';
 import { Offers } from './Offers/Offers';
 import { Sale } from './Sale/Sale';
 import { Testimonials } from './Testimonials/Testimonials';
+import { TestMarkup } from './TestMarkup/TestMarkup';
 import { BackgroundImageChild, StorefrontChild } from './types';
 
 function backgroundImageChildToComponent(component: BackgroundImageChild, index = 0) {
@@ -49,5 +50,11 @@ export interface StorefrontProps {
 }
 
 export const Storefront = ({ storefront }: StorefrontProps) => {
-  return <div className="bg-white">{storefront?.components?.map(storefrontChildToComponent())}</div>;
+  return (
+    <div className="bg-white">
+      {storefront?.components?.map(storefrontChildToComponent())}
+
+      <TestMarkup />
+    </div>
+  );
 };

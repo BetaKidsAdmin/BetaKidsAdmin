@@ -47,77 +47,112 @@ const StorefrontFragments = gql`
 `;
 
 export const GetStorefrontQuery = gql`
-  ${StorefrontFragments}
   query GetStorefrontQuery {
-    storefront: getStorefront {
+    storefront: getHomepage {
       components {
         __typename
-        ... on OffersComponent {
-          offers {
-            href
-            name
-            description
-          }
-        }
         ... on HeroComponent {
-          primaryText
+          firstButton {
+            text
+            url
+          }
+          primaryText {
+            firstRow
+            secondRow
+          }
+          secondButton {
+            text
+            url
+          }
           secondaryText
-          buttonText
           image {
             path
             description
-          }
-        }
-        ... on CollectionsComponent {
-          collections {
-            name
-            description
-            href
-            image {
-              path
-              description
-            }
-          }
-        }
-        ... on CollectionComponent {
-          collection {
-            shopifyCollection {
-              ...StorefrontCollection
-              products(first: 4) {
-                pageInfo {
-                  endCursor
-                  startCursor
-                  hasNextPage
-                  hasPreviousPage
-                }
-                nodes {
-                  ...StorefrontProduct
-                }
-              }
-            }
-          }
-        }
-        ... on BackgroundImageComponent {
-          image {
-            path
-            description
-          }
-          components {
-            __typename
-            ... on SaleComponent {
-              primaryText
-              secondaryText
-              buttonText
-            }
-            ... on TestimonialsComponent {
-              testimonials {
-                quote
-                attribution
-              }
-            }
           }
         }
       }
     }
   }
 `;
+
+// export const GetStorefrontQuery = gql`
+//   ${StorefrontFragments}
+//   query GetStorefrontQuery {
+//     storefront: getHomepage {
+//       components {
+//         __typename
+//         ... on OffersComponent {
+//           offers {
+//             href
+//             name
+//             description
+//           }
+//         }
+//         ... on HeroComponent {
+//           firstButton {
+//             text
+//             url
+//           }
+//           primaryText {
+//             firstRow
+//             secondRow
+//           }
+//           secondButton {
+//             text
+//             url
+//           }
+//           secondaryText
+//         }
+//         ... on CollectionsComponent {
+//           collections {
+//             name
+//             description
+//             href
+//             image {
+//               path
+//               description
+//             }
+//           }
+//         }
+//         ... on CollectionComponent {
+//           collection {
+//             shopifyCollection {
+//               ...StorefrontCollection
+//               products(first: 4) {
+//                 pageInfo {
+//                   endCursor
+//                   startCursor
+//                   hasNextPage
+//                   hasPreviousPage
+//                 }
+//                 nodes {
+//                   ...StorefrontProduct
+//                 }
+//               }
+//             }
+//           }
+//         }
+//         ... on BackgroundImageComponent {
+//           image {
+//             path
+//             description
+//           }
+//           components {
+//             __typename
+//             ... on SaleComponent {
+//               primaryText
+//               secondaryText
+//               buttonText
+//             }
+//             ... on TestimonialsComponent {
+//               testimonials {
+//                 quote
+//                 attribution
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// `;
