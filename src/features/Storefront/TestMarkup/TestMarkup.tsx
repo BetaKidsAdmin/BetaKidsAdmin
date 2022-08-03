@@ -1,4 +1,6 @@
-import { GlobeAltIcon, LightningBoltIcon, ScaleIcon } from '@heroicons/react/outline';
+import { Disclosure } from '@headlessui/react';
+import { ChevronDownIcon, GlobeAltIcon, LightningBoltIcon, ScaleIcon } from '@heroicons/react/outline';
+import classNames from 'utils/classNames';
 
 const features1 = [
   {
@@ -73,13 +75,47 @@ const features3 = [
   }
 ];
 
+const faqs = [
+  {
+    id: 1,
+    question: 'Immune Support Gummies (monthly)',
+    answer:
+      'Our tasty, science-backed immune support gummy. Specially formulated just for kids with Beta Glucan, Selenium and Vitamin D3.',
+    defaultOpen: true
+  },
+  {
+    id: 2,
+    question: 'Immune Support Gummies (monthly)',
+    answer:
+      'Our tasty, science-backed immune support gummy. Specially formulated just for kids with Beta Glucan, Selenium and Vitamin D3.'
+  },
+  {
+    id: 3,
+    question: 'Immune Support Gummies (monthly)',
+    answer:
+      'Our tasty, science-backed immune support gummy. Specially formulated just for kids with Beta Glucan, Selenium and Vitamin D3.'
+  },
+  {
+    id: 4,
+    question: 'Immune Support Gummies (monthly)',
+    answer:
+      'Our tasty, science-backed immune support gummy. Specially formulated just for kids with Beta Glucan, Selenium and Vitamin D3.'
+  },
+  {
+    id: 5,
+    question: 'Immune Support Gummies (monthly)',
+    answer:
+      'Our tasty, science-backed immune support gummy. Specially formulated just for kids with Beta Glucan, Selenium and Vitamin D3.'
+  }
+];
+
 export const TestMarkup = () => {
   return (
     <>
       {/* features section */}
-      <div className="py-12 bg-white">
+
+      {/* <div className="py-12 bg-white">
         <div className="max-w-xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-          <h2 className="sr-only">A better way to send money.</h2>
           <dl className="space-y-10 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-8">
             {features1.map((feature) => (
               <div key={feature.name} className="text-center">
@@ -94,8 +130,17 @@ export const TestMarkup = () => {
             ))}
           </dl>
         </div>
-      </div>
-
+        <div className="mt-6 flex justify-center">
+          <div className="rounded-md shadow">
+            <a
+              href="#"
+              className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-400 hover:bg-red-500 md:py-4 md:text-lg md:px-10"
+            >
+              Buy BetaKIDS®
+            </a>
+          </div>
+        </div>
+      </div> */}
       {/* Feature section with grid */}
       <div className="relative bg-gray-50 py-16 sm:py-24 lg:py-32">
         <div className="mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
@@ -128,7 +173,6 @@ export const TestMarkup = () => {
           </div>
         </div>
       </div>
-
       {/* CTA Section */}
       <div className="relative py-16 bg-white">
         <div className="hidden absolute top-0 inset-x-0 h-1/2 bg-gray-50 lg:block" aria-hidden="true" />
@@ -212,7 +256,6 @@ export const TestMarkup = () => {
           </div>
         </div>
       </div>
-
       {/* Feature section with grid */}
       <div className="relative bg-gray-50 py-16 sm:py-24 lg:py-32">
         <div className="mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
@@ -220,13 +263,11 @@ export const TestMarkup = () => {
             Clinically-Proven Ingredients
           </p>
           <p className="mt-5 max-w-prose mx-auto text-xl text-gray-500">
-            <p>
-              <strong>BetaKIDS®</strong> is an all-natural,{' '}
-              <a href="/" title="BetaKIDS Immune Support Science">
-                science-backed
-              </a>{' '}
-              gummy that has been shown to <strong>double a child's immune response</strong> without overstimulation.
-            </p>
+            <strong>BetaKIDS®</strong> is an all-natural,{' '}
+            <a href="#" title="BetaKIDS Immune Support Science">
+              science-backed
+            </a>{' '}
+            gummy that has been shown to <strong>double a child's immune response</strong> without overstimulation.
           </p>
           <div className="mt-12">
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -240,7 +281,7 @@ export const TestMarkup = () => {
                         </span>
                       </div>
                       <h3 className="mt-8 text-lg font-medium text-gray-900 tracking-tight">{feature.name}</h3>
-                      <p className="mt-5 text-base text-gray-500">{feature.description}</p>
+                      <div className="mt-5 text-base text-gray-500">{feature.description}</div>
                     </div>
                   </div>
                 </div>
@@ -249,7 +290,6 @@ export const TestMarkup = () => {
           </div>
         </div>
       </div>
-
       {/* Testimonial section */}
       <div className="pb-16 bg-gradient-to-r from-orange-300 to-red-400 lg:pb-0 lg:z-10 lg:relative">
         <div className="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-8">
@@ -259,7 +299,7 @@ export const TestMarkup = () => {
               <div className="aspect-w-10 aspect-h-6 rounded-xl shadow-xl overflow-hidden sm:aspect-w-16 sm:aspect-h-7 lg:aspect-none lg:h-full">
                 <img
                   className="object-cover lg:h-full lg:w-full"
-                  src="https://images.unsplash.com/photo-1520333789090-1afc82db536a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2102&q=80"
+                  src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=450&q=80"
                   alt=""
                 />
               </div>
@@ -289,7 +329,319 @@ export const TestMarkup = () => {
           </div>
         </div>
       </div>
+      {/* faq */}
+      <div className="bg-white">
+        <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+          <div className="max-w-2xl lg:mx-auto lg:text-center">
+            <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">The Subscription Box</h2>
+            <div className="mt-4 text-gray-500">
+              <p>
+                We're making immune health <strong>fun, educational</strong> and <strong>engaging</strong> for kids and
+                families.
+              </p>
+            </div>
+          </div>
+          <div className="mt-8">
+            <div className="relative lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
+              <div className="relative">
+                <dl className="mt-6 space-y-6 divide-y divide-gray-200">
+                  {faqs.map((faq) => (
+                    <Disclosure as="div" key={faq.question} defaultOpen={faq?.defaultOpen} className="pt-6">
+                      {({ open }) => (
+                        <>
+                          <dt className="text-lg">
+                            <Disclosure.Button className="text-left w-full flex justify-between items-start text-gray-400">
+                              <span className="font-medium text-gray-900">{faq.question}</span>
+                              <span className="ml-6 h-7 flex items-center">
+                                <ChevronDownIcon
+                                  className={classNames(open ? '-rotate-180' : 'rotate-0', 'h-6 w-6 transform')}
+                                  aria-hidden="true"
+                                />
+                              </span>
+                            </Disclosure.Button>
+                          </dt>
+                          <Disclosure.Panel as="dd" className="mt-2 pr-12">
+                            <p className="text-base text-gray-500">{faq.answer}</p>
+                          </Disclosure.Panel>
+                        </>
+                      )}
+                    </Disclosure>
+                  ))}
+                </dl>
+              </div>
 
+              <div className="mt-10 -mx-4 relative lg:mt-0" aria-hidden="true">
+                <svg
+                  className="absolute left-1/2 transform -translate-x-1/2 translate-y-16 lg:hidden"
+                  width={784}
+                  height={404}
+                  fill="none"
+                  viewBox="0 0 784 404"
+                >
+                  <defs>
+                    <pattern
+                      id="ca9667ae-9f92-4be7-abcb-9e3d727f2941"
+                      x={0}
+                      y={0}
+                      width={20}
+                      height={20}
+                      patternUnits="userSpaceOnUse"
+                    >
+                      <rect x={0} y={0} width={4} height={4} className="text-gray-200" fill="currentColor" />
+                    </pattern>
+                  </defs>
+                  <rect width={784} height={404} fill="url(#ca9667ae-9f92-4be7-abcb-9e3d727f2941)" />
+                </svg>
+                <img
+                  className="relative mx-auto rounded-xl shadow-xl"
+                  width={490}
+                  src="https://cdn.shopify.com/s/files/1/0045/6517/2288/files/BK_Unboxing-1andstop_1500x.gif?v=1637768157"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+          <div className="mt-8 lg:mt-12 flex justify-center">
+            <div className="rounded-md shadow">
+              <a
+                href="#"
+                className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-400 hover:bg-red-500 md:py-4 md:text-lg md:px-10"
+              >
+                Buy BetaKIDS®
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* other section */}
+      <div className="py-16 bg-gray-50 overflow-hidden lg:py-24">
+        <div className="relative max-w-xl mx-auto px-4 sm:px-6 lg:px-8 lg:max-w-7xl">
+          <svg
+            className="hidden lg:block absolute left-full transform -translate-x-1/2 -translate-y-1/4"
+            width={404}
+            height={784}
+            fill="none"
+            viewBox="0 0 404 784"
+            aria-hidden="true"
+          >
+            <defs>
+              <pattern
+                id="b1e6e422-73f8-40a6-b5d9-c8586e37e0e7"
+                x={0}
+                y={0}
+                width={20}
+                height={20}
+                patternUnits="userSpaceOnUse"
+              >
+                <rect x={0} y={0} width={4} height={4} className="text-red-200" fill="currentColor" />
+              </pattern>
+            </defs>
+            <rect width={404} height={784} fill="url(#b1e6e422-73f8-40a6-b5d9-c8586e37e0e7)" />
+          </svg>
+
+          <div className="relative">
+            <h2 className="text-center text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+              Healthier Kids. Happier Families.
+            </h2>
+            <p className="mt-4 max-w-3xl mx-auto text-center text-xl text-gray-500">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam voluptatum cupiditate veritatis
+              in, accusamus quisquam.
+            </p>
+          </div>
+
+          <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
+            <div className="relative">
+              <h3 className="text-2xl font-extrabold text-gray-900 tracking-tight sm:text-3xl">
+                Peace of mind for this family!
+              </h3>
+              <p className="mt-3 text-lg text-gray-500">
+                "My kids are really loving the immune gummies! They love the taste plus the packaging is great,
+                especially since it comes with so many goodies. It's really nice to have the extra immune support from
+                the beta glucan and vitamin D - especially during the cold season. 🤗"
+              </p>
+            </div>
+
+            <div className="mt-10 -mx-4 relative lg:mt-0" aria-hidden="true">
+              <svg
+                className="absolute left-1/2 transform -translate-x-1/2 translate-y-16 lg:hidden"
+                width={784}
+                height={404}
+                fill="none"
+                viewBox="0 0 784 404"
+              >
+                <defs>
+                  <pattern
+                    id="ca9667ae-9f92-4be7-abcb-9e3d727f2941"
+                    x={0}
+                    y={0}
+                    width={20}
+                    height={20}
+                    patternUnits="userSpaceOnUse"
+                  >
+                    <rect x={0} y={0} width={4} height={4} className="text-gray-200" fill="currentColor" />
+                  </pattern>
+                </defs>
+                <rect width={784} height={404} fill="url(#ca9667ae-9f92-4be7-abcb-9e3d727f2941)" />
+              </svg>
+              <img
+                className="relative mx-auto rounded-xl shadow-xl"
+                width={490}
+                src="https://cdn.shopify.com/s/files/1/0045/6517/2288/files/Image_from_iOS_1500x.jpg?v=1647884051"
+                alt=""
+              />
+            </div>
+          </div>
+
+          <svg
+            className="hidden lg:block absolute right-full transform translate-x-1/2 translate-y-12"
+            width={404}
+            height={784}
+            fill="none"
+            viewBox="0 0 404 784"
+            aria-hidden="true"
+          >
+            <defs>
+              <pattern
+                id="64e643ad-2176-4f86-b3d7-f2c5da3b6a6d"
+                x={0}
+                y={0}
+                width={20}
+                height={20}
+                patternUnits="userSpaceOnUse"
+              >
+                <rect x={0} y={0} width={4} height={4} className="text-red-200" fill="currentColor" />
+              </pattern>
+            </defs>
+            <rect width={404} height={784} fill="url(#64e643ad-2176-4f86-b3d7-f2c5da3b6a6d)" />
+          </svg>
+
+          <div className="relative mt-12 sm:mt-16 lg:mt-24">
+            <div className="lg:grid lg:grid-flow-row-dense lg:grid-cols-2 lg:gap-8 lg:items-center">
+              <div className="lg:col-start-2">
+                <h3 className="text-2xl font-extrabold text-gray-900 tracking-tight sm:text-3xl">
+                  They were reminding ME to take their gummies!
+                </h3>
+                <p className="mt-3 text-lg text-gray-500">
+                  "My kids liked the chart and stickers and everything that came with the vitamins. They were reminding
+                  ME to take their vitamins. They said they loved the way it tasted! I like the ingredients (or lack
+                  thereof I should say) Overall, I’d say it’s been a success with them. At first, I didn’t think my kids
+                  would like the texture of them, but they actually didn’t mind. Plus, I can smoosh it up into some
+                  juice pretty easily if I needed to lol"
+                </p>
+              </div>
+
+              <div className="mt-10 -mx-4 relative lg:mt-0 lg:col-start-1">
+                <svg
+                  className="absolute left-1/2 transform -translate-x-1/2 translate-y-16 lg:hidden"
+                  width={784}
+                  height={404}
+                  fill="none"
+                  viewBox="0 0 784 404"
+                  aria-hidden="true"
+                >
+                  <defs>
+                    <pattern
+                      id="e80155a9-dfde-425a-b5ea-1f6fadd20131"
+                      x={0}
+                      y={0}
+                      width={20}
+                      height={20}
+                      patternUnits="userSpaceOnUse"
+                    >
+                      <rect x={0} y={0} width={4} height={4} className="text-red-200" fill="currentColor" />
+                    </pattern>
+                  </defs>
+                  <rect width={784} height={404} fill="url(#e80155a9-dfde-425a-b5ea-1f6fadd20131)" />
+                </svg>
+                <img
+                  className="relative mx-auto rounded-xl shadow-xl"
+                  width={490}
+                  src="https://cdn.shopify.com/s/files/1/0045/6517/2288/files/F5CC8544-7508-4507-BC07-8F278490CAF8_1500x.jpg?v=1651088832"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+
+          <svg
+            className="hidden lg:block absolute left-full transform -translate-x-1/2 -translate-y-1/4"
+            width={404}
+            height={784}
+            fill="none"
+            viewBox="0 0 404 784"
+            aria-hidden="true"
+          >
+            <defs>
+              <pattern
+                id="b1e6e422-73f8-40a6-b5d9-c8586e37e0e7"
+                x={0}
+                y={0}
+                width={20}
+                height={20}
+                patternUnits="userSpaceOnUse"
+              >
+                <rect x={0} y={0} width={4} height={4} className="text-red-200" fill="currentColor" />
+              </pattern>
+            </defs>
+            <rect width={404} height={784} fill="url(#b1e6e422-73f8-40a6-b5d9-c8586e37e0e7)" />
+          </svg>
+
+          <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
+            <div className="relative">
+              <h3 className="text-2xl font-extrabold text-gray-900 tracking-tight sm:text-3xl">
+                A huge hit with the kiddos!
+              </h3>
+              <p className="mt-3 text-lg text-gray-500">
+                "These chewable gummies have been a huge hit for the kiddos! I definitely notice that they are
+                maintaining and supporting their immune response, which is super important these days. I love how they
+                are made with all natural ingredients, with no artificial coloring or flavoring, no GMO's, gluten and
+                lactose free... AND they are yummy! On top of that, it comes with a super fun set of daily calendar
+                reminder, stickers and markers so they can record their progress too! Thank you so much BetaKids!"
+              </p>
+              <div className="mt-6 flex justify-start">
+                <div className="rounded-md shadow">
+                  <a
+                    href="#"
+                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-400 hover:bg-red-500 md:py-4 md:text-lg md:px-10"
+                  >
+                    Buy BetaKIDS®
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-10 -mx-4 relative lg:mt-0" aria-hidden="true">
+              <svg
+                className="absolute left-1/2 transform -translate-x-1/2 translate-y-16 lg:hidden"
+                width={784}
+                height={404}
+                fill="none"
+                viewBox="0 0 784 404"
+              >
+                <defs>
+                  <pattern
+                    id="ca9667ae-9f92-4be7-abcb-9e3d727f2941"
+                    x={0}
+                    y={0}
+                    width={20}
+                    height={20}
+                    patternUnits="userSpaceOnUse"
+                  >
+                    <rect x={0} y={0} width={4} height={4} className="text-gray-200" fill="currentColor" />
+                  </pattern>
+                </defs>
+                <rect width={784} height={404} fill="url(#ca9667ae-9f92-4be7-abcb-9e3d727f2941)" />
+              </svg>
+              <img
+                className="relative mx-auto rounded-xl shadow-xl"
+                width={490}
+                src="https://cdn.shopify.com/s/files/1/0045/6517/2288/files/84878222-DBAA-4D84-AA65-68D7DD13379E_1500x.jpg?v=1651086202"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
       {/* CTA section */}
       <div className="relative mt-24 sm:mt-32 sm:py-16">
         <div aria-hidden="true" className="hidden sm:block">
