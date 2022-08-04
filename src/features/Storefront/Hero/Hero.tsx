@@ -74,7 +74,7 @@ export const Hero = ({ primaryText, secondaryText, firstButton, secondButton, im
                   </div>
                 ))}
               </dl>
-              <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
+              <div className="mt-5 sm:mt-10 sm:flex sm:justify-center lg:justify-start">
                 <div className="rounded-md shadow">
                   <a
                     href="#"
