@@ -1,12 +1,13 @@
+import { CtaBrandPanelWithOverlappingImage } from 'features/Global/CtaBrandPanelWithOverlappingImage/CtaBrandPanelWithOverlappingImage';
+import { FaqTwoColumnsWithImage } from 'features/Global/FaqTwoColumnsWithImage/FaqTwoColumnsWithImage';
+import { FeaturesAlternativeSideBySideWithImages } from 'features/Global/FeaturesAlternativeSideBySideWithImages/FeaturesAlternativeSideBySideWithImages';
+import { FeaturesGrid } from 'features/Global/FeaturesGrid/FeaturesGrid';
+import { NewsletterCenteredCardWithGraphic } from 'features/Global/NewsletterCenteredCardWithGraphic/NewsletterCenteredCardWithGraphic';
+import { TestimonialWithOverlappingImage } from 'features/Global/TestimonialWithOverlappingImage/TestimonialWithOverlappingImage';
 import { GetStorefrontQueryResponse } from 'types/takeshape';
-import { BackgroundImage } from './BackgroundImage/BackgroundImage';
-import { Collection } from './Collection/Collection';
-import { Collections } from './Collections/Collections';
 import { Hero } from './Hero/Hero';
-import { Offers } from './Offers/Offers';
 import { Sale } from './Sale/Sale';
 import { Testimonials } from './Testimonials/Testimonials';
-import { TestMarkup } from './TestMarkup/TestMarkup';
 import { BackgroundImageChild, StorefrontChild } from './types';
 
 function backgroundImageChildToComponent(component: BackgroundImageChild, index = 0) {
@@ -23,20 +24,21 @@ function backgroundImageChildToComponent(component: BackgroundImageChild, index 
 function storefrontChildToComponent() {
   const StorefrontComponent = (component: StorefrontChild, index = 0) => {
     switch (component.__typename) {
-      case 'BackgroundImageComponent':
-        return (
-          <BackgroundImage key={index} {...component}>
-            {component.components.map(backgroundImageChildToComponent)}
-          </BackgroundImage>
-        );
-      case 'CollectionsComponent':
-        return <Collections key={index} {...component} />;
+      case 'CtaBrandPanelWithOverlappingImageComponent':
+        return <CtaBrandPanelWithOverlappingImage key={index} {...component} />;
+      case 'FaqTwoColumnsWithImageComponent':
+        return <FaqTwoColumnsWithImage key={index} {...component} />;
+      case 'FeaturesAlternativeSideBySideWithImagesComponent':
+        return <FeaturesAlternativeSideBySideWithImages key={index} {...component} />;
+      case 'FeaturesGridComponent':
+        return <FeaturesGrid key={index} {...component} />;
+      case 'NewsletterCenteredCardWithGraphicComponent':
+        return <NewsletterCenteredCardWithGraphic key={index} {...component} />;
+      case 'TestimonialWithOverlappingImageComponent':
+        return <TestimonialWithOverlappingImage key={index} {...component} />;
       case 'HeroComponent':
         return <Hero key={index} {...component} />;
-      case 'OffersComponent':
-        return <Offers key={index} {...component} />;
-      case 'CollectionComponent':
-        return <Collection key={index} {...component} />;
+
       default:
         return null;
     }
@@ -50,11 +52,5 @@ export interface StorefrontProps {
 }
 
 export const Storefront = ({ storefront }: StorefrontProps) => {
-  return (
-    <div className="bg-white">
-      {storefront?.components?.map(storefrontChildToComponent())}
-
-      <TestMarkup />
-    </div>
-  );
+  return <div className="bg-white">{storefront?.components?.map(storefrontChildToComponent())}</div>;
 };

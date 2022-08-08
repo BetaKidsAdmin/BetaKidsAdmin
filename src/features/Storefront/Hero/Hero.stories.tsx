@@ -13,14 +13,37 @@ const Template: ComponentStory<typeof Hero> = (args) => <Hero {...args} />;
 
 export const _Hero = Template.bind({});
 _Hero.args = {
-  primaryText: 'Focus on what matters',
+  features: [
+    {
+      description: 'Synergistic ingredients proven to support the immune system.',
+      iconName: 'globe-alt',
+      title: 'Proven Ingredients.'
+    },
+    {
+      description: 'No junk, sugar-free gummy that your child will love.',
+      iconName: 'globe-alt',
+      title: 'Healthy, Safe and Fun!'
+    },
+    {
+      description: 'Peace of mind through healthier and happier kids.',
+      iconName: 'globe-alt',
+      title: 'Happier Families.'
+    }
+  ],
+  firstButton: {
+    text: 'Buy BetaKIDS®',
+    url: '/products/beta-kids-immune-support-gummies'
+  },
+  primaryText: {
+    firstRow: 'The Immune Gummy',
+    secondRow: 'Created for Kids.'
+  },
+  secondButton: {
+    text: 'The Science',
+    url: '/pages/betakids-immune-support-science'
+  },
   secondaryText:
-    "All the charts, datepickers, and notifications in the world can't beat checking off some items on a paper card.",
-  buttonText: 'Shop Productivity',
-  image: {
-    filename: 'home-page-02-hero-half-width.jpg',
-    path: '06ccc3dc-a9da-4f5b-9142-5a104db52ee3/dev/0c3a5505-a306-40f0-aacd-af0f5b103219/home-page-02-hero-half-width.jpg'
-  }
+    "BetaKIDS® is an all-natural, science-backed gummy shown to double a child's immune response without overstimulation."
 };
 
 export default Meta;

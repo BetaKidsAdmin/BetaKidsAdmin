@@ -48,10 +48,73 @@ const StorefrontFragments = gql`
 
 export const GetStorefrontQuery = gql`
   query GetStorefrontQuery {
-    storefront: getHomepage {
+    storefront: getStorefront {
+      seo {
+        metaDescription
+        metaTitle
+      }
       components {
         __typename
+        ... on CtaBrandPanelWithOverlappingImageComponent {
+          button {
+            text
+            url
+          }
+          descriptionHtml
+          heading
+          image {
+            path
+            description
+          }
+        }
+        ... on FaqTwoColumnsWithImageComponent {
+          faQs {
+            answerHtml
+            question
+          }
+          heading
+          subheadingHtml
+          image {
+            path
+            description
+          }
+          button {
+            text
+            url
+          }
+        }
+        ... on FeaturesAlternativeSideBySideWithImagesComponent {
+          heading
+          repeater {
+            button {
+              text
+              url
+            }
+            text(format: html)
+            title
+            image {
+              path
+              description
+            }
+          }
+          subheadingHtml
+        }
+        ... on FeaturesGridComponent {
+          blocks {
+            descriptionHtml
+            iconName
+            title
+          }
+          heading
+          preheading
+          subheadingHtml
+        }
         ... on HeroComponent {
+          features {
+            description
+            iconName
+            title
+          }
           firstButton {
             text
             url
@@ -70,89 +133,20 @@ export const GetStorefrontQuery = gql`
             description
           }
         }
+        ... on NewsletterCenteredCardWithGraphicComponent {
+          descriptionHtml
+          headline
+          preHeadline
+        }
+        ... on TestimonialWithOverlappingImageComponent {
+          quote(format: html)
+          source
+          image {
+            path
+            description
+          }
+        }
       }
     }
   }
 `;
-
-// export const GetStorefrontQuery = gql`
-//   ${StorefrontFragments}
-//   query GetStorefrontQuery {
-//     storefront: getHomepage {
-//       components {
-//         __typename
-//         ... on OffersComponent {
-//           offers {
-//             href
-//             name
-//             description
-//           }
-//         }
-//         ... on HeroComponent {
-//           firstButton {
-//             text
-//             url
-//           }
-//           primaryText {
-//             firstRow
-//             secondRow
-//           }
-//           secondButton {
-//             text
-//             url
-//           }
-//           secondaryText
-//         }
-//         ... on CollectionsComponent {
-//           collections {
-//             name
-//             description
-//             href
-//             image {
-//               path
-//               description
-//             }
-//           }
-//         }
-//         ... on CollectionComponent {
-//           collection {
-//             shopifyCollection {
-//               ...StorefrontCollection
-//               products(first: 4) {
-//                 pageInfo {
-//                   endCursor
-//                   startCursor
-//                   hasNextPage
-//                   hasPreviousPage
-//                 }
-//                 nodes {
-//                   ...StorefrontProduct
-//                 }
-//               }
-//             }
-//           }
-//         }
-//         ... on BackgroundImageComponent {
-//           image {
-//             path
-//             description
-//           }
-//           components {
-//             __typename
-//             ... on SaleComponent {
-//               primaryText
-//               secondaryText
-//               buttonText
-//             }
-//             ... on TestimonialsComponent {
-//               testimonials {
-//                 quote
-//                 attribution
-//               }
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
-// `;

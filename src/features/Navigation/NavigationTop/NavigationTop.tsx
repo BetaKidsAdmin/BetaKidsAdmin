@@ -102,14 +102,14 @@ export const NavigationTop = ({ message, sections, currencies }: NavigationTopPr
                 {/* Logo (lg-) */}
                 <NextLink href="/" className="lg:hidden">
                   <span className="sr-only">Workflow</span>
-                  <div className="h-8 w-32 relative">
-                    <NextImage src={siteLogo} height={32} width={128} alt="" className="w-auto h-8" priority />
+                  <div className="h-6 w-22 md:h-8 md:w-32 relative">
+                    <NextImage src={siteLogo} height={32} width={128} alt="" className="w-auto h-6 md:h-8" priority />
                   </div>
                 </NextLink>
 
                 <div className="flex-1 flex items-center justify-end">
                   <div className="flex items-center lg:ml-8">
-                    <div className="flex space-x-8">
+                    <div className="flex space-x-6 md:space-x-8">
                       <div className="hidden lg:flex">
                         <div
                           onClick={() => setIsSearchOpen(true)}
