@@ -60,7 +60,7 @@ export const GetStorefrontQuery = gql`
             text
             url
           }
-          descriptionHtml
+          descriptionHtml: description(format: html)
           heading
           image {
             path
@@ -135,8 +135,8 @@ export const GetStorefrontQuery = gql`
         }
         ... on NewsletterCenteredCardWithGraphicComponent {
           descriptionHtml
-          headline
-          preHeadline
+          heading
+          preHeading
         }
         ... on TestimonialWithOverlappingImageComponent {
           quote(format: html)

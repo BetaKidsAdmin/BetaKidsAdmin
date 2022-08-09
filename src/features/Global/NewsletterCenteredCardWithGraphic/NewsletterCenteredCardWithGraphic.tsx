@@ -1,4 +1,4 @@
-export const NewsletterCenteredCardWithGraphic = ({ descriptionHtml, headline, preHeadline }) => {
+export const NewsletterCenteredCardWithGraphic = ({ descriptionHtml, heading, preHeading }) => {
   return (
     <div className="relative sm:mt-32 py-16">
       <div aria-hidden="true" className="hidden sm:block">
@@ -43,11 +43,11 @@ export const NewsletterCenteredCardWithGraphic = ({ descriptionHtml, headline, p
           </div>
           <div className="relative">
             <div className="sm:text-center">
-              {preHeadline && (
-                <p className="text-base font-semibold uppercase tracking-wider text-red-100 ">{preHeadline}</p>
+              {preHeading && (
+                <p className="text-base font-semibold uppercase tracking-wider text-red-100 ">{preHeading}</p>
               )}
-              {headline && (
-                <h2 className="mt-2 text-3xl font-extrabold text-white tracking-tight sm:text-4xl">{headline}</h2>
+              {heading && (
+                <h2 className="mt-2 text-3xl font-extrabold text-white tracking-tight sm:text-4xl">{heading}</h2>
               )}
               {descriptionHtml && (
                 <div

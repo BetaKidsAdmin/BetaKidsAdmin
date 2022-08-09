@@ -8,7 +8,7 @@ type HeroProps = StorefrontChild & { __typename?: 'HeroComponent' };
 
 export const Hero = ({ primaryText, secondaryText, features, firstButton, secondButton, image }: HeroProps) => {
   return (
-    <div className="pt-10 bg-gray-50 sm:pt-16 lg:pt-8 lg:pb-14 lg:overflow-hidden">
+    <div className="pt-10 bg-gray-50 sm:py-16 lg:overflow-hidden">
       <div className="mx-auto max-w-7xl lg:px-8">
         <div className="lg:grid lg:grid-cols-2 lg:gap-8">
           <div className="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-left lg:flex lg:items-center">

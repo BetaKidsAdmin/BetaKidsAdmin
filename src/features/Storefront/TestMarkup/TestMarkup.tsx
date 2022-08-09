@@ -1,6 +1,4 @@
-import { Disclosure } from '@headlessui/react';
-import { ChevronDownIcon, GlobeAltIcon, LightningBoltIcon, ScaleIcon } from '@heroicons/react/outline';
-import classNames from 'utils/classNames';
+import { GlobeAltIcon, LightningBoltIcon, ScaleIcon } from '@heroicons/react/outline';
 
 const features1 = [
   {
@@ -142,7 +140,7 @@ export const TestMarkup = () => {
         </div>
       </div> */}
       {/* Feature section with grid */}
-      <div className="relative bg-gray-50 py-16 sm:py-24 lg:py-32">
+      {/* <div className="relative bg-gray-50 py-16 sm:py-24 lg:py-32">
         <div className="mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
           <h2 className="text-base font-semibold tracking-wider text-red-400 uppercase">BetaKIDS</h2>
           <p className="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
@@ -172,9 +170,9 @@ export const TestMarkup = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* CTA Section */}
-      <div className="relative py-16 bg-white">
+      {/* <div className="relative py-16 bg-white">
         <div className="hidden absolute top-0 inset-x-0 h-1/2 bg-gray-50 lg:block" aria-hidden="true" />
         <div className="max-w-7xl mx-auto bg-red-400 lg:bg-transparent lg:px-8">
           <div className="lg:grid lg:grid-cols-12">
@@ -255,9 +253,9 @@ export const TestMarkup = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* Feature section with grid */}
-      <div className="relative bg-gray-50 py-16 sm:py-24 lg:py-32">
+      {/* <div className="relative bg-gray-50 py-16 sm:py-24 lg:py-32">
         <div className="mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
           <p className="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
             Clinically-Proven Ingredients
@@ -289,9 +287,9 @@ export const TestMarkup = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* Testimonial section */}
-      <div className="pb-16 bg-gradient-to-r from-orange-300 to-red-400 lg:pb-0 lg:z-10 lg:relative">
+      {/* <div className="pb-16 bg-gradient-to-r from-orange-300 to-red-400 lg:pb-0 lg:z-10 lg:relative">
         <div className="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-8">
           <div className="relative lg:-my-8">
             <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1/2 bg-white lg:hidden" />
@@ -328,9 +326,9 @@ export const TestMarkup = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* faq */}
-      <div className="bg-white">
+      {/* <div className="bg-white overflow-x-hidden">
         <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
           <div className="max-w-2xl lg:mx-auto lg:text-center">
             <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">The Subscription Box</h2>
@@ -370,28 +368,7 @@ export const TestMarkup = () => {
                 </dl>
               </div>
 
-              <div className="mt-10 -mx-4 relative lg:mt-0" aria-hidden="true">
-                <svg
-                  className="absolute left-1/2 transform -translate-x-1/2 translate-y-16 lg:hidden"
-                  width={784}
-                  height={404}
-                  fill="none"
-                  viewBox="0 0 784 404"
-                >
-                  <defs>
-                    <pattern
-                      id="ca9667ae-9f92-4be7-abcb-9e3d727f2941"
-                      x={0}
-                      y={0}
-                      width={20}
-                      height={20}
-                      patternUnits="userSpaceOnUse"
-                    >
-                      <rect x={0} y={0} width={4} height={4} className="text-gray-200" fill="currentColor" />
-                    </pattern>
-                  </defs>
-                  <rect width={784} height={404} fill="url(#ca9667ae-9f92-4be7-abcb-9e3d727f2941)" />
-                </svg>
+              <div className="mt-10  relative lg:mt-0" aria-hidden="true">
                 <img
                   className="relative mx-auto rounded-xl shadow-xl"
                   width={490}
@@ -412,9 +389,9 @@ export const TestMarkup = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* other section */}
-      <div className="py-16 bg-gray-50 overflow-hidden lg:py-24">
+      {/* <div className="py-16 bg-gray-50 overflow-hidden lg:py-24">
         <div className="relative max-w-xl mx-auto px-4 sm:px-6 lg:px-8 lg:max-w-7xl">
           <svg
             className="hidden lg:block absolute left-full transform -translate-x-1/2 -translate-y-1/4"
@@ -641,84 +618,8 @@ export const TestMarkup = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* CTA section */}
-      <div className="relative mt-24 sm:mt-32 sm:py-16">
-        <div aria-hidden="true" className="hidden sm:block">
-          <div className="absolute inset-y-0 left-0 w-1/2 bg-gray-50 rounded-r-3xl" />
-          <svg className="absolute top-8 left-1/2 -ml-3" width={404} height={392} fill="none" viewBox="0 0 404 392">
-            <defs>
-              <pattern
-                id="8228f071-bcee-4ec8-905a-2a059a2cc4fb"
-                x={0}
-                y={0}
-                width={20}
-                height={20}
-                patternUnits="userSpaceOnUse"
-              >
-                <rect x={0} y={0} width={4} height={4} className="text-gray-200" fill="currentColor" />
-              </pattern>
-            </defs>
-            <rect width={404} height={392} fill="url(#8228f071-bcee-4ec8-905a-2a059a2cc4fb)" />
-          </svg>
-        </div>
-        <div className="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8">
-          <div className="relative rounded-2xl px-6 py-10 bg-red-400 overflow-hidden shadow-xl sm:px-12 sm:py-20">
-            <div aria-hidden="true" className="absolute inset-0 -mt-72 sm:-mt-32 md:mt-0">
-              <svg
-                className="absolute inset-0 h-full w-full"
-                preserveAspectRatio="xMidYMid slice"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 1463 360"
-              >
-                <path
-                  className="text-red-300 text-opacity-40"
-                  fill="currentColor"
-                  d="M-82.673 72l1761.849 472.086-134.327 501.315-1761.85-472.086z"
-                />
-                <path
-                  className="text-red-500 text-opacity-40"
-                  fill="currentColor"
-                  d="M-217.088 544.086L1544.761 72l134.327 501.316-1761.849 472.086z"
-                />
-              </svg>
-            </div>
-            <div className="relative">
-              <div className="sm:text-center">
-                <p className="text-base font-semibold uppercase tracking-wider text-red-100 "> FREE 56-page eBook!</p>
-                <h2 className="mt-2 text-3xl font-extrabold text-white tracking-tight sm:text-4xl">
-                  How to Stay Healthy as a Family
-                </h2>
-                <p className="mt-6 mx-auto max-w-2xl text-lg text-red-100">
-                  Join to get our 56-page Healthy Family e-book (plus deals, Healthy Habit emails and more)
-                </p>
-              </div>
-              <form action="#" className="mt-12 sm:mx-auto sm:max-w-lg sm:flex">
-                <div className="min-w-0 flex-1">
-                  <label htmlFor="cta-email" className="sr-only">
-                    Email address
-                  </label>
-                  <input
-                    id="cta-email"
-                    type="email"
-                    className="block w-full border border-transparent rounded-md px-5 py-3 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-red-500"
-                    placeholder="Enter your email"
-                  />
-                </div>
-                <div className="mt-4 sm:mt-0 sm:ml-3">
-                  <button
-                    type="submit"
-                    className="block w-full rounded-md border border-transparent px-5 py-3 bg-gray-900 text-base font-medium text-white shadow hover:bg-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-red-500 sm:px-10"
-                  >
-                    Subscribe
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
     </>
   );
 };
