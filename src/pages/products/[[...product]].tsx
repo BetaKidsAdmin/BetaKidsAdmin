@@ -2,28 +2,29 @@ import PageLoader from 'components/PageLoader';
 import { lighthouseHandle, lighthouseProductHandle, pageRevalidationTtl, productReviewsPerPage } from 'config';
 import { ProductPage as ProductPageComponent } from 'features/ProductPage/ProductPage';
 import {
-    ProductPageShopifyProductHandlesQuery,
-    ProductPageShopifyProductQuery
+  ProductPageShopifyProductHandlesQuery,
+  ProductPageShopifyProductQuery
 } from 'features/ProductPage/queries.takeshape';
 import {
-    getBreadcrumbs,
-    getDetails,
-    getPageOptions,
-    getPolicies,
-    getProduct,
-    getProductPageParams,
-    getProductReviews,
-    getReviewHighlights
+  getBreadcrumbs,
+  getDetails,
+  getPageOptions,
+  getPolicies,
+  getProduct,
+  getProductPageParams,
+  getProductReviews,
+  getProductSections,
+  getReviewHighlights
 } from 'features/ProductPage/transforms';
 import Layout from 'layouts/Default';
 import { getLayoutData } from 'layouts/getLayoutData';
 import { GetStaticPaths, GetStaticPropsContext, InferGetStaticPropsType, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import {
-    ProductPageShopifyProductHandlesQueryResponse,
-    ProductPageShopifyProductHandlesQueryVariables,
-    ProductPageShopifyProductResponse,
-    ProductPageShopifyProductVariables
+  ProductPageShopifyProductHandlesQueryResponse,
+  ProductPageShopifyProductHandlesQueryVariables,
+  ProductPageShopifyProductResponse,
+  ProductPageShopifyProductVariables
 } from 'types/takeshape';
 import { retryGraphqlThrottle } from 'utils/apollo/retryGraphqlThrottle';
 import { createAnonymousTakeshapeApolloClient } from 'utils/takeshape';
@@ -32,6 +33,7 @@ import { getSingle } from 'utils/types';
 const ProductPage: NextPage = ({
   noindex,
   options,
+  globalSettings,
   navigation,
   footer,
   product,
@@ -39,13 +41,19 @@ const ProductPage: NextPage = ({
   reviewList,
   details,
   policies,
-  breadcrumbs
+  breadcrumbs,
+  sections
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { isFallback } = useRouter();
 
   if (isFallback) {
     return (
-      <Layout navigation={navigation} footer={footer} seo={{ title: 'Product is loading...' }}>
+      <Layout
+        globalSettings={globalSettings}
+        navigation={navigation}
+        footer={footer}
+        seo={{ title: 'Product is loading...' }}
+      >
         <PageLoader />
       </Layout>
     );
@@ -53,6 +61,7 @@ const ProductPage: NextPage = ({
 
   return (
     <Layout
+      globalSettings={globalSettings}
       navigation={navigation}
       footer={footer}
       seo={{ title: product.seo.title, description: product.seo.description, noindex }}
@@ -67,6 +76,7 @@ const ProductPage: NextPage = ({
         details={details}
         policies={policies}
         reviewsPerPage={productReviewsPerPage}
+        sections={sections}
       />
     </Layout>
   );
@@ -107,9 +117,11 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
       key: product.id,
       // Don't index lighthouse test urls
       noindex: handle === lighthouseHandle,
+      globalSettings,
       navigation,
       footer,
       product,
+      sections: getProductSections(data),
       options: getPageOptions(data),
       reviewHighlights: getReviewHighlights(data),
       reviewList: getProductReviews(data),
@@ -138,19 +150,17 @@ export const getStaticPaths: GetStaticPaths = async () => {
       }
     });
 
-    // get products that present in takeshape
-    data.products.nodes = data.products.nodes.filter((node) => node?.takeshape?._id);
-
     paths = [...paths, ...getProductPageParams(data)];
     hasNextPage = data.products.pageInfo.hasNextPage;
     endCursor = data.products.pageInfo.endCursor;
   }
 
   // Add the lighthouse testing path, if configured
-  // if (lighthouseProductHandle) {
-  //   paths.push({ params: { product: [lighthouseHandle] } });
-  // }
+  if (lighthouseProductHandle) {
+    paths.push({ params: { product: [lighthouseHandle] } });
+  }
 
+  console.log('PATH!!!!!!', paths);
   return {
     paths,
     fallback: true

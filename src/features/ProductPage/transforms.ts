@@ -63,7 +63,9 @@ export function getProduct(response: ProductPageShopifyProductResponse): Product
     hasSubscriptionPurchaseOption: shopifyProduct.sellingPlanGroupCount > 0,
     hasStock: shopifyProduct.totalInventory > 0,
     variantOptions: getProductVariantOptions(shopifyProduct.options, variants),
-    lineItemAttributes: getProductLineItemAttributes(null)
+    lineItemAttributes: getProductLineItemAttributes(null),
+    otherDescriptionHtml: shopifyProduct.takeshape.descriptionHtml,
+    additionalDetails: shopifyProduct.takeshape.additionalDetails
   };
 }
 
@@ -150,6 +152,16 @@ function getProductComponent(productComponent?: string): ProductPageProductCompo
   }
 }
 
+export function getProductSections(response: ProductPageShopifyProductResponse) {
+  const takeshapeProduct = response?.product?.takeshape;
+
+  if (!takeshapeProduct) {
+    return null;
+  }
+
+  return takeshapeProduct.sections ?? [];
+}
+
 export function getPageOptions(response: ProductPageShopifyProductResponse): ProductPageOptions {
   const takeshapeProduct = response?.product?.takeshape;
 
@@ -174,11 +186,13 @@ export function getProductPageParams(response: ProductPageShopifyProductHandlesQ
     return null;
   }
 
-  return nodes.map((node) => ({
-    params: {
-      product: [node.handle]
-    }
-  }));
+  return nodes
+    .filter((node) => node?.takeshape?._id)
+    .map((node) => ({
+      params: {
+        product: [node.handle]
+      }
+    }));
 }
 
 function getRelatedProduct(

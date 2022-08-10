@@ -59,7 +59,7 @@ export const FaqTwoColumnsWithImage = ({ heading, subheadingHtml, faQs, image, b
             </div>
           </div>
         </div>
-        {button.url && button.text && (
+        {button?.url && button?.text && (
           <div className="mt-8 lg:mt-12 flex justify-center">
             <div className="rounded-md shadow">
               <NextLink

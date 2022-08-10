@@ -1,4 +1,12 @@
 import Wrapper from 'components/Wrapper/Content';
+import { CtaBrandPanelWithOverlappingImage } from 'features/Global/CtaBrandPanelWithOverlappingImage/CtaBrandPanelWithOverlappingImage';
+import { FaqOneColumn } from 'features/Global/FaqOneColumn/FaqOneColumn';
+import { FaqTwoColumnsWithImage } from 'features/Global/FaqTwoColumnsWithImage/FaqTwoColumnsWithImage';
+import { FeaturesAlternativeSideBySideWithImages } from 'features/Global/FeaturesAlternativeSideBySideWithImages/FeaturesAlternativeSideBySideWithImages';
+import { FeaturesFullWidthWithVerticalImages } from 'features/Global/FeaturesFullWidthWithVerticalImages/FeaturesFullWidthWithVerticalImages';
+import { FeaturesGrid } from 'features/Global/FeaturesGrid/FeaturesGrid';
+import { NewsletterCenteredCardWithGraphic } from 'features/Global/NewsletterCenteredCardWithGraphic/NewsletterCenteredCardWithGraphic';
+import { TestimonialWithOverlappingImage } from 'features/Global/TestimonialWithOverlappingImage/TestimonialWithOverlappingImage';
 import { shopifyGidToId } from 'transforms/shopify';
 import { Details, DetailsProps } from './Details/Details';
 import { Policies, PoliciesProps } from './Policies/Policies';
@@ -14,6 +22,34 @@ export type ProductPageProps = Omit<ProductProps, 'showFeaturedReviews' | 'showB
     options: ProductPageOptions;
   };
 
+function pageChildToComponent() {
+  const PageComponent = (component, index = 0) => {
+    switch (component.__typename) {
+      case 'CtaBrandPanelWithOverlappingImageComponent':
+        return <CtaBrandPanelWithOverlappingImage key={index} {...component} />;
+      case 'FaqOneColumnComponent':
+        return <FaqOneColumn key={index} {...component} />;
+      case 'FaqTwoColumnsWithImageComponent':
+        return <FaqTwoColumnsWithImage key={index} {...component} />;
+      case 'FeaturesAlternativeSideBySideWithImagesComponent':
+        return <FeaturesAlternativeSideBySideWithImages key={index} {...component} />;
+      case 'FeaturesFullWidthWithVerticalImagesComponent':
+        return <FeaturesFullWidthWithVerticalImages key={index} {...component} />;
+      case 'FeaturesGridComponent':
+        return <FeaturesGrid key={index} {...component} />;
+      case 'NewsletterCenteredCardWithGraphicComponent':
+        return <NewsletterCenteredCardWithGraphic key={index} {...component} />;
+      case 'TestimonialWithOverlappingImageComponent':
+        return <TestimonialWithOverlappingImage key={index} {...component} />;
+
+      default:
+        return null;
+    }
+  };
+
+  return PageComponent;
+}
+
 export const ProductPage = ({
   product,
   reviewHighlights,
@@ -23,7 +59,8 @@ export const ProductPage = ({
   policies,
   reviewList,
   breadcrumbs,
-  reviewsPerPage
+  reviewsPerPage,
+  sections
 }: ProductPageProps) => {
   const { showDetails, showPolicies, showReviews, showRelatedProducts, showBreadcrumbs } = options;
 
@@ -40,12 +77,15 @@ export const ProductPage = ({
           showReviewsLink={showReviews}
         />
       </div>
-      <div className="bg-gray-50">
-        <div className="max-w-2xl mx-auto px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8">
-          {details && showDetails && <Details details={details} />}
-          {policies && showPolicies && <Policies policies={policies} />}
+      <div className="bg-white overflow-hidden">{sections?.map(pageChildToComponent())}</div>
+      {(showDetails || showPolicies) && (
+        <div className="bg-gray-50">
+          <div className="max-w-2xl mx-auto px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8">
+            {details && showDetails && <Details details={details} />}
+            {policies && showPolicies && <Policies policies={policies} />}
+          </div>
         </div>
-      </div>
+      )}
       <div className="bg-white">
         <Wrapper>
           {showReviews && (

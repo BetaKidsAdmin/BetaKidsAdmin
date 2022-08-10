@@ -30,6 +30,13 @@ export const ProductPageShopifyProductQuery = gql`
       requiresSellingPlan
       takeshape {
         _id
+        additionalDetails {
+          list {
+            item
+          }
+          name
+        }
+        descriptionHtml
         productComponent
         hideBreadcrumbs
         hideReviews
@@ -59,6 +66,99 @@ export const ProductPageShopifyProductQuery = gql`
               description
             }
             descriptionHtml
+          }
+        }
+        sections {
+          ... on CtaBrandPanelWithOverlappingImageComponent {
+            button {
+              text
+              url
+            }
+            descriptionHtml: description(format: html)
+            heading
+            image {
+              path
+              description
+            }
+          }
+          ... on FaqOneColumnComponent {
+            faQs {
+              answerHtml
+              question
+            }
+            heading
+            subheadingHtml
+          }
+          ... on FaqTwoColumnsWithImageComponent {
+            faQs {
+              answerHtml
+              question
+            }
+            heading
+            subheadingHtml
+            image {
+              path
+              description
+            }
+            button {
+              text
+              url
+            }
+          }
+          ... on FeaturesAlternativeSideBySideWithImagesComponent {
+            heading
+            repeater {
+              button {
+                text
+                url
+              }
+              text(format: html)
+              title
+              image {
+                path
+                description
+              }
+            }
+            subheadingHtml
+          }
+          ... on FeaturesFullWidthWithVerticalImagesComponent {
+            descriptionHtml
+            heading
+            repeater {
+              button {
+                text
+                url
+              }
+              description
+              title
+              image {
+                path
+                description
+              }
+            }
+          }
+          ... on FeaturesGridComponent {
+            blocks {
+              descriptionHtml
+              iconName
+              title
+            }
+            heading
+            preheading
+            subheadingHtml
+          }
+          ... on NewsletterCenteredCardWithGraphicComponent {
+            descriptionHtml
+            heading
+            preHeading
+          }
+          ... on TestimonialWithOverlappingImageComponent {
+            quote(format: html)
+            source
+            image {
+              path
+              description
+            }
           }
         }
       }

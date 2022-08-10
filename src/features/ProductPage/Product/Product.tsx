@@ -1,3 +1,4 @@
+import { ProductDefault } from 'features/ProductPage/Product/Default/Default';
 import { ProductPageProductComponent } from '../types';
 import { ProductWithImage, ProductWithImageProps } from './WithImage/WithImage';
 import { ProductWithImageGrid, ProductWithImageGridProps } from './WithImageGrid/WithImageGrid';
@@ -21,5 +22,5 @@ export const Product = ({ component, ...props }: ProductProps) => {
       return null;
   }
 
-  return <Component {...props} />;
+  return <ProductDefault {...props} />;
 };
