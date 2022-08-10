@@ -92,7 +92,7 @@ export const Modal = () => {
                   />
                 </div>
 
-                {results.length > 0 && (
+                {Boolean(results.length) && (
                   <Combobox.Options static className="max-h-96 scroll-py-3 overflow-y-auto p-3">
                     {results.map((item) => (
                       <div key={item.product.id}>

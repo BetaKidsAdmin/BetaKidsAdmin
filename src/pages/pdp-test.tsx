@@ -1,11 +1,11 @@
 import { Disclosure, RadioGroup, Tab } from '@headlessui/react';
 import {
-  ChevronDownIcon,
-  GlobeAltIcon,
-  LightningBoltIcon,
-  MinusSmIcon,
-  PlusSmIcon,
-  ScaleIcon
+    ChevronDownIcon,
+    GlobeAltIcon,
+    LightningBoltIcon,
+    MinusSmIcon,
+    PlusSmIcon,
+    ScaleIcon
 } from '@heroicons/react/outline';
 import { StarIcon } from '@heroicons/react/solid';
 import Layout from 'layouts/Default';
@@ -952,7 +952,7 @@ const pdpTest = ({ navigation, footer }) => {
 };
 
 export const getStaticProps = async () => {
-  const { navigation, footer } = await getLayoutData();
+  const { globalSettings, navigation, footer } = await getLayoutData();
 
   return {
     props: {

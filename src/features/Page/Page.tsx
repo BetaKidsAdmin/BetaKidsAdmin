@@ -1,5 +1,6 @@
 import Wrapper from 'components/Wrapper/Content';
 import { ContentBody } from 'features/Content/ContentBody';
+import { ContentBodyVertorDots } from 'features/Content/ContentBodyVertorDots';
 import { ContentHeader } from 'features/Content/ContentHeader';
 import { CtaBrandPanelWithOverlappingImage } from 'features/Global/CtaBrandPanelWithOverlappingImage/CtaBrandPanelWithOverlappingImage';
 import { FaqTwoColumnsWithImage } from 'features/Global/FaqTwoColumnsWithImage/FaqTwoColumnsWithImage';
@@ -24,6 +25,7 @@ function pageChildToComponent() {
         return (
           <Wrapper>
             <div className="relative px-4 sm:px-6 lg:px-8">
+              <ContentBodyVertorDots />
               <ContentBody key={index}>
                 <div dangerouslySetInnerHTML={{ __html: component.content }} />
               </ContentBody>
@@ -56,7 +58,7 @@ function pageChildToComponent() {
 }
 
 export const Page = ({ page }: PageProps) => (
-  <div className="bg-white">{page?.sections?.map(pageChildToComponent())}</div>
+  <div className="bg-white overflow-hidden">{page?.sections?.map(pageChildToComponent())}</div>
 );
 
 export default Page;

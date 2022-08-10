@@ -14,7 +14,7 @@ export const FeaturesGrid = ({ heading, preheading, subheadingHtml, blocks }) =>
             dangerouslySetInnerHTML={{ __html: subheadingHtml }}
           />
         )}
-        {blocks?.length > 0 && (
+        {Boolean(blocks?.length) && (
           <div className="mt-12">
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {blocks.map((item) => (

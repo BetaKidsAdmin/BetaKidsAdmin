@@ -5,9 +5,13 @@ import Layout from 'layouts/Default';
 import { getLayoutData } from 'layouts/getLayoutData';
 import { InferGetStaticPropsType, NextPage } from 'next';
 
-const NotFoundPage: NextPage = ({ navigation, footer }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const NotFoundPage: NextPage = ({
+  globalSettings,
+  navigation,
+  footer
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <Layout navigation={navigation} footer={footer} seo={{ title: 'Server Error' }}>
+    <Layout globalSettings={globalSettings} navigation={navigation} footer={footer} seo={{ title: 'Server Error' }}>
       <Wrapper>
         <ErrorMessage headline="500 error" subhead="Server error" body="Sorry, we had an unexpected error.">
           <NextLink
@@ -23,8 +27,8 @@ const NotFoundPage: NextPage = ({ navigation, footer }: InferGetStaticPropsType<
 };
 
 export const getStaticProps = async () => {
-  const { navigation, footer } = await getLayoutData();
-  return { props: { navigation, footer } };
+  const { globalSettings, navigation, footer } = await getLayoutData();
+  return { props: { globalSettings, navigation, footer } };
 };
 
 export default NotFoundPage;

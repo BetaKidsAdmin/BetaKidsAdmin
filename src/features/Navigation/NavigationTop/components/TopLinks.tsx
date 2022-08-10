@@ -71,22 +71,19 @@ const SectionWithPopover = ({ section }: { section: NavigationSection }) => (
 );
 
 const SectionLink = ({ section }: { section: NavigationSection }) => (
-  <NextLink
-    className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
-    href={section.link.href}
-  >
+  <NextLink className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800" href={section.url}>
     {section.name}
   </NextLink>
 );
 
-export const TopLinks = ({ sections }: Pick<Navigation, 'sections'>) => {
+export const TopLinks = ({ navigation, sections }: Pick<Navigation, 'sections'>) => {
   return (
     <div className="hidden h-full lg:flex">
       {/* Mega menus */}
       <Popover.Group className="ml-8">
         <div className="h-full flex justify-center space-x-8">
-          {sections?.map((section) =>
-            section.subsections ? (
+          {navigation?.links?.map((section) =>
+            section?.subsections ? (
               <SectionWithPopover key={section.name} section={section} />
             ) : (
               <SectionLink key={section.name} section={section} />

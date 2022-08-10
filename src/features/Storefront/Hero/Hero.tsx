@@ -18,7 +18,7 @@ export const Hero = ({ primaryText, secondaryText, features, firstButton, second
                 <span className="block text-red-400">{primaryText.secondRow}</span>
               </h1>
               <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">{secondaryText}</p>
-              {features.length > 0 && (
+              {Boolean(features.length) && (
                 <dl className="mt-8 space-y-8">
                   {features.map((item, index) => (
                     <div key={index} className="relative text-left">

@@ -14,7 +14,7 @@ import { TopMessage } from './components/TopMessage';
 
 export interface NavigationTopProps extends Navigation {}
 
-export const NavigationTop = ({ message, sections, currencies }: NavigationTopProps) => {
+export const NavigationTop = ({ header, message, sections, currencies }: NavigationTopProps) => {
   const setIsMobileMenuOpen = useSetAtom(isMobileMenuOpenAtom);
   const setIsSearchOpen = useSetAtom(isSearchOpenAtom);
 
@@ -79,7 +79,7 @@ export const NavigationTop = ({ message, sections, currencies }: NavigationTopPr
                   </NextLink>
                 </div>
 
-                <TopLinks sections={sections} />
+                <TopLinks navigation={header?.navigation} sections={sections} />
 
                 {/* Mobile menu and search (lg-) */}
                 <div className="flex-1 flex items-center lg:hidden">

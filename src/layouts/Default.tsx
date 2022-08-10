@@ -15,14 +15,14 @@ export interface LayoutProps {
   footer: FooterProps;
 }
 
-export const Layout = ({ children, navigation, footer, seo }: PropsWithChildren<LayoutProps>) => {
+export const Layout = ({ children, globalSettings, navigation, footer, seo }: PropsWithChildren<LayoutProps>) => {
   return (
     <CartProvider>
       <div className="flex flex-col min-h-screen">
         <Seo {...seo} />
 
         <SearchModal />
-        <Navigation {...navigation} />
+        <Navigation header={globalSettings?.header} {...navigation} />
 
         <main id="content" className="flex flex-col grow">
           {children}

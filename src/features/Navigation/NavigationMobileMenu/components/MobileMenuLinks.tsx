@@ -4,9 +4,9 @@ import { Fragment } from 'react';
 import classNames from 'utils/classNames';
 import { Navigation } from '../../types';
 
-export const MobileMenuLinks = ({ sections }: Pick<Navigation, 'sections'>) => {
-  const withSubsections = sections.filter((section) => section.subsections);
-  const withoutSubsections = sections.filter((section) => !section.subsections);
+export const MobileMenuLinks = ({ navigation, sections }: Pick<Navigation, 'sections'>) => {
+  const withSubsections = navigation?.links.filter((section) => section.subsections);
+  const withoutSubsections = navigation?.links?.filter((section) => !section.subsections);
   return (
     <Fragment>
       {/* Links */}
@@ -65,7 +65,7 @@ export const MobileMenuLinks = ({ sections }: Pick<Navigation, 'sections'>) => {
         <div className="border-t border-gray-200 py-6 px-4 space-y-6">
           {withoutSubsections.map((section) => (
             <div key={section.name} className="flow-root">
-              <NextLink href={section.link.href} className="-m-2 p-2 block font-medium text-gray-900">
+              <NextLink href={section.url} className="-m-2 p-2 block font-medium text-gray-900">
                 {section.name}
               </NextLink>
             </div>

@@ -12,7 +12,7 @@ const AccountPurchasesPage: NextPage = ({ navigation, footer }: InferGetStaticPr
 };
 
 export const getStaticProps = async () => {
-  const { navigation, footer } = await getLayoutData();
+  const { globalSettings, navigation, footer } = await getLayoutData();
   return { props: { navigation, footer } };
 };
 

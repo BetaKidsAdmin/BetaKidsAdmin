@@ -8,9 +8,14 @@ import { InferGetStaticPropsType, NextPage } from 'next';
 import { GetStorefrontQueryResponse } from 'types/takeshape';
 import { createAnonymousTakeshapeApolloClient } from 'utils/takeshape';
 
-const IndexPage: NextPage = ({ navigation, footer, storefront }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const IndexPage: NextPage = ({
+  globalSettings,
+  navigation,
+  footer,
+  storefront
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <Layout navigation={navigation} footer={footer}>
+    <Layout globalSettings={globalSettings} navigation={navigation} footer={footer}>
       <Storefront storefront={storefront} />
     </Layout>
   );
@@ -19,7 +24,7 @@ const IndexPage: NextPage = ({ navigation, footer, storefront }: InferGetStaticP
 const apolloClient = createAnonymousTakeshapeApolloClient();
 
 export const getStaticProps = async () => {
-  const { navigation, footer } = await getLayoutData();
+  const { globalSettings, navigation, footer } = await getLayoutData();
 
   const { data, error } = await apolloClient.query<GetStorefrontQueryResponse>({
     query: GetStorefrontQuery
@@ -34,6 +39,7 @@ export const getStaticProps = async () => {
   return {
     revalidate: homepageRevalidationTtl,
     props: {
+      globalSettings,
       navigation,
       footer,
       storefront

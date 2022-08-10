@@ -2,28 +2,28 @@ import PageLoader from 'components/PageLoader';
 import { lighthouseHandle, lighthouseProductHandle, pageRevalidationTtl, productReviewsPerPage } from 'config';
 import { ProductPage as ProductPageComponent } from 'features/ProductPage/ProductPage';
 import {
-  ProductPageShopifyProductHandlesQuery,
-  ProductPageShopifyProductQuery
+    ProductPageShopifyProductHandlesQuery,
+    ProductPageShopifyProductQuery
 } from 'features/ProductPage/queries.takeshape';
 import {
-  getBreadcrumbs,
-  getDetails,
-  getPageOptions,
-  getPolicies,
-  getProduct,
-  getProductPageParams,
-  getProductReviews,
-  getReviewHighlights
+    getBreadcrumbs,
+    getDetails,
+    getPageOptions,
+    getPolicies,
+    getProduct,
+    getProductPageParams,
+    getProductReviews,
+    getReviewHighlights
 } from 'features/ProductPage/transforms';
 import Layout from 'layouts/Default';
 import { getLayoutData } from 'layouts/getLayoutData';
 import { GetStaticPaths, GetStaticPropsContext, InferGetStaticPropsType, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import {
-  ProductPageShopifyProductHandlesQueryResponse,
-  ProductPageShopifyProductHandlesQueryVariables,
-  ProductPageShopifyProductResponse,
-  ProductPageShopifyProductVariables
+    ProductPageShopifyProductHandlesQueryResponse,
+    ProductPageShopifyProductHandlesQueryVariables,
+    ProductPageShopifyProductResponse,
+    ProductPageShopifyProductVariables
 } from 'types/takeshape';
 import { retryGraphqlThrottle } from 'utils/apollo/retryGraphqlThrottle';
 import { createAnonymousTakeshapeApolloClient } from 'utils/takeshape';
@@ -75,7 +75,7 @@ const ProductPage: NextPage = ({
 const apolloClient = createAnonymousTakeshapeApolloClient();
 
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
-  const { navigation, footer } = await getLayoutData();
+  const { globalSettings, navigation, footer } = await getLayoutData();
 
   let handle = getSingle(params.product);
 

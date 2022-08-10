@@ -13,19 +13,29 @@ import { getSingle } from 'utils/types';
 
 const apolloClient = createAnonymousTakeshapeApolloClient();
 
-const PagePage: NextPage = ({ navigation, footer, post }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const PagePage: NextPage = ({
+  globalSettings,
+  navigation,
+  footer,
+  post
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
 
   if (router.isFallback) {
     return (
-      <Layout navigation={navigation} footer={footer} seo={{ title: 'Page is loading...' }}>
+      <Layout
+        globalSettings={globalSettings}
+        navigation={navigation}
+        footer={footer}
+        seo={{ title: 'Page is loading...' }}
+      >
         <PageLoader />
       </Layout>
     );
   }
 
   return (
-    <Layout navigation={navigation} footer={footer} seo={{ title: post.title }}>
+    <Layout globalSettings={globalSettings} navigation={navigation} footer={footer} seo={{ title: post.title }}>
       <BlogPost post={post} />
     </Layout>
   );
@@ -34,7 +44,7 @@ const PagePage: NextPage = ({ navigation, footer, post }: InferGetStaticPropsTyp
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   const slug = getSingle(params.page);
 
-  const { navigation, footer } = await getLayoutData();
+  const { globalSettings, navigation, footer } = await getLayoutData();
 
   const { data, error } = await apolloClient.query<GetBlogPostResponse, GetBlogPostVariables>({
     query: GetBlogPost,
@@ -55,6 +65,7 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     props: {
       // IMPORTANT This allows state to reset on NextLink route changes
       key: post._id,
+      globalSettings,
       navigation,
       footer,
       post
