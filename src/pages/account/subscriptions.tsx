@@ -3,17 +3,17 @@ import Layout from 'layouts/Account';
 import { getLayoutData } from 'layouts/getLayoutData';
 import { InferGetStaticPropsType, NextPage } from 'next';
 
-const AccountPurchasesPage: NextPage = ({ navigation, footer }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const AccountPurchasesPage: NextPage = ({ globalSettings }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <Layout navigation={navigation} footer={footer} seo={{ title: 'Subscriptions' }}>
+    <Layout globalSettings={globalSettings} seo={{ title: 'Subscriptions' }}>
       <AccountSubscriptions />
     </Layout>
   );
 };
 
 export const getStaticProps = async () => {
-  const { globalSettings, navigation, footer } = await getLayoutData();
-  return { props: { navigation, footer } };
+  const { globalSettings } = await getLayoutData();
+  return { props: { globalSettings } };
 };
 
 export default AccountPurchasesPage;

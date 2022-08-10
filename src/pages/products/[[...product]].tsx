@@ -34,8 +34,6 @@ const ProductPage: NextPage = ({
   noindex,
   options,
   globalSettings,
-  navigation,
-  footer,
   product,
   reviewHighlights,
   reviewList,
@@ -48,12 +46,7 @@ const ProductPage: NextPage = ({
 
   if (isFallback) {
     return (
-      <Layout
-        globalSettings={globalSettings}
-        navigation={navigation}
-        footer={footer}
-        seo={{ title: 'Product is loading...' }}
-      >
+      <Layout globalSettings={globalSettings} seo={{ title: 'Product is loading...' }}>
         <PageLoader />
       </Layout>
     );
@@ -62,8 +55,6 @@ const ProductPage: NextPage = ({
   return (
     <Layout
       globalSettings={globalSettings}
-      navigation={navigation}
-      footer={footer}
       seo={{ title: product.seo.title, description: product.seo.description, noindex }}
     >
       <ProductPageComponent
@@ -85,7 +76,7 @@ const ProductPage: NextPage = ({
 const apolloClient = createAnonymousTakeshapeApolloClient();
 
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
-  const { globalSettings, navigation, footer } = await getLayoutData();
+  const { globalSettings } = await getLayoutData();
 
   let handle = getSingle(params.product);
 
@@ -118,8 +109,6 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
       // Don't index lighthouse test urls
       noindex: handle === lighthouseHandle,
       globalSettings,
-      navigation,
-      footer,
       product,
       sections: getProductSections(data),
       options: getPageOptions(data),
@@ -160,7 +149,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths.push({ params: { product: [lighthouseHandle] } });
   }
 
-  console.log('PATH!!!!!!', paths);
   return {
     paths,
     fallback: true

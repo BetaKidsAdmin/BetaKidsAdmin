@@ -13,29 +13,19 @@ import { getSingle } from 'utils/types';
 
 const apolloClient = createAnonymousTakeshapeApolloClient();
 
-const PagePage: NextPage = ({
-  globalSettings,
-  navigation,
-  footer,
-  page
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+const PagePage: NextPage = ({ globalSettings, page }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
 
   if (router.isFallback) {
     return (
-      <Layout
-        globalSettings={globalSettings}
-        navigation={navigation}
-        footer={footer}
-        seo={{ title: 'Page is loading...' }}
-      >
+      <Layout globalSettings={globalSettings} seo={{ title: 'Page is loading...' }}>
         <PageLoader />
       </Layout>
     );
   }
 
   return (
-    <Layout globalSettings={globalSettings} navigation={navigation} footer={footer} seo={{ title: page.title }}>
+    <Layout globalSettings={globalSettings} seo={{ title: page.title }}>
       <Page page={page} />
     </Layout>
   );
@@ -44,7 +34,7 @@ const PagePage: NextPage = ({
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   const slug = getSingle(params.page);
 
-  const { globalSettings, navigation, footer } = await getLayoutData();
+  const { globalSettings } = await getLayoutData();
 
   const { data, error } = await apolloClient.query<PageGetPageResponse, PageGetPageVariables>({
     query: PageGetPage,
@@ -66,8 +56,6 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
       // IMPORTANT This allows state to reset on NextLink route changes
       key: page._id,
       globalSettings,
-      navigation,
-      footer,
       page
     }
   };

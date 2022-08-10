@@ -7,15 +7,15 @@ import { InferGetStaticPropsType, NextPage } from 'next';
 import { GetMyLoyaltyCardQueryResponse } from 'types/takeshape';
 import { useAuthenticatedQuery } from 'utils/takeshape';
 
-const AccountRewardsPage: NextPage = ({ navigation, footer }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const AccountRewardsPage: NextPage = ({ globalSettings }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { data } = useAuthenticatedQuery<GetMyLoyaltyCardQueryResponse>(GetMyLoyaltyCardQuery);
 
   if (!data) {
-    return <Layout navigation={navigation} footer={footer} seo={{ title: 'Rewards' }}></Layout>;
+    return <Layout globalSettings={globalSettings} seo={{ title: 'Rewards' }}></Layout>;
   }
 
   return (
-    <Layout navigation={navigation} footer={footer} seo={{ title: 'Rewards' }}>
+    <Layout globalSettings={globalSettings} seo={{ title: 'Rewards' }}>
       <AccountReferrals />
       <AccountLoyaltyCard
         code={data?.loyaltyCard.code}
@@ -27,8 +27,8 @@ const AccountRewardsPage: NextPage = ({ navigation, footer }: InferGetStaticProp
 };
 
 export const getStaticProps = async () => {
-  const { globalSettings, navigation, footer } = await getLayoutData();
-  return { props: { navigation, footer } };
+  const { globalSettings } = await getLayoutData();
+  return { props: { globalSettings } };
 };
 
 export default AccountRewardsPage;

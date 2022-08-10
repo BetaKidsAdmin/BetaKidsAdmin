@@ -6,11 +6,7 @@ import { InferGetStaticPropsType, NextPage } from 'next';
 import { useCallback, useState } from 'react';
 // import { CreateTicketMutationResponse, CreateTicketMutationVariables } from 'types/takeshape';
 
-const ContactPage: NextPage = ({
-  globalSettings,
-  navigation,
-  footer
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+const ContactPage: NextPage = ({ globalSettings }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [success, setSuccess] = useState<string>();
   // const [createTicket, { error }] = useMutation<any, any>(CreateTicketMutation);
 
@@ -34,7 +30,7 @@ const ContactPage: NextPage = ({
   }, []);
 
   return (
-    <Layout globalSettings={globalSettings} navigation={navigation} footer={footer} seo={{ title: 'Contact' }}>
+    <Layout globalSettings={globalSettings} seo={{ title: 'Contact' }}>
       <Contact
         text={{
           primary: 'Get in touch',
@@ -50,13 +46,11 @@ const ContactPage: NextPage = ({
 };
 
 export const getStaticProps = async () => {
-  const { globalSettings, navigation, footer } = await getLayoutData();
+  const { globalSettings } = await getLayoutData();
   return {
     revalidate: pageRevalidationTtl,
     props: {
-      globalSettings,
-      navigation,
-      footer
+      globalSettings
     }
   };
 };

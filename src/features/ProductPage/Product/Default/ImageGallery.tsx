@@ -1,4 +1,5 @@
 import { Tab } from '@headlessui/react';
+import NextImage from 'components/NextImage';
 import classNames from 'utils/classNames';
 
 export const ImageGallery = ({ images }) => {
@@ -18,7 +19,13 @@ export const ImageGallery = ({ images }) => {
                   <>
                     <span className="sr-only">{image.altText}</span>
                     <span className="absolute inset-0 rounded-md overflow-hidden">
-                      <img src={image.url} alt="" className="w-full h-full object-center object-cover" />
+                      <NextImage
+                        src={image.url}
+                        alt={image.altText}
+                        className="w-full h-full object-center object-cover"
+                        width={577}
+                        height={577}
+                      />
                     </span>
                     <span
                       className={classNames(
@@ -37,10 +44,12 @@ export const ImageGallery = ({ images }) => {
         <Tab.Panels className="w-full aspect-w-1 aspect-h-1">
           {images?.map((image) => (
             <Tab.Panel key={image.id}>
-              <img
+              <NextImage
                 src={image.url}
                 alt={image.altText}
                 className="w-full h-full object-center object-cover sm:rounded-lg"
+                width={577}
+                height={577}
               />
             </Tab.Panel>
           ))}

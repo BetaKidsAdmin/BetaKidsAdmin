@@ -16,37 +16,26 @@ import { createAnonymousTakeshapeApolloClient } from 'utils/takeshape';
 
 const apolloClient = createAnonymousTakeshapeApolloClient();
 
-const PagePage: NextPage = ({
-  globalSettings,
-  navigation,
-  footer,
-  page,
-  posts
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+const PagePage: NextPage = ({ globalSettings, page, posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
 
   if (router.isFallback) {
     return (
-      <Layout
-        globalSettings={globalSettings}
-        navigation={navigation}
-        footer={footer}
-        seo={{ title: 'Page is loading...' }}
-      >
+      <Layout globalSettings={globalSettings} seo={{ title: 'Page is loading...' }}>
         <PageLoader />
       </Layout>
     );
   }
 
   return (
-    <Layout globalSettings={globalSettings} navigation={navigation} footer={footer} seo={{ title: page.seo.metaTitle }}>
+    <Layout globalSettings={globalSettings} seo={{ title: page.seo.metaTitle }}>
       <BlogPage page={page} posts={posts} />
     </Layout>
   );
 };
 
 export const getStaticProps = async () => {
-  const { globalSettings, navigation, footer } = await getLayoutData();
+  const { globalSettings } = await getLayoutData();
 
   const { data, error } = await apolloClient.query<GetBlogPageResponse, GetBlogPageVariables>({
     query: GetBlogPage
@@ -67,8 +56,6 @@ export const getStaticProps = async () => {
   return {
     props: {
       globalSettings,
-      navigation,
-      footer,
       page,
       posts
     }

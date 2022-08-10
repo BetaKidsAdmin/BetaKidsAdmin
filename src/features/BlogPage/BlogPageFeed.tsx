@@ -15,13 +15,13 @@ export const BlogPageFeed = ({ posts }) => {
               <p className="text-sm text-gray-500">
                 <time dateTime={post.date}>{format(new Date(post.date), 'PP')}</time>
               </p>
-              <NextLink href={`/blog/news/${post.slug}`} className="mt-2 block">
+              <NextLink href={`/blogs/news/${post.slug}`} className="mt-2 block">
                 <p className="text-xl font-semibold text-gray-900">{post.title}</p>
                 {/* <p className="mt-3 text-base text-gray-500">{post.description}</p> */}
               </NextLink>
               <div className="mt-3">
                 <NextLink
-                  href={`/blog/news/${post.slug}`}
+                  href={`/blogs/news/${post.slug}`}
                   className="text-base font-semibold text-red-500 hover:text-red-400"
                 >
                   Read full story

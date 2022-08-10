@@ -1,3 +1,4 @@
+import { currencyList } from 'config';
 import { GlobalSettingsQueryResponse } from 'types/takeshape';
 
 export function getGlobalSettings(response: GlobalSettingsQueryResponse) {
@@ -7,5 +8,5 @@ export function getGlobalSettings(response: GlobalSettingsQueryResponse) {
     return null;
   }
 
-  return globalSettings;
+  return { ...globalSettings, currencies: [...currencyList] };
 }
