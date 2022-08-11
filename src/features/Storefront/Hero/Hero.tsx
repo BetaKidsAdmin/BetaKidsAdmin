@@ -63,7 +63,7 @@ export const Hero = ({ primaryText, secondaryText, features, firstButton, second
             <div className="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 lg:max-w-none lg:px-0">
               <NextImage
                 src={getImageUrl(image)}
-                alt={image.description ?? ''}
+                alt={image?.description ?? ''}
                 className="w-full h-full object-center object-cover lg:inset-y-0 lg:left-0 lg:h-full lg:w-auto lg:max-w-none"
                 priority
                 width={580}

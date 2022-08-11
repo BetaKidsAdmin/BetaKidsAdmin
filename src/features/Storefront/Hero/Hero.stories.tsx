@@ -3,10 +3,7 @@ import { Hero } from './Hero';
 
 const Meta: ComponentMeta<typeof Hero> = {
   title: 'Features / Storefront / Components / Hero',
-  component: Hero,
-  parameters: {
-    layout: 'centered'
-  }
+  component: Hero
 };
 
 const Template: ComponentStory<typeof Hero> = (args) => <Hero {...args} />;
@@ -43,7 +40,11 @@ _Hero.args = {
     url: '/pages/betakids-immune-support-science'
   },
   secondaryText:
-    "BetaKIDS® is an all-natural, science-backed gummy shown to double a child's immune response without overstimulation."
+    "BetaKIDS® is an all-natural, science-backed gummy shown to double a child's immune response without overstimulation.",
+  image: {
+    path: 'e6942252-2648-44e1-a793-f1d77edb40c9/dev/46b5151a-66b2-4118-8985-2d1e30914877/Children-pana.svg',
+    description: null
+  }
 };
 
 export default Meta;

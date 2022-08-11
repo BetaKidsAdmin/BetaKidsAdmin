@@ -13,7 +13,6 @@ jobs:
       LIGHTHOUSE_URLS: |
         ${{ github.event.deployment_status.target_url }}
         ${{ github.event.deployment_status.target_url }}/product/__lighthouse
-        ${{ github.event.deployment_status.target_url }}/collection/__lighthouse
     steps:
       - uses: actions/checkout@v3
 
@@ -74,7 +73,6 @@ jobs:
       LIGHTHOUSE_URLS: |
         ${{ github.event.deployment_status.target_url }}
         ${{ github.event.deployment_status.target_url }}/product/__lighthouse
-        ${{ github.event.deployment_status.target_url }}/collection/__lighthouse
     steps:
       - uses: actions/checkout@v3
         with:
