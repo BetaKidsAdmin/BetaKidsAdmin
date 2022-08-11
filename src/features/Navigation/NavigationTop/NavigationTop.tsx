@@ -4,7 +4,7 @@ import NextLink from 'components/NextLink';
 import { showCurrencySelector, siteLogo } from 'config';
 import { useSetAtom } from 'jotai';
 import { isMobileMenuOpenAtom, isSearchOpenAtom } from 'store';
-import { Navigation } from '../types';
+import { Header } from '../types';
 import { TopAccountIcon } from './components/TopAccountIcon';
 import { TopCartIcon } from './components/TopCartIcon';
 import { TopCreateOrSignIn } from './components/TopCreateOrSignIn';
@@ -12,9 +12,9 @@ import { TopCurrencySelect } from './components/TopCurrencySelect';
 import { TopLinks } from './components/TopLinks';
 import { TopMessage } from './components/TopMessage';
 
-export interface NavigationTopProps extends Navigation {}
+export interface NavigationTopProps extends Header {}
 
-export const NavigationTop = ({ header, message, sections, currencies }: NavigationTopProps) => {
+export const NavigationTop = ({ header, currencies }: NavigationTopProps) => {
   const setIsMobileMenuOpen = useSetAtom(isMobileMenuOpenAtom);
   const setIsSearchOpen = useSetAtom(isSearchOpenAtom);
 
@@ -59,7 +59,7 @@ export const NavigationTop = ({ header, message, sections, currencies }: Navigat
               )}
             </form>
 
-            <TopMessage message={message} />
+            <TopMessage message={header?.message} />
             <TopCreateOrSignIn />
           </div>
         </div>
@@ -79,7 +79,7 @@ export const NavigationTop = ({ header, message, sections, currencies }: Navigat
                   </NextLink>
                 </div>
 
-                <TopLinks navigation={header?.navigation} sections={sections} />
+                <TopLinks navigation={header?.navigation} />
 
                 {/* Mobile menu and search (lg-) */}
                 <div className="flex-1 flex items-center lg:hidden">

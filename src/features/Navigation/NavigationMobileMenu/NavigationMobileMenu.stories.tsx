@@ -41,8 +41,7 @@ _Open.parameters = {
   }
 };
 _Open.args = {
-  message: navigation.message,
-  sections: navigation.sections,
+  header: navigation.header,
   currencies: navigation.currencies
 };
 

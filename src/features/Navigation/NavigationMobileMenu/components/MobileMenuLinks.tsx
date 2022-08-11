@@ -2,9 +2,9 @@ import { Tab } from '@headlessui/react';
 import NextLink from 'components/NextLink';
 import { Fragment } from 'react';
 import classNames from 'utils/classNames';
-import { Navigation } from '../../types';
+import { HeaderNavigation } from '../../types';
 
-export const MobileMenuLinks = ({ navigation, sections }: Pick<Navigation, 'sections'>) => {
+export const MobileMenuLinks = ({ navigation }: HeaderNavigation) => {
   const withSubsections = navigation?.links.filter((section) => section.subsections);
   const withoutSubsections = navigation?.links?.filter((section) => !section.subsections);
   return (

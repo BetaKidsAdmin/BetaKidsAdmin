@@ -2,7 +2,7 @@ import { Popover, Transition } from '@headlessui/react';
 import NextLink from 'components/NextLink';
 import { Fragment } from 'react';
 import classNames from 'utils/classNames';
-import { Navigation, NavigationSection } from '../../types';
+import { HeaderNavigation, NavigationSection } from '../../types';
 
 const SectionWithPopover = ({ section }: { section: NavigationSection }) => (
   <Popover key={section.name} className="flex">
@@ -76,7 +76,7 @@ const SectionLink = ({ section }: { section: NavigationSection }) => (
   </NextLink>
 );
 
-export const TopLinks = ({ navigation, sections }: Pick<Navigation, 'sections'>) => {
+export const TopLinks = ({ navigation }: Pick<HeaderNavigation, 'navigation'>) => {
   return (
     <div className="hidden h-full lg:flex">
       {/* Mega menus */}

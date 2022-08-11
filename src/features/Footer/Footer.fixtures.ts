@@ -3,94 +3,45 @@ import { FooterProps } from 'features/Footer/Footer';
 export const GetFooterQueryData: { footer: FooterProps } = {
   footer: {
     navigation: {
+      info: {
+        descriptionHtml:
+          '<p>BetaKIDS is on a mission to create healthier kids and happier families... one immune system at a time.</p>',
+        heading: 'Our Mission'
+      },
       sections: [
         {
-          name: 'Solutions',
           links: [
             {
-              name: 'Marketing',
-              href: '#'
-            },
-            {
-              name: 'Analytics',
-              href: '#'
-            },
-            {
-              name: 'Commerce',
-              href: '#'
-            },
-            {
-              name: 'Insights',
-              href: '#'
+              name: 'Manage Your Account',
+              url: '/api/auth/signin'
             }
-          ]
+          ],
+          title: 'Your Account'
         },
         {
-          name: 'Support',
           links: [
             {
-              name: 'Contact',
-              href: 'contact'
+              name: 'Contact Us',
+              url: '/pages/contact-us'
             },
             {
-              name: 'Pricing',
-              href: '#'
+              name: 'Shipping & Returns',
+              url: '/pages/shipping-returns'
             },
             {
-              name: 'Documentation',
-              href: '#'
+              name: 'Terms of Service',
+              url: '/pages/terms-of-service'
             },
             {
-              name: 'Guides',
-              href: '#'
+              name: 'Privacy Policy',
+              url: '/pages/privacy-policy'
             },
             {
-              name: 'API Status',
-              href: '#'
+              name: 'Cookie Policy',
+              url: '/pages/cookie-policy'
             }
-          ]
-        },
-        {
-          name: 'Company',
-          links: [
-            {
-              name: 'About',
-              href: '#'
-            },
-            {
-              name: 'Blog',
-              href: '#'
-            },
-            {
-              name: 'Jobs',
-              href: '#'
-            },
-            {
-              name: 'Press',
-              href: '#'
-            },
-            {
-              name: 'Partners',
-              href: '#'
-            }
-          ]
-        },
-        {
-          name: 'Legal',
-          links: [
-            {
-              name: 'Claim',
-              href: '#'
-            },
-            {
-              name: 'Privacy',
-              href: '#'
-            },
-            {
-              name: 'Terms',
-              href: '#'
-            }
-          ]
+          ],
+          title: 'Help'
         }
       ]
     },

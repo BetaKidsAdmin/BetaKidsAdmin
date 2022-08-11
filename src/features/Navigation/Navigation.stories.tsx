@@ -4,9 +4,8 @@ import { rest } from 'msw';
 import { isMobileMenuOpenAtom, isSearchOpenAtom } from 'store';
 import { Navigation } from './Navigation';
 import { navigationResponse } from './queries.fixtures';
-import { getNavigation } from './transforms';
 
-const navigation = getNavigation(navigationResponse);
+const navigation = navigationResponse;
 
 const Meta: ComponentMeta<typeof Navigation> = {
   title: 'Features / Navigation',
@@ -40,8 +39,7 @@ const Template: ComponentStory<typeof Navigation> = (args) => <Navigation {...ar
 
 export const _Navigation = Template.bind({});
 _Navigation.args = {
-  message: navigation.message,
-  sections: navigation.sections,
+  header: navigation.header,
   currencies: currencyList
 };
 

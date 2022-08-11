@@ -25,8 +25,16 @@ export type NavigationSection = {
   subsections: NavigationSubsection[];
 };
 
-export type Navigation = {
+export type HeaderNavigationLinks = {
+  links: NavigationItem[];
+};
+
+export type HeaderNavigation = {
   message: NavigationMessage;
-  sections: NavigationSection[];
+  navigation: HeaderNavigationLinks;
+};
+
+export type Header = {
+  header: HeaderNavigation;
   currencies: NavigationCurrency[];
 };

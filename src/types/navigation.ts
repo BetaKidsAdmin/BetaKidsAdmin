@@ -7,7 +7,7 @@ export type NavigationMessage = string;
 
 export type NavigationItem = {
   name: string;
-  href: string;
+  url: string;
 };
 
 export type NavigationCategory = {

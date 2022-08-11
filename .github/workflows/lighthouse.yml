@@ -22,7 +22,7 @@ jobs:
           number=$(gh pr list --search "${{ github.sha }}" --state open --json number --jq ".[0].number")
           echo "::set-output name=number::$number"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}
 
       - name: Audit URLs using Lighthouse
         if: steps.pr.outputs.number != ''
@@ -55,7 +55,7 @@ jobs:
         if: always() && steps.pr.outputs.number != ''
         uses: marocchino/sticky-pull-request-comment@v2.2.0
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}
           number: ${{ steps.pr.outputs.number }}
           header: lighthouse
           message: ${{ steps.format_lighthouse_score.outputs.comment }}
@@ -124,7 +124,7 @@ jobs:
         if: always()
         uses: stefanzweifel/git-auto-commit-action@v4
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}
         with:
           commit_message: Lighthouse Score [skip ci]
           skip_dirty_check: true

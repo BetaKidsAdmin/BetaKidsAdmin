@@ -1,7 +1,7 @@
 import { currencyList } from 'config';
 import { getNavigationLink } from 'transforms/navigation';
 import { NavigationQueryResponse, NavigationSectionsLinkProperty } from 'types/takeshape';
-import { Navigation, NavigationSection } from './types';
+import { NavigationSection } from './types';
 
 export function getNavigationLinksSections(response: NavigationQueryResponse): NavigationSection[] {
   return response.navigation?.sections
@@ -18,7 +18,7 @@ export function getNavigationLinksSections(response: NavigationQueryResponse): N
     : [];
 }
 
-export function getNavigation(response: NavigationQueryResponse): Navigation {
+export function getNavigation(response: NavigationQueryResponse): any {
   const navigation = response?.navigation;
 
   if (!navigation) {

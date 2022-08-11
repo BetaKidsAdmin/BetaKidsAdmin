@@ -4,12 +4,12 @@ import { isStorybook } from 'config';
 import { useAtom } from 'jotai';
 import { Fragment } from 'react';
 import { isMobileMenuOpenAtom } from 'store';
-import { Navigation } from '../types';
+import { Header } from '../types';
 import { MobileMenuCreateOrSignIn } from './components/MobileMenuCreateOrSignIn';
 import { MobileMenuCurrencySelect } from './components/MobileMenuCurrencySelect';
 import { MobileMenuLinks } from './components/MobileMenuLinks';
 
-export const NavigationMobileMenu = ({ header, sections, currencies }: Pick<Navigation, 'currencies' | 'sections'>) => {
+export const NavigationMobileMenu = ({ header, currencies }: Header) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useAtom(isMobileMenuOpenAtom);
 
   return (
@@ -54,7 +54,7 @@ export const NavigationMobileMenu = ({ header, sections, currencies }: Pick<Navi
               </button>
             </div>
 
-            <MobileMenuLinks navigation={header?.navigation} sections={sections} />
+            <MobileMenuLinks navigation={header?.navigation} />
 
             <MobileMenuCreateOrSignIn />
 

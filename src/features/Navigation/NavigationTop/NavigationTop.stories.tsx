@@ -2,10 +2,9 @@ import { ComponentMeta } from '@storybook/react';
 import { rest } from 'msw';
 import { isMobileMenuOpenAtom, isSearchOpenAtom } from 'store';
 import { navigationResponse } from '../queries.fixtures';
-import { getNavigation } from '../transforms';
 import { NavigationTop } from './NavigationTop';
 
-const navigation = getNavigation(navigationResponse);
+const navigation = navigationResponse;
 
 const Meta: ComponentMeta<typeof NavigationTop> = {
   title: 'Features / Navigation / Navigation Top',
@@ -39,8 +38,7 @@ const Template = (args) => <NavigationTop {...args} />;
 
 export const _Mobile = Template.bind({});
 _Mobile.args = {
-  message: navigation.message,
-  sections: navigation.sections,
+  header: navigation.header,
   currencies: navigation.currencies
 };
 _Mobile.parameters = {
@@ -51,8 +49,7 @@ _Mobile.parameters = {
 
 export const _Tablet = Template.bind({});
 _Tablet.args = {
-  message: navigation.message,
-  sections: navigation.sections,
+  header: navigation.header,
   currencies: navigation.currencies
 };
 _Tablet.parameters = {
@@ -63,8 +60,7 @@ _Tablet.parameters = {
 
 export const _Desktop = Template.bind({});
 _Desktop.args = {
-  message: navigation.message,
-  sections: navigation.sections,
+  header: navigation.header,
   currencies: navigation.currencies
 };
 _Desktop.parameters = {};

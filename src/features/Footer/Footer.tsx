@@ -1,7 +1,27 @@
 import NextLink from 'components/NextLink';
 import { PaymentList } from 'features/Footer/PaymentList/PaymentList';
 
-export interface FooterProps {}
+export interface FooterProps {
+  footer: {
+    navigation: {
+      info: {
+        descriptionHtml: string;
+        heading: string;
+      };
+      sections: [
+        {
+          links: [
+            {
+              name: string;
+              url: string;
+            }
+          ];
+          title: string;
+        }
+      ];
+    };
+  };
+}
 
 export const Footer = ({ footer }) => {
   if (!footer?.info || !footer?.navigation) return null;
