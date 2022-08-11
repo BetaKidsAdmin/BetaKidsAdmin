@@ -10,28 +10,6 @@ TakeShape provides, just deploy the pattern in the `.takeshape/pattern` director
 
 <!-- prettier-ignore-start -->
 <!-- LIGHTHOUSE:BEGIN -->
-## ⚡️🏠 Lighthouse Report
-
-| Category | Score |
-| -------- | ----- |
-| [Path: /](https://deluxe-sample-project-lptizu204-takeshape.vercel.app/) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1658334181542-93304.report.html) |
-| 🟢 Performance | 100 |
-| 🟢 Accessibility | 100 |
-| 🟢 Best practices | 100 |
-| 🟢 SEO | 100 |
-| 🟢 PWA | 100 |
-| [Path: /product/__lighthouse](https://deluxe-sample-project-lptizu204-takeshape.vercel.app/product/__lighthouse) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1658334182124-74894.report.html) |
-| 🟢 Performance | 100 |
-| 🟢 Accessibility | 100 |
-| 🟢 Best practices | 100 |
-| 🟢 SEO | 100 |
-| 🟢 PWA | 100 |
-| [Path: /collection/__lighthouse](https://deluxe-sample-project-lptizu204-takeshape.vercel.app/collection/__lighthouse) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1658334182573-19421.report.html) |
-| 🟢 Performance | 100 |
-| 🟢 Accessibility | 100 |
-| 🟢 Best practices | 100 |
-| 🟢 SEO | 100 |
-| 🟢 PWA | 100 |
 
 <!-- LIGHTHOUSE:END -->
 <!-- prettier-ignore-end -->
