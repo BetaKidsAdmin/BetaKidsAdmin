@@ -42,15 +42,12 @@ jobs:
         with:
           script: |
             const lighthouseCommentMaker = require('./.lighthouse/lighthouseCommentMaker.js');
-
             const lighthouseOutputs = {
               manifest: ${{ steps.lighthouse_audit.outputs.manifest }},
               links: ${{ steps.lighthouse_audit.outputs.links }}
             };
-
             const comment = lighthouseCommentMaker({ lighthouseOutputs });
             core.setOutput("comment", comment);
-
       - name: Add Lighthouse stats as comment
         if: always() && steps.pr.outputs.number != ''
         uses: marocchino/sticky-pull-request-comment@v2.2.0
@@ -96,30 +93,24 @@ jobs:
         with:
           script: |
             const lighthouseCommentMaker = require('./.lighthouse/lighthouseCommentMaker.js');
-
             const lighthouseOutputs = {
               manifest: ${{ steps.lighthouse_audit.outputs.manifest }},
               links: ${{ steps.lighthouse_audit.outputs.links }}
             };
-
             const comment = lighthouseCommentMaker({ lighthouseOutputs });
             core.setOutput("comment", comment);
-
       - name: Add Lighthouse to README.md
         if: always()
         run: |
           begin=$LIGHTHOUSE_BEGIN_TOKEN
           end=$LIGHTHOUSE_END_TOKEN
           file=$LIGHTHOUSE_FILE
-
           data="${{ steps.format_lighthouse_score.outputs.comment }}"
-
           awk -i inplace \
             -v begin="$begin" \
             -v end="$end" \
             -v data="$data" '$0~end{f=0} !f{print} $0~begin{print data;f=1}' \
             "$file"
-
       - name: Commit to repo
         if: always()
         uses: stefanzweifel/git-auto-commit-action@v4
