@@ -76,7 +76,7 @@ export const NavigationTop = ({ header, currencies }: NavigationTopProps) => {
                     <div className="h-9 w-32 relative">
                       <NextImage
                         src={siteLogo}
-                        height={36}
+                        height={34}
                         width={128}
                         alt="BetaKids"
                         className="w-auto h-9"
