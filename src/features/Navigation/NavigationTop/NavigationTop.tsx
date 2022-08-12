@@ -73,8 +73,15 @@ export const NavigationTop = ({ header, currencies }: NavigationTopProps) => {
                 <div className="hidden lg:flex lg:items-center">
                   <NextLink href="/">
                     <span className="sr-only">Workflow</span>
-                    <div className="h-8 w-32 relative">
-                      <NextImage src={siteLogo} height={32} width={128} alt="" className="w-auto h-8" priority />
+                    <div className="h-9 w-32 relative">
+                      <NextImage
+                        src={siteLogo}
+                        height={36}
+                        width={128}
+                        alt="BetaKids"
+                        className="w-auto h-9"
+                        priority
+                      />
                     </div>
                   </NextLink>
                 </div>
@@ -102,8 +109,15 @@ export const NavigationTop = ({ header, currencies }: NavigationTopProps) => {
                 {/* Logo (lg-) */}
                 <NextLink href="/" className="lg:hidden">
                   <span className="sr-only">Workflow</span>
-                  <div className="h-6 w-22 md:h-8 md:w-32 relative">
-                    <NextImage src={siteLogo} height={32} width={128} alt="" className="w-auto h-6 md:h-8" priority />
+                  <div className="h-6 w-24 md:h-8 md:w-32 relative">
+                    <NextImage
+                      src={siteLogo}
+                      height={25}
+                      width={96}
+                      alt="BetaKids"
+                      className="w-auto h-6 md:h-8"
+                      priority
+                    />
                   </div>
                 </NextLink>
 
