@@ -12,7 +12,7 @@ jobs:
       LIGHTHOUSE_CONFIG: 'preview'
       LIGHTHOUSE_URLS: |
         ${{ github.event.deployment_status.target_url }}
-        ${{ github.event.deployment_status.target_url }}/product/__lighthouse
+        ${{ github.event.deployment_status.target_url }}/products/__lighthouse
     steps:
       - uses: actions/checkout@v3
 
@@ -69,7 +69,7 @@ jobs:
       LIGHTHOUSE_END_TOKEN: '<!-- LIGHTHOUSE:END -->'
       LIGHTHOUSE_URLS: |
         ${{ github.event.deployment_status.target_url }}
-        ${{ github.event.deployment_status.target_url }}/product/__lighthouse
+        ${{ github.event.deployment_status.target_url }}/products/__lighthouse
     steps:
       - uses: actions/checkout@v3
         with:
