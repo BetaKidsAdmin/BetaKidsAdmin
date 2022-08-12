@@ -10,22 +10,6 @@ TakeShape provides, just deploy the pattern in the `.takeshape/pattern` director
 
 <!-- prettier-ignore-start -->
 <!-- LIGHTHOUSE:BEGIN -->
-## ⚡️🏠 Lighthouse Report
-
-| Category | Score |
-| -------- | ----- |
-| [Path: /](https://beta-kids-admin-6iv0hg7td-admin-betakidscom.vercel.app/) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1660291482817-17303.report.html) |
-| 🟢 Performance | 100 |
-| 🟢 Accessibility | 100 |
-| 🟠 Best practices | 83 |
-| 🟢 SEO | 100 |
-| 🟢 PWA | 100 |
-| [Path: /products/__lighthouse](https://beta-kids-admin-6iv0hg7td-admin-betakidscom.vercel.app/products/__lighthouse) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1660291483429-84749.report.html) |
-| 🟢 Performance | 100 |
-| 🟢 Accessibility | 100 |
-| 🟠 Best practices | 83 |
-| 🟢 SEO | 100 |
-| 🟢 PWA | 100 |
 
 <!-- LIGHTHOUSE:END -->
 <!-- prettier-ignore-end -->
