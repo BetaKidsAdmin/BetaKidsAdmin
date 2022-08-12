@@ -14,13 +14,13 @@ TakeShape provides, just deploy the pattern in the `.takeshape/pattern` director
 
 | Category | Score |
 | -------- | ----- |
-| [Path: /](https://beta-kids-admin-l59u2cx3s-admin-betakidscom.vercel.app/) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1660291043507-35201.report.html) |
+| [Path: /](https://beta-kids-admin-crn00nztz-admin-betakidscom.vercel.app/) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1660291262921-35274.report.html) |
 | 🟢 Performance | 100 |
 | 🟢 Accessibility | 100 |
 | 🟠 Best practices | 83 |
 | 🟢 SEO | 100 |
 | 🟢 PWA | 100 |
-| [Path: /products/__lighthouse](https://beta-kids-admin-l59u2cx3s-admin-betakidscom.vercel.app/products/__lighthouse) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1660291044012-36633.report.html) |
+| [Path: /products/__lighthouse](https://beta-kids-admin-crn00nztz-admin-betakidscom.vercel.app/products/__lighthouse) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1660291263519-57662.report.html) |
 | 🟢 Performance | 100 |
 | 🟢 Accessibility | 100 |
 | 🟠 Best practices | 83 |
