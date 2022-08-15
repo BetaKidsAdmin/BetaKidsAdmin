@@ -19,7 +19,7 @@ export function getPageParams(response: GetBlogPostSlugsResponse) {
 
   return items.map((item) => ({
     params: {
-      page: item.slug
+      post: item.slug
     }
   }));
 }

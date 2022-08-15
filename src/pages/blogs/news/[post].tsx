@@ -32,7 +32,7 @@ const PagePage: NextPage = ({ globalSettings, post }: InferGetStaticPropsType<ty
 };
 
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
-  const slug = getSingle(params.page);
+  const slug = getSingle(params.post);
 
   const { globalSettings } = await getLayoutData();
 

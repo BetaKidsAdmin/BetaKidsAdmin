@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
-export const GetBlogPosts = gql`
-  query GetBlogPosts {
+export const GetBlogPostsQuery = gql`
+  query GetBlogPostsQuery {
     blogPostList: getBlogPostList(size: 100) {
       items {
         _id
@@ -14,8 +14,8 @@ export const GetBlogPosts = gql`
   }
 `;
 
-export const GetBlogPage = gql`
-  query GetBlogPage {
+export const GetBlogPageQuery = gql`
+  query GetBlogPageQuery {
     blogPage: getBlogPage {
       _id
       components {
@@ -33,6 +33,28 @@ export const GetBlogPage = gql`
       seo {
         metaDescription
         metaTitle
+      }
+    }
+  }
+`;
+
+export const GetBlogPostListTotalQuery = gql`
+  query GetBlogPostListTotalQuery {
+    getBlogPostList {
+      total
+    }
+  }
+`;
+
+export const GetBlogPostListPostsQuery = gql`
+  query GetBlogPostListPostsQuery($from: Int!, $size: Int!) {
+    blogPostList: getBlogPostList(from: $from, size: $size, sort: { field: "date", order: "desc" }) {
+      items {
+        _id
+        date
+        slug
+        title
+        content
       }
     }
   }

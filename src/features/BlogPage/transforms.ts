@@ -17,5 +17,11 @@ export function getBlogPosts(response: GetBlogPostsResponse) {
     return null;
   }
 
-  return items;
+  return items.map((item) => {
+    const contentText = item.content.replace(/<\/?p>/g, '');
+    let trimmedContent = contentText.slice(0, 200);
+    trimmedContent = trimmedContent.slice(0, Math.min(trimmedContent.length, trimmedContent.lastIndexOf(' ')));
+
+    return { ...item, content: trimmedContent };
+  });
 }

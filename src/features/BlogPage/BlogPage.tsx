@@ -5,6 +5,10 @@ import { GetBlogPageResponse, GetBlogPostsResponse } from 'types/takeshape';
 export interface PageProps {
   page: GetBlogPageResponse['blogPage'];
   posts: GetBlogPostsResponse['blogPostList']['items'][0];
+  pagination: {
+    allPages: number;
+    currentPage: number;
+  };
 }
 
 function pageChildToComponent() {
@@ -21,10 +25,10 @@ function pageChildToComponent() {
   return PageComponent;
 }
 
-export const BlogPage = ({ page, posts }: PageProps) => (
+export const BlogPage = ({ page, posts, pagination }: PageProps) => (
   <div className="bg-white">
     {page?.components?.map(pageChildToComponent())}
-    <BlogPageFeed posts={posts} />
+    <BlogPageFeed posts={posts} pagination={pagination} />
   </div>
 );
 
