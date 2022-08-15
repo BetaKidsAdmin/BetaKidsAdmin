@@ -14,17 +14,17 @@ TakeShape provides, just deploy the pattern in the `.takeshape/pattern` director
 
 | Category | Score |
 | -------- | ----- |
-| [Path: /](https://beta-kids-admin-k83uwltyg-admin-betakidscom.vercel.app/) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1660583426746-47641.report.html) |
+| [Path: /](https://beta-kids-admin-i9fpd09wi-admin-betakidscom.vercel.app/) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1660583683490-97794.report.html) |
 | 🟢 Performance | 100 |
 | 🟢 Accessibility | 100 |
 | 🟠 Best practices | 83 |
 | 🟢 SEO | 100 |
 | 🟢 PWA | 100 |
-| [Path: /products/__lighthouse](https://beta-kids-admin-k83uwltyg-admin-betakidscom.vercel.app/products/__lighthouse) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1660583427380-92994.report.html) |
-| 🟢 Performance | 99 |
+| [Path: /products/__lighthouse](https://beta-kids-admin-i9fpd09wi-admin-betakidscom.vercel.app/products/__lighthouse) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1660583683843-20680.report.html) |
+| 🟢 Performance | 100 |
 | 🟢 Accessibility | 100 |
-| 🟢 Best practices | 92 |
-| 🟢 SEO | 90 |
+| 🟠 Best practices | 83 |
+| 🟢 SEO | 100 |
 | 🟢 PWA | 100 |
 
 <!-- LIGHTHOUSE:END -->
