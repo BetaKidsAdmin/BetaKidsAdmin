@@ -10,7 +10,10 @@ import { createAnonymousTakeshapeApolloClient } from 'utils/takeshape';
 
 const IndexPage: NextPage = ({ globalSettings, storefront }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <Layout globalSettings={globalSettings}>
+    <Layout
+      seo={{ title: 'A Beta Glucan Gummy to help boost your kids Immune System' }}
+      globalSettings={globalSettings}
+    >
       <Storefront storefront={storefront} />
     </Layout>
   );

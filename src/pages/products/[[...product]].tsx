@@ -53,10 +53,7 @@ const ProductPage: NextPage = ({
   }
 
   return (
-    <Layout
-      globalSettings={globalSettings}
-      seo={{ title: product.seo.title, description: product.seo.description, noindex }}
-    >
+    <Layout globalSettings={globalSettings} seo={{ title: product.seo.title, description: product.seo.description }}>
       <ProductPageComponent
         component={options.component}
         options={options}
