@@ -98,6 +98,15 @@ const config = {
       }
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: '/blogs/news',
+        destination: '/blogs',
+        permanent: true
+      }
+    ];
+  },
   poweredByHeader: false,
   reactStrictMode: true,
   eslint: {

@@ -16,7 +16,7 @@ export const navigationResponse: any = {
         },
         {
           name: 'Blog',
-          url: '/blogs/news'
+          url: '/blogs'
         },
         {
           name: 'Contact Us',
