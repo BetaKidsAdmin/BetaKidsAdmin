@@ -9,10 +9,10 @@ import Layout from 'layouts/Default';
 import { getLayoutData } from 'layouts/getLayoutData';
 
 import {
-  GetBlogPageResponse,
-  GetBlogPageVariables,
-  GetBlogPostsResponse,
-  GetBlogPostsVariables
+  GetBlogPageQueryResponse,
+  GetBlogPageQueryVariables,
+  GetBlogPostListPostsQueryResponse,
+  GetBlogPostListPostsQueryVariables
 } from 'types/takeshape';
 import { createAnonymousTakeshapeApolloClient } from 'utils/takeshape';
 
@@ -44,7 +44,7 @@ const PagePage: NextPage = ({
 export const getStaticProps = async ({ params }) => {
   const { globalSettings } = await getLayoutData();
 
-  const { data, error } = await apolloClient.query<GetBlogPageResponse, GetBlogPageVariables>({
+  const { data, error } = await apolloClient.query<GetBlogPageQueryResponse, GetBlogPageQueryVariables>({
     query: GetBlogPageQuery
   });
 
@@ -64,7 +64,10 @@ export const getStaticProps = async ({ params }) => {
   if (params.page) {
     from = params.page[0].slice(-1) - 1;
   }
-  const { data: postsData, error: postsError } = await apolloClient.query<GetBlogPostsResponse, GetBlogPostsVariables>({
+  const { data: postsData, error: postsError } = await apolloClient.query<
+    GetBlogPostListPostsQueryResponse,
+    GetBlogPostListPostsQueryVariables
+  >({
     query: GetBlogPostListPostsQuery,
     variables: {
       from: from * postsPerPage,
