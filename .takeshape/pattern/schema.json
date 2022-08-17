@@ -1,10 +1,10 @@
 {
   "$schema": "https://schema.takeshape.io/project-schema",
-  "dataKey": "",
-  "projectId": "06ccc3dc-a9da-4f5b-9142-5a104db52ee3",
-  "version": 8,
-  "created": "2022-04-21T15:47:16.247Z",
-  "updated": "2022-04-25T19:39:31.180Z",
+  "dataKey": "AQIDAHi9nATJb1LYgj5u7ShOGp43y2H6TuckRKGDlwTU4b6ryQE3F753UJC+EN+T6NA+sECOAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMEqXfFd6xB3H7ALoIAgEQgDsvrzZF7f6VjxJyNpDMrgKOxnBnPoX+1WefE8ckQNX4ZtZPzSBCYkNwIWY7C5Va9RIwWSxbNKNShoRfEQ==",
+  "projectId": "e6942252-2648-44e1-a793-f1d77edb40c9",
+  "version": 100,
+  "created": "2022-07-25T07:27:22.404Z",
+  "updated": "2022-08-16T07:14:41.813Z",
   "defaultLocale": "en-us",
   "locales": [
     "en-us"
@@ -111,6 +111,9 @@
           "name": {
             "widget": "singleLineText"
           },
+          "description": {
+            "widget": "wysiwygSingleLineText"
+          },
           "productComponent": {
             "widget": "dropdown"
           },
@@ -123,6 +126,32 @@
           "hideRelatedProducts": {
             "widget": "toggleSwitch"
           },
+          "additionalDetails": {
+            "widget": "repeater",
+            "properties": {
+              "name": {
+                "widget": "singleLineText"
+              },
+              "list": {
+                "widget": "repeater",
+                "properties": {
+                  "item": {
+                    "widget": "singleLineText"
+                  }
+                },
+                "order": [
+                  "item"
+                ]
+              }
+            },
+            "order": [
+              "name",
+              "list"
+            ]
+          },
+          "sections": {
+            "widget": "shapeArray"
+          },
           "showDetails": {
             "widget": "toggleSwitch"
           },
@@ -133,9 +162,6 @@
             "widget": "toggleSwitch"
           },
           "policies": {
-            "widget": "relationship"
-          },
-          "lineItemAttributes": {
             "widget": "relationship"
           },
           "shopifyProduct": {
@@ -227,15 +253,17 @@
         },
         "order": [
           "name",
+          "description",
           "productComponent",
           "hideBreadcrumbs",
           "hideReviews",
           "hideRelatedProducts",
+          "additionalDetails",
+          "sections",
           "showDetails",
           "details",
           "showPolicies",
           "policies",
-          "lineItemAttributes",
           "shopifyProductId",
           "shopifyProduct"
         ]
@@ -273,13 +301,72 @@
       "default": {
         "properties": {
           "primaryText": {
-            "widget": "singleLineText"
+            "widget": "object",
+            "properties": {
+              "firstRow": {
+                "widget": "singleLineText"
+              },
+              "secondRow": {
+                "widget": "singleLineText"
+              }
+            },
+            "order": [
+              "firstRow",
+              "secondRow"
+            ]
           },
           "secondaryText": {
             "widget": "singleLineText"
           },
-          "buttonText": {
-            "widget": "singleLineText"
+          "features": {
+            "widget": "repeater",
+            "properties": {
+              "title": {
+                "widget": "singleLineText"
+              },
+              "description": {
+                "widget": "singleLineText"
+              },
+              "iconName": {
+                "widget": "singleLineText",
+                "instructions": "https://heroicons.com/"
+              }
+            },
+            "order": [
+              "title",
+              "description",
+              "iconName"
+            ]
+          },
+          "firstButton": {
+            "widget": "object",
+            "properties": {
+              "text": {
+                "widget": "singleLineText"
+              },
+              "url": {
+                "widget": "singleLineText"
+              }
+            },
+            "order": [
+              "text",
+              "url"
+            ]
+          },
+          "secondButton": {
+            "widget": "object",
+            "properties": {
+              "text": {
+                "widget": "singleLineText"
+              },
+              "url": {
+                "widget": "singleLineText"
+              }
+            },
+            "order": [
+              "text",
+              "url"
+            ]
           },
           "image": {
             "widget": "image"
@@ -288,7 +375,9 @@
         "order": [
           "primaryText",
           "secondaryText",
-          "buttonText",
+          "features",
+          "firstButton",
+          "secondButton",
           "image"
         ]
       }
@@ -408,11 +497,27 @@
     "Storefront": {
       "default": {
         "properties": {
+          "seo": {
+            "widget": "object",
+            "properties": {
+              "metaTitle": {
+                "widget": "singleLineText"
+              },
+              "metaDescription": {
+                "widget": "paragraphText"
+              }
+            },
+            "order": [
+              "metaTitle",
+              "metaDescription"
+            ]
+          },
           "components": {
             "widget": "shapeArray"
           }
         },
         "order": [
+          "seo",
           "components"
         ]
       }
@@ -580,6 +685,21 @@
           "slug": {
             "widget": "slug"
           },
+          "seo": {
+            "widget": "object",
+            "properties": {
+              "metaTitle": {
+                "widget": "singleLineText"
+              },
+              "metaDescription": {
+                "widget": "paragraphText"
+              }
+            },
+            "order": [
+              "metaTitle",
+              "metaDescription"
+            ]
+          },
           "sections": {
             "widget": "shapeArray"
           }
@@ -587,6 +707,7 @@
         "order": [
           "title",
           "slug",
+          "seo",
           "sections"
         ]
       }
@@ -654,12 +775,569 @@
           "attributes"
         ]
       }
+    },
+    "Homepage": {
+      "default": {
+        "properties": {
+          "components": {
+            "widget": "shapeArray"
+          }
+        },
+        "order": [
+          "components"
+        ]
+      }
+    },
+    "FeaturesGridComponent": {
+      "default": {
+        "properties": {
+          "preheading": {
+            "widget": "singleLineText"
+          },
+          "heading": {
+            "widget": "singleLineText"
+          },
+          "subheading": {
+            "widget": "wysiwygSingleLineText"
+          },
+          "blocks": {
+            "widget": "repeater",
+            "properties": {
+              "title": {
+                "widget": "singleLineText"
+              },
+              "description": {
+                "widget": "wysiwygSingleLineText"
+              },
+              "iconName": {
+                "widget": "singleLineText",
+                "instructions": "https://heroicons.com/"
+              }
+            },
+            "order": [
+              "title",
+              "description",
+              "iconName"
+            ]
+          }
+        },
+        "order": [
+          "preheading",
+          "heading",
+          "subheading",
+          "blocks"
+        ]
+      }
+    },
+    "CtaBrandPanelWithOverlappingImageComponent": {
+      "default": {
+        "properties": {
+          "heading": {
+            "widget": "singleLineText"
+          },
+          "description": {
+            "widget": "wysiwygTextMdx"
+          },
+          "button": {
+            "widget": "object",
+            "properties": {
+              "url": {
+                "widget": "singleLineText"
+              },
+              "text": {
+                "widget": "singleLineText"
+              }
+            },
+            "order": [
+              "url",
+              "text"
+            ]
+          },
+          "image": {
+            "widget": "image"
+          }
+        },
+        "order": [
+          "heading",
+          "description",
+          "button",
+          "image"
+        ]
+      }
+    },
+    "TestimonialWithOverlappingImageComponent": {
+      "default": {
+        "properties": {
+          "quote": {
+            "widget": "wysiwygTextMdx"
+          },
+          "source": {
+            "widget": "singleLineText"
+          },
+          "image": {
+            "widget": "image"
+          }
+        },
+        "order": [
+          "quote",
+          "source",
+          "image"
+        ]
+      }
+    },
+    "FaqTwoColumnsWithImageComponent": {
+      "default": {
+        "properties": {
+          "heading": {
+            "widget": "singleLineText"
+          },
+          "subheading": {
+            "widget": "wysiwygSingleLineText"
+          },
+          "faQs": {
+            "widget": "repeater",
+            "properties": {
+              "question": {
+                "widget": "singleLineText"
+              },
+              "answer": {
+                "widget": "wysiwygSingleLineText"
+              }
+            },
+            "order": [
+              "question",
+              "answer"
+            ]
+          },
+          "image": {
+            "widget": "image"
+          },
+          "button": {
+            "widget": "object",
+            "properties": {
+              "url": {
+                "widget": "singleLineText"
+              },
+              "text": {
+                "widget": "singleLineText"
+              }
+            },
+            "order": [
+              "url",
+              "text"
+            ]
+          }
+        },
+        "order": [
+          "heading",
+          "subheading",
+          "faQs",
+          "image",
+          "button"
+        ]
+      }
+    },
+    "FeaturesAlternativeSideBySideWithImagesComponent": {
+      "default": {
+        "properties": {
+          "heading": {
+            "widget": "singleLineText"
+          },
+          "subheading": {
+            "widget": "wysiwygSingleLineText"
+          },
+          "repeater": {
+            "widget": "repeater",
+            "properties": {
+              "title": {
+                "widget": "singleLineText"
+              },
+              "text": {
+                "widget": "wysiwygTextMdx"
+              },
+              "button": {
+                "widget": "object",
+                "properties": {
+                  "url": {
+                    "widget": "singleLineText"
+                  },
+                  "text": {
+                    "widget": "singleLineText"
+                  }
+                },
+                "order": [
+                  "url",
+                  "text"
+                ]
+              },
+              "image": {
+                "widget": "image"
+              }
+            },
+            "order": [
+              "title",
+              "text",
+              "button",
+              "image"
+            ]
+          }
+        },
+        "order": [
+          "heading",
+          "subheading",
+          "repeater"
+        ]
+      }
+    },
+    "NewsletterCenteredCardWithGraphicComponent": {
+      "default": {
+        "properties": {
+          "preHeading": {
+            "widget": "singleLineText"
+          },
+          "heading": {
+            "widget": "singleLineText"
+          },
+          "description": {
+            "widget": "wysiwygSingleLineText"
+          }
+        },
+        "order": [
+          "preHeading",
+          "heading",
+          "description"
+        ]
+      }
+    },
+    "FeaturesFullWidthWithVerticalImagesComponent": {
+      "default": {
+        "properties": {
+          "heading": {
+            "widget": "singleLineText"
+          },
+          "description": {
+            "widget": "wysiwygSingleLineText"
+          },
+          "repeater": {
+            "widget": "repeater",
+            "properties": {
+              "title": {
+                "widget": "singleLineText"
+              },
+              "description": {
+                "widget": "singleLineText"
+              },
+              "button": {
+                "widget": "object",
+                "properties": {
+                  "url": {
+                    "widget": "singleLineText"
+                  },
+                  "text": {
+                    "widget": "singleLineText"
+                  }
+                },
+                "order": [
+                  "url",
+                  "text"
+                ]
+              },
+              "image": {
+                "widget": "image"
+              }
+            },
+            "order": [
+              "title",
+              "description",
+              "button",
+              "image"
+            ]
+          }
+        },
+        "order": [
+          "heading",
+          "description",
+          "repeater"
+        ]
+      }
+    },
+    "HeroSectionMediumWithIllustrationComponent": {
+      "default": {
+        "properties": {
+          "heading": {
+            "widget": "singleLineText"
+          },
+          "description": {
+            "widget": "wysiwygSingleLineText"
+          },
+          "button": {
+            "widget": "object",
+            "properties": {
+              "url": {
+                "widget": "singleLineText"
+              },
+              "text": {
+                "widget": "singleLineText"
+              }
+            },
+            "order": [
+              "url",
+              "text"
+            ]
+          },
+          "image": {
+            "widget": "image"
+          }
+        },
+        "order": [
+          "heading",
+          "description",
+          "button",
+          "image"
+        ]
+      }
+    },
+    "BlogPage": {
+      "default": {
+        "properties": {
+          "seo": {
+            "widget": "object",
+            "properties": {
+              "metaTitle": {
+                "widget": "singleLineText"
+              },
+              "metaDescription": {
+                "widget": "paragraphText"
+              }
+            },
+            "order": [
+              "metaTitle",
+              "metaDescription"
+            ]
+          },
+          "components": {
+            "widget": "shapeArray"
+          }
+        },
+        "order": [
+          "seo",
+          "components"
+        ]
+      }
+    },
+    "BlogPost": {
+      "default": {
+        "properties": {
+          "title": {
+            "widget": "singleLineText"
+          },
+          "slug": {
+            "widget": "slug"
+          },
+          "date": {
+            "widget": "date"
+          },
+          "seo": {
+            "widget": "object",
+            "properties": {
+              "metaTitle": {
+                "widget": "singleLineText"
+              },
+              "metaDescription": {
+                "widget": "paragraphText"
+              }
+            },
+            "order": [
+              "metaTitle",
+              "metaDescription"
+            ]
+          },
+          "content": {
+            "widget": "wysiwygTextMdx"
+          }
+        },
+        "order": [
+          "title",
+          "slug",
+          "date",
+          "seo",
+          "content"
+        ]
+      }
+    },
+    "GlobalSettings": {
+      "default": {
+        "properties": {
+          "header": {
+            "widget": "object",
+            "properties": {
+              "navigation": {
+                "widget": "object",
+                "properties": {
+                  "links": {
+                    "widget": "repeater",
+                    "properties": {
+                      "name": {
+                        "widget": "singleLineText"
+                      },
+                      "url": {
+                        "widget": "singleLineText"
+                      }
+                    },
+                    "order": [
+                      "name",
+                      "url"
+                    ]
+                  }
+                },
+                "order": [
+                  "links"
+                ]
+              }
+            },
+            "order": [
+              "navigation"
+            ]
+          },
+          "footer": {
+            "widget": "object",
+            "properties": {
+              "info": {
+                "widget": "object",
+                "properties": {
+                  "heading": {
+                    "widget": "singleLineText"
+                  },
+                  "description": {
+                    "widget": "wysiwygSingleLineText"
+                  }
+                },
+                "order": [
+                  "heading",
+                  "description"
+                ]
+              },
+              "navigation": {
+                "widget": "object",
+                "properties": {
+                  "sections": {
+                    "widget": "repeater",
+                    "properties": {
+                      "title": {
+                        "widget": "singleLineText"
+                      },
+                      "links": {
+                        "widget": "repeater",
+                        "properties": {
+                          "name": {
+                            "widget": "singleLineText"
+                          },
+                          "url": {
+                            "widget": "singleLineText"
+                          }
+                        },
+                        "order": [
+                          "name",
+                          "url"
+                        ]
+                      }
+                    },
+                    "order": [
+                      "title",
+                      "links"
+                    ]
+                  }
+                },
+                "order": [
+                  "sections"
+                ]
+              }
+            },
+            "order": [
+              "info",
+              "navigation"
+            ]
+          }
+        },
+        "order": [
+          "header",
+          "footer"
+        ]
+      }
+    },
+    "FaqOneColumnComponent": {
+      "default": {
+        "properties": {
+          "heading": {
+            "widget": "singleLineText"
+          },
+          "subheading": {
+            "widget": "wysiwygSingleLineText"
+          },
+          "faQs": {
+            "widget": "repeater",
+            "properties": {
+              "question": {
+                "widget": "singleLineText"
+              },
+              "answer": {
+                "widget": "wysiwygSingleLineText"
+              }
+            },
+            "order": [
+              "question",
+              "answer"
+            ]
+          }
+        },
+        "order": [
+          "heading",
+          "subheading",
+          "faQs"
+        ]
+      }
+    },
+    "Policy": {
+      "default": {
+        "properties": {
+          "title": {
+            "widget": "singleLineText"
+          },
+          "slug": {
+            "widget": "slug"
+          },
+          "seo": {
+            "widget": "object",
+            "properties": {
+              "metaTitle": {
+                "widget": "singleLineText"
+              },
+              "metaDescription": {
+                "widget": "paragraphText"
+              }
+            },
+            "order": [
+              "metaTitle",
+              "metaDescription"
+            ]
+          },
+          "sections": {
+            "widget": "shapeArray"
+          }
+        },
+        "order": [
+          "title",
+          "slug",
+          "seo",
+          "sections"
+        ]
+      }
     }
   },
   "services": {
     "gorgias": {
       "id": "gorgias",
-      "provider": "generic",
+      "provider": "rest",
       "title": "Gorgias",
       "namespace": "Gorgias",
       "serviceType": "rest",
@@ -691,11 +1369,12 @@
       "options": {
         "endpoint": "https://a.klaviyo.com/api/",
         "spec": "https://klaviyo-openapi.s3.amazonaws.com/spec.json"
-      }
+      },
+      "authentication": "4yAvvJMZIQEuHwXl+yNvR3JPRb8Rf6OeL2Qc2lhyAth0QfYNmFUKI819MB1SPwTMwg4B2EpJgxmFOk76aUNBC4/E0dAR3MmMnJgmXIxRW/Ry4cdxeXrk+gHEVQITym7HtZplcCaeFi1tDj+ddZSXwOSQ7eME"
     },
     "voucherify": {
       "id": "voucherify",
-      "provider": "generic",
+      "provider": "rest",
       "title": "Voucherify",
       "namespace": "Voucherify",
       "serviceType": "rest",
@@ -706,7 +1385,7 @@
     },
     "referral-candy": {
       "id": "referral-candy",
-      "provider": "generic",
+      "provider": "rest",
       "title": "Referral Candy",
       "namespace": "Referral",
       "serviceType": "rest",
@@ -722,22 +1401,24 @@
       "serviceType": "graphql",
       "authenticationType": "oauth2Bearer",
       "options": {
-        "shop": "",
-        "endpoint": "",
-        "shopifyPlus": false
+        "shop": "betakids",
+        "endpoint": "https://betakids.myshopify.com/admin/api/2022-07/graphql.json",
+        "shopifyPlus": "false"
       },
-      "id": "shopify"
+      "id": "shopify",
+      "authentication": "8vJIE0AM1NFZerOc2JojEjekQd7l7trPyklOsN30djjpyoq+mk8gDtyjhj4FIsgfa/XCEeCifeRi5ZT/WtDeH8ikFNdC7Wmw50XId+eKu5YnAtlt98P/GIqyEATTPCznPDST5PsKVJUiu7KxB9dMbUi7MNjHPLDtuIAcsWrNxNQEscI3Q609nJR9zQ2UA+/FlRWdWzxzIRPKpZOxURnIf4hOaMPpme26aseIIuuAiZoX2ay1ihavtwW5d0QIillAkpLSMVTTqr9MGmtmIhkSMQr3baJIi+sIMqy9/5sGGjpIBGE4QzFgDBw9WT7zeUCtMl3MgrsplS2GwSzbVBF45YVjy3eFbEUKbsTW0N+pPOSzNBrvsNIDihH21DG44A4M9ilWE8O63SqWBkxxS6as+g2U+mE2EJqTeK9CUmwdy2KunRP18ig7QDU0GQ4jDLBp4682XMSJGV1cxsSTF8kzxyhi0UrBlhz8KRP5SoW3qlepfMFilp9mErT3hTawAZYwA2cIAvup5/3j40d1gozA0Uk+6XFz3C4HUoazhdiiORN/apXjLIyPuHBTMGU9zNMvewVh3iYFfxyVL+lfUiEjvb7iSdPB9ywFV4QREaAauo9TOnfrhlatAZ1BwsUz7ThN/GqBPYvAJHPG8NfHbDQveigA0Os2S51iyt/uVyg1I909JCNo/NccKWXgqb2j2rcd+zPTjTordlfZo7j6KKdcHKi3pB8y1WwBlOUCVFKORttoSE3RPnFxvsJD4JhSf2Aw8COuHhYXPe7mq5yZ9/p1kbTPtHAxa5Fw/u+8SC9bmIG47x4OXNCKzJBeikpkviFqT3qxPcYMYZHw1m79nIDYRDcFLId3/kxen5PzYDnv8sKvNvcQiCIAPnF247QgBYCbux7G8zBxJDhte1MhiURH6ijiFWqbTsK6XLqvAFZ/n6XT/bCUhKI+oot2bgggQGS6BBriX8EjbuP7En5200bCDSZiUTXLt+WMiaZHogzPV/N7sD+Y87mwP6mNS3JlntQzvdiAzsOAtMZWZlJCetxqXQx+9CpUPOB4fBfpgzFtc356jwaTD1c3+m9dsWHcSfXhKO/5igB6WJcoeLapHx1jqjs95WoDZZ4TrpmD3jg3Fxy0NrJkp1JiazrnTJ2LtgktVBcX6AeMrOfJe0tqLIc7nyzsV6k1k3qPgSE2Tw=="
     },
     "shopify-storefront": {
       "id": "shopify-storefront",
-      "provider": "generic",
+      "provider": "graphql",
       "title": "Shopify Storefront",
       "namespace": "ShopifyStorefront",
       "serviceType": "graphql",
       "authenticationType": "bearer",
       "options": {
-        "endpoint": ""
-      }
+        "endpoint": "https://betakids.myshopify.com/api/2022-07/graphql.json"
+      },
+      "authentication": "Gl8sq3ZmbcKcuzVa7XGkTWuIELxBg1UCc1aIzjjpUSp6TF/TiiATyEScZUAPOyFNYf9GogVYzpFKGEYQ3Kh558PBpy0mHCYSi+Zv0EXuARSefFvZcm7bFw6/9bcOlGmxxmK38kKQiWRX5Ld2fFuXn8pYJPhThPbNsw=="
     },
     "open-id": {
       "id": "open-id",
@@ -746,19 +1427,23 @@
       "serviceType": "authentication",
       "authenticationType": "none",
       "options": {
-        "idClaim": "sub"
+        "idClaim": "sub",
+        "configurationUrl": "https://beta-kids-admin.vercel.app/api/auth/all-access/.well-known/openid-configuration",
+        "issuer": "https://beta-kids-admin.vercel.app",
+        "audience": "https://api.takeshape.io/project/e6942252-2648-44e1-a793-f1d77edb40c9/open-id"
       }
     },
     "recaptcha": {
       "id": "recaptcha",
-      "provider": "generic",
+      "provider": "rest",
       "title": "ReCAPTCHA",
       "namespace": "ReCAPTCHA",
       "serviceType": "rest",
       "authenticationType": "searchParams",
       "options": {
         "endpoint": "https://www.google.com/recaptcha/api"
-      }
+      },
+      "authentication": "VmUF5D5z/ZjJvF0vzlzOQvA7YQEuk17i15VxauPlRUVCKN02xH8JYUTa/B39LOUFMprp/WoyuGlRJ8J4T+0m2jOgaYeT0dha75rDGLo0+xP5S+0aCJvsglGBi3WUNpj3DO0td44xERW67erPOIJsDjNLA+u20ho="
     }
   },
   "indexedShapes": {
@@ -794,24 +1479,24 @@
   },
   "queries": {
     "getLink": {
-      "shape": "Link",
+      "args": "TSGetArgs<Link>",
       "resolver": {
         "name": "takeshape:get",
         "service": "takeshape:local",
         "shapeName": "Link"
       },
-      "description": "Get a Link by ID",
-      "args": "TSGetArgs<Link>"
+      "shape": "Link",
+      "description": "Get a Link by ID"
     },
     "getLinkList": {
-      "shape": "PaginatedList<Link>",
+      "args": "TSListArgs<Link>",
       "resolver": {
         "name": "takeshape:list",
         "service": "takeshape:local",
         "shapeName": "Link"
       },
-      "description": "Returns a list Link in natural order.",
-      "args": "TSListArgs<Link>"
+      "shape": "PaginatedList<Link>",
+      "description": "Returns a list Link in natural order."
     },
     "getProduct": {
       "shape": "Product",
@@ -834,7 +1519,7 @@
       "args": "TSListArgs<Product>"
     },
     "getProductListWithTtl": {
-      "shape": "PaginatedList<Product>",
+      "args": "TSListArgs<Product>",
       "resolver": {
         "name": "takeshape:list",
         "service": "takeshape:local",
@@ -843,48 +1528,20 @@
           "ttl": 60
         }
       },
-      "description": "Returns a list Product in natural order.",
-      "args": "TSListArgs<Product>"
+      "shape": "PaginatedList<Product>",
+      "description": "Returns a list Product in natural order."
     },
     "getFooter": {
-      "shape": "Footer",
+      "args": "TSGetSingletonArgs<Footer>",
       "resolver": {
         "name": "takeshape:get",
         "service": "takeshape:local",
         "shapeName": "Footer"
       },
-      "description": "Get a Footer by ID",
-      "args": "TSGetSingletonArgs<Footer>"
+      "shape": "Footer",
+      "description": "Get a Footer by ID"
     },
     "ReviewsIo_createInvitation": {
-      "shape": "ReviewsIo_CreateInvitationResponse",
-      "resolver": {
-        "name": "rest:post",
-        "service": "reviews-io",
-        "path": "/invitation",
-        "body": {
-          "ops": [
-            {
-              "path": "$",
-              "mapping": "$args.input"
-            }
-          ],
-          "serialize": {
-            "content": {
-              "contentType": "application/json"
-            }
-          }
-        },
-        "headers": {
-          "ops": [
-            {
-              "path": "content-type",
-              "value": "application/json"
-            }
-          ]
-        }
-      },
-      "summary": "Queue review invitation",
       "args": {
         "type": "object",
         "properties": {
@@ -924,10 +1581,81 @@
           }
         },
         "required": []
-      }
+      },
+      "resolver": {
+        "name": "rest:post",
+        "service": "reviews-io",
+        "path": "/invitation",
+        "body": {
+          "ops": [
+            {
+              "path": "$",
+              "mapping": "$args.input"
+            }
+          ],
+          "serialize": {
+            "content": {
+              "contentType": "application/json"
+            }
+          }
+        },
+        "headers": {
+          "ops": [
+            {
+              "path": "content-type",
+              "value": "application/json"
+            }
+          ]
+        }
+      },
+      "shape": "ReviewsIo_CreateInvitationResponse"
     },
     "ReviewsIo_listProductReviews": {
-      "shape": "ReviewsIo_ListProductReviewsResponse",
+      "args": {
+        "type": "object",
+        "properties": {
+          "sku": {
+            "type": "string"
+          },
+          "mpn": {
+            "type": "string"
+          },
+          "page": {
+            "type": "integer"
+          },
+          "per_page": {
+            "type": "integer"
+          },
+          "photos": {
+            "type": "integer"
+          },
+          "verified_only": {
+            "type": "integer"
+          },
+          "comments_only": {
+            "type": "integer"
+          },
+          "minRating": {
+            "type": "integer"
+          },
+          "include_unpublished_images": {
+            "type": "integer"
+          },
+          "include_moderated": {
+            "type": "integer"
+          },
+          "order_id": {
+            "type": "string"
+          },
+          "min_date": {
+            "type": "string"
+          },
+          "max_date": {
+            "type": "string"
+          }
+        },
+        "required": []
+      },
       "resolver": {
         "name": "rest:get",
         "service": "reviews-io",
@@ -1040,51 +1768,7 @@
           }
         }
       },
-      "args": {
-        "type": "object",
-        "properties": {
-          "sku": {
-            "type": "string"
-          },
-          "mpn": {
-            "type": "string"
-          },
-          "page": {
-            "type": "integer"
-          },
-          "per_page": {
-            "type": "integer"
-          },
-          "photos": {
-            "type": "integer"
-          },
-          "verified_only": {
-            "type": "integer"
-          },
-          "comments_only": {
-            "type": "integer"
-          },
-          "minRating": {
-            "type": "integer"
-          },
-          "include_unpublished_images": {
-            "type": "integer"
-          },
-          "include_moderated": {
-            "type": "integer"
-          },
-          "order_id": {
-            "type": "string"
-          },
-          "min_date": {
-            "type": "string"
-          },
-          "max_date": {
-            "type": "string"
-          }
-        },
-        "required": []
-      }
+      "shape": "ReviewsIo_ListProductReviewsResponse"
     },
     "getMyAdminCustomer": {
       "resolver": {
@@ -1103,8 +1787,6 @@
       "shape": "Shopify_Customer"
     },
     "getMyLoyaltyCard": {
-      "description": "Get a loyalty card from Voucherify",
-      "shape": "local:Voucherify_LoyaltyCard",
       "resolver": {
         "compose": [
           {
@@ -1176,15 +1858,11 @@
             }
           ]
         }
-      }
+      },
+      "shape": "local:Voucherify_LoyaltyCard",
+      "description": "Get a loyalty card from Voucherify"
     },
     "getMyNewsletterSubscriptions": {
-      "shape": {
-        "type": "array",
-        "items": {
-          "@ref": "local:ProfileNewsletterStatus"
-        }
-      },
       "resolver": {
         "if": "!isEmpty($claims.email)",
         "name": "rest:get",
@@ -1218,67 +1896,65 @@
             ]
           }
         }
+      },
+      "shape": {
+        "type": "array",
+        "items": {
+          "@ref": "local:ProfileNewsletterStatus"
+        }
       }
     },
     "getNavigation": {
-      "shape": "Navigation",
+      "args": "TSGetSingletonArgs<Navigation>",
       "resolver": {
         "name": "takeshape:get",
         "service": "takeshape:local",
         "shapeName": "Navigation"
       },
-      "description": "Get a Navigation by ID",
-      "args": "TSGetSingletonArgs<Navigation>"
+      "shape": "Navigation",
+      "description": "Get a Navigation by ID"
     },
     "getProductPageDetails": {
-      "shape": "ProductPageDetails",
+      "args": "TSGetArgs<ProductPageDetails>",
       "resolver": {
         "name": "takeshape:get",
         "service": "takeshape:local",
         "shapeName": "ProductPageDetails"
       },
-      "description": "Get a ProductPageDetails by ID",
-      "args": "TSGetArgs<ProductPageDetails>"
+      "shape": "ProductPageDetails",
+      "description": "Get a ProductPageDetails by ID"
     },
     "getProductPageDetailsList": {
-      "shape": "PaginatedList<ProductPageDetails>",
+      "args": "TSListArgs<ProductPageDetails>",
       "resolver": {
         "name": "takeshape:list",
         "service": "takeshape:local",
         "shapeName": "ProductPageDetails"
       },
-      "description": "Returns a list ProductPageDetails in natural order.",
-      "args": "TSListArgs<ProductPageDetails>"
+      "shape": "PaginatedList<ProductPageDetails>",
+      "description": "Returns a list ProductPageDetails in natural order."
     },
     "getProductPagePolicies": {
-      "shape": "ProductPagePolicies",
+      "args": "TSGetArgs<ProductPagePolicies>",
       "resolver": {
         "name": "takeshape:get",
         "service": "takeshape:local",
         "shapeName": "ProductPagePolicies"
       },
-      "description": "Get a ProductPagePolicies by ID",
-      "args": "TSGetArgs<ProductPagePolicies>"
+      "shape": "ProductPagePolicies",
+      "description": "Get a ProductPagePolicies by ID"
     },
     "getProductPagePoliciesList": {
-      "shape": "PaginatedList<ProductPagePolicies>",
+      "args": "TSListArgs<ProductPagePolicies>",
       "resolver": {
         "name": "takeshape:list",
         "service": "takeshape:local",
         "shapeName": "ProductPagePolicies"
       },
-      "description": "Returns a list ProductPagePolicies in natural order.",
-      "args": "TSListArgs<ProductPagePolicies>"
+      "shape": "PaginatedList<ProductPagePolicies>",
+      "description": "Returns a list ProductPagePolicies in natural order."
     },
     "collectionsWithTtl": {
-      "resolver": {
-        "name": "graphql:query",
-        "service": "shopify",
-        "fieldName": "collections",
-        "options": {
-          "ttl": 60
-        }
-      },
       "args": {
         "type": "object",
         "properties": {
@@ -1319,17 +1995,17 @@
           }
         }
       },
-      "shape": "Shopify_CollectionConnection"
-    },
-    "collectionByHandleWithTtl": {
       "resolver": {
         "name": "graphql:query",
         "service": "shopify",
-        "fieldName": "collectionByHandle",
+        "fieldName": "collections",
         "options": {
           "ttl": 60
         }
       },
+      "shape": "Shopify_CollectionConnection"
+    },
+    "collectionByHandleWithTtl": {
       "args": {
         "type": "object",
         "properties": {
@@ -1342,14 +2018,17 @@
           "handle"
         ]
       },
-      "shape": "Shopify_Collection"
-    },
-    "Shopify_products": {
       "resolver": {
         "name": "graphql:query",
         "service": "shopify",
-        "fieldName": "products"
+        "fieldName": "collectionByHandle",
+        "options": {
+          "ttl": 60
+        }
       },
+      "shape": "Shopify_Collection"
+    },
+    "Shopify_products": {
       "args": {
         "type": "object",
         "properties": {
@@ -1390,9 +2069,54 @@
           }
         }
       },
+      "resolver": {
+        "name": "graphql:query",
+        "service": "shopify",
+        "fieldName": "products"
+      },
       "shape": "Shopify_ProductConnection"
     },
     "productsWithTtl": {
+      "args": {
+        "type": "object",
+        "properties": {
+          "first": {
+            "type": "integer",
+            "description": "Returns up to the first `n` elements from the list."
+          },
+          "after": {
+            "type": "string",
+            "description": "Returns the elements that come after the specified cursor."
+          },
+          "last": {
+            "type": "integer",
+            "description": "Returns up to the last `n` elements from the list."
+          },
+          "before": {
+            "type": "string",
+            "description": "Returns the elements that come before the specified cursor."
+          },
+          "reverse": {
+            "type": "boolean",
+            "description": "Reverse the order of the underlying list.",
+            "default": false
+          },
+          "sortKey": {
+            "@ref": "shopify:ProductSortKeys",
+            "description": "Sort the underlying list by the given key.",
+            "default": "ID"
+          },
+          "query": {
+            "type": "string",
+            "description": "Supported filter parameters:\n - `barcode`\n - `created_at`\n - `delivery_profile_id`\n - `error_feedback`\n - `gift_card`\n - `has_only_composites`\n - `has_only_default_variant`\n - `id`\n - `inventory_total`\n - `is_price_reduced`\n - `out_of_stock_somewhere`\n - `price`\n - `product_type`\n - `publishable_status`\n - `published_status`\n - `sku`\n - `status`\n - `tag`\n - `tag_not`\n - `title`\n - `updated_at`\n - `vendor`\n\nSee the detailed [search syntax](https://shopify.dev/api/usage/search-syntax)\nfor more information about using filters."
+          },
+          "savedSearchId": {
+            "type": "string",
+            "@tag": "id",
+            "description": "The ID of an existing saved search.\nThe search’s query string is used as the query argument.\nRefer to [SavedSearch](https://shopify.dev/api/admin-graphql/latest/objects/savedsearch)."
+          }
+        }
+      },
       "resolver": {
         "name": "graphql:query",
         "service": "shopify",
@@ -1401,57 +2125,9 @@
           "ttl": 60
         }
       },
-      "args": {
-        "type": "object",
-        "properties": {
-          "first": {
-            "type": "integer",
-            "description": "Returns up to the first `n` elements from the list."
-          },
-          "after": {
-            "type": "string",
-            "description": "Returns the elements that come after the specified cursor."
-          },
-          "last": {
-            "type": "integer",
-            "description": "Returns up to the last `n` elements from the list."
-          },
-          "before": {
-            "type": "string",
-            "description": "Returns the elements that come before the specified cursor."
-          },
-          "reverse": {
-            "type": "boolean",
-            "description": "Reverse the order of the underlying list.",
-            "default": false
-          },
-          "sortKey": {
-            "@ref": "shopify:ProductSortKeys",
-            "description": "Sort the underlying list by the given key.",
-            "default": "ID"
-          },
-          "query": {
-            "type": "string",
-            "description": "Supported filter parameters:\n - `barcode`\n - `created_at`\n - `delivery_profile_id`\n - `error_feedback`\n - `gift_card`\n - `has_only_composites`\n - `has_only_default_variant`\n - `id`\n - `inventory_total`\n - `is_price_reduced`\n - `out_of_stock_somewhere`\n - `price`\n - `product_type`\n - `publishable_status`\n - `published_status`\n - `sku`\n - `status`\n - `tag`\n - `tag_not`\n - `title`\n - `updated_at`\n - `vendor`\n\nSee the detailed [search syntax](https://shopify.dev/api/usage/search-syntax)\nfor more information about using filters."
-          },
-          "savedSearchId": {
-            "type": "string",
-            "@tag": "id",
-            "description": "The ID of an existing saved search.\nThe search’s query string is used as the query argument.\nRefer to [SavedSearch](https://shopify.dev/api/admin-graphql/latest/objects/savedsearch)."
-          }
-        }
-      },
       "shape": "Shopify_ProductConnection"
     },
     "productByHandleWithTtl": {
-      "resolver": {
-        "name": "graphql:query",
-        "service": "shopify",
-        "fieldName": "productByHandle",
-        "options": {
-          "ttl": 60
-        }
-      },
       "args": {
         "type": "object",
         "properties": {
@@ -1463,6 +2139,14 @@
         "required": [
           "handle"
         ]
+      },
+      "resolver": {
+        "name": "graphql:query",
+        "service": "shopify",
+        "fieldName": "productByHandle",
+        "options": {
+          "ttl": 60
+        }
       },
       "shape": "Shopify_Product"
     },
@@ -1477,27 +2161,27 @@
       "args": "TSGetSingletonArgs<Storefront>"
     },
     "getCollection": {
-      "shape": "Collection",
+      "args": "TSGetArgs<Collection>",
       "resolver": {
         "name": "takeshape:get",
         "service": "takeshape:local",
         "shapeName": "Collection"
       },
-      "description": "Get a Collection by ID",
-      "args": "TSGetArgs<Collection>"
+      "shape": "Collection",
+      "description": "Get a Collection by ID"
     },
     "getCollectionList": {
-      "shape": "PaginatedList<Collection>",
+      "args": "TSListArgs<Collection>",
       "resolver": {
         "name": "takeshape:list",
         "service": "takeshape:local",
         "shapeName": "Collection"
       },
-      "description": "Returns a list Collection in natural order.",
-      "args": "TSListArgs<Collection>"
+      "shape": "PaginatedList<Collection>",
+      "description": "Returns a list Collection in natural order."
     },
     "getCollectionListWithTtl": {
-      "shape": "PaginatedList<Collection>",
+      "args": "TSListArgs<Collection>",
       "resolver": {
         "name": "takeshape:list",
         "service": "takeshape:local",
@@ -1506,8 +2190,8 @@
           "ttl": 60
         }
       },
-      "description": "Returns a list Collection in natural order.",
-      "args": "TSListArgs<Collection>"
+      "shape": "PaginatedList<Collection>",
+      "description": "Returns a list Collection in natural order."
     },
     "getPage": {
       "shape": "Page",
@@ -1530,33 +2214,216 @@
       "args": "TSListArgs<Page>"
     },
     "getLineItemAttributes": {
-      "shape": "LineItemAttributes",
+      "args": "TSGetArgs<LineItemAttributes>",
       "resolver": {
         "name": "takeshape:get",
         "service": "takeshape:local",
         "shapeName": "LineItemAttributes"
       },
-      "description": "Get a LineItemAttributes by ID",
-      "args": "TSGetArgs<LineItemAttributes>"
+      "shape": "LineItemAttributes",
+      "description": "Get a LineItemAttributes by ID"
     },
     "getLineItemAttributesList": {
-      "shape": "PaginatedList<LineItemAttributes>",
+      "args": "TSListArgs<LineItemAttributes>",
       "resolver": {
         "name": "takeshape:list",
         "service": "takeshape:local",
         "shapeName": "LineItemAttributes"
       },
-      "description": "Returns a list LineItemAttributes in natural order.",
-      "args": "TSListArgs<LineItemAttributes>"
+      "shape": "PaginatedList<LineItemAttributes>",
+      "description": "Returns a list LineItemAttributes in natural order."
+    },
+    "getHomepage": {
+      "shape": "Homepage",
+      "resolver": {
+        "name": "takeshape:get",
+        "service": "takeshape:local",
+        "shapeName": "Homepage"
+      },
+      "description": "Get a Homepage by ID",
+      "args": "TSGetSingletonArgs<Homepage>"
+    },
+    "getBlogPage": {
+      "shape": "BlogPage",
+      "resolver": {
+        "name": "takeshape:get",
+        "service": "takeshape:local",
+        "shapeName": "BlogPage"
+      },
+      "description": "Get a BlogPage by ID",
+      "args": "TSGetSingletonArgs<BlogPage>"
+    },
+    "getBlogPost": {
+      "shape": "BlogPost",
+      "resolver": {
+        "name": "takeshape:get",
+        "service": "takeshape:local",
+        "shapeName": "BlogPost"
+      },
+      "description": "Get a BlogPost by ID",
+      "args": "TSGetArgs<BlogPost>"
+    },
+    "getBlogPostList": {
+      "shape": "PaginatedList<BlogPost>",
+      "resolver": {
+        "name": "takeshape:list",
+        "service": "takeshape:local",
+        "shapeName": "BlogPost"
+      },
+      "description": "Returns a list BlogPost in natural order.",
+      "args": "TSListArgs<BlogPost>"
+    },
+    "getGlobalSettings": {
+      "shape": "GlobalSettings",
+      "resolver": {
+        "name": "takeshape:get",
+        "service": "takeshape:local",
+        "shapeName": "GlobalSettings"
+      },
+      "description": "Get a GlobalSettings by ID",
+      "args": "TSGetSingletonArgs<GlobalSettings>"
+    },
+    "getPolicy": {
+      "shape": "Policy",
+      "resolver": {
+        "name": "takeshape:get",
+        "service": "takeshape:local",
+        "shapeName": "Policy"
+      },
+      "description": "Get a Policy by ID",
+      "args": "TSGetArgs<Policy>"
+    },
+    "getPolicyList": {
+      "shape": "PaginatedList<Policy>",
+      "resolver": {
+        "name": "takeshape:list",
+        "service": "takeshape:local",
+        "shapeName": "Policy"
+      },
+      "description": "Returns a list Policy in natural order.",
+      "args": "TSListArgs<Policy>"
+    },
+    "getTrustpilotProductReviews": {
+      "resolver": {
+        "name": "rest:get",
+        "service": "trustpilot",
+        "path": {
+          "ops": [
+            {
+              "path": "businessUnit",
+              "mapping": "$args.businessUnit"
+            }
+          ],
+          "serialize": {
+            "template": "/v1/product-reviews/business-units/{businessUnit}/reviews"
+          }
+        },
+        "searchParams": {
+          "ops": [
+            {
+              "path": "page",
+              "mapping": "$args.page"
+            },
+            {
+              "path": "perPage",
+              "mapping": "$args.perPage"
+            },
+            {
+              "path": "productUrl",
+              "mapping": "$args.productUrl"
+            },
+            {
+              "path": "sku",
+              "mapping": "$args.sku"
+            },
+            {
+              "path": "language",
+              "mapping": "$args.language"
+            },
+            {
+              "path": "stars",
+              "mapping": "$args.stars"
+            },
+            {
+              "path": "locale",
+              "mapping": "$args.locale"
+            },
+            {
+              "path": "attributeIds",
+              "mapping": "$args.attributeIds"
+            }
+          ]
+        },
+        "options": {
+          "retry": {
+            "limit": 10,
+            "statusCode": [
+              429
+            ]
+          }
+        }
+      },
+      "args": {
+        "type": "object",
+        "properties": {
+          "businessUnit": {
+            "type": "string",
+            "description": "The BusinessUnitId that owns the products."
+          },
+          "page": {
+            "type": "integer",
+            "description": "The page to retrieve. If the page number requested is higher than the available number of pages an empty array will be returned.\nConstraints: The allowed range is minimum: 1, maximum: 2147483647\nDefault value: 1"
+          },
+          "perPage": {
+            "type": "integer",
+            "description": "The number of reviews to retrieve per page.\nConstraints: The allowed range is minimum: 1, maximum: 100\nDefault value: 20"
+          },
+          "productUrl": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The url of the product. Optional only if sku is provided."
+          },
+          "sku": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The sku of the product. Optional only if productUrl is provided."
+          },
+          "language": {
+            "type": "string",
+            "description": "Filter reviews by language."
+          },
+          "stars": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "Filter reviews with a specific number of stars.\nConstraints: Allowed values are 1, 2, 3, 4, 5"
+          },
+          "locale": {
+            "type": "string",
+            "description": "The language in which the attributes, if any, are returned\nDefault value: en-US"
+          },
+          "attributeIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A comma-separated list of attribute ids"
+          }
+        },
+        "required": [
+          "businessUnit"
+        ]
+      },
+      "shape": "TrustpilotProductReviews"
     }
   },
   "mutations": {
     "ShopifyStorefront_customerAccessTokenCreate": {
-      "resolver": {
-        "name": "graphql:mutation",
-        "service": "shopify-storefront",
-        "fieldName": "customerAccessTokenCreate"
-      },
       "args": {
         "type": "object",
         "properties": {
@@ -1569,31 +2436,34 @@
           "input"
         ]
       },
+      "resolver": {
+        "name": "graphql:mutation",
+        "service": "shopify-storefront",
+        "fieldName": "customerAccessTokenCreate"
+      },
       "shape": "ShopifyStorefront_CustomerAccessTokenCreatePayload"
     },
     "updateFooter": {
-      "shape": "UpdateResult<Footer>",
+      "args": "UpdateArgs<Footer>",
       "resolver": {
         "name": "takeshape:update",
         "service": "takeshape:local",
         "shapeName": "Footer"
       },
-      "description": "Update Footer",
-      "args": "UpdateArgs<Footer>"
+      "shape": "UpdateResult<Footer>",
+      "description": "Update Footer"
     },
     "updateNavigation": {
-      "shape": "UpdateResult<Navigation>",
+      "args": "UpdateArgs<Navigation>",
       "resolver": {
         "name": "takeshape:update",
         "service": "takeshape:local",
         "shapeName": "Navigation"
       },
-      "description": "Update Navigation",
-      "args": "UpdateArgs<Navigation>"
+      "shape": "UpdateResult<Navigation>",
+      "description": "Update Navigation"
     },
     "Voucherify_createOrder": {
-      "description": "Create an order in Voucherify",
-      "shape": "Voucherify_Order",
       "args": {
         "type": "object",
         "properties": {
@@ -1681,10 +2551,29 @@
             }
           ]
         }
-      }
+      },
+      "shape": "Voucherify_Order",
+      "description": "Create an order in Voucherify"
     },
     "addMembers": {
-      "shape": "Klaviyo_AddMembersResponse",
+      "args": {
+        "type": "object",
+        "properties": {
+          "input": {
+            "@ref": "local:AddListMembersInput"
+          },
+          "list_id": {
+            "type": "string"
+          },
+          "recaptchaToken": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "list_id",
+          "recaptchaToken"
+        ]
+      },
       "resolver": {
         "compose": [
           {
@@ -1754,28 +2643,20 @@
           ]
         }
       },
-      "summary": "Add Members to a List",
+      "shape": "Klaviyo_AddMembersResponse"
+    },
+    "subscribeMyEmailToNewsletter": {
       "args": {
         "type": "object",
         "properties": {
-          "input": {
-            "@ref": "local:AddListMembersInput"
-          },
           "list_id": {
-            "type": "string"
-          },
-          "recaptchaToken": {
             "type": "string"
           }
         },
         "required": [
-          "list_id",
-          "recaptchaToken"
+          "list_id"
         ]
-      }
-    },
-    "subscribeMyEmailToNewsletter": {
-      "shape": "Klaviyo_AddMembersResponse",
+      },
       "resolver": {
         "name": "rest:post",
         "service": "klaviyo",
@@ -1825,7 +2706,9 @@
           ]
         }
       },
-      "summary": "Add Members to a List",
+      "shape": "Klaviyo_AddMembersResponse"
+    },
+    "unsubscribeMyEmailFromNewsletter": {
       "args": {
         "type": "object",
         "properties": {
@@ -1836,10 +2719,7 @@
         "required": [
           "list_id"
         ]
-      }
-    },
-    "unsubscribeMyEmailFromNewsletter": {
-      "shape": "Klaviyo_200Ok",
+      },
       "resolver": {
         "name": "rest:delete",
         "service": "klaviyo",
@@ -1881,10 +2761,39 @@
           ]
         }
       },
-      "summary": "Remove Profiles From List",
+      "shape": "Klaviyo_200Ok"
+    },
+    "Klaviyo_removeMembers": {
       "args": {
         "type": "object",
         "properties": {
+          "input": {
+            "description": "\nThe profiles that you would like to remove from the list. \n\nExample:\n\n{\n  \"emails\":[\"george.washington@klaviyo.com\",\"abraham.lincoln@klaviyo.com\"],\n  \"phone_numbers\":[\"+13239169023\"],\n  \"push_tokens\":[\"03df25c845d460bcdad7802d2vf6fc1dfde97283bf75cc993eb6dca835ea2e2r\"]\n}\n",
+            "properties": {
+              "emails": {
+                "minItems": 0,
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "phone_numbers": {
+                "minItems": 0,
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "push_tokens": {
+                "minItems": 0,
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
           "list_id": {
             "type": "string"
           }
@@ -1892,10 +2801,7 @@
         "required": [
           "list_id"
         ]
-      }
-    },
-    "Klaviyo_removeMembers": {
-      "shape": "Klaviyo_200Ok",
+      },
       "resolver": {
         "name": "rest:delete",
         "service": "klaviyo",
@@ -1937,140 +2843,83 @@
           ]
         }
       },
-      "summary": "Remove Profiles From List",
+      "shape": "Klaviyo_200Ok"
+    },
+    "createZendeskTicket": {
       "args": {
         "type": "object",
         "properties": {
-          "input": {
-            "description": "\nThe profiles that you would like to remove from the list. \n\nExample:\n\n{\n  \"emails\":[\"george.washington@klaviyo.com\",\"abraham.lincoln@klaviyo.com\"],\n  \"phone_numbers\":[\"+13239169023\"],\n  \"push_tokens\":[\"03df25c845d460bcdad7802d2vf6fc1dfde97283bf75cc993eb6dca835ea2e2r\"]\n}\n",
-            "properties": {
-              "emails": {
-                "minItems": 0,
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              "phone_numbers": {
-                "minItems": 0,
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              "push_tokens": {
-                "minItems": 0,
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              }
-            },
-            "type": "object"
+          "name": {
+            "type": "string"
           },
-          "list_id": {
+          "email": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "recaptchaToken": {
             "type": "string"
           }
         },
         "required": [
-          "list_id"
+          "name",
+          "email",
+          "message",
+          "recaptchaToken"
         ]
       },
-      "createTicket": {
-        "resolver": {
-          "compose": [
-            {
-              "id": "recaptcha",
-              "name": "rest:post",
-              "service": "recaptcha",
-              "path": "/siteverify",
-              "searchParams": {
-                "ops": [
-                  {
-                    "path": "response",
-                    "mapping": "$args.recaptchaToken"
-                  }
-                ]
-              }
-            },
-            {
-              "id": "gorgiasCreateTicket",
-              "if": "$resolvers.recaptcha.success == true",
-              "name": "rest:post",
-              "service": "gorgias",
-              "path": "/tickets",
-              "json": {
-                "ops": [
-                  {
-                    "path": "customer.email",
-                    "mapping": "$args.email"
-                  },
-                  {
-                    "path": "messages",
-                    "value": [
-                      {
-                        "channel": "email",
-                        "from_agent": false,
-                        "source": {
-                          "to": [
-                            {
-                              "address": "qw72eg20ez05v4dy@emails.gorgias.com"
-                            }
-                          ]
-                        },
-                        "via": "api"
-                      }
-                    ]
-                  },
-                  {
-                    "path": "messages[0].body_text",
-                    "mapping": "$args.message"
-                  },
-                  {
-                    "path": "messages[0].source.from.address",
-                    "mapping": "$args.email"
-                  }
-                ]
-              }
-            }
-          ],
-          "results": {
-            "ops": [
-              {
-                "path": "$",
-                "mapping": "$finalResolver"
-              }
-            ]
-          }
-        },
-        "args": {
-          "type": "object",
-          "properties": {
-            "email": {
-              "type": "string"
-            },
-            "message": {
-              "type": "string"
-            },
-            "recaptchaToken": {
-              "type": "string"
+      "resolver": {
+        "compose": [
+          {
+            "id": "recaptcha",
+            "name": "rest:post",
+            "service": "recaptcha",
+            "path": "/siteverify",
+            "searchParams": {
+              "ops": [
+                {
+                  "path": "response",
+                  "mapping": "$args.recaptchaToken"
+                }
+              ]
             }
           },
-          "required": [
-            "email",
-            "message",
-            "recaptchaToken"
+          {
+            "id": "ZendeskCreateTicket",
+            "name": "rest:post",
+            "service": "zendesk",
+            "path": "/api/v2/requests",
+            "json": {
+              "ops": [
+                {
+                  "path": "request.requester.name",
+                  "mapping": "$args.name"
+                },
+                {
+                  "path": "request.requester.email",
+                  "mapping": "$args.email"
+                },
+                {
+                  "path": "request.comment.body",
+                  "mapping": "$args.message"
+                }
+              ]
+            }
+          }
+        ],
+        "results": {
+          "ops": [
+            {
+              "path": "$",
+              "mapping": "$finalResolver.request"
+            }
           ]
-        },
-        "shape": "CreateTicketResponse"
-      }
+        }
+      },
+      "shape": "CreateTicketResponse"
     },
     "Shopify_products": {
-      "resolver": {
-        "name": "graphql:query",
-        "service": "shopify",
-        "fieldName": "products"
-      },
       "args": {
         "type": "object",
         "properties": {
@@ -2111,14 +2960,14 @@
           }
         }
       },
-      "shape": "Shopify_ProductConnection"
-    },
-    "Shopify_product": {
       "resolver": {
         "name": "graphql:query",
         "service": "shopify",
-        "fieldName": "product"
+        "fieldName": "products"
       },
+      "shape": "Shopify_ProductConnection"
+    },
+    "Shopify_product": {
       "args": {
         "type": "object",
         "properties": {
@@ -2132,9 +2981,52 @@
           "id"
         ]
       },
+      "resolver": {
+        "name": "graphql:query",
+        "service": "shopify",
+        "fieldName": "product"
+      },
       "shape": "Shopify_Product"
     },
     "createCustomer": {
+      "args": {
+        "type": "object",
+        "properties": {
+          "input": {
+            "type": "object",
+            "properties": {
+              "firstName": {
+                "type": "string"
+              },
+              "lastName": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "acceptsMarketing": {
+                "type": "boolean"
+              },
+              "recaptchaToken": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "email",
+              "password"
+            ]
+          }
+        },
+        "required": [
+          "input"
+        ]
+      },
       "resolver": {
         "compose": [
           {
@@ -2211,47 +3103,25 @@
           ]
         }
       },
-      "args": {
-        "type": "object",
-        "properties": {
-          "input": {
-            "type": "object",
-            "properties": {
-              "firstName": {
-                "type": "string"
-              },
-              "lastName": {
-                "type": "string"
-              },
-              "email": {
-                "type": "string"
-              },
-              "phone": {
-                "type": "string"
-              },
-              "password": {
-                "type": "string"
-              },
-              "acceptsMarketing": {
-                "type": "boolean"
-              },
-              "recaptchaToken": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "email",
-              "password"
-            ]
-          }
-        },
-        "required": [
-          "input"
-        ]
-      },
       "shape": "CreateCustomerPayload"
     },
     "recoverCustomerAccount": {
+      "args": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "The email address of the customer to recover."
+          },
+          "recaptchaToken": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "recaptchaToken"
+        ]
+      },
       "resolver": {
         "compose": [
           {
@@ -2275,22 +3145,6 @@
             "service": "shopify-storefront",
             "fieldName": "customerRecover"
           }
-        ]
-      },
-      "args": {
-        "type": "object",
-        "properties": {
-          "email": {
-            "type": "string",
-            "description": "The email address of the customer to recover."
-          },
-          "recaptchaToken": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "email",
-          "recaptchaToken"
         ]
       },
       "shape": "ShopifyStorefront_CustomerRecoverPayload"
@@ -2606,87 +3460,87 @@
       "args": "DeleteArgs<Product>"
     },
     "updateProductPageDetails": {
-      "shape": "UpdateResult<ProductPageDetails>",
+      "args": "UpdateArgs<ProductPageDetails>",
       "resolver": {
         "name": "takeshape:update",
         "service": "takeshape:local",
         "shapeName": "ProductPageDetails"
       },
-      "description": "Update ProductPageDetails",
-      "args": "UpdateArgs<ProductPageDetails>"
+      "shape": "UpdateResult<ProductPageDetails>",
+      "description": "Update ProductPageDetails"
     },
     "createProductPageDetails": {
-      "shape": "CreateResult<ProductPageDetails>",
+      "args": "CreateArgs<ProductPageDetails>",
       "resolver": {
         "name": "takeshape:create",
         "service": "takeshape:local",
         "shapeName": "ProductPageDetails"
       },
-      "description": "Create ProductPageDetails",
-      "args": "CreateArgs<ProductPageDetails>"
+      "shape": "CreateResult<ProductPageDetails>",
+      "description": "Create ProductPageDetails"
     },
     "duplicateProductPageDetails": {
-      "shape": "DuplicateResult<ProductPageDetails>",
+      "args": "DuplicateArgs<ProductPageDetails>",
       "resolver": {
         "name": "takeshape:duplicate",
         "service": "takeshape:local",
         "shapeName": "ProductPageDetails"
       },
-      "description": "Duplicate ProductPageDetails",
-      "args": "DuplicateArgs<ProductPageDetails>"
+      "shape": "DuplicateResult<ProductPageDetails>",
+      "description": "Duplicate ProductPageDetails"
     },
     "deleteProductPageDetails": {
-      "shape": "DeleteResult<ProductPageDetails>",
+      "args": "DeleteArgs<ProductPageDetails>",
       "resolver": {
         "name": "takeshape:delete",
         "service": "takeshape:local",
         "shapeName": "ProductPageDetails"
       },
-      "description": "Delete ProductPageDetails",
-      "args": "DeleteArgs<ProductPageDetails>"
+      "shape": "DeleteResult<ProductPageDetails>",
+      "description": "Delete ProductPageDetails"
     },
     "updateProductPagePolicies": {
-      "shape": "UpdateResult<ProductPagePolicies>",
+      "args": "UpdateArgs<ProductPagePolicies>",
       "resolver": {
         "name": "takeshape:update",
         "service": "takeshape:local",
         "shapeName": "ProductPagePolicies"
       },
-      "description": "Update ProductPagePolicies",
-      "args": "UpdateArgs<ProductPagePolicies>"
+      "shape": "UpdateResult<ProductPagePolicies>",
+      "description": "Update ProductPagePolicies"
     },
     "createProductPagePolicies": {
-      "shape": "CreateResult<ProductPagePolicies>",
+      "args": "CreateArgs<ProductPagePolicies>",
       "resolver": {
         "name": "takeshape:create",
         "service": "takeshape:local",
         "shapeName": "ProductPagePolicies"
       },
-      "description": "Create ProductPagePolicies",
-      "args": "CreateArgs<ProductPagePolicies>"
+      "shape": "CreateResult<ProductPagePolicies>",
+      "description": "Create ProductPagePolicies"
     },
     "duplicateProductPagePolicies": {
-      "shape": "DuplicateResult<ProductPagePolicies>",
+      "args": "DuplicateArgs<ProductPagePolicies>",
       "resolver": {
         "name": "takeshape:duplicate",
         "service": "takeshape:local",
         "shapeName": "ProductPagePolicies"
       },
-      "description": "Duplicate ProductPagePolicies",
-      "args": "DuplicateArgs<ProductPagePolicies>"
+      "shape": "DuplicateResult<ProductPagePolicies>",
+      "description": "Duplicate ProductPagePolicies"
     },
     "deleteProductPagePolicies": {
-      "shape": "DeleteResult<ProductPagePolicies>",
+      "args": "DeleteArgs<ProductPagePolicies>",
       "resolver": {
         "name": "takeshape:delete",
         "service": "takeshape:local",
         "shapeName": "ProductPagePolicies"
       },
-      "description": "Delete ProductPagePolicies",
-      "args": "DeleteArgs<ProductPagePolicies>"
+      "shape": "DeleteResult<ProductPagePolicies>",
+      "description": "Delete ProductPagePolicies"
     },
     "updateCollection": {
-      "shape": "UpdateResult<Collection>",
+      "args": "UpdateArgs<CollectionInterface>",
       "resolver": {
         "compose": [
           {
@@ -2810,11 +3664,11 @@
           ]
         }
       },
-      "description": "Update Collection. If the input has Shopify values and a Shopify ID, the Shopify collection with that ID is updated.\nIf the input has Shopify values and no Shopify ID, a Shopify collection is created.",
-      "args": "UpdateArgs<CollectionInterface>"
+      "shape": "UpdateResult<Collection>",
+      "description": "Update Collection. If the input has Shopify values and a Shopify ID, the Shopify collection with that ID is updated.\nIf the input has Shopify values and no Shopify ID, a Shopify collection is created."
     },
     "createCollection": {
-      "shape": "CreateResult<Collection>",
+      "args": "CreateArgs<CollectionInterface>",
       "resolver": {
         "compose": [
           {
@@ -2912,28 +3766,28 @@
           ]
         }
       },
-      "description": "Create Collection. If Shopify values are provided, a Shopify collection is also created and the new collection ID is saved.",
-      "args": "CreateArgs<CollectionInterface>"
+      "shape": "CreateResult<Collection>",
+      "description": "Create Collection. If Shopify values are provided, a Shopify collection is also created and the new collection ID is saved."
     },
     "duplicateCollection": {
-      "shape": "DuplicateResult<Collection>",
+      "args": "DuplicateArgs<Collection>",
       "resolver": {
         "name": "takeshape:duplicate",
         "service": "takeshape:local",
         "shapeName": "Collection"
       },
-      "description": "Duplicate Collection",
-      "args": "DuplicateArgs<Collection>"
+      "shape": "DuplicateResult<Collection>",
+      "description": "Duplicate Collection"
     },
     "deleteCollection": {
-      "shape": "DeleteResult<Collection>",
+      "args": "DeleteArgs<Collection>",
       "resolver": {
         "name": "takeshape:delete",
         "service": "takeshape:local",
         "shapeName": "Collection"
       },
-      "description": "Delete Collection",
-      "args": "DeleteArgs<Collection>"
+      "shape": "DeleteResult<Collection>",
+      "description": "Delete Collection"
     },
     "updatePage": {
       "shape": "UpdateResult<Page>",
@@ -2976,43 +3830,6 @@
       "args": "DeleteArgs<Page>"
     },
     "createMyProductReview": {
-      "shape": "ReviewsIo_CreateProductReviewNewResponse",
-      "resolver": {
-        "if": "!isEmpty($claims.sub)",
-        "name": "rest:post",
-        "service": "reviews-io",
-        "path": "/product/review/new",
-        "body": {
-          "ops": [
-            {
-              "path": "$",
-              "mapping": "$args.input"
-            },
-            {
-              "path": "name",
-              "mapping": "$claims.name"
-            },
-            {
-              "path": "email",
-              "mapping": "$claims.email"
-            }
-          ],
-          "serialize": {
-            "content": {
-              "contentType": "application/json"
-            }
-          }
-        },
-        "headers": {
-          "ops": [
-            {
-              "path": "content-type",
-              "value": "application/json"
-            }
-          ]
-        }
-      },
-      "summary": "Insert product review",
       "args": {
         "type": "object",
         "properties": {
@@ -3055,87 +3872,243 @@
           }
         },
         "required": []
-      }
+      },
+      "resolver": {
+        "if": "!isEmpty($claims.sub)",
+        "name": "rest:post",
+        "service": "reviews-io",
+        "path": "/product/review/new",
+        "body": {
+          "ops": [
+            {
+              "path": "$",
+              "mapping": "$args.input"
+            },
+            {
+              "path": "name",
+              "mapping": "$claims.name"
+            },
+            {
+              "path": "email",
+              "mapping": "$claims.email"
+            }
+          ],
+          "serialize": {
+            "content": {
+              "contentType": "application/json"
+            }
+          }
+        },
+        "headers": {
+          "ops": [
+            {
+              "path": "content-type",
+              "value": "application/json"
+            }
+          ]
+        }
+      },
+      "shape": "ReviewsIo_CreateProductReviewNewResponse"
     },
     "updateLink": {
-      "shape": "UpdateResult<Link>",
+      "args": "UpdateArgs<Link>",
       "resolver": {
         "name": "takeshape:update",
         "service": "takeshape:local",
         "shapeName": "Link"
       },
-      "description": "Update Link",
-      "args": "UpdateArgs<Link>"
+      "shape": "UpdateResult<Link>",
+      "description": "Update Link"
     },
     "createLink": {
-      "shape": "CreateResult<Link>",
+      "args": "CreateArgs<Link>",
       "resolver": {
         "name": "takeshape:create",
         "service": "takeshape:local",
         "shapeName": "Link"
       },
-      "description": "Create Link",
-      "args": "CreateArgs<Link>"
+      "shape": "CreateResult<Link>",
+      "description": "Create Link"
     },
     "duplicateLink": {
-      "shape": "DuplicateResult<Link>",
+      "args": "DuplicateArgs<Link>",
       "resolver": {
         "name": "takeshape:duplicate",
         "service": "takeshape:local",
         "shapeName": "Link"
       },
-      "description": "Duplicate Link",
-      "args": "DuplicateArgs<Link>"
+      "shape": "DuplicateResult<Link>",
+      "description": "Duplicate Link"
     },
     "deleteLink": {
-      "shape": "DeleteResult<Link>",
+      "args": "DeleteArgs<Link>",
       "resolver": {
         "name": "takeshape:delete",
         "service": "takeshape:local",
         "shapeName": "Link"
       },
-      "description": "Delete Link",
-      "args": "DeleteArgs<Link>"
+      "shape": "DeleteResult<Link>",
+      "description": "Delete Link"
     },
     "updateLineItemAttributes": {
-      "shape": "UpdateResult<LineItemAttributes>",
+      "args": "UpdateArgs<LineItemAttributes>",
       "resolver": {
         "name": "takeshape:update",
         "service": "takeshape:local",
         "shapeName": "LineItemAttributes"
       },
-      "description": "Update LineItemAttributes",
-      "args": "UpdateArgs<LineItemAttributes>"
+      "shape": "UpdateResult<LineItemAttributes>",
+      "description": "Update LineItemAttributes"
     },
     "createLineItemAttributes": {
-      "shape": "CreateResult<LineItemAttributes>",
+      "args": "CreateArgs<LineItemAttributes>",
       "resolver": {
         "name": "takeshape:create",
         "service": "takeshape:local",
         "shapeName": "LineItemAttributes"
       },
-      "description": "Create LineItemAttributes",
-      "args": "CreateArgs<LineItemAttributes>"
+      "shape": "CreateResult<LineItemAttributes>",
+      "description": "Create LineItemAttributes"
     },
     "duplicateLineItemAttributes": {
-      "shape": "DuplicateResult<LineItemAttributes>",
+      "args": "DuplicateArgs<LineItemAttributes>",
       "resolver": {
         "name": "takeshape:duplicate",
         "service": "takeshape:local",
         "shapeName": "LineItemAttributes"
       },
-      "description": "Duplicate LineItemAttributes",
-      "args": "DuplicateArgs<LineItemAttributes>"
+      "shape": "DuplicateResult<LineItemAttributes>",
+      "description": "Duplicate LineItemAttributes"
     },
     "deleteLineItemAttributes": {
-      "shape": "DeleteResult<LineItemAttributes>",
+      "args": "DeleteArgs<LineItemAttributes>",
       "resolver": {
         "name": "takeshape:delete",
         "service": "takeshape:local",
         "shapeName": "LineItemAttributes"
       },
-      "description": "Delete LineItemAttributes",
-      "args": "DeleteArgs<LineItemAttributes>"
+      "shape": "DeleteResult<LineItemAttributes>",
+      "description": "Delete LineItemAttributes"
+    },
+    "updateHomepage": {
+      "shape": "UpdateResult<Homepage>",
+      "resolver": {
+        "name": "takeshape:update",
+        "service": "takeshape:local",
+        "shapeName": "Homepage"
+      },
+      "description": "Update Homepage",
+      "args": "UpdateArgs<Homepage>"
+    },
+    "updateStorefront": {
+      "shape": "UpdateResult<Storefront>",
+      "resolver": {
+        "name": "takeshape:update",
+        "service": "takeshape:local",
+        "shapeName": "Storefront"
+      },
+      "description": "Update Storefront",
+      "args": "UpdateArgs<Storefront>"
+    },
+    "updateBlogPage": {
+      "shape": "UpdateResult<BlogPage>",
+      "resolver": {
+        "name": "takeshape:update",
+        "service": "takeshape:local",
+        "shapeName": "BlogPage"
+      },
+      "description": "Update BlogPage",
+      "args": "UpdateArgs<BlogPage>"
+    },
+    "updateBlogPost": {
+      "shape": "UpdateResult<BlogPost>",
+      "resolver": {
+        "name": "takeshape:update",
+        "service": "takeshape:local",
+        "shapeName": "BlogPost"
+      },
+      "description": "Update BlogPost",
+      "args": "UpdateArgs<BlogPost>"
+    },
+    "createBlogPost": {
+      "shape": "CreateResult<BlogPost>",
+      "resolver": {
+        "name": "takeshape:create",
+        "service": "takeshape:local",
+        "shapeName": "BlogPost"
+      },
+      "description": "Create BlogPost",
+      "args": "CreateArgs<BlogPost>"
+    },
+    "duplicateBlogPost": {
+      "shape": "DuplicateResult<BlogPost>",
+      "resolver": {
+        "name": "takeshape:duplicate",
+        "service": "takeshape:local",
+        "shapeName": "BlogPost"
+      },
+      "description": "Duplicate BlogPost",
+      "args": "DuplicateArgs<BlogPost>"
+    },
+    "deleteBlogPost": {
+      "shape": "DeleteResult<BlogPost>",
+      "resolver": {
+        "name": "takeshape:delete",
+        "service": "takeshape:local",
+        "shapeName": "BlogPost"
+      },
+      "description": "Delete BlogPost",
+      "args": "DeleteArgs<BlogPost>"
+    },
+    "updateGlobalSettings": {
+      "shape": "UpdateResult<GlobalSettings>",
+      "resolver": {
+        "name": "takeshape:update",
+        "service": "takeshape:local",
+        "shapeName": "GlobalSettings"
+      },
+      "description": "Update GlobalSettings",
+      "args": "UpdateArgs<GlobalSettings>"
+    },
+    "updatePolicy": {
+      "shape": "UpdateResult<Policy>",
+      "resolver": {
+        "name": "takeshape:update",
+        "service": "takeshape:local",
+        "shapeName": "Policy"
+      },
+      "description": "Update Policy",
+      "args": "UpdateArgs<Policy>"
+    },
+    "createPolicy": {
+      "shape": "CreateResult<Policy>",
+      "resolver": {
+        "name": "takeshape:create",
+        "service": "takeshape:local",
+        "shapeName": "Policy"
+      },
+      "description": "Create Policy",
+      "args": "CreateArgs<Policy>"
+    },
+    "duplicatePolicy": {
+      "shape": "DuplicateResult<Policy>",
+      "resolver": {
+        "name": "takeshape:duplicate",
+        "service": "takeshape:local",
+        "shapeName": "Policy"
+      },
+      "description": "Duplicate Policy",
+      "args": "DuplicateArgs<Policy>"
+    },
+    "deletePolicy": {
+      "shape": "DeleteResult<Policy>",
+      "resolver": {
+        "name": "takeshape:delete",
+        "service": "takeshape:local",
+        "shapeName": "Policy"
+      },
+      "description": "Delete Policy",
+      "args": "DeleteArgs<Policy>"
     }
   },
   "shapes": {
@@ -3680,6 +4653,175 @@
                   }
                 }
               },
+              "trustpilotReviews": {
+                "@ref": "local:TrustpilotProductReviews",
+                "@args": {
+                  "type": "object",
+                  "properties": {
+                    "businessUnit": {
+                      "type": "string",
+                      "description": "The BusinessUnitId that owns the products."
+                    },
+                    "page": {
+                      "type": "integer",
+                      "description": "The page to retrieve. If the page number requested is higher than the available number of pages an empty array will be returned.\nConstraints: The allowed range is minimum: 1, maximum: 2147483647\nDefault value: 1"
+                    },
+                    "perPage": {
+                      "type": "integer",
+                      "description": "The number of reviews to retrieve per page.\nConstraints: The allowed range is minimum: 1, maximum: 100\nDefault value: 20"
+                    },
+                    "productUrl": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "The url of the product. Optional only if sku is provided."
+                    },
+                    "language": {
+                      "type": "string",
+                      "description": "Filter reviews by language."
+                    },
+                    "stars": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      },
+                      "description": "Filter reviews with a specific number of stars.\nConstraints: Allowed values are 1, 2, 3, 4, 5"
+                    },
+                    "locale": {
+                      "type": "string",
+                      "description": "The language in which the attributes, if any, are returned\nDefault value: en-US"
+                    },
+                    "attributeIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "A comma-separated list of attribute ids"
+                    }
+                  },
+                  "required": [
+                    "businessUnit"
+                  ]
+                },
+                "@resolver": {
+                  "name": "rest:get",
+                  "service": "trustpilot",
+                  "path": {
+                    "ops": [
+                      {
+                        "path": "businessUnit",
+                        "mapping": "$args.businessUnit"
+                      }
+                    ],
+                    "serialize": {
+                      "template": "/v1/product-reviews/business-units/{businessUnit}/reviews"
+                    }
+                  },
+                  "searchParams": {
+                    "ops": [
+                      {
+                        "path": "page",
+                        "mapping": "$args.page"
+                      },
+                      {
+                        "path": "perPage",
+                        "mapping": "$args.perPage"
+                      },
+                      {
+                        "path": "productUrl",
+                        "mapping": "$args.productUrl"
+                      },
+                      {
+                        "path": "sku",
+                        "mapping": [
+                          [
+                            "get",
+                            {
+                              "path": "$source.id"
+                            }
+                          ],
+                          [
+                            "replace",
+                            {
+                              "pattern": "gid://shopify/Product/",
+                              "replacement": ""
+                            }
+                          ]
+                        ]
+                      },
+                      {
+                        "path": "language",
+                        "mapping": "$args.language"
+                      },
+                      {
+                        "path": "stars",
+                        "mapping": "$args.stars"
+                      },
+                      {
+                        "path": "locale",
+                        "mapping": "$args.locale"
+                      },
+                      {
+                        "path": "attributeIds",
+                        "mapping": "$args.attributeIds"
+                      }
+                    ]
+                  }
+                }
+              },
+              "trustpilotReviewsSummary": {
+                "@ref": "local:TrustpilotProductReviewsSummary",
+                "@args": {
+                  "type": "object",
+                  "properties": {
+                    "businessUnit": {
+                      "type": "string",
+                      "description": "The BusinessUnitId that owns the products."
+                    }
+                  },
+                  "required": [
+                    "businessUnit"
+                  ]
+                },
+                "@resolver": {
+                  "name": "rest:get",
+                  "service": "trustpilot",
+                  "path": {
+                    "ops": [
+                      {
+                        "path": "businessUnit",
+                        "mapping": "$args.businessUnit"
+                      }
+                    ],
+                    "serialize": {
+                      "template": "/v1/product-reviews/business-units/{businessUnit}"
+                    }
+                  },
+                  "searchParams": {
+                    "ops": [
+                      {
+                        "path": "sku",
+                        "mapping": [
+                          [
+                            "get",
+                            {
+                              "path": "$source.id"
+                            }
+                          ],
+                          [
+                            "replace",
+                            {
+                              "pattern": "gid://shopify/Product/",
+                              "replacement": ""
+                            }
+                          ]
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
               "takeshape": {
                 "@ref": "local:Product",
                 "@resolver": {
@@ -3806,6 +4948,11 @@
             "description": "Initialized with title from shopify",
             "title": "Name"
           },
+          "description": {
+            "type": "object",
+            "@tag": "draftjs",
+            "title": "Description"
+          },
           "productComponent": {
             "minLength": 1,
             "type": "string",
@@ -3826,9 +4973,9 @@
             "title": "Product Component"
           },
           "hideBreadcrumbs": {
-            "type": "boolean",
             "default": false,
             "@l10n": false,
+            "type": "boolean",
             "title": "Hide Breadcrumbs"
           },
           "hideReviews": {
@@ -3842,6 +4989,45 @@
             "@l10n": false,
             "type": "boolean",
             "title": "Hide Related Products"
+          },
+          "additionalDetails": {
+            "title": "Additional Details",
+            "items": {
+              "@ref": "local:ProductAdditionalDetailsInterface"
+            },
+            "type": "array"
+          },
+          "sections": {
+            "items": {
+              "oneOf": [
+                {
+                  "@ref": "local:FeaturesFullWidthWithVerticalImagesComponent"
+                },
+                {
+                  "@ref": "local:NewsletterCenteredCardWithGraphicComponent"
+                },
+                {
+                  "@ref": "local:FeaturesAlternativeSideBySideWithImagesComponent"
+                },
+                {
+                  "@ref": "local:FaqTwoColumnsWithImageComponent"
+                },
+                {
+                  "@ref": "local:TestimonialWithOverlappingImageComponent"
+                },
+                {
+                  "@ref": "local:CtaBrandPanelWithOverlappingImageComponent"
+                },
+                {
+                  "@ref": "local:FeaturesGridComponent"
+                },
+                {
+                  "@ref": "local:FaqOneColumnComponent"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Sections"
           },
           "showDetails": {
             "default": false,
@@ -3921,6 +5107,13 @@
             "title": "Name",
             "@mapping": "takeshape:local:Product.90tPC0GwFe"
           },
+          "description": {
+            "type": "object",
+            "@tag": "draftjs",
+            "description": "",
+            "title": "Description",
+            "@mapping": "takeshape:local:Product.d7umca_W6"
+          },
           "productComponent": {
             "minLength": 1,
             "type": "string",
@@ -3943,9 +5136,9 @@
             "@mapping": "takeshape:local:Product.ViTuUtNE_"
           },
           "hideBreadcrumbs": {
-            "type": "boolean",
             "default": false,
             "@l10n": false,
+            "type": "boolean",
             "description": "",
             "title": "Hide Breadcrumbs",
             "@mapping": "takeshape:local:Product.SNVU8G6B8"
@@ -3965,6 +5158,49 @@
             "description": "",
             "title": "Hide Related Products",
             "@mapping": "takeshape:local:Product.rFRswSLmi"
+          },
+          "additionalDetails": {
+            "title": "Additional Details",
+            "description": "",
+            "items": {
+              "@ref": "local:ProductAdditionalDetails"
+            },
+            "type": "array",
+            "@mapping": "takeshape:local:Product.K05wP-xkq"
+          },
+          "sections": {
+            "items": {
+              "oneOf": [
+                {
+                  "@ref": "local:FeaturesFullWidthWithVerticalImagesComponent"
+                },
+                {
+                  "@ref": "local:NewsletterCenteredCardWithGraphicComponent"
+                },
+                {
+                  "@ref": "local:FeaturesAlternativeSideBySideWithImagesComponent"
+                },
+                {
+                  "@ref": "local:FaqTwoColumnsWithImageComponent"
+                },
+                {
+                  "@ref": "local:TestimonialWithOverlappingImageComponent"
+                },
+                {
+                  "@ref": "local:CtaBrandPanelWithOverlappingImageComponent"
+                },
+                {
+                  "@ref": "local:FeaturesGridComponent"
+                },
+                {
+                  "@ref": "local:FaqOneColumnComponent"
+                }
+              ]
+            },
+            "type": "array",
+            "description": "",
+            "title": "Sections",
+            "@mapping": "takeshape:local:Product.0CoajKGqQ"
           },
           "showDetails": {
             "default": false,
@@ -4264,15 +5500,15 @@
     "HeroComponent": {
       "id": "ryd1vUTw_",
       "name": "HeroComponent",
-      "title": "Hero Component",
+      "title": "Hero Component ",
       "schema": {
         "type": "object",
         "properties": {
           "primaryText": {
-            "minLength": 1,
-            "type": "string",
             "title": "Primary Text",
-            "@mapping": "takeshape:local:HeroComponent.dBpjebsDG"
+            "description": "",
+            "@ref": "local:HeroComponentPrimaryText",
+            "@mapping": "takeshape:local:HeroComponent.a3_ERdS0i"
           },
           "secondaryText": {
             "minLength": 1,
@@ -4280,11 +5516,26 @@
             "title": "Secondary Text",
             "@mapping": "takeshape:local:HeroComponent.GtIaaH1nJ"
           },
-          "buttonText": {
-            "minLength": 1,
-            "type": "string",
-            "title": "Button Text",
-            "@mapping": "takeshape:local:HeroComponent.1UlfVUH6m"
+          "features": {
+            "title": "Features",
+            "description": "",
+            "items": {
+              "@ref": "local:HeroComponentFeatures"
+            },
+            "type": "array",
+            "@mapping": "takeshape:local:HeroComponent.oH9lnkD0P"
+          },
+          "firstButton": {
+            "title": "First Button",
+            "description": "",
+            "@ref": "local:HeroComponentFirstButton",
+            "@mapping": "takeshape:local:HeroComponent.iUrLCVel4"
+          },
+          "secondButton": {
+            "title": "Second Button",
+            "description": "",
+            "@ref": "local:HeroComponentSecondButton",
+            "@mapping": "takeshape:local:HeroComponent.df8zsJsX_"
           },
           "image": {
             "description": "",
@@ -4307,7 +5558,6 @@
         "required": [
           "primaryText",
           "secondaryText",
-          "buttonText",
           "image"
         ]
       }
@@ -4636,29 +5886,35 @@
       "schema": {
         "type": "object",
         "properties": {
+          "seo": {
+            "title": "SEO",
+            "description": "",
+            "@ref": "local:StorefrontSeo",
+            "@mapping": "takeshape:local:Storefront.vZbyI9FlP"
+          },
           "components": {
             "items": {
               "oneOf": [
                 {
-                  "@ref": "local:OffersComponent"
-                },
-                {
                   "@ref": "local:HeroComponent"
                 },
                 {
-                  "@ref": "local:CollectionsComponent"
+                  "@ref": "local:FeaturesGridComponent"
                 },
                 {
-                  "@ref": "local:BackgroundImageComponent"
+                  "@ref": "local:CtaBrandPanelWithOverlappingImageComponent"
                 },
                 {
-                  "@ref": "local:SaleComponent"
+                  "@ref": "local:TestimonialWithOverlappingImageComponent"
                 },
                 {
-                  "@ref": "local:TestimonialsComponent"
+                  "@ref": "local:FaqTwoColumnsWithImageComponent"
                 },
                 {
-                  "@ref": "local:CollectionComponent"
+                  "@ref": "local:FeaturesAlternativeSideBySideWithImagesComponent"
+                },
+                {
+                  "@ref": "local:NewsletterCenteredCardWithGraphicComponent"
                 }
               ]
             },
@@ -4916,6 +6172,12 @@
             "title": "Slug",
             "@mapping": "takeshape:local:Page.GJu5JWCZS"
           },
+          "seo": {
+            "title": "SEO",
+            "description": "",
+            "@ref": "local:PageSeo",
+            "@mapping": "takeshape:local:Page.nytl5yojX"
+          },
           "sections": {
             "items": {
               "oneOf": [
@@ -4924,6 +6186,30 @@
                 },
                 {
                   "@ref": "local:PageSectionMdx"
+                },
+                {
+                  "@ref": "local:HeroSectionMediumWithIllustrationComponent"
+                },
+                {
+                  "@ref": "local:FeaturesGridComponent"
+                },
+                {
+                  "@ref": "local:CtaBrandPanelWithOverlappingImageComponent"
+                },
+                {
+                  "@ref": "local:TestimonialWithOverlappingImageComponent"
+                },
+                {
+                  "@ref": "local:FaqTwoColumnsWithImageComponent"
+                },
+                {
+                  "@ref": "local:FeaturesAlternativeSideBySideWithImagesComponent"
+                },
+                {
+                  "@ref": "local:NewsletterCenteredCardWithGraphicComponent"
+                },
+                {
+                  "@ref": "local:FeaturesFullWidthWithVerticalImagesComponent"
                 }
               ]
             },
@@ -5188,7 +6474,1629 @@
           "key"
         ]
       }
+    },
+    "HeroComponentPrimaryText": {
+      "id": "a3_ERdS0i",
+      "name": "HeroComponentPrimaryText",
+      "title": "Hero Component  PrimaryText",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "firstRow": {
+            "minLength": 1,
+            "type": "string",
+            "title": "First Row",
+            "@mapping": "takeshape:local:HeroComponentPrimaryText.dBpjebsDG"
+          },
+          "secondRow": {
+            "minLength": 0,
+            "type": "string",
+            "description": "",
+            "title": "Second Row",
+            "@mapping": "takeshape:local:HeroComponentPrimaryText.dOUw5QvNm"
+          }
+        },
+        "required": [
+          "firstRow"
+        ]
+      }
+    },
+    "HeroComponentFirstButton": {
+      "id": "iUrLCVel4",
+      "name": "HeroComponentFirstButton",
+      "title": "Hero Component  FirstButton",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "minLength": 1,
+            "type": "string",
+            "title": "Text",
+            "@mapping": "takeshape:local:HeroComponentFirstButton.1UlfVUH6m"
+          },
+          "url": {
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "URL",
+            "@mapping": "takeshape:local:HeroComponentFirstButton.1M0IClJXK"
+          }
+        },
+        "required": [
+          "text",
+          "url"
+        ]
+      }
+    },
+    "HeroComponentSecondButton": {
+      "id": "df8zsJsX_",
+      "name": "HeroComponentSecondButton",
+      "title": "Hero Component  SecondButton",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "Text",
+            "@mapping": "takeshape:local:HeroComponentSecondButton.ta4-x74T_"
+          },
+          "url": {
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "URL",
+            "@mapping": "takeshape:local:HeroComponentSecondButton.CAk4loZ-7"
+          }
+        },
+        "required": [
+          "text",
+          "url"
+        ]
+      }
+    },
+    "Homepage": {
+      "id": "K0-71QJNY",
+      "name": "Homepage",
+      "title": "Homepage",
+      "workflow": "default",
+      "model": {
+        "type": "single"
+      },
+      "schema": {
+        "type": "object",
+        "properties": {
+          "components": {
+            "items": {
+              "oneOf": [
+                {
+                  "@ref": "local:HeroComponent"
+                },
+                {
+                  "@ref": "local:FeaturesGridComponent"
+                },
+                {
+                  "@ref": "local:CtaBrandPanelWithOverlappingImageComponent"
+                }
+              ]
+            },
+            "type": "array",
+            "description": "",
+            "title": "Components",
+            "@mapping": "takeshape:local:Homepage._DmpdCYQp"
+          }
+        }
+      }
+    },
+    "HeroComponentFeatures": {
+      "id": "oH9lnkD0P",
+      "name": "HeroComponentFeatures",
+      "title": "Hero Component  Features",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "minLength": 0,
+            "type": "string",
+            "description": "",
+            "title": "Title",
+            "@mapping": "takeshape:local:HeroComponentFeatures.k4GRALhyJ"
+          },
+          "description": {
+            "minLength": 0,
+            "type": "string",
+            "description": "",
+            "title": "Description",
+            "@mapping": "takeshape:local:HeroComponentFeatures.LJQbgHQEJ"
+          },
+          "iconName": {
+            "minLength": 0,
+            "type": "string",
+            "description": "",
+            "title": "Icon Name",
+            "@mapping": "takeshape:local:HeroComponentFeatures.2-cQ2BbiZ"
+          }
+        }
+      }
+    },
+    "StorefrontSeo": {
+      "id": "vZbyI9FlP",
+      "name": "StorefrontSeo",
+      "title": "Storefront Seo",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "metaTitle": {
+            "minLength": 0,
+            "type": "string",
+            "description": "",
+            "title": "Meta Title",
+            "@mapping": "takeshape:local:StorefrontSeo.2QrDfFGQZ"
+          },
+          "metaDescription": {
+            "minLength": 0,
+            "type": "string",
+            "description": "",
+            "title": "Meta Description",
+            "@mapping": "takeshape:local:StorefrontSeo.7bgteasAg"
+          }
+        }
+      }
+    },
+    "FeaturesGridComponentBlocks": {
+      "id": "PZ80vGPUX",
+      "name": "FeaturesGridComponentBlocks",
+      "title": "Features Grid Component Blocks",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "Title",
+            "@mapping": "takeshape:local:FeaturesGridComponentBlocks.Z8a1_u8PB"
+          },
+          "description": {
+            "type": "object",
+            "@tag": "draftjs",
+            "description": "",
+            "title": "Description",
+            "@mapping": "takeshape:local:FeaturesGridComponentBlocks.w1wakbQNo"
+          },
+          "iconName": {
+            "minLength": 0,
+            "type": "string",
+            "description": "",
+            "title": "Icon Name",
+            "@mapping": "takeshape:local:FeaturesGridComponentBlocks.J0zVSXjZL"
+          }
+        }
+      }
+    },
+    "FeaturesGridComponent": {
+      "id": "nV5a1IKi8",
+      "name": "FeaturesGridComponent",
+      "title": "Features Grid Component",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "preheading": {
+            "minLength": 0,
+            "type": "string",
+            "description": "",
+            "title": "Preheading",
+            "@mapping": "takeshape:local:FeaturesGridComponent.5K_J1zWe7"
+          },
+          "heading": {
+            "minLength": 0,
+            "type": "string",
+            "description": "",
+            "title": "Heading",
+            "@mapping": "takeshape:local:FeaturesGridComponent.QjPfK1eOR"
+          },
+          "subheading": {
+            "type": "object",
+            "@tag": "draftjs",
+            "description": "",
+            "title": "Subheading",
+            "@mapping": "takeshape:local:FeaturesGridComponent.XpgZUBsP7"
+          },
+          "blocks": {
+            "title": "Blocks",
+            "description": "",
+            "items": {
+              "@ref": "local:FeaturesGridComponentBlocks"
+            },
+            "type": "array",
+            "@mapping": "takeshape:local:FeaturesGridComponent.PZ80vGPUX"
+          }
+        }
+      }
+    },
+    "CtaBrandPanelWithOverlappingImageComponent": {
+      "id": "woQDxbxR_",
+      "name": "CtaBrandPanelWithOverlappingImageComponent",
+      "title": "Cta Brand Panel With Overlapping Image Component",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "heading": {
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "Heading",
+            "@mapping": "takeshape:local:CtaBrandPanelWithOverlappingImageComponent.RqsQQJb7O"
+          },
+          "description": {
+            "type": "string",
+            "@tag": "mdx",
+            "description": "",
+            "title": "Description",
+            "@mapping": "takeshape:local:CtaBrandPanelWithOverlappingImageComponent.WwiSFtoZs"
+          },
+          "button": {
+            "title": "Button",
+            "description": "",
+            "@ref": "local:CtaBrandPanelWithOverlappingImageComponentButton",
+            "@mapping": "takeshape:local:CtaBrandPanelWithOverlappingImageComponent.rXseF9wTS"
+          },
+          "image": {
+            "description": "",
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "takeshape:getRelated",
+              "service": "takeshape:local",
+              "options": {
+                "nullable": true
+              }
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "title": "Image",
+            "@mapping": "takeshape:local:CtaBrandPanelWithOverlappingImageComponent.LZIi056uq"
+          }
+        },
+        "required": [
+          "image"
+        ]
+      }
+    },
+    "CtaBrandPanelWithOverlappingImageComponentButton": {
+      "id": "rXseF9wTS",
+      "name": "CtaBrandPanelWithOverlappingImageComponentButton",
+      "title": "Cta Brand Panel With Overlapping Image Component Button",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "URL",
+            "@mapping": "takeshape:local:CtaBrandPanelWithOverlappingImageComponentButton.e4dTDtIky"
+          },
+          "text": {
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "Text",
+            "@mapping": "takeshape:local:CtaBrandPanelWithOverlappingImageComponentButton.bo07Fc_MI"
+          }
+        },
+        "required": [
+          "url",
+          "text"
+        ]
+      }
+    },
+    "TestimonialWithOverlappingImageComponent": {
+      "id": "EVdiz60xi",
+      "name": "TestimonialWithOverlappingImageComponent",
+      "title": "Testimonial With Overlapping Image Component",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "quote": {
+            "minLength": 1,
+            "type": "string",
+            "@tag": "mdx",
+            "description": "",
+            "title": "Quote",
+            "@mapping": "takeshape:local:TestimonialWithOverlappingImageComponent.yOuWAseSz"
+          },
+          "source": {
+            "minLength": 0,
+            "type": "string",
+            "description": "",
+            "title": "Source",
+            "@mapping": "takeshape:local:TestimonialWithOverlappingImageComponent.R6l6gB8SG"
+          },
+          "image": {
+            "description": "",
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "takeshape:getRelated",
+              "service": "takeshape:local",
+              "options": {
+                "nullable": true
+              }
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "title": "Image",
+            "@mapping": "takeshape:local:TestimonialWithOverlappingImageComponent.64HJKD835"
+          }
+        },
+        "required": [
+          "quote",
+          "image"
+        ]
+      }
+    },
+    "FaqTwoColumnsWithImageComponentFaQs": {
+      "id": "ovVjY_jJt",
+      "name": "FaqTwoColumnsWithImageComponentFaQs",
+      "title": "Faq Two Columns with Image Component FaQs",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "question": {
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "Question",
+            "@mapping": "takeshape:local:FaqTwoColumnsWithImageComponentFaQs.PFw8bC6a1"
+          },
+          "answer": {
+            "type": "object",
+            "@tag": "draftjs",
+            "description": "",
+            "title": "Answer",
+            "@mapping": "takeshape:local:FaqTwoColumnsWithImageComponentFaQs.aBUsBfqEw"
+          }
+        },
+        "required": [
+          "question",
+          "answer"
+        ]
+      }
+    },
+    "FaqTwoColumnsWithImageComponent": {
+      "id": "JuVx9MyCf",
+      "name": "FaqTwoColumnsWithImageComponent",
+      "title": "Faq Two Columns with Image Component",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "heading": {
+            "minLength": 0,
+            "type": "string",
+            "description": "",
+            "title": "Heading",
+            "@mapping": "takeshape:local:FaqTwoColumnsWithImageComponent.RpZbp0kSA"
+          },
+          "subheading": {
+            "type": "object",
+            "@tag": "draftjs",
+            "description": "",
+            "title": "Subheading",
+            "@mapping": "takeshape:local:FaqTwoColumnsWithImageComponent.O_y5X3qv-"
+          },
+          "faQs": {
+            "title": "FAQs",
+            "description": "",
+            "items": {
+              "@ref": "local:FaqTwoColumnsWithImageComponentFaQs"
+            },
+            "type": "array",
+            "@mapping": "takeshape:local:FaqTwoColumnsWithImageComponent.ovVjY_jJt"
+          },
+          "image": {
+            "description": "",
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "takeshape:getRelated",
+              "service": "takeshape:local",
+              "options": {
+                "nullable": true
+              }
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "title": "Image",
+            "@mapping": "takeshape:local:FaqTwoColumnsWithImageComponent.jyJTGnHcr"
+          },
+          "button": {
+            "title": "Button",
+            "description": "",
+            "@ref": "local:FaqTwoColumnsWithImageComponentButton",
+            "@mapping": "takeshape:local:FaqTwoColumnsWithImageComponent.EY3L1bpsl"
+          }
+        },
+        "required": [
+          "image"
+        ]
+      }
+    },
+    "FaqTwoColumnsWithImageComponentButton": {
+      "id": "EY3L1bpsl",
+      "name": "FaqTwoColumnsWithImageComponentButton",
+      "title": "Faq Two Columns with Image Component Button",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "URL",
+            "@mapping": "takeshape:local:FaqTwoColumnsWithImageComponentButton.2E9e_V8mY"
+          },
+          "text": {
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "Text",
+            "@mapping": "takeshape:local:FaqTwoColumnsWithImageComponentButton.snXJDmy3I"
+          }
+        },
+        "required": [
+          "url",
+          "text"
+        ]
+      }
+    },
+    "FeaturesAlternativeSideBySideWithImagesComponentRepeaterButton": {
+      "id": "wWbKGvpGc",
+      "name": "FeaturesAlternativeSideBySideWithImagesComponentRepeaterButton",
+      "title": "Features Alternative Side-by-side With Images Component Repeater Button",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "URL",
+            "@mapping": "takeshape:local:FeaturesAlternativeSideBySideWithImagesComponentRepeaterButton.QLaJxSf_t"
+          },
+          "text": {
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "Text",
+            "@mapping": "takeshape:local:FeaturesAlternativeSideBySideWithImagesComponentRepeaterButton.7lqIDZT1p"
+          }
+        },
+        "required": [
+          "url",
+          "text"
+        ]
+      }
+    },
+    "FeaturesAlternativeSideBySideWithImagesComponentRepeater": {
+      "id": "DjVVuO4BJ",
+      "name": "FeaturesAlternativeSideBySideWithImagesComponentRepeater",
+      "title": "Features Alternative Side-by-side With Images Component Repeater",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "Title",
+            "@mapping": "takeshape:local:FeaturesAlternativeSideBySideWithImagesComponentRepeater.uP3MwiuRE"
+          },
+          "text": {
+            "type": "string",
+            "@tag": "mdx",
+            "description": "",
+            "title": "Text",
+            "@mapping": "takeshape:local:FeaturesAlternativeSideBySideWithImagesComponentRepeater.-0OCOSqr9"
+          },
+          "button": {
+            "title": "Button",
+            "description": "",
+            "@ref": "local:FeaturesAlternativeSideBySideWithImagesComponentRepeaterButton",
+            "@mapping": "takeshape:local:FeaturesAlternativeSideBySideWithImagesComponentRepeater.wWbKGvpGc"
+          },
+          "image": {
+            "description": "",
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "takeshape:getRelated",
+              "service": "takeshape:local",
+              "options": {
+                "nullable": true
+              }
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "title": "Image",
+            "@mapping": "takeshape:local:FeaturesAlternativeSideBySideWithImagesComponentRepeater.M5U0EpjJv"
+          }
+        },
+        "required": [
+          "title",
+          "image"
+        ]
+      }
+    },
+    "FeaturesAlternativeSideBySideWithImagesComponent": {
+      "id": "g7boMIc9c",
+      "name": "FeaturesAlternativeSideBySideWithImagesComponent",
+      "title": "Features Alternative Side-by-side With Images Component",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "heading": {
+            "minLength": 0,
+            "type": "string",
+            "description": "",
+            "title": "Heading",
+            "@mapping": "takeshape:local:FeaturesAlternativeSideBySideWithImagesComponent.NFebWBFlO"
+          },
+          "subheading": {
+            "type": "object",
+            "@tag": "draftjs",
+            "description": "",
+            "title": "Subheading",
+            "@mapping": "takeshape:local:FeaturesAlternativeSideBySideWithImagesComponent.cqWPTeQld"
+          },
+          "repeater": {
+            "title": "Repeater",
+            "description": "",
+            "items": {
+              "@ref": "local:FeaturesAlternativeSideBySideWithImagesComponentRepeater"
+            },
+            "type": "array",
+            "@mapping": "takeshape:local:FeaturesAlternativeSideBySideWithImagesComponent.DjVVuO4BJ"
+          }
+        }
+      }
+    },
+    "NewsletterCenteredCardWithGraphicComponent": {
+      "id": "sp4oxwpMD",
+      "name": "NewsletterCenteredCardWithGraphicComponent",
+      "title": "Newsletter Centered Card With Graphic Component",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "preHeading": {
+            "minLength": 0,
+            "type": "string",
+            "description": "",
+            "title": "Pre Heading",
+            "@mapping": "takeshape:local:NewsletterCenteredCardWithGraphicComponent.1okYgni7A"
+          },
+          "heading": {
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "Heading",
+            "@mapping": "takeshape:local:NewsletterCenteredCardWithGraphicComponent.-jnKeFN8j"
+          },
+          "description": {
+            "type": "object",
+            "@tag": "draftjs",
+            "description": "",
+            "title": "Description",
+            "@mapping": "takeshape:local:NewsletterCenteredCardWithGraphicComponent.lrUcU6QXi"
+          }
+        }
+      }
+    },
+    "PageSeo": {
+      "id": "nytl5yojX",
+      "name": "PageSeo",
+      "title": "Page Seo",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "metaTitle": {
+            "minLength": 0,
+            "type": "string",
+            "description": "",
+            "title": "Meta Title",
+            "@mapping": "takeshape:local:PageSeo.1GJQ7WQx0"
+          },
+          "metaDescription": {
+            "minLength": 0,
+            "type": "string",
+            "description": "",
+            "title": "Meta Description",
+            "@mapping": "takeshape:local:PageSeo.Ktt5-Oxpx"
+          }
+        }
+      }
+    },
+    "FeaturesFullWidthWithVerticalImagesComponentRepeaterButton": {
+      "id": "Fp04HxO5J",
+      "name": "FeaturesFullWidthWithVerticalImagesComponentRepeaterButton",
+      "title": "Features Full Width With Vertical Images Component Repeater Button",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "URL",
+            "@mapping": "takeshape:local:FeaturesFullWidthWithVerticalImagesComponentRepeaterButton.8_un7C9XW"
+          },
+          "text": {
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "Text",
+            "@mapping": "takeshape:local:FeaturesFullWidthWithVerticalImagesComponentRepeaterButton.xtvZqAcSr"
+          }
+        },
+        "required": [
+          "url",
+          "text"
+        ]
+      }
+    },
+    "FeaturesFullWidthWithVerticalImagesComponentRepeater": {
+      "id": "RxKi1mhf5",
+      "name": "FeaturesFullWidthWithVerticalImagesComponentRepeater",
+      "title": "Features Full Width With Vertical Images Component Repeater",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "Title",
+            "@mapping": "takeshape:local:FeaturesFullWidthWithVerticalImagesComponentRepeater.A5ynxq37v"
+          },
+          "description": {
+            "minLength": 0,
+            "type": "string",
+            "description": "",
+            "title": "Description",
+            "@mapping": "takeshape:local:FeaturesFullWidthWithVerticalImagesComponentRepeater.p9V8EpNXg"
+          },
+          "button": {
+            "title": "Button",
+            "description": "",
+            "@ref": "local:FeaturesFullWidthWithVerticalImagesComponentRepeaterButton",
+            "@mapping": "takeshape:local:FeaturesFullWidthWithVerticalImagesComponentRepeater.Fp04HxO5J"
+          },
+          "image": {
+            "description": "",
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "takeshape:getRelated",
+              "service": "takeshape:local",
+              "options": {
+                "nullable": true
+              }
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "title": "Image",
+            "@mapping": "takeshape:local:FeaturesFullWidthWithVerticalImagesComponentRepeater.eEjOTRWeb"
+          }
+        },
+        "required": [
+          "title",
+          "image"
+        ]
+      }
+    },
+    "FeaturesFullWidthWithVerticalImagesComponent": {
+      "id": "CY7vjqKC6",
+      "name": "FeaturesFullWidthWithVerticalImagesComponent",
+      "title": "Features Full Width With Vertical Images Component",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "heading": {
+            "minLength": 0,
+            "type": "string",
+            "description": "",
+            "title": "Heading",
+            "@mapping": "takeshape:local:FeaturesFullWidthWithVerticalImagesComponent.DQUvkynsu"
+          },
+          "description": {
+            "type": "object",
+            "@tag": "draftjs",
+            "description": "",
+            "title": "Description",
+            "@mapping": "takeshape:local:FeaturesFullWidthWithVerticalImagesComponent.VsaZW3Vq6"
+          },
+          "repeater": {
+            "title": "Repeater",
+            "description": "",
+            "items": {
+              "@ref": "local:FeaturesFullWidthWithVerticalImagesComponentRepeater"
+            },
+            "type": "array",
+            "@mapping": "takeshape:local:FeaturesFullWidthWithVerticalImagesComponent.RxKi1mhf5"
+          }
+        }
+      }
+    },
+    "HeroSectionMediumWithIllustrationComponentButton": {
+      "id": "HfFEKI1fy",
+      "name": "HeroSectionMediumWithIllustrationComponentButton",
+      "title": "Hero Section Medium With Illustration Component Button",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "URL",
+            "@mapping": "takeshape:local:HeroSectionMediumWithIllustrationComponentButton.ocZ8tmQMw"
+          },
+          "text": {
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "Text",
+            "@mapping": "takeshape:local:HeroSectionMediumWithIllustrationComponentButton.dQiBhOJ1x"
+          }
+        },
+        "required": [
+          "url",
+          "text"
+        ]
+      }
+    },
+    "HeroSectionMediumWithIllustrationComponent": {
+      "id": "ZBGrAN08h",
+      "name": "HeroSectionMediumWithIllustrationComponent",
+      "title": "Hero Section Medium With Illustration Component",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "heading": {
+            "minLength": 0,
+            "type": "string",
+            "description": "",
+            "title": "Heading",
+            "@mapping": "takeshape:local:HeroSectionMediumWithIllustrationComponent.dXzmISjuu"
+          },
+          "description": {
+            "type": "object",
+            "@tag": "draftjs",
+            "description": "",
+            "title": "Description",
+            "@mapping": "takeshape:local:HeroSectionMediumWithIllustrationComponent.lcSPSMl4L"
+          },
+          "button": {
+            "title": "Button",
+            "description": "",
+            "@ref": "local:HeroSectionMediumWithIllustrationComponentButton",
+            "@mapping": "takeshape:local:HeroSectionMediumWithIllustrationComponent.HfFEKI1fy"
+          },
+          "image": {
+            "description": "",
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "takeshape:getRelated",
+              "service": "takeshape:local",
+              "options": {
+                "nullable": true
+              }
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "title": "Image",
+            "@mapping": "takeshape:local:HeroSectionMediumWithIllustrationComponent.vF9wBCeCt"
+          }
+        },
+        "required": [
+          "image"
+        ]
+      }
+    },
+    "BlogPageSeo": {
+      "id": "lNOltdIda",
+      "name": "BlogPageSeo",
+      "title": "Blog Page Seo",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "metaTitle": {
+            "type": "string",
+            "minLength": 0,
+            "description": "",
+            "title": "Meta Title",
+            "@mapping": "takeshape:local:BlogPageSeo.9pmkq4yRN"
+          },
+          "metaDescription": {
+            "type": "string",
+            "minLength": 0,
+            "description": "",
+            "title": "Meta Description",
+            "@mapping": "takeshape:local:BlogPageSeo.BZAZnIu83"
+          }
+        }
+      }
+    },
+    "BlogPage": {
+      "id": "sQfrSm1UY",
+      "name": "BlogPage",
+      "title": "Blog Page",
+      "workflow": "default",
+      "model": {
+        "type": "single"
+      },
+      "schema": {
+        "type": "object",
+        "properties": {
+          "seo": {
+            "title": "SEO",
+            "description": "",
+            "@ref": "local:BlogPageSeo",
+            "@mapping": "takeshape:local:BlogPage.lNOltdIda"
+          },
+          "components": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "@ref": "local:HeroSectionMediumWithIllustrationComponent"
+                }
+              ]
+            },
+            "description": "",
+            "title": "Components",
+            "@mapping": "takeshape:local:BlogPage.Yj-dRVvUg"
+          }
+        }
+      }
+    },
+    "BlogPostSeo": {
+      "id": "1huMsm9aA",
+      "name": "BlogPostSeo",
+      "title": "Blog Post Seo",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "metaTitle": {
+            "minLength": 0,
+            "type": "string",
+            "description": "",
+            "title": "Meta Title",
+            "@mapping": "takeshape:local:BlogPostSeo.JUUF54AMr"
+          },
+          "metaDescription": {
+            "minLength": 0,
+            "type": "string",
+            "description": "",
+            "title": "Meta Description",
+            "@mapping": "takeshape:local:BlogPostSeo.VouapWq3A"
+          }
+        }
+      }
+    },
+    "BlogPost": {
+      "id": "VaN3nhADH",
+      "name": "BlogPost",
+      "title": "Blog Post",
+      "workflow": "default",
+      "model": {
+        "type": "multiple"
+      },
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "Title",
+            "@mapping": "takeshape:local:BlogPost.idKV1IJ_f"
+          },
+          "slug": {
+            "@derivedFrom": "title",
+            "pattern": "^[\\w-]*$",
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "Slug",
+            "@mapping": "takeshape:local:BlogPost.3Wtwx-bXb"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "@l10n": false,
+            "description": "",
+            "title": "Date",
+            "@mapping": "takeshape:local:BlogPost.FSKVtWgQh"
+          },
+          "seo": {
+            "title": "SEO",
+            "description": "",
+            "@ref": "local:BlogPostSeo",
+            "@mapping": "takeshape:local:BlogPost.1huMsm9aA"
+          },
+          "content": {
+            "type": "string",
+            "@tag": "mdx",
+            "description": "",
+            "title": "Content",
+            "@mapping": "takeshape:local:BlogPost.B1UrOhCRW"
+          }
+        },
+        "required": [
+          "title",
+          "slug"
+        ]
+      }
+    },
+    "GlobalSettingsHeaderNavigationLinks": {
+      "id": "w2z7UESJ9",
+      "name": "GlobalSettingsHeaderNavigationLinks",
+      "title": "Global Settings Header Navigation Links",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "Name",
+            "@mapping": "takeshape:local:GlobalSettingsHeaderNavigationLinks.cGYMXf0Mv"
+          },
+          "url": {
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "URL",
+            "@mapping": "takeshape:local:GlobalSettingsHeaderNavigationLinks.oreYk_GYA"
+          }
+        },
+        "required": [
+          "name",
+          "url"
+        ]
+      }
+    },
+    "GlobalSettingsHeaderNavigation": {
+      "id": "fH_MJ0naw",
+      "name": "GlobalSettingsHeaderNavigation",
+      "title": "Global Settings Header Navigation",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "links": {
+            "title": "Links",
+            "description": "",
+            "items": {
+              "@ref": "local:GlobalSettingsHeaderNavigationLinks"
+            },
+            "type": "array",
+            "@mapping": "takeshape:local:GlobalSettingsHeaderNavigation.w2z7UESJ9"
+          }
+        }
+      }
+    },
+    "GlobalSettingsHeader": {
+      "id": "85RA1oGcB",
+      "name": "GlobalSettingsHeader",
+      "title": "Global Settings Header",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "navigation": {
+            "title": "Navigation",
+            "description": "",
+            "@ref": "local:GlobalSettingsHeaderNavigation",
+            "@mapping": "takeshape:local:GlobalSettingsHeader.fH_MJ0naw"
+          }
+        }
+      }
+    },
+    "GlobalSettingsFooterNavigationSectionsLinks": {
+      "id": "liJgMZjNd",
+      "name": "GlobalSettingsFooterNavigationSectionsLinks",
+      "title": "Global Settings Footer Navigation Sections Links",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "Name",
+            "@mapping": "takeshape:local:GlobalSettingsFooterNavigationSectionsLinks.o-4OFUS5J"
+          },
+          "url": {
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "URL",
+            "@mapping": "takeshape:local:GlobalSettingsFooterNavigationSectionsLinks.b9aiM1OhI"
+          }
+        },
+        "required": [
+          "name",
+          "url"
+        ]
+      }
+    },
+    "GlobalSettingsFooterNavigationSections": {
+      "id": "fGXdJIAMv",
+      "name": "GlobalSettingsFooterNavigationSections",
+      "title": "Global Settings Footer Navigation Sections",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "Title",
+            "@mapping": "takeshape:local:GlobalSettingsFooterNavigationSections.eeEkizLSM"
+          },
+          "links": {
+            "title": "Links",
+            "description": "",
+            "items": {
+              "@ref": "local:GlobalSettingsFooterNavigationSectionsLinks"
+            },
+            "type": "array",
+            "@mapping": "takeshape:local:GlobalSettingsFooterNavigationSections.liJgMZjNd"
+          }
+        },
+        "required": [
+          "title"
+        ]
+      }
+    },
+    "GlobalSettingsFooterNavigation": {
+      "id": "BVejkzfQu",
+      "name": "GlobalSettingsFooterNavigation",
+      "title": "Global Settings Footer Navigation",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "sections": {
+            "title": "Sections",
+            "description": "",
+            "items": {
+              "@ref": "local:GlobalSettingsFooterNavigationSections"
+            },
+            "maxItems": 2,
+            "type": "array",
+            "@mapping": "takeshape:local:GlobalSettingsFooterNavigation.fGXdJIAMv"
+          }
+        }
+      }
+    },
+    "GlobalSettingsFooter": {
+      "id": "jXrAa-iFi",
+      "name": "GlobalSettingsFooter",
+      "title": "Global Settings Footer",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "title": "Info",
+            "description": "",
+            "@ref": "local:GlobalSettingsFooterInfo",
+            "@mapping": "takeshape:local:GlobalSettingsFooter.e-TPyEX3x"
+          },
+          "navigation": {
+            "title": "Navigation",
+            "description": "",
+            "@ref": "local:GlobalSettingsFooterNavigation",
+            "@mapping": "takeshape:local:GlobalSettingsFooter.BVejkzfQu"
+          }
+        }
+      }
+    },
+    "GlobalSettings": {
+      "id": "k8CufJ-ZM",
+      "name": "GlobalSettings",
+      "title": "Global Settings",
+      "workflow": "default",
+      "model": {
+        "type": "single"
+      },
+      "schema": {
+        "type": "object",
+        "properties": {
+          "header": {
+            "title": "Header",
+            "description": "",
+            "@ref": "local:GlobalSettingsHeader",
+            "@mapping": "takeshape:local:GlobalSettings.85RA1oGcB"
+          },
+          "footer": {
+            "title": "Footer",
+            "description": "",
+            "@ref": "local:GlobalSettingsFooter",
+            "@mapping": "takeshape:local:GlobalSettings.jXrAa-iFi"
+          }
+        }
+      }
+    },
+    "ProductAdditionalDetailsListInterface": {
+      "id": "ProductAdditionalDetailsListInterface",
+      "name": "ProductAdditionalDetailsListInterface",
+      "title": "ProductAdditionalDetailsListInterface",
+      "description": "ProductAdditionalDetailsListInterface",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "_version": {
+            "type": "number"
+          },
+          "_status": {
+            "type": "string",
+            "@workflow": "default"
+          },
+          "item": {
+            "minLength": 1,
+            "type": "string",
+            "title": "Item"
+          }
+        },
+        "required": [
+          "item"
+        ]
+      }
+    },
+    "ProductAdditionalDetailsList": {
+      "id": "GG0dmS2Cp",
+      "name": "ProductAdditionalDetailsList",
+      "title": "Product AdditionalDetails List",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "item": {
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "Item",
+            "@mapping": "takeshape:local:ProductAdditionalDetailsList.-x_Kag7ar"
+          }
+        },
+        "required": [
+          "item"
+        ]
+      }
+    },
+    "ProductAdditionalDetailsInterface": {
+      "id": "ProductAdditionalDetailsInterface",
+      "name": "ProductAdditionalDetailsInterface",
+      "title": "ProductAdditionalDetailsInterface",
+      "description": "ProductAdditionalDetailsInterface",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "_version": {
+            "type": "number"
+          },
+          "_status": {
+            "type": "string",
+            "@workflow": "default"
+          },
+          "name": {
+            "minLength": 1,
+            "type": "string",
+            "title": "Name"
+          },
+          "list": {
+            "title": "List",
+            "items": {
+              "@ref": "local:ProductAdditionalDetailsListInterface"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      }
+    },
+    "ProductAdditionalDetails": {
+      "id": "K05wP-xkq",
+      "name": "ProductAdditionalDetails",
+      "title": "Product AdditionalDetails",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "Name",
+            "@mapping": "takeshape:local:ProductAdditionalDetails.sNpUcIhEi"
+          },
+          "list": {
+            "title": "List",
+            "description": "",
+            "items": {
+              "@ref": "local:ProductAdditionalDetailsList"
+            },
+            "type": "array",
+            "@mapping": "takeshape:local:ProductAdditionalDetails.GG0dmS2Cp"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      }
+    },
+    "FaqOneColumnComponentFaQs": {
+      "id": "kEgLdMv9y",
+      "name": "FaqOneColumnComponentFaQs",
+      "title": "Faq One Column Component FaQs",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "question": {
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "Question",
+            "@mapping": "takeshape:local:FaqOneColumnComponentFaQs.OtNf9jexm"
+          },
+          "answer": {
+            "type": "object",
+            "@tag": "draftjs",
+            "description": "",
+            "title": "Answer",
+            "@mapping": "takeshape:local:FaqOneColumnComponentFaQs.v7KjohB1U"
+          }
+        },
+        "required": [
+          "question",
+          "answer"
+        ]
+      }
+    },
+    "FaqOneColumnComponent": {
+      "id": "PUGYU7N-6",
+      "name": "FaqOneColumnComponent",
+      "title": "Faq One Column Component",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "heading": {
+            "minLength": 0,
+            "type": "string",
+            "description": "",
+            "title": "Heading",
+            "@mapping": "takeshape:local:FaqOneColumnComponent.XHGE_NZ_Q"
+          },
+          "subheading": {
+            "type": "object",
+            "@tag": "draftjs",
+            "description": "",
+            "title": "Subheading",
+            "@mapping": "takeshape:local:FaqOneColumnComponent.nc_IvoUvt"
+          },
+          "faQs": {
+            "title": "FAQs",
+            "description": "",
+            "items": {
+              "@ref": "local:FaqOneColumnComponentFaQs"
+            },
+            "type": "array",
+            "@mapping": "takeshape:local:FaqOneColumnComponent.kEgLdMv9y"
+          }
+        }
+      }
+    },
+    "GlobalSettingsFooterInfo": {
+      "id": "e-TPyEX3x",
+      "name": "GlobalSettingsFooterInfo",
+      "title": "Global Settings Footer Info",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "heading": {
+            "type": "string",
+            "minLength": 0,
+            "description": "",
+            "title": "Heading",
+            "@mapping": "takeshape:local:GlobalSettingsFooterInfo.PQ8Vri8wj"
+          },
+          "description": {
+            "type": "object",
+            "@tag": "draftjs",
+            "description": "",
+            "title": "Description",
+            "@mapping": "takeshape:local:GlobalSettingsFooterInfo.vTGn5N9nj"
+          }
+        }
+      }
+    },
+    "PolicySeo": {
+      "id": "8jPo3mgmf",
+      "name": "PolicySeo",
+      "title": "Policy Seo",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "metaTitle": {
+            "type": "string",
+            "minLength": 0,
+            "description": "",
+            "title": "Meta Title",
+            "@mapping": "takeshape:local:PolicySeo.zr8wnrL0s"
+          },
+          "metaDescription": {
+            "type": "string",
+            "minLength": 0,
+            "description": "",
+            "title": "Meta Description",
+            "@mapping": "takeshape:local:PolicySeo.2PxWBydSf"
+          }
+        }
+      }
+    },
+    "Policy": {
+      "id": "QYKDH_HhW",
+      "name": "Policy",
+      "title": "Policy",
+      "workflow": "default",
+      "model": {
+        "type": "multiple"
+      },
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "description": "",
+            "title": "Title",
+            "@mapping": "takeshape:local:Policy.4Rwr0c57E"
+          },
+          "slug": {
+            "@derivedFrom": "title",
+            "pattern": "^[\\w-]*$",
+            "minLength": 1,
+            "type": "string",
+            "description": "",
+            "title": "Slug",
+            "@mapping": "takeshape:local:Policy.o-uzkYMTA"
+          },
+          "seo": {
+            "title": "SEO",
+            "description": "",
+            "@ref": "local:PolicySeo",
+            "@mapping": "takeshape:local:Policy.8jPo3mgmf"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "@ref": "local:PageSectionTitle"
+                },
+                {
+                  "@ref": "local:PageSectionMdx"
+                }
+              ]
+            },
+            "description": "",
+            "title": "Sections",
+            "@mapping": "takeshape:local:Policy.vombujmOj"
+          }
+        },
+        "required": [
+          "title",
+          "slug"
+        ]
+      }
+    },
+    "TrustpilotProductReviews": {
+      "id": "TrustpilotProductReviews",
+      "name": "TrustpilotProductReviews",
+      "title": "Trustpilot Product Reviews",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "productReviews": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "createdAt": {
+                  "type": "string"
+                },
+                "stars": {
+                  "type": "integer"
+                },
+                "content": {
+                  "type": "string"
+                },
+                "consumer": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "displayName": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "language": {
+                  "type": "string"
+                },
+                "attributeRatings": {
+                  "type": "array",
+                  "items": {
+                    "@ref": "local:TrustpilotAttributeRating"
+                  }
+                },
+                "attachments": {
+                  "type": "array",
+                  "items": {
+                    "@ref": "local:TrustpilotAttachment"
+                  }
+                }
+              }
+            }
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "@ref": "local:TrustpilotLink"
+            }
+          }
+        }
+      }
+    },
+    "TrustpilotAttributeRating": {
+      "id": "TrustpilotAttributeRating",
+      "name": "TrustpilotAttributeRating",
+      "title": "Trustpilot Attribute Rating",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "attributeId": {
+            "type": "string"
+          },
+          "attributeName": {
+            "type": "string"
+          },
+          "rating": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "TrustpilotAttachment": {
+      "id": "TrustpilotAttachment",
+      "name": "TrustpilotAttachment",
+      "title": "Trustpilot Attachment",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "processedFiles": {
+            "type": "array",
+            "items": {
+              "@ref": "local:TrustpilotAttachmentProcessedFiles"
+            }
+          }
+        }
+      }
+    },
+    "TrustpilotAttachmentProcessedFiles": {
+      "id": "TrustpilotAttachmentProcessedFiles",
+      "name": "TrustpilotAttachmentProcessedFiles",
+      "title": "Trustpilot Attachment Processed FIles",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "dimension": {
+            "type": "string"
+          },
+          "mimeType": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TrustpilotLink": {
+      "id": "TrustpilotLink",
+      "name": "TrustpilotLink",
+      "title": "Trustpilot Link",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string"
+          },
+          "method": {
+            "type": "string"
+          },
+          "rel": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TrustpilotProductReviewsSummary": {
+      "id": "TrustpilotProductReviewsSummary",
+      "name": "TrustpilotProductReviewsSummary",
+      "title": "Trustpilot Product Reviews Summary",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "starsAverage": {
+            "type": "number"
+          },
+          "numberOfReviews": {
+            "type": "object",
+            "properties": {
+              "total": {
+                "type": "integer"
+              },
+              "oneStar": {
+                "type": "integer"
+              },
+              "twoStar": {
+                "type": "integer"
+              },
+              "threeStar": {
+                "type": "integer"
+              },
+              "fourStars": {
+                "type": "integer"
+              },
+              "fiveStars": {
+                "type": "integer"
+              }
+            }
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "@ref": "local:TrustpilotLink"
+            }
+          }
+        }
+      }
     }
   },
-  "schemaVersion": "3.18.0"
+  "schemaVersion": "3.18.2"
 }

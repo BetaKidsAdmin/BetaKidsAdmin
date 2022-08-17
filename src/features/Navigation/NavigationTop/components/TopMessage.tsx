@@ -1,9 +1,9 @@
-import { HeaderNavigation } from '../../types';
+import { Navigation } from '../../types';
 
-export const TopMessage = ({ message }: Pick<HeaderNavigation, 'message'>) => {
+export const TopMessage = ({ message }: Pick<Navigation, 'message'>) => {
   return (
     <p
-      className="flex-1 text-center text-sm font-medium text-white lg:flex-none"
+      className="flex-1 text-center text-sm font-medium text-inverted lg:flex-none"
       dangerouslySetInnerHTML={{ __html: message }}
     ></p>
   );

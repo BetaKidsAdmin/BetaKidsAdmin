@@ -1,6 +1,5 @@
 import createBundleAnalyzer from '@next/bundle-analyzer';
 import { withSentryConfig } from '@sentry/nextjs';
-import withPlugins from 'next-compose-plugins';
 import withPwa from 'next-pwa';
 
 const SENTRY_DSN = process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN;
@@ -62,7 +61,7 @@ const securityHeaders = [
   }
 ];
 
-const config = {
+const nextConfig = {
   async headers() {
     return [
       {
@@ -132,6 +131,10 @@ const config = {
         },
         {
           protocol: 'https',
+          hostname: 'tailwindui.com'
+        },
+        {
+          protocol: 'https',
           hostname: '**.shopify.com'
         },
         {
@@ -156,19 +159,24 @@ const config = {
     // Warning: This allows production builds to successfully complete even if
     // your project has ESLint errors.
     ignoreDuringBuilds: true
+  },
+  pwa: {
+    dest: 'public',
+    disable: process.env.NODE_ENV === 'development'
   }
 };
+
+const withPlugins = (plugins, config) => () =>
+  plugins.reduce((acc, plugin) => plugin(acc), {
+    ...config
+  });
 
 export default withPlugins(
   [
     withBundleAnalyzer,
-    withPwa({
-      pwa: {
-        dest: 'public',
-        disable: process.env.NODE_ENV === 'development'
-      }
-    }),
-    SENTRY_DSN ? (config) => withSentryConfig(config, { silent: true }) : {}
+    withPwa,
+    (config) =>
+      SENTRY_DSN ? withSentryConfig({ ...config, sentry: { hideSourceMaps: true } }, { silent: true }) : config
   ],
-  config
+  nextConfig
 );
