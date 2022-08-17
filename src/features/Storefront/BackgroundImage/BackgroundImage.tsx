@@ -16,11 +16,13 @@ export const BackgroundImage = ({ image, children }: PropsWithChildren<Backgroun
               src={getImageUrl(image)}
               alt={image.description ?? ''}
               className="w-full h-full object-center object-cover"
+              height={1000}
+              width={1000}
             />
           </div>
         </div>
-        <div className="absolute inset-0 bg-white bg-opacity-75" />
-        <div className="absolute inset-0 bg-gradient-to-t from-white via-white" />
+        <div className="absolute inset-0 bg-background bg-opacity-75" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background" />
       </div>
       {children}
     </div>

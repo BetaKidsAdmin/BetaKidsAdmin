@@ -1,12 +1,15 @@
-# TakeShape Deluxe ™️ Ecommerce Sample Project
+# Penny
+
+![penny-logo](https://user-images.githubusercontent.com/277401/184440759-05acd25e-6adc-453e-b5a2-ccb6811549e0.png)
+
+An e-commerce starter kit by TakeShape.
 
 The easiest way to know if a tool is right for you is to see it in action. Check out the store now at
-https://deluxe-sample-project.vercel.app/.
+https://penny-ecommerce.vercel.app/.
 
-You can clone this repo with git to run the Next.js frontend locally
-(`git clone https://github.com/takeshape/takeshape-deluxe-sample-project`). To connect it to a GraphQL backend that
-TakeShape provides, just deploy the pattern in the `.takeshape/pattern` directory.
-[The instructions section of this README will teach you how to do that](#instructions).
+You can clone this repo with git to run the Next.js frontend locally (`git clone https://github.com/takeshape/penny`).
+To connect it to a GraphQL backend that TakeShape provides, just deploy the pattern in the `.takeshape/pattern`
+directory. [The instructions section of this README will teach you how to do that](#instructions).
 
 <!-- prettier-ignore-start -->
 <!-- LIGHTHOUSE:BEGIN -->
@@ -14,16 +17,22 @@ TakeShape provides, just deploy the pattern in the `.takeshape/pattern` director
 
 | Category | Score |
 | -------- | ----- |
-| [Path: /](https://beta-kids-admin-2izxl0z6u-admin-betakidscom.vercel.app/) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1660657538707-52383.report.html) |
+| [Path: /](https://penny-erzh4fmrz-takeshape.vercel.app/) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1660337616172-71912.report.html) |
 | 🟢 Performance | 100 |
 | 🟢 Accessibility | 100 |
-| 🟠 Best practices | 83 |
+| 🟢 Best practices | 100 |
 | 🟢 SEO | 100 |
 | 🟢 PWA | 100 |
-| [Path: /products/__lighthouse](https://beta-kids-admin-2izxl0z6u-admin-betakidscom.vercel.app/products/__lighthouse) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1660657539213-25817.report.html) |
+| [Path: /product/__lighthouse](https://penny-erzh4fmrz-takeshape.vercel.app/product/__lighthouse) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1660337616592-13948.report.html) |
 | 🟢 Performance | 100 |
 | 🟢 Accessibility | 100 |
-| 🟠 Best practices | 83 |
+| 🟢 Best practices | 100 |
+| 🟢 SEO | 100 |
+| 🟢 PWA | 100 |
+| [Path: /collection/__lighthouse](https://penny-erzh4fmrz-takeshape.vercel.app/collection/__lighthouse) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1660337617043-58241.report.html) |
+| 🟢 Performance | 100 |
+| 🟢 Accessibility | 100 |
+| 🟢 Best practices | 92 |
 | 🟢 SEO | 100 |
 | 🟢 PWA | 100 |
 
@@ -104,6 +113,14 @@ to keep error-free and performant.
 
 - [Lighthouse](https://web.dev/lighthouse-seo/) for SEO and browser performance metrics
 
+**IMPORTANT**
+
+If you have branch protections in place on your `main` branch you will need to include a repo secret
+`PROTECTED_PUSH_TOKEN` that is a personal access token with the `repo` scopes and which is an admin on the project repo.
+
+If you are not using branch protection rules you can replace `${{ secrets.PROTECTED_PUSH_TOKEN }}` with
+`${{ secrest.GITHUB_TOKEN }}` in the `lighthouse.yml` workflow file.
+
 #### Snapshots
 
 - [Chromatic](https://www.chromatic.com/) hosts Storybook stories and provides visual snapshot comparisons
@@ -134,7 +151,7 @@ Here are the steps for getting started with this project:
 
 1. Create a TakeShape project using the pattern in this repo. This button will deploy the project for you:
 
-<a href="https://app.takeshape.io/add-to-takeshape?repo=https://github.com/takeshape/takeshape-deluxe-sample-project/tree/main/.takeshape/pattern"><img alt="Deploy To TakeShape" src="https://camo.githubusercontent.com/1b580e3ce353d235bde0f376ca35b0fb26d685f3750a3013ae4b225dd3aaf344/68747470733a2f2f696d616765732e74616b6573686170652e696f2f32636363633832352d373062652d343331632d396261302d3130616233386563643361372f6465762f38653266376264612d306530382d346564652d613534362d3664663539626536613862622f4465706c6f79253230746f25323054616b65536861706525343032782e706e673f6175746f3d666f726d6174253243636f6d7072657373" width="205" height="38" data-canonical-src="https://images.takeshape.io/2cccc825-70be-431c-9ba0-10ab38ecd3a7/dev/8e2f7bda-0e08-4ede-a546-6df59be6a8bb/Deploy%20to%20TakeShape%402x.png?auto=format%2Ccompress" style="max-width:100%;"></a>
+<a href="https://app.takeshape.io/add-to-takeshape?repo=https://github.com/takeshape/penny/tree/main/.takeshape/pattern"><img alt="Deploy To TakeShape" src="https://camo.githubusercontent.com/1b580e3ce353d235bde0f376ca35b0fb26d685f3750a3013ae4b225dd3aaf344/68747470733a2f2f696d616765732e74616b6573686170652e696f2f32636363633832352d373062652d343331632d396261302d3130616233386563643361372f6465762f38653266376264612d306530382d346564652d613534362d3664663539626536613862622f4465706c6f79253230746f25323054616b65536861706525343032782e706e673f6175746f3d666f726d6174253243636f6d7072657373" width="205" height="38" data-canonical-src="https://images.takeshape.io/2cccc825-70be-431c-9ba0-10ab38ecd3a7/dev/8e2f7bda-0e08-4ede-a546-6df59be6a8bb/Deploy%20to%20TakeShape%402x.png?auto=format%2Ccompress" style="max-width:100%;"></a>
 
 2. Generate an `anonymous` and a `webhook` TakeShape API key. You need these two API keys, and they must have different
    permissions scopes. Here's how to create them:
@@ -166,7 +183,7 @@ Here are the steps for getting started with this project:
 4. Clone this repo:
 
 ```bash
-git clone https://github.com/takeshape/takeshape-deluxe-sample-project
+git clone https://github.com/takeshape/penny
 ```
 
 5. Navigate to the project directory in your local terminal and run the `npm install` command to install all
@@ -186,7 +203,7 @@ service provider in your TakeShape project, and configuring NextAuth with `@take
 
 1. In the **Home** tab of your TakeShape project, select **OpenID** from the list of services. You will be taken to the
    **OpenID** service configuration page.
-   ![A screenshot of the Home tab in the deluxe sample project on TakeShape](/readme-images/home-tab-open-id-readme-images.png)
+   ![A screenshot of the Home tab in the Penny on TakeShape](/readme-images/home-tab-open-id-readme-images.png)
 
 2. Add your store's URL to the **Issuer URL** field, and enter the same URL with
    `/api/auth/all-access/.well-known/openid-configuration` appended to the end of it in the **OpenID Configuration
@@ -341,8 +358,7 @@ Then select **Save** at the top right of the page.
 #### Connecting the Shopify services to TakeShape
 
 To use Shopify with this project, you'll need to connect your Shopify Admin API and Shopify Storefront API as two
-separate services. The following instructions will help you connect your Shopify APIs to the deluxe sample project
-pattern, but you can
+separate services. The following instructions will help you connect your Shopify APIs to the Penny pattern, but you can
 [connect Shopify to any TakeShape project by following the Shopify guide in our docs](https://app.takeshape.io/docs/services/providers/shopify/).
 
 ##### Connecting Shopify Admin
@@ -387,9 +403,8 @@ Now your Shopify store is configured for this project.
 
 ### REVIEWS.io
 
-The following section describes how to connect REVIEWS.io to your Deluxe Sample Project pattern in TakeShape. To learn
-how to connect REVIEWS.io to any TakeShape project,
-[check out our docs](https://app.takeshape.io/docs/services/providers/reviews-io).
+The following section describes how to connect REVIEWS.io to your Penny pattern in TakeShape. To learn how to connect
+REVIEWS.io to any TakeShape project, [check out our docs](https://app.takeshape.io/docs/services/providers/reviews-io).
 
 1. First, you'll need your Store ID and API Key from REVIEWS.io
 
@@ -414,8 +429,8 @@ Application. All you need to do is connect ShipEngine to your Shopify store in t
 
 ### Voucherify
 
-The following section describes how to connect Voucherify to your Deluxe Sample Project pattern in TakeShape. To learn
-how to connect Voucherify to any TakeShape project,
+The following section describes how to connect Voucherify to your Penny pattern in TakeShape. To learn how to connect
+Voucherify to any TakeShape project,
 [check out our REST provider docs](https://app.takeshape.io/docs/services/providers/rest). Using our generic REST
 provider, you can connect most arbitrary REST APIs, including Voucherify.
 
@@ -437,9 +452,8 @@ provider, you can connect most arbitrary REST APIs, including Voucherify.
 
 ### Klaviyo
 
-The following section describes how to connect Klaviyo to your Deluxe Sample Project pattern in TakeShape. To learn how
-to connect Klaviyo to any TakeShape project,
-[check out our docs](https://app.takeshape.io/docs/services/providers/klaviyo).
+The following section describes how to connect Klaviyo to your Penny pattern in TakeShape. To learn how to connect
+Klaviyo to any TakeShape project, [check out our docs](https://app.takeshape.io/docs/services/providers/klaviyo).
 
 1. First, get your api key for Klaviyo.
 
@@ -458,8 +472,8 @@ to connect Klaviyo to any TakeShape project,
 
 ### reCAPTCHA
 
-The following section describes how to connect reCAPTCHA to your Deluxe Sample Project pattern in TakeShape using a
-generic REST provider. To learn how to connect ReCAPTCHA to any TakeShape project,
+The following section describes how to connect reCAPTCHA to your Penny pattern in TakeShape using a generic REST
+provider. To learn how to connect ReCAPTCHA to any TakeShape project,
 [check out our docs on using a generic REST service](https://app.takeshape.io/docs/services/providers/rest).
 
 > Don't want to use captcha? Captcha can be disabled in the client by removing `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` from the
@@ -502,8 +516,8 @@ generic REST provider. To learn how to connect ReCAPTCHA to any TakeShape projec
 
 ### Gorgias
 
-The following section describes how to connect Gorgias to your Deluxe Sample Project pattern in TakeShape. To learn how
-to connect Gorgias to any TakeShape project,
+The following section describes how to connect Gorgias to your Penny pattern in TakeShape. To learn how to connect
+Gorgias to any TakeShape project,
 [check out our REST provider docs](https://app.takeshape.io/docs/services/providers/rest). Using our generic REST
 provider, you can connect most arbitrary REST APIs, including Gorgias.
 
@@ -669,3 +683,8 @@ bash scripts/ignore-build.sh
 - Captcha can be disabled in the client by removing `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` from the env. The Takeshape API
   will still require Captcha unless the Captcha compose step and `"if": "$resolvers.recaptcha.success == true"` is
   removed from the relevant mutations in the project schema.
+
+## Credits
+
+- This project uses credit card icons from
+  [svg-credit-card-payment-icons](https://github.com/aaronfagan/svg-credit-card-payment-icons/tree/main/flat-rounded)

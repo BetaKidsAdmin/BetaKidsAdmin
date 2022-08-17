@@ -1,71 +1,93 @@
 import { useApolloClient } from '@apollo/client';
-import { LogoutIcon } from '@heroicons/react/outline';
+import {
+  CreditCardIcon,
+  GiftIcon,
+  KeyIcon,
+  LogoutIcon,
+  RefreshIcon,
+  TagIcon,
+  UserCircleIcon
+} from '@heroicons/react/outline';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
-import { useCallback } from 'react';
+import { useRouter } from 'next/router';
+import { useCallback, useMemo } from 'react';
 import classNames from 'utils/classNames';
 
-export interface AccountNavigationProps {
-  items: {
-    name: string;
-    href: string;
-    current: boolean;
-    icon: (props: React.ComponentProps<'svg'>) => JSX.Element;
-  }[];
+export const accountNavigationItems = [
+  { name: 'Account', href: '/account', icon: UserCircleIcon, current: false },
+  { name: 'Password', href: '/account/password', icon: KeyIcon, current: false },
+  { name: 'Purchases', href: '/account/purchases', icon: TagIcon, current: false },
+  { name: 'Subscriptions', href: '/account/subscriptions', icon: RefreshIcon, current: false },
+  { name: 'Payment Methods', href: '/account/payments', icon: CreditCardIcon, current: false },
+  { name: 'Rewards', href: '/account/rewards', icon: GiftIcon, current: false }
+];
+
+function useAccountNavigationItems() {
+  const { asPath } = useRouter();
+  const items = useMemo(
+    () =>
+      accountNavigationItems.map((item) => ({
+        ...item,
+        current: asPath.startsWith(item.href)
+      })),
+    [asPath]
+  );
+  return items;
 }
 
-export const AccountNavigation = ({ items }: AccountNavigationProps) => {
+function useLogout() {
   const { resetStore } = useApolloClient();
+  const handleLogout = useCallback(async () => {
+    await resetStore();
+    signOut({ callbackUrl: '/' });
+  }, [resetStore]);
+  return {
+    handleLogout
+  };
+}
 
-  const handleLogout = useCallback(
-    async (e) => {
-      e.preventDefault();
-      await resetStore();
-      signOut({ callbackUrl: '/' });
-    },
-    [resetStore]
-  );
+export const AccountNavigation = () => {
+  const { handleLogout } = useLogout();
+  const items = useAccountNavigationItems();
 
   return (
-    <aside className="py-6 px-2 sm:px-6 lg:py-0 lg:px-0 lg:col-span-3">
+    <aside className="w-full">
       <nav className="space-y-1">
         {items.map((item) => (
           <Link key={item.name} href={item.href}>
-            <a
+            <button
               className={classNames(
                 item.current
-                  ? 'bg-gray-50 text-indigo-700 hover:text-indigo-700 hover:bg-white'
-                  : 'text-gray-900 hover:text-gray-900 hover:bg-gray-50',
-                'group rounded-md px-3 py-2 flex items-center text-sm font-medium'
+                  ? 'bg-primary-50 text-accent-700 hover:text-accent-700 hover:bg-background'
+                  : 'text-primary-800 hover:text-primary-800 hover:bg-primary-50',
+                'group rounded-md px-3 py-2 flex items-center text-sm font-medium w-full'
               )}
               aria-current={item.current ? 'page' : undefined}
             >
               <item.icon
                 className={classNames(
                   item.current
-                    ? 'text-indigo-500 group-hover:text-indigo-500'
-                    : 'text-gray-400 group-hover:text-gray-500',
+                    ? 'text-accent-500 group-hover:text-accent-500'
+                    : 'text-primary-400 group-hover:text-primary-500',
                   'flex-shrink-0 -ml-1 mr-3 h-6 w-6'
                 )}
                 aria-hidden="true"
               />
               <span className="truncate">{item.name}</span>
-            </a>
+            </button>
           </Link>
         ))}
-        <a
+        <button
           onClick={handleLogout}
-          className={classNames(
-            'text-gray-600 bg-gray-300 hover:text-gray-800 hover:bg-gray-400',
-            'group rounded-md px-3 py-2 flex items-center text-sm font-medium cursor-pointer'
-          )}
+          className="text-body-500 hover:text-body-900 bg-body-300 hover:bg-body-400 group rounded-md px-3 py-2 flex items-center text-sm font-medium w-full"
         >
           <LogoutIcon
-            className={classNames('text-gray-600 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6')}
+            className="text-body-400 group-hover:text-body-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
             aria-hidden="true"
           />
           <span className="truncate">Sign Out</span>
-        </a>
+        </button>
       </nav>
     </aside>
   );

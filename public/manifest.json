@@ -1,6 +1,6 @@
 {
-  "name": "Deluxe ™️ Store",
-  "short_name": "Deluxe",
+  "name": "Beta Kids",
+  "short_name": "BetaKids",
   "icons": [
     {
       "src": "/favicon-192x192.png",
@@ -13,8 +13,8 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
+  "theme_color": "#f87171",
+  "background_color": "#f87171",
   "display": "standalone",
   "start_url": "/"
 }
