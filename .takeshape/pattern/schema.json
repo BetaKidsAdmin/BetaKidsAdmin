@@ -1444,6 +1444,28 @@
         "endpoint": "https://www.google.com/recaptcha/api"
       },
       "authentication": "VmUF5D5z/ZjJvF0vzlzOQvA7YQEuk17i15VxauPlRUVCKN02xH8JYUTa/B39LOUFMprp/WoyuGlRJ8J4T+0m2jOgaYeT0dha75rDGLo0+xP5S+0aCJvsglGBi3WUNpj3DO0td44xERW67erPOIJsDjNLA+u20ho="
+    },
+    "zendesk": {
+      "id": "zendesk",
+      "provider": "rest",
+      "title": "Zendesk",
+      "namespace": "Zendesk",
+      "serviceType": "rest",
+      "authenticationType": "none",
+      "options": {
+        "endpoint": "https://takeshape.zendesk.com/"
+      }
+    },
+    "trustpilot": {
+      "id": "trustpilot",
+      "provider": "rest",
+      "title": "Trustpilot",
+      "namespace": "Trustpilot",
+      "serviceType": "rest",
+      "authenticationType": "searchParams",
+      "options": {
+        "endpoint": "https://api.trustpilot.com"
+      }
     }
   },
   "indexedShapes": {
