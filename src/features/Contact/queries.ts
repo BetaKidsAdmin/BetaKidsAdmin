@@ -1,7 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const CreateTicketMutation = gql`
-  mutation CreateTicketMutation {
+  mutation {
+    __typename
   }
 `;
 // export const CreateTicketMutation = gql`
