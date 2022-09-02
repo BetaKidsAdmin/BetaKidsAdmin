@@ -1,5 +1,12 @@
 import PageLoader from 'components/PageLoader';
-import { lighthouseHandle, lighthouseProductHandle, pageRevalidationTtl, productReviewsPerPage } from 'config';
+import {
+  lighthouseHandle,
+  lighthouseProductHandle,
+  pageRevalidationTtl,
+  reviewsIoReviewsPerPage,
+  trustpilotReviewsPerPage
+} from 'config';
+import { trustpilotBusinessUnit } from 'config/trustpilot';
 import { ProductPage as ProductPageComponent } from 'features/ProductPage/ProductPage';
 import {
   ProductPageShopifyProductHandlesQuery,
@@ -14,7 +21,9 @@ import {
   getProductPageParams,
   getProductReviews,
   getProductSections,
-  getReviewHighlights
+  getReviewHighlights,
+  getTrustpilotProductReviews,
+  getTrustpilotReviewsSummary
 } from 'features/ProductPage/transforms';
 import Layout from 'layouts/Default';
 import { getLayoutData } from 'layouts/getLayoutData';
@@ -37,6 +46,8 @@ const ProductPage: NextPage = ({
   product,
   reviewHighlights,
   reviewList,
+  trustpilotReviewList,
+  trustpilotSummary,
   details,
   policies,
   breadcrumbs,
@@ -61,9 +72,11 @@ const ProductPage: NextPage = ({
         product={product}
         reviewHighlights={reviewHighlights}
         reviewList={reviewList}
+        trustpilotReviewList={trustpilotReviewList}
+        trustpilotSummary={trustpilotSummary}
         details={details}
         policies={policies}
-        reviewsPerPage={productReviewsPerPage}
+        reviewsPerPage={reviewsIoReviewsPerPage}
         sections={sections}
       />
     </Layout>
@@ -85,8 +98,9 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     return apolloClient.query<ProductPageShopifyProductResponse, ProductPageShopifyProductVariables>({
       query: ProductPageShopifyProductQuery,
       variables: {
-        handle
-        // reviewsPerPage: productReviewsPerPage
+        handle,
+        trustpilotReviewsPerPage: trustpilotReviewsPerPage,
+        trustpilotBusinessUnit
       }
     });
   });
@@ -111,6 +125,8 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
       options: getPageOptions(data),
       reviewHighlights: getReviewHighlights(data),
       reviewList: getProductReviews(data),
+      trustpilotReviewList: getTrustpilotProductReviews(data),
+      trustpilotSummary: getTrustpilotReviewsSummary(data),
       details: getDetails(data),
       policies: getPolicies(data),
       breadcrumbs: getBreadcrumbs(data)

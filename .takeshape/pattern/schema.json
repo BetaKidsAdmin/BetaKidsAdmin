@@ -2,9 +2,9 @@
   "$schema": "https://schema.takeshape.io/project-schema",
   "dataKey": "AQIDAHi9nATJb1LYgj5u7ShOGp43y2H6TuckRKGDlwTU4b6ryQE3F753UJC+EN+T6NA+sECOAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMEqXfFd6xB3H7ALoIAgEQgDsvrzZF7f6VjxJyNpDMrgKOxnBnPoX+1WefE8ckQNX4ZtZPzSBCYkNwIWY7C5Va9RIwWSxbNKNShoRfEQ==",
   "projectId": "e6942252-2648-44e1-a793-f1d77edb40c9",
-  "version": 103,
+  "version": 111,
   "created": "2022-07-25T07:27:22.404Z",
-  "updated": "2022-09-01T07:10:31.554Z",
+  "updated": "2022-09-02T10:18:30.727Z",
   "defaultLocale": "en-us",
   "locales": [
     "en-us"
@@ -1335,6 +1335,17 @@
     }
   },
   "services": {
+    "recharge": {
+      "id": "recharge",
+      "provider": "rest",
+      "title": "Recharge",
+      "namespace": "Recharge",
+      "serviceType": "rest",
+      "authenticationType": "bearer",
+      "options": {
+        "endpoint": "https://api.rechargeapps.com"
+      }
+    },
     "gorgias": {
       "id": "gorgias",
       "provider": "rest",
@@ -5070,21 +5081,7 @@
                       },
                       {
                         "path": "sku",
-                        "mapping": [
-                          [
-                            "get",
-                            {
-                              "path": "$source.id"
-                            }
-                          ],
-                          [
-                            "replace",
-                            {
-                              "pattern": "gid://shopify/Product/",
-                              "replacement": ""
-                            }
-                          ]
-                        ]
+                        "value": "BK-31-2,BK-30"
                       },
                       {
                         "path": "language",
@@ -5138,21 +5135,7 @@
                     "ops": [
                       {
                         "path": "sku",
-                        "mapping": [
-                          [
-                            "get",
-                            {
-                              "path": "$source.id"
-                            }
-                          ],
-                          [
-                            "replace",
-                            {
-                              "pattern": "gid://shopify/Product/",
-                              "replacement": ""
-                            }
-                          ]
-                        ]
+                        "value": "BK-31-2,BK-30"
                       }
                     ]
                   }

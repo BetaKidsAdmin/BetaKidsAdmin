@@ -5,6 +5,7 @@ import Textarea from 'components/Form/Textarea/Textarea';
 import { Star } from 'components/Stars/Stars';
 import { Fragment, useCallback, useMemo } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { CreateMyProductReviewMutationResponse, CreateMyProductReviewMutationVariables } from 'types/takeshape';
 import { useAuthenticatedMutation } from 'utils/takeshape';
 import { CreateMyProductReviewMutation } from '../queries.takeshape';
 
@@ -35,8 +36,8 @@ export const CreateReview = (props: ReviewsProps) => {
   } = useForm<CreateReviewForm>();
 
   const [createProductReview, { data: createProductReviewResponse, error: mutationError }] = useAuthenticatedMutation<
-    any,
-    any
+    CreateMyProductReviewMutationResponse,
+    CreateMyProductReviewMutationVariables
   >(CreateMyProductReviewMutation);
 
   const submitCallback = useCallback(
@@ -100,8 +101,8 @@ export const CreateReview = (props: ReviewsProps) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                <Dialog.Title as="h3" className="text-lg font-medium mb-3">
+              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-background p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Title as="h3" className="text-lg text-body-900 font-medium mb-3">
                   Review {productName}
                 </Dialog.Title>
 
@@ -115,7 +116,7 @@ export const CreateReview = (props: ReviewsProps) => {
                       }}
                       render={({ field: { value, onChange } }) => (
                         <>
-                          <label htmlFor="starRating" className="block text-sm font-medium text-gray-700 mb-2">
+                          <label htmlFor="starRating" className="block text-sm font-medium text-body-700 mb-2">
                             Rating
                           </label>
                           <div id="starRating" className="flex items-center">

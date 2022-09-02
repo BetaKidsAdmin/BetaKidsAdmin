@@ -10,16 +10,13 @@ export const ProductPageShopifyProductHandlesQuery = gql`
       nodes {
         id
         handle
-        takeshape {
-          _id
-        }
       }
     }
   }
 `;
 
 export const ProductPageShopifyProductQuery = gql`
-  query ProductPageShopifyProduct($handle: String!) {
+  query ProductPageShopifyProduct($handle: String!, $trustpilotReviewsPerPage: Int, $trustpilotBusinessUnit: String!) {
     product: productByHandleWithTtl(handle: $handle) {
       id
       handle
@@ -28,6 +25,25 @@ export const ProductPageShopifyProductQuery = gql`
       descriptionHtml
       tags
       requiresSellingPlan
+      trustpilotReviews(businessUnit: $trustpilotBusinessUnit, perPage: $trustpilotReviewsPerPage) {
+        productReviews {
+          content
+          stars
+          createdAt
+          consumer {
+            displayName
+          }
+        }
+        links {
+          rel
+        }
+      }
+      trustpilotReviewsSummary(businessUnit: $trustpilotBusinessUnit) {
+        starsAverage
+        numberOfReviews {
+          total
+        }
+      }
       takeshape {
         _id
         additionalDetails {
@@ -162,37 +178,6 @@ export const ProductPageShopifyProductQuery = gql`
           }
         }
       }
-      standardizedProductType {
-        productTaxonomyNode {
-          name
-        }
-      }
-      # collections(first: 25) {
-      #   nodes {
-      #     id
-      #     handle
-      #     title
-      #     productsCount
-      #     ruleSet {
-      #       rules {
-      #         column
-      #         condition
-      #         relation
-      #       }
-      #     }
-      #     takeshape {
-      #       breadcrumbTitle
-      #       parent {
-      #         breadcrumbTitle
-      #         shopifyCollection {
-      #           id
-      #           handle
-      #           title
-      #         }
-      #       }
-      #     }
-      #   }
-      # }
       featuredImage {
         id
         url(transform: { maxWidth: 800, maxHeight: 800, preferredContentType: WEBP })
@@ -318,6 +303,24 @@ export const ProductPageShopifyProductQuery = gql`
 export const ProductPageReviewPageQuery = gql`
   query {
     __typename
+  }
+`;
+
+export const TrustpilotProductPageReviewPageQuery = gql`
+  query TrustpilotProductPageReviewPageQuery($businessUnit: String!, $sku: [String!], $page: Int!, $perPage: Int!) {
+    reviewData: getTrustpilotProductReviews(businessUnit: $businessUnit, sku: $sku, page: $page, perPage: $perPage) {
+      productReviews {
+        content
+        stars
+        createdAt
+        consumer {
+          displayName
+        }
+      }
+      links {
+        rel
+      }
+    }
   }
 `;
 

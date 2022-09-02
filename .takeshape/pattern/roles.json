@@ -71,7 +71,34 @@
         },
         {
           "Resource": [
+            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Query.getPageList"
+          ],
+          "Effect": "Allow",
+          "Action": [
+            "graphql:execute"
+          ]
+        },
+        {
+          "Resource": [
+            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Query.getAssetList"
+          ],
+          "Effect": "Allow",
+          "Action": [
+            "graphql:execute"
+          ]
+        },
+        {
+          "Resource": [
             "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Query.search"
+          ],
+          "Effect": "Allow",
+          "Action": [
+            "graphql:execute"
+          ]
+        },
+        {
+          "Resource": [
+            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Query.getTrustpilotProductReviews"
           ],
           "Effect": "Allow",
           "Action": [
@@ -117,6 +144,15 @@
         {
           "Resource": [
             "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Mutation.createTicket"
+          ],
+          "Effect": "Allow",
+          "Action": [
+            "graphql:execute"
+          ]
+        },
+        {
+          "Resource": [
+            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Mutation.createZendeskTicket"
           ],
           "Effect": "Allow",
           "Action": [
@@ -225,6 +261,42 @@
         {
           "Resource": [
             "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Mutation.createMyProductReview"
+          ],
+          "Effect": "Allow",
+          "Action": [
+            "graphql:execute"
+          ]
+        },
+        {
+          "Resource": [
+            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Query.Recharge_getMyPaymentMethods"
+          ],
+          "Effect": "Allow",
+          "Action": [
+            "graphql:execute"
+          ]
+        },
+        {
+          "Resource": [
+            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Query.Recharge_getMyAddressPaymentMethods"
+          ],
+          "Effect": "Allow",
+          "Action": [
+            "graphql:execute"
+          ]
+        },
+        {
+          "Resource": [
+            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Mutation.Recharge_sendMyUpdatePaymentEmail"
+          ],
+          "Effect": "Allow",
+          "Action": [
+            "graphql:execute"
+          ]
+        },
+        {
+          "Resource": [
+            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Mutation.Recharge_updateMySubscriptionPaymentMethod"
           ],
           "Effect": "Allow",
           "Action": [

@@ -7,12 +7,12 @@ import { FeaturesFullWidthWithVerticalImages } from 'features/Global/FeaturesFul
 import { FeaturesGrid } from 'features/Global/FeaturesGrid/FeaturesGrid';
 import { NewsletterCenteredCardWithGraphic } from 'features/Global/NewsletterCenteredCardWithGraphic/NewsletterCenteredCardWithGraphic';
 import { TestimonialWithOverlappingImage } from 'features/Global/TestimonialWithOverlappingImage/TestimonialWithOverlappingImage';
-import { shopifyGidToId } from 'transforms/shopify';
+import { TrustpilotWithData } from 'features/ProductPage/Trustpilot/TrustpilotWIthData';
 import { Details, DetailsProps } from './Details/Details';
 import { Policies, PoliciesProps } from './Policies/Policies';
 import { Product, ProductProps } from './Product/Product';
 import { RelatedProductsWithData } from './RelatedProducts/RelatedProductsWithData';
-import { ReviewsWithData, ReviewsWithDataProps } from './Reviews/ReviewsWithData';
+import { ReviewsWithDataProps } from './Reviews/ReviewsWithData';
 import { ProductPageOptions } from './types';
 
 export type ProductPageProps = Omit<ProductProps, 'showFeaturedReviews' | 'showBreadcrumbs' | 'showReviewsLink'> &
@@ -58,11 +58,13 @@ export const ProductPage = ({
   details,
   policies,
   reviewList,
+  trustpilotReviewList,
+  trustpilotSummary,
   breadcrumbs,
   reviewsPerPage,
   sections
 }: ProductPageProps) => {
-  const { showDetails, showPolicies, showReviews, showRelatedProducts, showBreadcrumbs } = options;
+  const { showDetails, showPolicies, showReviewsIo, showTrustpilot, showRelatedProducts, showBreadcrumbs } = options;
 
   return (
     <>
@@ -71,10 +73,10 @@ export const ProductPage = ({
           component={component}
           product={product}
           reviewHighlights={reviewHighlights}
-          showFeaturedReviews={!showReviews}
+          showFeaturedReviews={!showReviewsIo}
           breadcrumbs={breadcrumbs}
           showBreadcrumbs={showBreadcrumbs}
-          showReviewsLink={showReviews}
+          showReviewsLink={showReviewsIo}
         />
       </div>
       <div className="bg-white overflow-hidden">{sections?.map(pageChildToComponent())}</div>
@@ -86,19 +88,20 @@ export const ProductPage = ({
           </div>
         </div>
       )}
-      <div className="bg-white">
-        <Wrapper>
-          {showReviews && (
-            <ReviewsWithData
-              productName={product.name}
-              sku={shopifyGidToId(product.id)}
-              reviewList={reviewList}
-              reviewsPerPage={reviewsPerPage}
-            />
-          )}
-          {showRelatedProducts && <RelatedProductsWithData limit={4} productId={product.id} />}
-        </Wrapper>
-      </div>
+      {(showTrustpilot || showRelatedProducts) && (
+        <div className="bg-white">
+          <Wrapper>
+            {showTrustpilot && (
+              <TrustpilotWithData
+                sku={'BK-31-2,BK-30'}
+                trustpilotReviewList={trustpilotReviewList}
+                trustpilotSummary={trustpilotSummary}
+              />
+            )}
+            {showRelatedProducts && <RelatedProductsWithData limit={4} productId={product.id} />}
+          </Wrapper>
+        </div>
+      )}
     </>
   );
 };
