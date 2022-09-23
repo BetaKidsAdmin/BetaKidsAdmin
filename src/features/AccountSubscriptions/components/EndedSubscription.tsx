@@ -1,10 +1,10 @@
 import { Menu, Tab, Transition } from '@headlessui/react';
-import { DotsVerticalIcon } from '@heroicons/react/solid';
+import { EllipsisVerticalIcon } from '@heroicons/react/24/solid';
 import { format } from 'date-fns';
-import { Fragment } from 'react';
+import { Fragment, useCallback } from 'react';
 import { shopifyGidToId } from 'transforms/shopify';
 import classNames from 'utils/classNames';
-import { EndedSubscription as TEndedSubscription } from '../types';
+import { AnySubscription, RefetchSubscriptions } from '../types';
 import { SubscriptionOrders } from './SubscriptionOrders/SubscriptionOrders';
 import { SubscriptionOverview } from './SubscriptionOverview/SubscriptionOverview';
 
@@ -18,10 +18,14 @@ const navigationItems = [
 ];
 
 export interface EndedSubscriptionProps {
-  subscription: TEndedSubscription;
+  subscription: AnySubscription;
+  refetchSubscription?: RefetchSubscriptions;
+  refetchSubscriptionList?: RefetchSubscriptions;
 }
 
 export const EndedSubscription = ({ subscription }: EndedSubscriptionProps) => {
+  const refetchSubscriptions = useCallback(async () => {}, []);
+
   return (
     <Tab.Group>
       <h3 className="sr-only" id={shopifyGidToId(subscription.id)}>
@@ -33,7 +37,7 @@ export const EndedSubscription = ({ subscription }: EndedSubscriptionProps) => {
           <div>
             <dt className="font-medium text-body-900">Date ended</dt>
             <dd className="mt-1 text-body-500">
-              <time dateTime={subscription.endedAt}>{format(new Date(subscription.endedAt), 'PPP')}</time>
+              <time dateTime={subscription.cancelledAt}>{format(new Date(subscription.cancelledAt), 'PP')}</time>
             </dd>
           </div>
         </dl>
@@ -42,7 +46,7 @@ export const EndedSubscription = ({ subscription }: EndedSubscriptionProps) => {
           <div className="flex items-center">
             <Menu.Button className="-m-2 p-2 flex items-center text-body-400 hover:text-body-500">
               <span className="sr-only">Options for subscription {subscription.id}</span>
-              <DotsVerticalIcon className="w-6 h-6" aria-hidden="true" />
+              <EllipsisVerticalIcon className="w-6 h-6" aria-hidden="true" />
             </Menu.Button>
           </div>
 
@@ -95,10 +99,10 @@ export const EndedSubscription = ({ subscription }: EndedSubscriptionProps) => {
 
       <Tab.Panels>
         <Tab.Panel>
-          <SubscriptionOverview subscription={subscription} />
+          <SubscriptionOverview subscription={subscription} refetchSubscriptions={refetchSubscriptions} />
         </Tab.Panel>
         <Tab.Panel>
-          <SubscriptionOrders subscription={subscription} />
+          <SubscriptionOrders subscription={subscription} refetchSubscriptions={refetchSubscriptions} />
         </Tab.Panel>
       </Tab.Panels>
     </Tab.Group>

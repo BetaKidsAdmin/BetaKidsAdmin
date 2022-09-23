@@ -1,5 +1,5 @@
 import { RadioGroup } from '@headlessui/react';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 import { ModalProps } from 'components/Modal/Modal';
 import { ModalForm } from 'components/Modal/ModalForm';
 import { ModalFormActions } from 'components/Modal/ModalFormActions';
@@ -17,7 +17,11 @@ import {
 } from 'date-fns';
 import { useCallback, useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { SetNextChargeDateMutationResponse, SetNextChargeDateMutationVariables } from 'types/takeshape';
 import classNames from 'utils/classNames';
+import { useAuthenticatedMutation } from 'utils/takeshape';
+import { SetNextChargeDateMutation } from '../../queries';
+import { AnySubscription, RefetchSubscriptions } from '../../types';
 
 function getMonth(forDate) {
   const now = new Date();
@@ -48,17 +52,20 @@ function getMonth(forDate) {
 }
 
 export interface NextChargeDateFormProps extends ModalProps {
-  currentNextChargeDate: string;
+  subscription: AnySubscription;
+  refetchSubscriptions: RefetchSubscriptions;
 }
 
 interface NextChargeDateFormValues {
   nextChargeDate: string;
 }
 
-/**
- * TODO Handle submit errors
- */
-export const NextChargeDateForm = ({ isOpen, onClose, currentNextChargeDate }: NextChargeDateFormProps) => {
+export const NextChargeDateForm = ({
+  isOpen,
+  onClose,
+  subscription,
+  refetchSubscriptions
+}: NextChargeDateFormProps) => {
   const {
     handleSubmit,
     control,
@@ -66,7 +73,7 @@ export const NextChargeDateForm = ({ isOpen, onClose, currentNextChargeDate }: N
     formState: { isSubmitting, isSubmitSuccessful }
   } = useForm<NextChargeDateFormValues>();
 
-  const [month, setMonth] = useState(getMonth(new Date(currentNextChargeDate)));
+  const [month, setMonth] = useState(getMonth(new Date(subscription.nextChargeScheduledAt)));
 
   const handlePrevMonth = useCallback(() => {
     setMonth(getMonth(subMonths(month.start, 1)));
@@ -76,20 +83,25 @@ export const NextChargeDateForm = ({ isOpen, onClose, currentNextChargeDate }: N
     setMonth(getMonth(addMonths(month.start, 1)));
   }, [month.start]);
 
+  const [setNextChargeDate] = useAuthenticatedMutation<
+    SetNextChargeDateMutationResponse,
+    SetNextChargeDateMutationVariables
+  >(SetNextChargeDateMutation);
+
   const handleFormSubmit = useCallback(
     async (formData: NextChargeDateFormValues) => {
-      // eslint-disable-next-line no-console
-      console.log(formData);
+      await setNextChargeDate({ variables: { subscriptionId: subscription.id, date: formData.nextChargeDate } });
+      await refetchSubscriptions();
       onClose();
     },
-    [onClose]
+    [onClose, refetchSubscriptions, setNextChargeDate, subscription.id]
   );
 
   const resetState = useCallback(() => {
     reset({
-      nextChargeDate: format(new Date(currentNextChargeDate), 'yyyy-MM-dd')
+      nextChargeDate: format(new Date(subscription.nextChargeScheduledAt), 'yyyy-MM-dd')
     });
-  }, [currentNextChargeDate, reset]);
+  }, [reset, subscription.nextChargeScheduledAt]);
 
   // Set initial values
   useEffect(() => resetState(), [resetState]);
@@ -98,8 +110,8 @@ export const NextChargeDateForm = ({ isOpen, onClose, currentNextChargeDate }: N
     <ModalForm
       isOpen={isOpen}
       onClose={onClose}
-      primaryText="Next charge date"
-      secondaryText="Changing your next charge date will also adjust the dates of all your upcoming orders."
+      primaryText="Delivery schedule"
+      secondaryText="Change the date of your next scheduled order and all upcoming orders."
       afterLeave={resetState}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
@@ -146,7 +158,7 @@ export const NextChargeDateForm = ({ isOpen, onClose, currentNextChargeDate }: N
           render={({ field }) => (
             <RadioGroup {...field}>
               <div className="isolate mt-2 grid grid-cols-7 gap-px rounded-lg text-sm">
-                {month.days.map((day, dayIdx) => (
+                {month.days.map((day) => (
                   <RadioGroup.Option
                     key={day.date}
                     value={day.date}
@@ -188,7 +200,7 @@ export const NextChargeDateForm = ({ isOpen, onClose, currentNextChargeDate }: N
         isSubmitting={isSubmitting}
         onCancel={onClose}
         className="mt-8 flex justify-end gap-2"
-        submitText="Update next charge date"
+        submitText="Update delivery schedule"
       />
     </ModalForm>
   );

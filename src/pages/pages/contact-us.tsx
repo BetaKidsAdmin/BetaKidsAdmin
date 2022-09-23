@@ -1,18 +1,19 @@
 import { pageRevalidationTtl } from 'config';
-// import { ContactWithGorgias } from 'features/Contact/ContactWithGorgias';
-import { ContactWithZendesk } from 'features/Contact/ContactWithZendesk';
+import { Contact } from 'features/Contact/Contact';
 import Layout from 'layouts/Default';
 import { getLayoutData } from 'layouts/getLayoutData';
 import { InferGetStaticPropsType, NextPage } from 'next';
 
 const ContactPage: NextPage = ({ globalSettings }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  // const router = useRouter();
-
-  // const Contact = router.query.provider === 'zendesk' ? ContactWithZendesk : ContactWithGorgias;
-
   return (
     <Layout globalSettings={globalSettings} seo={{ title: 'Contact' }}>
-      <ContactWithZendesk />
+      <Contact
+        text={{
+          primary: 'Get in touch',
+          secondary: "We'd be happy to hear from you!",
+          button: 'Send'
+        }}
+      />
     </Layout>
   );
 };

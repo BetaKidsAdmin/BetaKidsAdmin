@@ -1,5 +1,5 @@
 import { Disclosure } from '@headlessui/react';
-import { MinusSmIcon, PlusSmIcon } from '@heroicons/react/outline';
+import { MinusSmallIcon, PlusSmallIcon } from '@heroicons/react/24/solid';
 import classNames from 'utils/classNames';
 
 export const AdditionalDetails = ({ details }) => {
@@ -22,12 +22,12 @@ export const AdditionalDetails = ({ details }) => {
                       </span>
                       <span className="ml-6 flex items-center">
                         {open ? (
-                          <MinusSmIcon
+                          <MinusSmallIcon
                             className="block h-6 w-6 text-red-400 group-hover:text-red-500"
                             aria-hidden="true"
                           />
                         ) : (
-                          <PlusSmIcon
+                          <PlusSmallIcon
                             className="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
                             aria-hidden="true"
                           />

@@ -2,29 +2,29 @@ import { RadioGroup } from '@headlessui/react';
 import { ModalProps } from 'components/Modal/Modal';
 import { ModalForm } from 'components/Modal/ModalForm';
 import { ModalFormActions } from 'components/Modal/ModalFormActions';
-import { formatDeliverySchedule } from 'features/AccountSubscriptions/utils';
 import { useCallback, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { UpdateDeliveryFrequencyMutationResponse, UpdateDeliveryFrequencyMutationVariables } from 'types/takeshape';
 import classNames from 'utils/classNames';
-import { SubscriptionDeliveryScheduleOption } from '../../types';
+import { useAuthenticatedMutation } from 'utils/takeshape';
+import { UpdateDeliveryFrequencyMutation } from '../../queries';
+import { AnySubscription, RefetchSubscriptions } from '../../types';
+import { formatDeliverySchedule } from '../../utils';
 
 export interface DeliveryFrequencyFormProps extends ModalProps {
-  deliveryScheduleOptions: SubscriptionDeliveryScheduleOption[];
-  currentDeliverySchedule: SubscriptionDeliveryScheduleOption;
+  subscription: AnySubscription;
+  refetchSubscriptions: RefetchSubscriptions;
 }
 
 export interface DeliveryFrequencyFormValues {
-  deliveryScheduleIntervalCount: number;
+  intervalCount: string;
 }
 
-/**
- * TODO Handle submit errors
- */
 export const DeliveryFrequencyForm = ({
   isOpen,
   onClose,
-  deliveryScheduleOptions,
-  currentDeliverySchedule
+  subscription,
+  refetchSubscriptions
 }: DeliveryFrequencyFormProps) => {
   const {
     handleSubmit,
@@ -33,30 +33,38 @@ export const DeliveryFrequencyForm = ({
     formState: { isSubmitting, isSubmitSuccessful }
   } = useForm<DeliveryFrequencyFormValues>();
 
+  const [updateDeliveryFrequency] = useAuthenticatedMutation<
+    UpdateDeliveryFrequencyMutationResponse,
+    UpdateDeliveryFrequencyMutationVariables
+  >(UpdateDeliveryFrequencyMutation);
+
   const handleFormSubmit = useCallback(
     async (formData: DeliveryFrequencyFormValues) => {
-      const deliverySchedule = {
-        interval: currentDeliverySchedule.interval,
-        intervalCount: formData.deliveryScheduleIntervalCount
-      };
-      // eslint-disable-next-line no-console
-      console.log(deliverySchedule);
-      // TODO Mutate subscription to show updated value
+      await updateDeliveryFrequency({
+        variables: {
+          frequency: formData.intervalCount,
+          unit: subscription.interval.toLowerCase(),
+          subscriptionId: subscription.id
+        }
+      });
+      await refetchSubscriptions();
       onClose();
     },
-    [currentDeliverySchedule.interval, onClose]
+    [onClose, refetchSubscriptions, subscription.id, subscription.interval, updateDeliveryFrequency]
   );
 
   const resetState = useCallback(
     () =>
       reset({
-        deliveryScheduleIntervalCount: currentDeliverySchedule.intervalCount
+        intervalCount: String(subscription.intervalCount)
       }),
-    [currentDeliverySchedule.intervalCount, reset]
+    [reset, subscription.intervalCount]
   );
 
   // Set initial values
   useEffect(() => resetState(), [resetState]);
+
+  const { intervalOptions } = subscription;
 
   return (
     <ModalForm
@@ -74,20 +82,20 @@ export const DeliveryFrequencyForm = ({
 
         <div className="mx-auto w-full rounded-2xl bg-white py-2">
           <Controller
-            name="deliveryScheduleIntervalCount"
+            name="intervalCount"
             control={control}
             render={({ field }) => (
               <RadioGroup {...field}>
                 <RadioGroup.Label className="sr-only">Delivery schedule</RadioGroup.Label>
                 <div className="bg-white rounded-md -space-y-px">
-                  {deliveryScheduleOptions.map((option, optionIdx) => (
+                  {intervalOptions.map((option, optionIdx) => (
                     <RadioGroup.Option
-                      key={option.intervalCount}
-                      value={option.intervalCount}
+                      key={option}
+                      value={option}
                       className={({ checked }) =>
                         classNames(
                           optionIdx === 0 ? 'rounded-tl-md rounded-tr-md' : '',
-                          optionIdx === deliveryScheduleOptions.length - 1 ? 'rounded-bl-md rounded-br-md' : '',
+                          optionIdx === intervalOptions.length - 1 ? 'rounded-bl-md rounded-br-md' : '',
                           checked ? 'bg-accent-50 border-accent-200 z-10' : 'border-body-200',
                           'relative border p-4 flex cursor-pointer focus:outline-none'
                         )
@@ -113,7 +121,11 @@ export const DeliveryFrequencyForm = ({
                                 'block text-sm font-medium'
                               )}
                             >
-                              Every {formatDeliverySchedule(option)}
+                              Every{' '}
+                              {formatDeliverySchedule({
+                                interval: subscription.interval,
+                                intervalCount: Number(option)
+                              })}
                             </RadioGroup.Label>
                           </span>
                         </>

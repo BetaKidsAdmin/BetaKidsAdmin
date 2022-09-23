@@ -1,5 +1,5 @@
 import { Disclosure } from '@headlessui/react';
-import { ChevronDownIcon } from '@heroicons/react/outline';
+import { ChevronDownIcon } from '@heroicons/react/24/solid';
 import { getImageUrl } from '@takeshape/routing';
 import NextImage from 'components/NextImage';
 import NextLink from 'components/NextLink';

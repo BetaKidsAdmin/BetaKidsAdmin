@@ -1,7 +1,7 @@
-import { MenuIcon, SearchIcon } from '@heroicons/react/outline';
-import NextImage from 'components/NextImage';
+import { Bars3Icon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { Logo } from 'components/Logo/Logo';
 import NextLink from 'components/NextLink';
-import { showCurrencySelector, siteLogo } from 'config';
+import { showCurrencySelector } from 'config';
 import { useSetAtom } from 'jotai';
 import { isMobileMenuOpenAtom, isSearchOpenAtom } from 'store';
 import { Header } from '../types';
@@ -26,7 +26,7 @@ export const NavigationTop = ({ header, currencies }: NavigationTopProps) => {
         </a>
 
         {/* Top navigation */}
-        <div className="bg-gray-900">
+        <div className="bg-primary-900">
           <div className="max-w-7xl mx-auto h-10 px-4 flex items-center justify-between sm:px-6 lg:px-8">
             {/* Currency selector */}
             <form className="hidden lg:block lg:flex-1">
@@ -35,15 +35,15 @@ export const NavigationTop = ({ header, currencies }: NavigationTopProps) => {
                   <label htmlFor="desktop-currency" className="sr-only">
                     Currency
                   </label>
-                  <div className="-ml-2 group relative bg-gray-900 border-transparent rounded-md focus-within:ring-2 focus-within:ring-white">
+                  <div className="-ml-2 group relative bg-primary-900 border-transparent rounded-md focus-within:ring-2 focus-within:ring-inverted">
                     <TopCurrencySelect currencies={currencies} />
-                    <div className="absolute right-0 inset-y-0 flex items-center pointer-events-none">
+                    <div className="absolute right-0 inset-y-0 flex items-center pointer-events-none text-inverted">
                       <svg
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 20 20"
-                        className="w-5 h-5 text-gray-300"
+                        className="w-5 h-5 text-inverted-300"
                       >
                         <path
                           stroke="currentColor"
@@ -65,24 +65,14 @@ export const NavigationTop = ({ header, currencies }: NavigationTopProps) => {
         </div>
 
         {/* Secondary navigation */}
-        <div className="bg-white">
-          <div className="border-b border-gray-200">
+        <div className="bg-background">
+          <div className="border-b border-body-200">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="h-16 flex items-center justify-between">
                 {/* Logo (lg+) */}
                 <div className="hidden lg:flex lg:items-center">
                   <NextLink href="/">
-                    <span className="sr-only">Workflow</span>
-                    <div className="h-9 w-32 relative">
-                      <NextImage
-                        src={siteLogo}
-                        height={34}
-                        width={128}
-                        alt="BetaKids"
-                        className="w-auto h-9"
-                        priority
-                      />
-                    </div>
+                    <Logo className="w-auto h-9" />
                   </NextLink>
                 </div>
 
@@ -92,33 +82,26 @@ export const NavigationTop = ({ header, currencies }: NavigationTopProps) => {
                 <div className="flex-1 flex items-center lg:hidden">
                   <button
                     type="button"
-                    className="-ml-2 bg-white p-2 rounded-md text-gray-400"
+                    className="-ml-2 bg-background p-2 rounded-md text-primary-400"
                     onClick={() => setIsMobileMenuOpen(true)}
                   >
                     <span className="sr-only">Open menu</span>
-                    <MenuIcon className="h-6 w-6" aria-hidden="true" />
+                    <Bars3Icon className="h-6 w-6" aria-hidden="true" />
                   </button>
 
                   {/* Search */}
-                  <div onClick={() => setIsSearchOpen(true)} className="ml-2 p-2 text-gray-400 hover:text-gray-500">
+                  <div
+                    onClick={() => setIsSearchOpen(true)}
+                    className="ml-2 p-2 text-primary-400 hover:text-primary-500"
+                  >
                     <span className="sr-only">Search</span>
-                    <SearchIcon className="w-6 h-6" aria-hidden="true" />
+                    <MagnifyingGlassIcon className="w-6 h-6" aria-hidden="true" />
                   </div>
                 </div>
 
                 {/* Logo (lg-) */}
                 <NextLink href="/" className="lg:hidden">
-                  <span className="sr-only">Workflow</span>
-                  <div className="h-6 w-24 md:h-8 md:w-32 relative">
-                    <NextImage
-                      src={siteLogo}
-                      height={25}
-                      width={96}
-                      alt="BetaKids"
-                      className="w-auto h-6 md:h-8"
-                      priority
-                    />
-                  </div>
+                  <Logo className="w-auto h-6 md:h-8" />
                 </NextLink>
 
                 <div className="flex-1 flex items-center justify-end">
@@ -127,10 +110,10 @@ export const NavigationTop = ({ header, currencies }: NavigationTopProps) => {
                       <div className="hidden lg:flex">
                         <div
                           onClick={() => setIsSearchOpen(true)}
-                          className="-m-2 p-2 text-gray-400 hover:text-gray-500"
+                          className="-m-2 p-2 text-primary-400 hover:text-primary-500"
                         >
                           <span className="sr-only">Search</span>
-                          <SearchIcon className="w-6 h-6" aria-hidden="true" />
+                          <MagnifyingGlassIcon className="w-6 h-6" aria-hidden="true" />
                         </div>
                       </div>
 
@@ -139,7 +122,7 @@ export const NavigationTop = ({ header, currencies }: NavigationTopProps) => {
                       </div>
                     </div>
 
-                    <span className="mx-4 h-6 w-px bg-gray-200 lg:mx-6" aria-hidden="true" />
+                    <span className="invisible lg:visible mx-4 h-6 w-px bg-gray-200 lg:mx-6" aria-hidden="true" />
 
                     <TopCartIcon />
                   </div>

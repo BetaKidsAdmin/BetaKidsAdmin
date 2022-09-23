@@ -17,19 +17,19 @@ directory. [The instructions section of this README will teach you how to do tha
 
 | Category | Score |
 | -------- | ----- |
-| [Path: /](https://penny-qi4e81xed-takeshape.vercel.app/) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1661984400458-97242.report.html) |
+| [Path: /](https://penny-7yq2iabxo-takeshape.vercel.app/) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1663193081667-12318.report.html) |
 | 🟢 Performance | 100 |
 | 🟢 Accessibility | 100 |
 | 🟢 Best practices | 100 |
 | 🟢 SEO | 100 |
 | 🟢 PWA | 100 |
-| [Path: /product/__lighthouse](https://penny-qi4e81xed-takeshape.vercel.app/product/__lighthouse) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1661984400932-19317.report.html) |
-| 🟢 Performance | 100 |
+| [Path: /product/__lighthouse](https://penny-7yq2iabxo-takeshape.vercel.app/product/__lighthouse) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1663193082066-34599.report.html) |
+| 🟢 Performance | 99 |
 | 🟢 Accessibility | 100 |
-| 🟢 Best practices | 92 |
+| 🟢 Best practices | 100 |
 | 🟢 SEO | 100 |
 | 🟢 PWA | 100 |
-| [Path: /collection/__lighthouse](https://penny-qi4e81xed-takeshape.vercel.app/collection/__lighthouse) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1661984401473-15806.report.html) |
+| [Path: /collection/__lighthouse](https://penny-7yq2iabxo-takeshape.vercel.app/collection/__lighthouse) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1663193082491-42247.report.html) |
 | 🟢 Performance | 100 |
 | 🟢 Accessibility | 100 |
 | 🟢 Best practices | 100 |
@@ -62,12 +62,14 @@ TakeShape is also providing performance and data services for the storefront:
 ```mermaid
 graph TD
     A[Frontend Next.js Client] --> |Unified GraphQL API| Mesh{TakeShape's API Mesh}
-    Mesh --> |User Authentication| OpenID
+    Mesh --> |User Authentication| OpenID[OpenID connect]
     Mesh --> |DDoS prevention| reCAPTCHA
     Mesh --> P{Products}
     P --> Shopify[Shopify Admin and Storefront]
+    P --> Recharge[Recharge]
     Mesh --> UP{User Profile}
-    UP --> |Orders, Subscriptions, and Customer Data| Shopify
+    UP --> |Orders, and Customer Data| Shopify
+    UP --> |Subscripitons, and Customer Data| Recharge
     UP --> |Newsletter| Klaviyo
     P --> |Product Reviews| REVIEWS.io
     UP --> |Reviews Written| REVIEWS.io
@@ -87,7 +89,6 @@ Here are the frameworks, language and styling options we went with for this buil
 
 - [Next.js](https://nextjs.org/) to build the pages and bundle the frontend application
 - [NextAuth](https://next-auth.js.org/) for user authentication against TakeShape and Shopify
-- [Tailwind UI](https://tailwindui.com/) for attractive components that are easy to customize
 - [TypeScript](https://www.typescriptlang.org/) for type safety and documentation
 - [Apollo Client](https://www.apollographql.com/docs/react/) for efficient GraphQL queries against TakeShape
 - [Jotai](https://jotai.org/) for optimized component state management
@@ -167,9 +168,6 @@ Here are the steps for getting started with this project:
 - Save the key somewhere. Later, you must either set it as the value of the `NEXT_PUBLIC_TAKESHAPE_ANONYMOUS_API_KEY`
   environment variable in your frontend project's `.env.local` file, or set it as an environment variable in your
   hosting provider's UI.
-
-- Do the same process, but this time create a key with `webhook` permissions. The environment variable for this key will
-  be `TAKESHAPE_WEBHOOK_API_KEY`.
 
 3. Get your TakeShape project's API Endpoint. Here's how:
 
@@ -400,6 +398,21 @@ Add or update the lines `NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN` and `NEXT_PUBLIC_
 file.
 
 Now your Shopify store is configured for this project.
+
+## Recharge Subscriptions
+
+You will need to set up a free [Recharge Subscriptions](https://rechargepayments.com) Shopify app and account to use
+subscriptions in Penny. You can follow their
+[guide](https://support.rechargepayments.com/hc/en-us/articles/360056632214-Getting-started-with-Recharge) if you are
+unfamiliar.
+
+Once Recharge is configured, you will need to get an API token. Go to Apps > API Tokens > Create an API token. At a
+minimum you'll want to provide read & write access to the following scopes: `orders`, `discounts`, `subscriptions`,
+`payments`, `payment methods`, `customers`, `products`, `customer notifications`. You will then enter this API token in
+your Recharge service config in TakeShape.
+
+For a product to appear with subscription options in your Penny site, you'll need to add it as a subscription-enabled
+product in Recharge. Go to Products > Products > Add products in the Recharge admin, search for and add your item.
 
 ## REVIEWS.io
 

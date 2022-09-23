@@ -1,4 +1,4 @@
-import * as Heroicons from '@heroicons/react/outline';
+import * as Heroicons from '@heroicons/react/24/outline';
 
 export const transformIconName = (iconName: string) => {
   const arr = iconName.split('-');
@@ -8,4 +8,7 @@ export const transformIconName = (iconName: string) => {
   return arr.join('') + 'Icon';
 };
 
-export const getHeroIcon = (iconName: string) => (Heroicons[iconName] ? Heroicons[iconName].render() : null);
+export const getHeroIcon = (iconName: string) => {
+  const Component = Heroicons?.[iconName] || null;
+  return <Component />;
+};

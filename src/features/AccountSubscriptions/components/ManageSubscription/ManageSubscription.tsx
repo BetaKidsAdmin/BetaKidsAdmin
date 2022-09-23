@@ -1,23 +1,30 @@
+import { CreditCard } from 'components/Payments/CreditCard';
 import { format } from 'date-fns';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { formatPrice } from 'utils/text';
-import { ActiveSubscription } from '../../types';
-import { formatDeliverySchedule } from '../../utils';
+import { AnySubscription, RefetchSubscriptions } from '../../types';
+import { formatDeliverySchedule, getOrders } from '../../utils';
 import { CancelSubscriptionForm } from '../Actions/CancelSubscriptionForm';
 import { DeliveryFrequencyForm } from '../Actions/DeliveryFrequencyForm';
 import { NextChargeDateForm } from '../Actions/NextChargeDate';
 import { OrderNowForm } from '../Actions/OrderNowForm';
-import { PaymentMethodRechargeForm } from '../Actions/PaymentMethodRechargeForm';
+import { PaymentMethodForm } from '../Actions/PaymentMethodForm';
 import { ProductOptionsForm } from '../Actions/ProductOptionsForm';
 import { ShippingAddressForm } from '../Actions/ShippingAddress';
 import { SkipForm } from '../Actions/SkipForm';
 
 export interface ManageSubscriptionProps {
-  subscription: ActiveSubscription;
+  subscription: AnySubscription;
+  refetchSubscriptions: RefetchSubscriptions;
+  refetchSubscriptionList: RefetchSubscriptions;
 }
 
-export const ManageSubscription = ({ subscription }: ManageSubscriptionProps) => {
-  const { product, nextOrder } = subscription;
+export const ManageSubscription = ({
+  subscription,
+  refetchSubscriptions,
+  refetchSubscriptionList
+}: ManageSubscriptionProps) => {
+  const { nextOrder, nextQueuedOrder } = useMemo(() => getOrders(subscription.orders), [subscription.orders]);
 
   const [isNextChargeDateOpen, setIsNextChargeDateOpen] = useState(false);
   const [isShippingAddressOpen, setIsShippingAddressOpen] = useState(false);
@@ -27,6 +34,8 @@ export const ManageSubscription = ({ subscription }: ManageSubscriptionProps) =>
   const [isOrderNowOpen, setIsOrderNowOpen] = useState(false);
   const [isCancelSubscriptionOpen, setIsCancelSubscriptionOpen] = useState(false);
   const [isPaymentMethodOpen, setIsPaymentMethodOpen] = useState(false);
+
+  const { product, productVariant } = subscription;
 
   return (
     <>
@@ -38,7 +47,7 @@ export const ManageSubscription = ({ subscription }: ManageSubscriptionProps) =>
           </div>
 
           <div className="flex flex-shrink-0 mt-6 space-x-4 lg:mt-0">
-            {nextOrder && (
+            {nextQueuedOrder && (
               <button
                 type="button"
                 onClick={() => setIsSkipNextOpen(true)}
@@ -74,9 +83,9 @@ export const ManageSubscription = ({ subscription }: ManageSubscriptionProps) =>
 
             {/* Next charge */}
             <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-              <dt className="text-sm font-medium text-body-500">Next charge date</dt>
+              <dt className="text-sm font-medium text-body-500">Order schedule</dt>
               <dd className="mt-1 flex text-sm text-body-900 sm:mt-0 sm:col-span-2">
-                <div className="flex-grow">{format(new Date(subscription.nextOrder.fulfillmentDate), 'PPP')}</div>
+                <div className="flex-grow">{format(new Date(subscription.nextChargeScheduledAt), 'PPP')}</div>
                 <div className="ml-4 flex-shrink-0 flex space-x-4">
                   <button
                     type="button"
@@ -91,9 +100,9 @@ export const ManageSubscription = ({ subscription }: ManageSubscriptionProps) =>
 
             {/* Delivery frequency */}
             <div className="py-4 sm:grid sm:py-5 sm:grid-cols-3 sm:gap-4">
-              <dt className="text-sm font-medium text-body-500">Delivery frequency</dt>
+              <dt className="text-sm font-medium text-body-500">Order frequency</dt>
               <dd className="mt-1 flex text-sm text-body-900 sm:mt-0 sm:col-span-2">
-                <div className="flex-grow">{formatDeliverySchedule(subscription.deliverySchedule)}</div>
+                <div className="flex-grow">{formatDeliverySchedule(subscription)}</div>
                 <div className="ml-4 flex-shrink-0">
                   <button
                     type="button"
@@ -112,7 +121,7 @@ export const ManageSubscription = ({ subscription }: ManageSubscriptionProps) =>
               <dd className="mt-1 flex text-sm text-body-900 sm:mt-0 sm:col-span-2">
                 <div className="flex-grow">
                   <div>{product.name}</div>
-                  <div className="mt-2">{product.variantName}</div>
+                  <div className="mt-2">{productVariant.name}</div>
                 </div>
                 <div className="ml-4 flex-shrink-0">
                   <button
@@ -131,7 +140,7 @@ export const ManageSubscription = ({ subscription }: ManageSubscriptionProps) =>
               <dt className="text-sm font-medium text-body-500">Quantity</dt>
               <dd className="mt-1 flex text-sm text-body-900 sm:mt-0 sm:col-span-2">
                 <div className="flex-grow">
-                  <div className="mt-2">{product.quantity}</div>
+                  <div className="mt-2">{subscription.quantity}</div>
                 </div>
                 <div className="ml-4 flex-shrink-0">
                   <button
@@ -149,7 +158,9 @@ export const ManageSubscription = ({ subscription }: ManageSubscriptionProps) =>
             <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
               <dt className="text-sm font-medium text-body-500">Amount per item</dt>
               <dd className="mt-1 flex text-sm text-body-900 sm:mt-0 sm:col-span-2">
-                <div className="flex-grow">{formatPrice(product.price.currencyCode, product.price.amount)}</div>
+                <div className="flex-grow">
+                  {formatPrice(subscription.unitPrice.currencyCode, subscription.unitPrice.amount)}
+                </div>
               </dd>
             </div>
 
@@ -169,14 +180,14 @@ export const ManageSubscription = ({ subscription }: ManageSubscriptionProps) =>
               <dd className="mt-1 flex text-sm text-body-900 sm:mt-0 sm:col-span-2">
                 <span className="flex-grow">
                   <span className="block">
-                    {subscription.shippingAddress.firstName} {subscription.shippingAddress.lastName}
+                    {subscription.address.firstName} {subscription.address.lastName}
                   </span>
-                  <span className="block mt-1">{subscription.shippingAddress.address1}</span>
-                  <span className="block mt-1">{subscription.shippingAddress.address2}</span>
+                  <span className="block mt-1">{subscription.address.address1}</span>
+                  <span className="block mt-1">{subscription.address.address2}</span>
                   <span className="block mt-1">
-                    {subscription.shippingAddress.city}, {subscription.shippingAddress.province}
+                    {subscription.address.city}, {subscription.address.province}
                   </span>
-                  <span className="block mt-1">{subscription.shippingAddress.zip}</span>
+                  <span className="block mt-1">{subscription.address.zip}</span>
                 </span>
                 <span className="ml-4 flex-shrink-0">
                   <button
@@ -191,21 +202,23 @@ export const ManageSubscription = ({ subscription }: ManageSubscriptionProps) =>
             </div>
 
             {/* Payment method */}
-            <div className="py-4 sm:grid sm:py-5 sm:grid-cols-3 sm:gap-4">
-              <dt className="text-sm font-medium text-body-500">Payment method</dt>
-              <dd className="mt-1 flex text-sm text-body-900 sm:mt-0 sm:col-span-2">
-                {/* <CreditCard className="flex-grow" card={subscription.paymentMethod.instrument} /> */}
-                <div className="ml-4 flex-shrink-0">
-                  <button
-                    type="button"
-                    onClick={() => setIsPaymentMethodOpen(true)}
-                    className="bg-white rounded-md font-medium text-accent-600 hover:text-accent-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
-                  >
-                    Update
-                  </button>
-                </div>
-              </dd>
-            </div>
+            {subscription.paymentMethod && (
+              <div className="py-4 sm:grid sm:py-5 sm:grid-cols-3 sm:gap-4">
+                <dt className="text-sm font-medium text-body-500">Payment method</dt>
+                <dd className="mt-1 flex text-sm text-body-900 sm:mt-0 sm:col-span-2">
+                  <CreditCard className="flex-grow" card={subscription.paymentMethod.instrument} />
+                  <div className="ml-4 flex-shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => setIsPaymentMethodOpen(true)}
+                      className="bg-white rounded-md font-medium text-accent-600 hover:text-accent-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
+                    >
+                      Update
+                    </button>
+                  </div>
+                </dd>
+              </div>
+            )}
 
             {/* Cancel */}
             <div className="flex pt-4 pb-2 sm:pt-6 sm:pb-3">
@@ -224,46 +237,63 @@ export const ManageSubscription = ({ subscription }: ManageSubscriptionProps) =>
       <NextChargeDateForm
         isOpen={isNextChargeDateOpen}
         onClose={() => setIsNextChargeDateOpen(false)}
-        currentNextChargeDate={subscription.nextOrder.fulfillmentDate}
+        subscription={subscription}
+        refetchSubscriptions={refetchSubscriptions}
       />
 
       <ProductOptionsForm
+        subscription={subscription}
         variants={product.variants}
         variantOptions={product.variantOptions}
-        currentQuantity={product.quantity}
-        currentSelections={product.variantSelections}
-        currentDeliverySchedule={subscription.deliverySchedule}
+        currentSelections={productVariant.options}
+        refetchSubscriptions={refetchSubscriptions}
         isOpen={isProductOptionsOpen}
         onClose={() => setIsProductOptionsOpen(false)}
       />
 
       <DeliveryFrequencyForm
-        currentDeliverySchedule={subscription.deliverySchedule}
-        deliveryScheduleOptions={subscription.deliveryScheduleOptions}
+        subscription={subscription}
+        refetchSubscriptions={refetchSubscriptions}
         isOpen={isDeliveryScheduleOpen}
         onClose={() => setIsDeliveryScheduleOpen(false)}
       />
 
       <ShippingAddressForm
+        subscription={subscription}
+        refetchSubscriptions={refetchSubscriptions}
         isOpen={isShippingAddressOpen}
         onClose={() => setIsShippingAddressOpen(false)}
-        currentAddress={subscription.shippingAddress}
       />
 
-      <SkipForm isOpen={isSkipNextOpen} onClose={() => setIsSkipNextOpen(false)} order={nextOrder} />
+      <SkipForm
+        isOpen={isSkipNextOpen}
+        onClose={() => setIsSkipNextOpen(false)}
+        subscription={subscription}
+        order={nextQueuedOrder}
+        refetchSubscriptions={refetchSubscriptions}
+      />
 
-      <OrderNowForm isOpen={isOrderNowOpen} onClose={() => setIsOrderNowOpen(false)} order={nextOrder} />
+      <OrderNowForm
+        isOpen={isOrderNowOpen}
+        onClose={() => setIsOrderNowOpen(false)}
+        subscription={subscription}
+        order={nextOrder}
+        refetchSubscriptions={refetchSubscriptions}
+      />
 
       <CancelSubscriptionForm
         isOpen={isCancelSubscriptionOpen}
         onClose={() => setIsCancelSubscriptionOpen(false)}
         subscription={subscription}
+        refetchSubscriptions={refetchSubscriptionList}
       />
 
-      <PaymentMethodRechargeForm
+      <PaymentMethodForm
         isOpen={isPaymentMethodOpen}
         onClose={() => setIsPaymentMethodOpen(false)}
-        addressId={subscription.shippingAddress.id}
+        defaultPaymentMethodId={subscription.paymentMethod.id}
+        addressId={subscription.address.id}
+        refetchSubscriptions={refetchSubscriptions}
       />
     </>
   );

@@ -3,7 +3,11 @@ import { SetRequired } from 'type-fest';
 import { ProductBase } from 'types/product';
 import { Review, ReviewHighlights, ReviewList, ReviewRollup, ReviewStats } from 'types/review';
 import { ProductPageRelatedProductsQueryResponse } from 'types/storefront';
-import { ProductPageShopifyProductResponse, Shopify_Product, Shopify_ProductConnection } from 'types/takeshape';
+import {
+  ProductPageShopifyProductResponse,
+  Shopify_Product,
+  Shopify_ProductConnection
+} from 'types/takeshape';
 import { TrustpilotReviewList } from 'types/trustpilot';
 
 export type ProductPageShopifyProductHandleNode = Pick<Shopify_Product, 'id' | 'handle'>;

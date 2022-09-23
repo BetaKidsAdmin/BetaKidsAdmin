@@ -2,9 +2,9 @@
   "$schema": "https://schema.takeshape.io/project-schema",
   "dataKey": "AQIDAHi9nATJb1LYgj5u7ShOGp43y2H6TuckRKGDlwTU4b6ryQE3F753UJC+EN+T6NA+sECOAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMEqXfFd6xB3H7ALoIAgEQgDsvrzZF7f6VjxJyNpDMrgKOxnBnPoX+1WefE8ckQNX4ZtZPzSBCYkNwIWY7C5Va9RIwWSxbNKNShoRfEQ==",
   "projectId": "e6942252-2648-44e1-a793-f1d77edb40c9",
-  "version": 117,
+  "version": 128,
   "created": "2022-07-25T07:27:22.404Z",
-  "updated": "2022-09-02T11:19:20.933Z",
+  "updated": "2022-09-22T14:46:20.395Z",
   "defaultLocale": "en-us",
   "locales": [
     "en-us"
@@ -1425,7 +1425,7 @@
     },
     "shopify-storefront": {
       "id": "shopify-storefront",
-      "provider": "generic",
+      "provider": "graphql",
       "title": "Shopify Storefront",
       "namespace": "ShopifyStorefront",
       "serviceType": "graphql",
@@ -1450,15 +1450,14 @@
     },
     "recaptcha": {
       "id": "recaptcha",
-      "provider": "generic",
+      "provider": "rest",
       "title": "ReCAPTCHA",
       "namespace": "ReCAPTCHA",
       "serviceType": "rest",
       "authenticationType": "searchParams",
       "options": {
         "endpoint": "https://www.google.com/recaptcha/api"
-      },
-      "authentication": "VmUF5D5z/ZjJvF0vzlzOQvA7YQEuk17i15VxauPlRUVCKN02xH8JYUTa/B39LOUFMprp/WoyuGlRJ8J4T+0m2jOgaYeT0dha75rDGLo0+xP5S+0aCJvsglGBi3WUNpj3DO0td44xERW67erPOIJsDjNLA+u20ho="
+      }
     },
     "zendesk": {
       "id": "zendesk",
@@ -1484,57 +1483,26 @@
       "authentication": "pUHyA+5fYrpIOMnezIYYEXpXResXQlyqftnVJ+jOrezZZjZK2kCSGs9CavxOqWTXg+hrckKTu4fTglMDeTS6T2U0UQttr3fn44MJbDXAhUu9spP6ZHdQsZBZRZePIEckHgr3EpKrlPBOZHHOUsGG"
     }
   },
-  "indexedShapes": {
-    "Shopify_Product": {
-      "queries": {
-        "list": {
-          "name": "Shopify_products",
-          "objectDepthLimit": 2
-        },
-        "get": {
-          "name": "Shopify_product",
-          "objectDepthLimit": 2
-        }
-      },
-      "triggers": [
-        {
-          "type": "schedule",
-          "query": "list",
-          "interval": 1440
-        },
-        {
-          "type": "webhook",
-          "query": "get",
-          "service": "shopify",
-          "events": [
-            "products/create",
-            "products/update",
-            "products/delete"
-          ]
-        }
-      ]
-    }
-  },
   "queries": {
     "getLink": {
-      "shape": "Link",
+      "args": "TSGetArgs<Link>",
       "resolver": {
         "name": "takeshape:get",
         "service": "takeshape:local",
         "shapeName": "Link"
       },
-      "description": "Get a Link by ID",
-      "args": "TSGetArgs<Link>"
+      "shape": "Link",
+      "description": "Get a Link by ID"
     },
     "getLinkList": {
-      "shape": "PaginatedList<Link>",
+      "args": "TSListArgs<Link>",
       "resolver": {
         "name": "takeshape:list",
         "service": "takeshape:local",
         "shapeName": "Link"
       },
-      "description": "Returns a list Link in natural order.",
-      "args": "TSListArgs<Link>"
+      "shape": "PaginatedList<Link>",
+      "description": "Returns a list Link in natural order."
     },
     "getProduct": {
       "shape": "Product",
@@ -1557,7 +1525,7 @@
       "args": "TSListArgs<Product>"
     },
     "getProductListWithTtl": {
-      "shape": "PaginatedList<Product>",
+      "args": "TSListArgs<Product>",
       "resolver": {
         "name": "takeshape:list",
         "service": "takeshape:local",
@@ -1566,48 +1534,20 @@
           "ttl": 60
         }
       },
-      "description": "Returns a list Product in natural order.",
-      "args": "TSListArgs<Product>"
+      "shape": "PaginatedList<Product>",
+      "description": "Returns a list Product in natural order."
     },
     "getFooter": {
-      "shape": "Footer",
+      "args": "TSGetSingletonArgs<Footer>",
       "resolver": {
         "name": "takeshape:get",
         "service": "takeshape:local",
         "shapeName": "Footer"
       },
-      "description": "Get a Footer by ID",
-      "args": "TSGetSingletonArgs<Footer>"
+      "shape": "Footer",
+      "description": "Get a Footer by ID"
     },
     "ReviewsIo_createInvitation": {
-      "shape": "ReviewsIo_CreateInvitationResponse",
-      "resolver": {
-        "name": "rest:post",
-        "service": "reviews-io",
-        "path": "/invitation",
-        "body": {
-          "ops": [
-            {
-              "path": "$",
-              "mapping": "$args.input"
-            }
-          ],
-          "serialize": {
-            "content": {
-              "contentType": "application/json"
-            }
-          }
-        },
-        "headers": {
-          "ops": [
-            {
-              "path": "content-type",
-              "value": "application/json"
-            }
-          ]
-        }
-      },
-      "summary": "Queue review invitation",
       "args": {
         "type": "object",
         "properties": {
@@ -1647,10 +1587,81 @@
           }
         },
         "required": []
-      }
+      },
+      "resolver": {
+        "name": "rest:post",
+        "service": "reviews-io",
+        "path": "/invitation",
+        "body": {
+          "ops": [
+            {
+              "path": "$",
+              "mapping": "$args.input"
+            }
+          ],
+          "serialize": {
+            "content": {
+              "contentType": "application/json"
+            }
+          }
+        },
+        "headers": {
+          "ops": [
+            {
+              "path": "content-type",
+              "value": "application/json"
+            }
+          ]
+        }
+      },
+      "shape": "ReviewsIo_CreateInvitationResponse"
     },
     "ReviewsIo_listProductReviews": {
-      "shape": "ReviewsIo_ListProductReviewsResponse",
+      "args": {
+        "type": "object",
+        "properties": {
+          "sku": {
+            "type": "string"
+          },
+          "mpn": {
+            "type": "string"
+          },
+          "page": {
+            "type": "integer"
+          },
+          "per_page": {
+            "type": "integer"
+          },
+          "photos": {
+            "type": "integer"
+          },
+          "verified_only": {
+            "type": "integer"
+          },
+          "comments_only": {
+            "type": "integer"
+          },
+          "minRating": {
+            "type": "integer"
+          },
+          "include_unpublished_images": {
+            "type": "integer"
+          },
+          "include_moderated": {
+            "type": "integer"
+          },
+          "order_id": {
+            "type": "string"
+          },
+          "min_date": {
+            "type": "string"
+          },
+          "max_date": {
+            "type": "string"
+          }
+        },
+        "required": []
+      },
       "resolver": {
         "name": "rest:get",
         "service": "reviews-io",
@@ -1763,51 +1774,7 @@
           }
         }
       },
-      "args": {
-        "type": "object",
-        "properties": {
-          "sku": {
-            "type": "string"
-          },
-          "mpn": {
-            "type": "string"
-          },
-          "page": {
-            "type": "integer"
-          },
-          "per_page": {
-            "type": "integer"
-          },
-          "photos": {
-            "type": "integer"
-          },
-          "verified_only": {
-            "type": "integer"
-          },
-          "comments_only": {
-            "type": "integer"
-          },
-          "minRating": {
-            "type": "integer"
-          },
-          "include_unpublished_images": {
-            "type": "integer"
-          },
-          "include_moderated": {
-            "type": "integer"
-          },
-          "order_id": {
-            "type": "string"
-          },
-          "min_date": {
-            "type": "string"
-          },
-          "max_date": {
-            "type": "string"
-          }
-        },
-        "required": []
-      }
+      "shape": "ReviewsIo_ListProductReviewsResponse"
     },
     "getMyAdminCustomer": {
       "resolver": {
@@ -1826,8 +1793,6 @@
       "shape": "Shopify_Customer"
     },
     "getMyLoyaltyCard": {
-      "description": "Get a loyalty card from Voucherify",
-      "shape": "local:Voucherify_LoyaltyCard",
       "resolver": {
         "compose": [
           {
@@ -1899,15 +1864,11 @@
             }
           ]
         }
-      }
+      },
+      "shape": "local:Voucherify_LoyaltyCard",
+      "description": "Get a loyalty card from Voucherify"
     },
     "getMyNewsletterSubscriptions": {
-      "shape": {
-        "type": "array",
-        "items": {
-          "@ref": "local:ProfileNewsletterStatus"
-        }
-      },
       "resolver": {
         "if": "!isEmpty($claims.email)",
         "name": "rest:get",
@@ -1941,67 +1902,65 @@
             ]
           }
         }
+      },
+      "shape": {
+        "type": "array",
+        "items": {
+          "@ref": "local:ProfileNewsletterStatus"
+        }
       }
     },
     "getNavigation": {
-      "shape": "Navigation",
+      "args": "TSGetSingletonArgs<Navigation>",
       "resolver": {
         "name": "takeshape:get",
         "service": "takeshape:local",
         "shapeName": "Navigation"
       },
-      "description": "Get a Navigation by ID",
-      "args": "TSGetSingletonArgs<Navigation>"
+      "shape": "Navigation",
+      "description": "Get a Navigation by ID"
     },
     "getProductPageDetails": {
-      "shape": "ProductPageDetails",
+      "args": "TSGetArgs<ProductPageDetails>",
       "resolver": {
         "name": "takeshape:get",
         "service": "takeshape:local",
         "shapeName": "ProductPageDetails"
       },
-      "description": "Get a ProductPageDetails by ID",
-      "args": "TSGetArgs<ProductPageDetails>"
+      "shape": "ProductPageDetails",
+      "description": "Get a ProductPageDetails by ID"
     },
     "getProductPageDetailsList": {
-      "shape": "PaginatedList<ProductPageDetails>",
+      "args": "TSListArgs<ProductPageDetails>",
       "resolver": {
         "name": "takeshape:list",
         "service": "takeshape:local",
         "shapeName": "ProductPageDetails"
       },
-      "description": "Returns a list ProductPageDetails in natural order.",
-      "args": "TSListArgs<ProductPageDetails>"
+      "shape": "PaginatedList<ProductPageDetails>",
+      "description": "Returns a list ProductPageDetails in natural order."
     },
     "getProductPagePolicies": {
-      "shape": "ProductPagePolicies",
+      "args": "TSGetArgs<ProductPagePolicies>",
       "resolver": {
         "name": "takeshape:get",
         "service": "takeshape:local",
         "shapeName": "ProductPagePolicies"
       },
-      "description": "Get a ProductPagePolicies by ID",
-      "args": "TSGetArgs<ProductPagePolicies>"
+      "shape": "ProductPagePolicies",
+      "description": "Get a ProductPagePolicies by ID"
     },
     "getProductPagePoliciesList": {
-      "shape": "PaginatedList<ProductPagePolicies>",
+      "args": "TSListArgs<ProductPagePolicies>",
       "resolver": {
         "name": "takeshape:list",
         "service": "takeshape:local",
         "shapeName": "ProductPagePolicies"
       },
-      "description": "Returns a list ProductPagePolicies in natural order.",
-      "args": "TSListArgs<ProductPagePolicies>"
+      "shape": "PaginatedList<ProductPagePolicies>",
+      "description": "Returns a list ProductPagePolicies in natural order."
     },
     "collectionsWithTtl": {
-      "resolver": {
-        "name": "graphql:query",
-        "service": "shopify",
-        "fieldName": "collections",
-        "options": {
-          "ttl": 60
-        }
-      },
       "args": {
         "type": "object",
         "properties": {
@@ -2042,17 +2001,17 @@
           }
         }
       },
-      "shape": "Shopify_CollectionConnection"
-    },
-    "collectionByHandleWithTtl": {
       "resolver": {
         "name": "graphql:query",
         "service": "shopify",
-        "fieldName": "collectionByHandle",
+        "fieldName": "collections",
         "options": {
           "ttl": 60
         }
       },
+      "shape": "Shopify_CollectionConnection"
+    },
+    "collectionByHandleWithTtl": {
       "args": {
         "type": "object",
         "properties": {
@@ -2065,14 +2024,17 @@
           "handle"
         ]
       },
-      "shape": "Shopify_Collection"
-    },
-    "Shopify_products": {
       "resolver": {
         "name": "graphql:query",
         "service": "shopify",
-        "fieldName": "products"
+        "fieldName": "collectionByHandle",
+        "options": {
+          "ttl": 60
+        }
       },
+      "shape": "Shopify_Collection"
+    },
+    "Shopify_products": {
       "args": {
         "type": "object",
         "properties": {
@@ -2113,9 +2075,54 @@
           }
         }
       },
+      "resolver": {
+        "name": "graphql:query",
+        "service": "shopify",
+        "fieldName": "products"
+      },
       "shape": "Shopify_ProductConnection"
     },
     "productsWithTtl": {
+      "args": {
+        "type": "object",
+        "properties": {
+          "first": {
+            "type": "integer",
+            "description": "Returns up to the first `n` elements from the list."
+          },
+          "after": {
+            "type": "string",
+            "description": "Returns the elements that come after the specified cursor."
+          },
+          "last": {
+            "type": "integer",
+            "description": "Returns up to the last `n` elements from the list."
+          },
+          "before": {
+            "type": "string",
+            "description": "Returns the elements that come before the specified cursor."
+          },
+          "reverse": {
+            "type": "boolean",
+            "description": "Reverse the order of the underlying list.",
+            "default": false
+          },
+          "sortKey": {
+            "@ref": "shopify:ProductSortKeys",
+            "description": "Sort the underlying list by the given key.",
+            "default": "ID"
+          },
+          "query": {
+            "type": "string",
+            "description": "Supported filter parameters:\n - `barcode`\n - `created_at`\n - `delivery_profile_id`\n - `error_feedback`\n - `gift_card`\n - `has_only_composites`\n - `has_only_default_variant`\n - `id`\n - `inventory_total`\n - `is_price_reduced`\n - `out_of_stock_somewhere`\n - `price`\n - `product_type`\n - `publishable_status`\n - `published_status`\n - `sku`\n - `status`\n - `tag`\n - `tag_not`\n - `title`\n - `updated_at`\n - `vendor`\n\nSee the detailed [search syntax](https://shopify.dev/api/usage/search-syntax)\nfor more information about using filters."
+          },
+          "savedSearchId": {
+            "type": "string",
+            "@tag": "id",
+            "description": "The ID of an existing saved search.\nThe search’s query string is used as the query argument.\nRefer to [SavedSearch](https://shopify.dev/api/admin-graphql/latest/objects/savedsearch)."
+          }
+        }
+      },
       "resolver": {
         "name": "graphql:query",
         "service": "shopify",
@@ -2124,57 +2131,9 @@
           "ttl": 60
         }
       },
-      "args": {
-        "type": "object",
-        "properties": {
-          "first": {
-            "type": "integer",
-            "description": "Returns up to the first `n` elements from the list."
-          },
-          "after": {
-            "type": "string",
-            "description": "Returns the elements that come after the specified cursor."
-          },
-          "last": {
-            "type": "integer",
-            "description": "Returns up to the last `n` elements from the list."
-          },
-          "before": {
-            "type": "string",
-            "description": "Returns the elements that come before the specified cursor."
-          },
-          "reverse": {
-            "type": "boolean",
-            "description": "Reverse the order of the underlying list.",
-            "default": false
-          },
-          "sortKey": {
-            "@ref": "shopify:ProductSortKeys",
-            "description": "Sort the underlying list by the given key.",
-            "default": "ID"
-          },
-          "query": {
-            "type": "string",
-            "description": "Supported filter parameters:\n - `barcode`\n - `created_at`\n - `delivery_profile_id`\n - `error_feedback`\n - `gift_card`\n - `has_only_composites`\n - `has_only_default_variant`\n - `id`\n - `inventory_total`\n - `is_price_reduced`\n - `out_of_stock_somewhere`\n - `price`\n - `product_type`\n - `publishable_status`\n - `published_status`\n - `sku`\n - `status`\n - `tag`\n - `tag_not`\n - `title`\n - `updated_at`\n - `vendor`\n\nSee the detailed [search syntax](https://shopify.dev/api/usage/search-syntax)\nfor more information about using filters."
-          },
-          "savedSearchId": {
-            "type": "string",
-            "@tag": "id",
-            "description": "The ID of an existing saved search.\nThe search’s query string is used as the query argument.\nRefer to [SavedSearch](https://shopify.dev/api/admin-graphql/latest/objects/savedsearch)."
-          }
-        }
-      },
       "shape": "Shopify_ProductConnection"
     },
     "productByHandleWithTtl": {
-      "resolver": {
-        "name": "graphql:query",
-        "service": "shopify",
-        "fieldName": "productByHandle",
-        "options": {
-          "ttl": 60
-        }
-      },
       "args": {
         "type": "object",
         "properties": {
@@ -2186,6 +2145,14 @@
         "required": [
           "handle"
         ]
+      },
+      "resolver": {
+        "name": "graphql:query",
+        "service": "shopify",
+        "fieldName": "productByHandle",
+        "options": {
+          "ttl": 60
+        }
       },
       "shape": "Shopify_Product"
     },
@@ -2200,27 +2167,27 @@
       "args": "TSGetSingletonArgs<Storefront>"
     },
     "getCollection": {
-      "shape": "Collection",
+      "args": "TSGetArgs<Collection>",
       "resolver": {
         "name": "takeshape:get",
         "service": "takeshape:local",
         "shapeName": "Collection"
       },
-      "description": "Get a Collection by ID",
-      "args": "TSGetArgs<Collection>"
+      "shape": "Collection",
+      "description": "Get a Collection by ID"
     },
     "getCollectionList": {
-      "shape": "PaginatedList<Collection>",
+      "args": "TSListArgs<Collection>",
       "resolver": {
         "name": "takeshape:list",
         "service": "takeshape:local",
         "shapeName": "Collection"
       },
-      "description": "Returns a list Collection in natural order.",
-      "args": "TSListArgs<Collection>"
+      "shape": "PaginatedList<Collection>",
+      "description": "Returns a list Collection in natural order."
     },
     "getCollectionListWithTtl": {
-      "shape": "PaginatedList<Collection>",
+      "args": "TSListArgs<Collection>",
       "resolver": {
         "name": "takeshape:list",
         "service": "takeshape:local",
@@ -2229,8 +2196,8 @@
           "ttl": 60
         }
       },
-      "description": "Returns a list Collection in natural order.",
-      "args": "TSListArgs<Collection>"
+      "shape": "PaginatedList<Collection>",
+      "description": "Returns a list Collection in natural order."
     },
     "getPage": {
       "shape": "Page",
@@ -2253,24 +2220,24 @@
       "args": "TSListArgs<Page>"
     },
     "getLineItemAttributes": {
-      "shape": "LineItemAttributes",
+      "args": "TSGetArgs<LineItemAttributes>",
       "resolver": {
         "name": "takeshape:get",
         "service": "takeshape:local",
         "shapeName": "LineItemAttributes"
       },
-      "description": "Get a LineItemAttributes by ID",
-      "args": "TSGetArgs<LineItemAttributes>"
+      "shape": "LineItemAttributes",
+      "description": "Get a LineItemAttributes by ID"
     },
     "getLineItemAttributesList": {
-      "shape": "PaginatedList<LineItemAttributes>",
+      "args": "TSListArgs<LineItemAttributes>",
       "resolver": {
         "name": "takeshape:list",
         "service": "takeshape:local",
         "shapeName": "LineItemAttributes"
       },
-      "description": "Returns a list LineItemAttributes in natural order.",
-      "args": "TSListArgs<LineItemAttributes>"
+      "shape": "PaginatedList<LineItemAttributes>",
+      "description": "Returns a list LineItemAttributes in natural order."
     },
     "getHomepage": {
       "shape": "Homepage",
@@ -2731,11 +2698,6 @@
   },
   "mutations": {
     "ShopifyStorefront_customerAccessTokenCreate": {
-      "resolver": {
-        "name": "graphql:mutation",
-        "service": "shopify-storefront",
-        "fieldName": "customerAccessTokenCreate"
-      },
       "args": {
         "type": "object",
         "properties": {
@@ -2748,31 +2710,34 @@
           "input"
         ]
       },
+      "resolver": {
+        "name": "graphql:mutation",
+        "service": "shopify-storefront",
+        "fieldName": "customerAccessTokenCreate"
+      },
       "shape": "ShopifyStorefront_CustomerAccessTokenCreatePayload"
     },
     "updateFooter": {
-      "shape": "UpdateResult<Footer>",
+      "args": "UpdateArgs<Footer>",
       "resolver": {
         "name": "takeshape:update",
         "service": "takeshape:local",
         "shapeName": "Footer"
       },
-      "description": "Update Footer",
-      "args": "UpdateArgs<Footer>"
+      "shape": "UpdateResult<Footer>",
+      "description": "Update Footer"
     },
     "updateNavigation": {
-      "shape": "UpdateResult<Navigation>",
+      "args": "UpdateArgs<Navigation>",
       "resolver": {
         "name": "takeshape:update",
         "service": "takeshape:local",
         "shapeName": "Navigation"
       },
-      "description": "Update Navigation",
-      "args": "UpdateArgs<Navigation>"
+      "shape": "UpdateResult<Navigation>",
+      "description": "Update Navigation"
     },
     "Voucherify_createOrder": {
-      "description": "Create an order in Voucherify",
-      "shape": "Voucherify_Order",
       "args": {
         "type": "object",
         "properties": {
@@ -2860,10 +2825,29 @@
             }
           ]
         }
-      }
+      },
+      "shape": "Voucherify_Order",
+      "description": "Create an order in Voucherify"
     },
     "addMembers": {
-      "shape": "Klaviyo_AddMembersResponse",
+      "args": {
+        "type": "object",
+        "properties": {
+          "input": {
+            "@ref": "local:AddListMembersInput"
+          },
+          "list_id": {
+            "type": "string"
+          },
+          "recaptchaToken": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "list_id",
+          "recaptchaToken"
+        ]
+      },
       "resolver": {
         "compose": [
           {
@@ -2933,28 +2917,20 @@
           ]
         }
       },
-      "summary": "Add Members to a List",
+      "shape": "Klaviyo_AddMembersResponse"
+    },
+    "subscribeMyEmailToNewsletter": {
       "args": {
         "type": "object",
         "properties": {
-          "input": {
-            "@ref": "local:AddListMembersInput"
-          },
           "list_id": {
-            "type": "string"
-          },
-          "recaptchaToken": {
             "type": "string"
           }
         },
         "required": [
-          "list_id",
-          "recaptchaToken"
+          "list_id"
         ]
-      }
-    },
-    "subscribeMyEmailToNewsletter": {
-      "shape": "Klaviyo_AddMembersResponse",
+      },
       "resolver": {
         "name": "rest:post",
         "service": "klaviyo",
@@ -3004,7 +2980,9 @@
           ]
         }
       },
-      "summary": "Add Members to a List",
+      "shape": "Klaviyo_AddMembersResponse"
+    },
+    "unsubscribeMyEmailFromNewsletter": {
       "args": {
         "type": "object",
         "properties": {
@@ -3015,10 +2993,7 @@
         "required": [
           "list_id"
         ]
-      }
-    },
-    "unsubscribeMyEmailFromNewsletter": {
-      "shape": "Klaviyo_200Ok",
+      },
       "resolver": {
         "name": "rest:delete",
         "service": "klaviyo",
@@ -3060,10 +3035,39 @@
           ]
         }
       },
-      "summary": "Remove Profiles From List",
+      "shape": "Klaviyo_200Ok"
+    },
+    "Klaviyo_removeMembers": {
       "args": {
         "type": "object",
         "properties": {
+          "input": {
+            "description": "\nThe profiles that you would like to remove from the list. \n\nExample:\n\n{\n  \"emails\":[\"george.washington@klaviyo.com\",\"abraham.lincoln@klaviyo.com\"],\n  \"phone_numbers\":[\"+13239169023\"],\n  \"push_tokens\":[\"03df25c845d460bcdad7802d2vf6fc1dfde97283bf75cc993eb6dca835ea2e2r\"]\n}\n",
+            "properties": {
+              "emails": {
+                "minItems": 0,
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "phone_numbers": {
+                "minItems": 0,
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "push_tokens": {
+                "minItems": 0,
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
           "list_id": {
             "type": "string"
           }
@@ -3071,10 +3075,7 @@
         "required": [
           "list_id"
         ]
-      }
-    },
-    "Klaviyo_removeMembers": {
-      "shape": "Klaviyo_200Ok",
+      },
       "resolver": {
         "name": "rest:delete",
         "service": "klaviyo",
@@ -3116,120 +3117,7 @@
           ]
         }
       },
-      "summary": "Remove Profiles From List",
-      "args": {
-        "type": "object",
-        "properties": {
-          "input": {
-            "description": "\nThe profiles that you would like to remove from the list. \n\nExample:\n\n{\n  \"emails\":[\"george.washington@klaviyo.com\",\"abraham.lincoln@klaviyo.com\"],\n  \"phone_numbers\":[\"+13239169023\"],\n  \"push_tokens\":[\"03df25c845d460bcdad7802d2vf6fc1dfde97283bf75cc993eb6dca835ea2e2r\"]\n}\n",
-            "properties": {
-              "emails": {
-                "minItems": 0,
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              "phone_numbers": {
-                "minItems": 0,
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              "push_tokens": {
-                "minItems": 0,
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              }
-            },
-            "type": "object"
-          },
-          "list_id": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "list_id"
-        ]
-      }
-    },
-    "Gorgias_createTicket": {
-      "resolver": {
-        "compose": [
-          {
-            "id": "recaptcha",
-            "if": "isEmpty($claims.email)",
-            "name": "rest:post",
-            "service": "recaptcha",
-            "path": "/siteverify",
-            "searchParams": {
-              "ops": [
-                {
-                  "path": "response",
-                  "mapping": "$args.recaptchaToken"
-                }
-              ]
-            }
-          },
-          {
-            "id": "createTicket",
-            "if": "$resolvers.recaptcha.success == true || !isEmpty($claims.email)",
-            "name": "rest:post",
-            "service": "gorgias",
-            "path": "/tickets",
-            "json": {
-              "ops": [
-                {
-                  "path": "customer.email",
-                  "mapping": "$args.email"
-                },
-                {
-                  "path": "messages",
-                  "value": [
-                    {
-                      "channel": "email",
-                      "from_agent": false,
-                      "source": {
-                        "to": [
-                          {
-                            "address": "qw72eg20ez05v4dy@emails.gorgias.com"
-                          }
-                        ]
-                      },
-                      "via": "contact_form"
-                    }
-                  ]
-                },
-                {
-                  "path": "messages[0].body_text",
-                  "mapping": "$args.message"
-                },
-                {
-                  "path": "messages[0].source.from.address",
-                  "mapping": "$args.email"
-                },
-                {
-                  "path": "messages[0].source.from.name",
-                  "mapping": "$args.name"
-                }
-              ]
-            }
-          }
-        ],
-        "results": {
-          "ops": [
-            {
-              "path": "$",
-              "mapping": "$finalResolver"
-            }
-          ]
-        }
-      },
-      "args": "CreateTicketVariables",
-      "shape": "CreateTicketResponse"
+      "shape": "Klaviyo_200Ok"
     },
     "Zendesk_createTicket": {
       "resolver": {
@@ -3286,11 +3174,6 @@
       "shape": "CreateTicketResponse"
     },
     "Shopify_products": {
-      "resolver": {
-        "name": "graphql:query",
-        "service": "shopify",
-        "fieldName": "products"
-      },
       "args": {
         "type": "object",
         "properties": {
@@ -3331,14 +3214,14 @@
           }
         }
       },
-      "shape": "Shopify_ProductConnection"
-    },
-    "Shopify_product": {
       "resolver": {
         "name": "graphql:query",
         "service": "shopify",
-        "fieldName": "product"
+        "fieldName": "products"
       },
+      "shape": "Shopify_ProductConnection"
+    },
+    "Shopify_product": {
       "args": {
         "type": "object",
         "properties": {
@@ -3352,9 +3235,52 @@
           "id"
         ]
       },
+      "resolver": {
+        "name": "graphql:query",
+        "service": "shopify",
+        "fieldName": "product"
+      },
       "shape": "Shopify_Product"
     },
     "createCustomer": {
+      "args": {
+        "type": "object",
+        "properties": {
+          "input": {
+            "type": "object",
+            "properties": {
+              "firstName": {
+                "type": "string"
+              },
+              "lastName": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "acceptsMarketing": {
+                "type": "boolean"
+              },
+              "recaptchaToken": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "email",
+              "password"
+            ]
+          }
+        },
+        "required": [
+          "input"
+        ]
+      },
       "resolver": {
         "compose": [
           {
@@ -3430,44 +3356,6 @@
             }
           ]
         }
-      },
-      "args": {
-        "type": "object",
-        "properties": {
-          "input": {
-            "type": "object",
-            "properties": {
-              "firstName": {
-                "type": "string"
-              },
-              "lastName": {
-                "type": "string"
-              },
-              "email": {
-                "type": "string"
-              },
-              "phone": {
-                "type": "string"
-              },
-              "password": {
-                "type": "string"
-              },
-              "acceptsMarketing": {
-                "type": "boolean"
-              },
-              "recaptchaToken": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "email",
-              "password"
-            ]
-          }
-        },
-        "required": [
-          "input"
-        ]
       },
       "shape": "CreateCustomerPayload"
     },
@@ -3826,87 +3714,87 @@
       "args": "DeleteArgs<Product>"
     },
     "updateProductPageDetails": {
-      "shape": "UpdateResult<ProductPageDetails>",
+      "args": "UpdateArgs<ProductPageDetails>",
       "resolver": {
         "name": "takeshape:update",
         "service": "takeshape:local",
         "shapeName": "ProductPageDetails"
       },
-      "description": "Update ProductPageDetails",
-      "args": "UpdateArgs<ProductPageDetails>"
+      "shape": "UpdateResult<ProductPageDetails>",
+      "description": "Update ProductPageDetails"
     },
     "createProductPageDetails": {
-      "shape": "CreateResult<ProductPageDetails>",
+      "args": "CreateArgs<ProductPageDetails>",
       "resolver": {
         "name": "takeshape:create",
         "service": "takeshape:local",
         "shapeName": "ProductPageDetails"
       },
-      "description": "Create ProductPageDetails",
-      "args": "CreateArgs<ProductPageDetails>"
+      "shape": "CreateResult<ProductPageDetails>",
+      "description": "Create ProductPageDetails"
     },
     "duplicateProductPageDetails": {
-      "shape": "DuplicateResult<ProductPageDetails>",
+      "args": "DuplicateArgs<ProductPageDetails>",
       "resolver": {
         "name": "takeshape:duplicate",
         "service": "takeshape:local",
         "shapeName": "ProductPageDetails"
       },
-      "description": "Duplicate ProductPageDetails",
-      "args": "DuplicateArgs<ProductPageDetails>"
+      "shape": "DuplicateResult<ProductPageDetails>",
+      "description": "Duplicate ProductPageDetails"
     },
     "deleteProductPageDetails": {
-      "shape": "DeleteResult<ProductPageDetails>",
+      "args": "DeleteArgs<ProductPageDetails>",
       "resolver": {
         "name": "takeshape:delete",
         "service": "takeshape:local",
         "shapeName": "ProductPageDetails"
       },
-      "description": "Delete ProductPageDetails",
-      "args": "DeleteArgs<ProductPageDetails>"
+      "shape": "DeleteResult<ProductPageDetails>",
+      "description": "Delete ProductPageDetails"
     },
     "updateProductPagePolicies": {
-      "shape": "UpdateResult<ProductPagePolicies>",
+      "args": "UpdateArgs<ProductPagePolicies>",
       "resolver": {
         "name": "takeshape:update",
         "service": "takeshape:local",
         "shapeName": "ProductPagePolicies"
       },
-      "description": "Update ProductPagePolicies",
-      "args": "UpdateArgs<ProductPagePolicies>"
+      "shape": "UpdateResult<ProductPagePolicies>",
+      "description": "Update ProductPagePolicies"
     },
     "createProductPagePolicies": {
-      "shape": "CreateResult<ProductPagePolicies>",
+      "args": "CreateArgs<ProductPagePolicies>",
       "resolver": {
         "name": "takeshape:create",
         "service": "takeshape:local",
         "shapeName": "ProductPagePolicies"
       },
-      "description": "Create ProductPagePolicies",
-      "args": "CreateArgs<ProductPagePolicies>"
+      "shape": "CreateResult<ProductPagePolicies>",
+      "description": "Create ProductPagePolicies"
     },
     "duplicateProductPagePolicies": {
-      "shape": "DuplicateResult<ProductPagePolicies>",
+      "args": "DuplicateArgs<ProductPagePolicies>",
       "resolver": {
         "name": "takeshape:duplicate",
         "service": "takeshape:local",
         "shapeName": "ProductPagePolicies"
       },
-      "description": "Duplicate ProductPagePolicies",
-      "args": "DuplicateArgs<ProductPagePolicies>"
+      "shape": "DuplicateResult<ProductPagePolicies>",
+      "description": "Duplicate ProductPagePolicies"
     },
     "deleteProductPagePolicies": {
-      "shape": "DeleteResult<ProductPagePolicies>",
+      "args": "DeleteArgs<ProductPagePolicies>",
       "resolver": {
         "name": "takeshape:delete",
         "service": "takeshape:local",
         "shapeName": "ProductPagePolicies"
       },
-      "description": "Delete ProductPagePolicies",
-      "args": "DeleteArgs<ProductPagePolicies>"
+      "shape": "DeleteResult<ProductPagePolicies>",
+      "description": "Delete ProductPagePolicies"
     },
     "updateCollection": {
-      "shape": "UpdateResult<Collection>",
+      "args": "UpdateArgs<CollectionInterface>",
       "resolver": {
         "compose": [
           {
@@ -4030,11 +3918,11 @@
           ]
         }
       },
-      "description": "Update Collection. If the input has Shopify values and a Shopify ID, the Shopify collection with that ID is updated.\nIf the input has Shopify values and no Shopify ID, a Shopify collection is created.",
-      "args": "UpdateArgs<CollectionInterface>"
+      "shape": "UpdateResult<Collection>",
+      "description": "Update Collection. If the input has Shopify values and a Shopify ID, the Shopify collection with that ID is updated.\nIf the input has Shopify values and no Shopify ID, a Shopify collection is created."
     },
     "createCollection": {
-      "shape": "CreateResult<Collection>",
+      "args": "CreateArgs<CollectionInterface>",
       "resolver": {
         "compose": [
           {
@@ -4132,28 +4020,28 @@
           ]
         }
       },
-      "description": "Create Collection. If Shopify values are provided, a Shopify collection is also created and the new collection ID is saved.",
-      "args": "CreateArgs<CollectionInterface>"
+      "shape": "CreateResult<Collection>",
+      "description": "Create Collection. If Shopify values are provided, a Shopify collection is also created and the new collection ID is saved."
     },
     "duplicateCollection": {
-      "shape": "DuplicateResult<Collection>",
+      "args": "DuplicateArgs<Collection>",
       "resolver": {
         "name": "takeshape:duplicate",
         "service": "takeshape:local",
         "shapeName": "Collection"
       },
-      "description": "Duplicate Collection",
-      "args": "DuplicateArgs<Collection>"
+      "shape": "DuplicateResult<Collection>",
+      "description": "Duplicate Collection"
     },
     "deleteCollection": {
-      "shape": "DeleteResult<Collection>",
+      "args": "DeleteArgs<Collection>",
       "resolver": {
         "name": "takeshape:delete",
         "service": "takeshape:local",
         "shapeName": "Collection"
       },
-      "description": "Delete Collection",
-      "args": "DeleteArgs<Collection>"
+      "shape": "DeleteResult<Collection>",
+      "description": "Delete Collection"
     },
     "updatePage": {
       "shape": "UpdateResult<Page>",
@@ -4196,43 +4084,6 @@
       "args": "DeleteArgs<Page>"
     },
     "createMyProductReview": {
-      "shape": "ReviewsIo_CreateProductReviewNewResponse",
-      "resolver": {
-        "if": "!isEmpty($claims.sub)",
-        "name": "rest:post",
-        "service": "reviews-io",
-        "path": "/product/review/new",
-        "body": {
-          "ops": [
-            {
-              "path": "$",
-              "mapping": "$args.input"
-            },
-            {
-              "path": "name",
-              "mapping": "$claims.name"
-            },
-            {
-              "path": "email",
-              "mapping": "$claims.email"
-            }
-          ],
-          "serialize": {
-            "content": {
-              "contentType": "application/json"
-            }
-          }
-        },
-        "headers": {
-          "ops": [
-            {
-              "path": "content-type",
-              "value": "application/json"
-            }
-          ]
-        }
-      },
-      "summary": "Insert product review",
       "args": {
         "type": "object",
         "properties": {
@@ -4275,87 +4126,123 @@
           }
         },
         "required": []
-      }
+      },
+      "resolver": {
+        "if": "!isEmpty($claims.sub)",
+        "name": "rest:post",
+        "service": "reviews-io",
+        "path": "/product/review/new",
+        "body": {
+          "ops": [
+            {
+              "path": "$",
+              "mapping": "$args.input"
+            },
+            {
+              "path": "name",
+              "mapping": "$claims.name"
+            },
+            {
+              "path": "email",
+              "mapping": "$claims.email"
+            }
+          ],
+          "serialize": {
+            "content": {
+              "contentType": "application/json"
+            }
+          }
+        },
+        "headers": {
+          "ops": [
+            {
+              "path": "content-type",
+              "value": "application/json"
+            }
+          ]
+        }
+      },
+      "shape": "ReviewsIo_CreateProductReviewNewResponse"
     },
     "updateLink": {
-      "shape": "UpdateResult<Link>",
+      "args": "UpdateArgs<Link>",
       "resolver": {
         "name": "takeshape:update",
         "service": "takeshape:local",
         "shapeName": "Link"
       },
-      "description": "Update Link",
-      "args": "UpdateArgs<Link>"
+      "shape": "UpdateResult<Link>",
+      "description": "Update Link"
     },
     "createLink": {
-      "shape": "CreateResult<Link>",
+      "args": "CreateArgs<Link>",
       "resolver": {
         "name": "takeshape:create",
         "service": "takeshape:local",
         "shapeName": "Link"
       },
-      "description": "Create Link",
-      "args": "CreateArgs<Link>"
+      "shape": "CreateResult<Link>",
+      "description": "Create Link"
     },
     "duplicateLink": {
-      "shape": "DuplicateResult<Link>",
+      "args": "DuplicateArgs<Link>",
       "resolver": {
         "name": "takeshape:duplicate",
         "service": "takeshape:local",
         "shapeName": "Link"
       },
-      "description": "Duplicate Link",
-      "args": "DuplicateArgs<Link>"
+      "shape": "DuplicateResult<Link>",
+      "description": "Duplicate Link"
     },
     "deleteLink": {
-      "shape": "DeleteResult<Link>",
+      "args": "DeleteArgs<Link>",
       "resolver": {
         "name": "takeshape:delete",
         "service": "takeshape:local",
         "shapeName": "Link"
       },
-      "description": "Delete Link",
-      "args": "DeleteArgs<Link>"
+      "shape": "DeleteResult<Link>",
+      "description": "Delete Link"
     },
     "updateLineItemAttributes": {
-      "shape": "UpdateResult<LineItemAttributes>",
+      "args": "UpdateArgs<LineItemAttributes>",
       "resolver": {
         "name": "takeshape:update",
         "service": "takeshape:local",
         "shapeName": "LineItemAttributes"
       },
-      "description": "Update LineItemAttributes",
-      "args": "UpdateArgs<LineItemAttributes>"
+      "shape": "UpdateResult<LineItemAttributes>",
+      "description": "Update LineItemAttributes"
     },
     "createLineItemAttributes": {
-      "shape": "CreateResult<LineItemAttributes>",
+      "args": "CreateArgs<LineItemAttributes>",
       "resolver": {
         "name": "takeshape:create",
         "service": "takeshape:local",
         "shapeName": "LineItemAttributes"
       },
-      "description": "Create LineItemAttributes",
-      "args": "CreateArgs<LineItemAttributes>"
+      "shape": "CreateResult<LineItemAttributes>",
+      "description": "Create LineItemAttributes"
     },
     "duplicateLineItemAttributes": {
-      "shape": "DuplicateResult<LineItemAttributes>",
+      "args": "DuplicateArgs<LineItemAttributes>",
       "resolver": {
         "name": "takeshape:duplicate",
         "service": "takeshape:local",
         "shapeName": "LineItemAttributes"
       },
-      "description": "Duplicate LineItemAttributes",
-      "args": "DuplicateArgs<LineItemAttributes>"
+      "shape": "DuplicateResult<LineItemAttributes>",
+      "description": "Duplicate LineItemAttributes"
     },
     "deleteLineItemAttributes": {
-      "shape": "DeleteResult<LineItemAttributes>",
+      "args": "DeleteArgs<LineItemAttributes>",
       "resolver": {
         "name": "takeshape:delete",
         "service": "takeshape:local",
         "shapeName": "LineItemAttributes"
       },
-      "description": "Delete LineItemAttributes",
-      "args": "DeleteArgs<LineItemAttributes>"
+      "shape": "DeleteResult<LineItemAttributes>",
+      "description": "Delete LineItemAttributes"
     },
     "updateHomepage": {
       "shape": "UpdateResult<Homepage>",
@@ -9929,5 +9816,37 @@
       }
     }
   },
-  "schemaVersion": "3.22.0"
+  "schemaVersion": "3.23.0",
+  "indexedShapes": {
+    "Shopify_Product": {
+      "queries": {
+        "list": {
+          "name": "Shopify_products"
+        },
+        "get": {
+          "name": "Shopify_product"
+        }
+      },
+      "triggers": [
+        {
+          "type": "schedule",
+          "query": "list",
+          "interval": 1440
+        },
+        {
+          "type": "webhook",
+          "query": "get",
+          "service": "shopify",
+          "events": [
+            "products/create",
+            "products/update",
+            "products/delete"
+          ]
+        }
+      ],
+      "query": {
+        "maxDepth": 2
+      }
+    }
+  }
 }

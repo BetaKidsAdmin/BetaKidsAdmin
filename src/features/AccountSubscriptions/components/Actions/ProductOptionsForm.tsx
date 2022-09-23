@@ -1,25 +1,25 @@
 import { Disclosure, RadioGroup } from '@headlessui/react';
-import { ChevronUpIcon } from '@heroicons/react/solid';
+import { ChevronUpIcon } from '@heroicons/react/24/solid';
 import { ModalProps } from 'components/Modal/Modal';
 import { ModalForm } from 'components/Modal/ModalForm';
 import { ModalFormActions } from 'components/Modal/ModalFormActions';
-import { SubscriptionDeliveryScheduleOption } from 'features/AccountSubscriptions/types';
 import { useCallback, useEffect } from 'react';
-import { Controller, useForm, useWatch } from 'react-hook-form';
-import { ProductVariant, ProductVariantOption, ProductVariantSelection } from 'types/product';
+import { Control, Controller, useForm, useWatch } from 'react-hook-form';
+import { shopifyGidToId } from 'transforms/shopify';
+import { ProductVariantOption, ProductVariantSelection } from 'types/product';
+import { UpdateProductOptionsMutationResponse, UpdateProductOptionsMutationVariables } from 'types/takeshape';
 import classNames from 'utils/classNames';
-import { findPriceOption, getVariant } from 'utils/products';
+import { useAuthenticatedMutation } from 'utils/takeshape';
 import { formatPrice } from 'utils/text';
+import { UpdateProductOptionsMutation } from '../../queries';
+import { AnySubscription, RefetchSubscriptions, SubscriptionProductVariant } from '../../types';
+import { getVariant, toFormOptions, toSelections } from '../../utils';
 
-function toFormOptions(selections: ProductVariantSelection[]): Record<string, string> {
-  return selections.reduce((formOptions, { name, value }) => ({ ...formOptions, [name]: value }), {});
+interface ProductOptionsPriceProps extends Pick<ProductOptionsFormProps, 'subscription' | 'variants'> {
+  control: Control<ProductOptionsFormValues, any>;
 }
 
-function toSelections(formOptions: Record<string, string>): ProductVariantSelection[] {
-  return Object.entries(formOptions).map(([name, value]) => ({ name, value }));
-}
-
-const ProductOptionsPrice = ({ control, variants, deliverySchedule }) => {
+const ProductOptionsPrice = ({ control, subscription, variants }: ProductOptionsPriceProps) => {
   const options = useWatch({
     control,
     name: 'options'
@@ -31,25 +31,25 @@ const ProductOptionsPrice = ({ control, variants, deliverySchedule }) => {
   });
 
   const variant = getVariant(variants, toSelections(options));
-  const price = findPriceOption(variant.prices, deliverySchedule);
-  const amount = price.amount * quantity;
 
   return (
     <div className="bg-body-600 text-white rounded-md py-2">
       <p className="grid grid-cols-2 px-4 font-medium text-lg">
         <span className="inline-block">Price</span>
-        <span className="inline-block ml-auto">{formatPrice(price.currencyCode, amount)}</span>
+        <span className="inline-block ml-auto">
+          {formatPrice(variant.price.currencyCode, variant.price.amount, quantity)}
+        </span>
       </p>
     </div>
   );
 };
 
 export interface ProductOptionsFormProps extends ModalProps {
-  variants: ProductVariant[];
+  subscription: AnySubscription;
+  variants: SubscriptionProductVariant[];
   variantOptions: ProductVariantOption[];
-  currentQuantity: number;
   currentSelections: ProductVariantSelection[];
-  currentDeliverySchedule: SubscriptionDeliveryScheduleOption;
+  refetchSubscriptions: RefetchSubscriptions;
 }
 
 interface ProductOptionsFormValues {
@@ -57,15 +57,12 @@ interface ProductOptionsFormValues {
   quantity: number;
 }
 
-/**
- * TODO Handle errors
- */
 export const ProductOptionsForm = ({
+  subscription,
   variants,
   variantOptions,
-  currentQuantity,
   currentSelections,
-  currentDeliverySchedule,
+  refetchSubscriptions,
   isOpen,
   onClose
 }: ProductOptionsFormProps) => {
@@ -78,27 +75,37 @@ export const ProductOptionsForm = ({
   } = useForm<ProductOptionsFormValues>({
     defaultValues: {
       options: toFormOptions(currentSelections),
-      quantity: currentQuantity
+      quantity: subscription.quantity
     }
   });
 
+  const [updateProductOptions] = useAuthenticatedMutation<
+    UpdateProductOptionsMutationResponse,
+    UpdateProductOptionsMutationVariables
+  >(UpdateProductOptionsMutation);
+
   const handleFormSubmit = useCallback(
     async ({ options, quantity }: ProductOptionsFormValues) => {
-      const variantSelections = toSelections(options);
-      // eslint-disable-next-line no-console
-      console.log({ quantity, options: variantSelections });
-      // TODO Mutate underlying state so the subscription show changes
+      const variant = getVariant(variants, toSelections(options));
+      await updateProductOptions({
+        variables: {
+          subscriptionId: subscription.id,
+          variantId: shopifyGidToId(variant.id),
+          quantity: quantity.toString()
+        }
+      });
+      await refetchSubscriptions();
       onClose();
     },
-    [onClose]
+    [onClose, refetchSubscriptions, subscription.id, updateProductOptions, variants]
   );
 
   const resetState = useCallback(() => {
     reset({
       options: toFormOptions(currentSelections),
-      quantity: currentQuantity
+      quantity: subscription.quantity
     });
-  }, [currentQuantity, currentSelections, reset]);
+  }, [subscription.quantity, currentSelections, reset]);
 
   // Set initial values
   useEffect(() => resetState(), [resetState]);
@@ -173,17 +180,6 @@ export const ProductOptionsForm = ({
                                       >
                                         {value.name}
                                       </RadioGroup.Label>
-                                      {value.description && (
-                                        <RadioGroup.Description
-                                          as="span"
-                                          className={classNames(
-                                            checked ? 'text-accent-700' : 'text-body-500',
-                                            'block text-sm'
-                                          )}
-                                        >
-                                          {value.description as string}
-                                        </RadioGroup.Description>
-                                      )}
                                     </span>
                                   </>
                                 )}
@@ -279,7 +275,7 @@ export const ProductOptionsForm = ({
           Product information
         </h3>
 
-        <ProductOptionsPrice variants={variants} control={control} deliverySchedule={currentDeliverySchedule} />
+        <ProductOptionsPrice control={control} subscription={subscription} variants={variants} />
       </section>
 
       <ModalFormActions

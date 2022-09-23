@@ -1,12 +1,13 @@
 import PageLoader from 'components/PageLoader';
 import { AccountSubscription } from 'features/AccountSubscriptions/AccountSubscription';
-import { subscriptions as rawSubscriptions } from 'features/AccountSubscriptions/fixtures';
+import { GetMySubscriptionQuery } from 'features/AccountSubscriptions/queries';
 import { getSubscription } from 'features/AccountSubscriptions/transforms';
 import Layout from 'layouts/Account';
 import { getLayoutData } from 'layouts/getLayoutData';
 import { GetStaticPaths, GetStaticPropsContext, InferGetStaticPropsType, NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { shopifyGidToId } from 'transforms/shopify';
+import { GetMySubscriptionQueryResponse, GetMySubscriptionQueryVariables } from 'types/takeshape';
+import { useAuthenticatedQuery } from 'utils/takeshape';
 import { getSingle } from 'utils/types';
 
 const AccountSubscriptionsPage: NextPage = ({
@@ -15,7 +16,12 @@ const AccountSubscriptionsPage: NextPage = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { isFallback } = useRouter();
 
-  if (isFallback) {
+  const { data, refetch } = useAuthenticatedQuery<GetMySubscriptionQueryResponse, GetMySubscriptionQueryVariables>(
+    GetMySubscriptionQuery,
+    { variables: { id: subscriptionId } }
+  );
+
+  if (isFallback || !data) {
     return (
       <Layout globalSettings={globalSettings} seo={{ title: 'Subscription is loading...' }}>
         <PageLoader />
@@ -23,11 +29,13 @@ const AccountSubscriptionsPage: NextPage = ({
     );
   }
 
-  const subscription = rawSubscriptions.find((sub) => shopifyGidToId(sub.id) === subscriptionId);
-
   return (
-    <Layout globalSettings={globalSettings} seo={{ title: 'Subscriptions' }}>
-      <AccountSubscription subscription={getSubscription(subscription)} />
+    <Layout globalSettings={globalSettings} seo={{ title: 'Subscription' }}>
+      <div className="shadow sm:rounded-md sm:overflow-hidden">
+        <div className="bg-white py-6 sm:px-4 sm:p-6">
+          <AccountSubscription subscription={getSubscription(data)} refetchSubscriptionList={refetch} />
+        </div>
+      </div>
     </Layout>
   );
 };

@@ -1,15 +1,20 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { XIcon } from '@heroicons/react/outline';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 import { isStorybook } from 'config';
 import { useAtom } from 'jotai';
 import { Fragment } from 'react';
 import { isMobileMenuOpenAtom } from 'store';
-import { Header } from '../types';
-import { MobileMenuCreateOrSignIn } from './components/MobileMenuCreateOrSignIn';
+import classNames from 'utils/classNames';
+import { Navigation } from '../types';
+import { MobileMenuAccount } from './components/MobileMenuAccount';
 import { MobileMenuCurrencySelect } from './components/MobileMenuCurrencySelect';
 import { MobileMenuLinks } from './components/MobileMenuLinks';
 
-export const NavigationMobileMenu = ({ header, currencies }: Header) => {
+const Divider = ({ className }: { className?: string }) => (
+  <div className={classNames('border-t border-body-200', className)} />
+);
+
+export const NavigationMobileMenu = ({ header, currencies }: Pick<Navigation, 'currencies' | 'header'>) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useAtom(isMobileMenuOpenAtom);
 
   return (
@@ -46,21 +51,21 @@ export const NavigationMobileMenu = ({ header, currencies }: Header) => {
             <div className="px-4 pt-5 pb-2 flex">
               <button
                 type="button"
-                className="-m-2 p-2 rounded-md inline-flex items-center justify-center text-gray-400"
+                className="-m-2 p-2 rounded-md inline-flex items-center justify-center text-primary-400"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <span className="sr-only">Close menu</span>
-                <XIcon className="h-6 w-6" aria-hidden="true" />
+                <XMarkIcon className="h-6 w-6" aria-hidden="true" />
               </button>
             </div>
 
             <MobileMenuLinks navigation={header?.navigation} />
-
-            <MobileMenuCreateOrSignIn />
-
-            <div className="border-t border-gray-200 py-6 px-4 space-y-6">
+            <Divider />
+            <div className="py-6 px-6 space-y-6">
               <MobileMenuCurrencySelect currencies={currencies} />
             </div>
+            <Divider />
+            <MobileMenuAccount />
           </div>
         </Transition.Child>
       </Dialog>

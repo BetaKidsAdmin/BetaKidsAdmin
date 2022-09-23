@@ -7,7 +7,7 @@ import { AdditionalDetails } from 'features/ProductPage/Product/Default/Addition
 import { ImageGallery } from 'features/ProductPage/Product/Default/ImageGallery';
 import { ReviewsCounter } from 'features/ProductPage/Product/Default/ReviewsCounter';
 
-export const ProductDefault = ({ product }) => {
+export const ProductDefault = ({ product, trustpilotSummary }) => {
   const { name, description, otherDescriptionHtml, additionalDetails = [], images, hasStock } = product;
 
   const selectedVariant = product.variants[0];
@@ -50,7 +50,7 @@ export const ProductDefault = ({ product }) => {
             <h2 className="text-2xl font-extrabold tracking-tight text-gray-700 mt-2">{description}</h2>
 
             {/* Reviews */}
-            <ReviewsCounter />
+            <ReviewsCounter trustpilotSummary={trustpilotSummary} />
 
             {otherDescriptionHtml && (
               <div className="mt-6">

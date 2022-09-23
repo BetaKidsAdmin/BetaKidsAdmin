@@ -60,7 +60,7 @@ export const productPageDetails: ProductPageDetails = {
   details: [
     {
       image: {
-        url: 'https://images.takeshape.io/06ccc3dc-a9da-4f5b-9142-5a104db52ee3/dev/1d7031bb-8159-452f-8796-c6eb1eeffafa/product-page-04-detail-product-shot-01.jpg',
+        url: '/images/placeholders/random-tea-kettle.png',
         altText: 'Drawstring top with elastic loop closure and textured interior padding.'
       },
       description:
@@ -68,7 +68,7 @@ export const productPageDetails: ProductPageDetails = {
     },
     {
       image: {
-        url: 'https://images.takeshape.io/06ccc3dc-a9da-4f5b-9142-5a104db52ee3/dev/edab6905-1e9a-44cd-971c-ae12c84716e9/product-page-04-detail-product-shot-02.jpg',
+        url: '/images/placeholders/random-fork.png',
         altText: 'Front zipper pouch with included key ring.'
       },
       description:
@@ -167,35 +167,35 @@ export const productPageProduct: ProductPageProduct = {
   descriptionHtml:
     '<p>The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.</p>\n<h3>Highlights<br data-mce-fragment="1">\n</h3>\n<ul>\n<li>Hand cut and sewn locally</li>\n<li>Dyed with our proprietary colors</li>\n<li>Pre-washed &amp; pre-shrunk</li>\n<li>Ultra-soft 100% cotton</li>\n</ul>\n<h3>Details<br data-mce-fragment="1">\n</h3>\n<p>The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.</p>',
   featuredImage: {
-    height: 1088,
-    url: 'https://cdn.shopify.com/s/files/1/0579/6744/4068/products/product-page-02-secondary-product-shot.jpg?v=1654530734',
-    width: 840,
-    altText: 'A bunch of shirts.'
+    height: 1024,
+    url: '/images/placeholders/t-shirt-man-front.png',
+    width: 1024,
+    altText: 'Image of An Exceptional Tee for Men'
   },
   images: [
     {
-      height: 1088,
-      url: 'https://cdn.shopify.com/s/files/1/0579/6744/4068/products/product-page-02-secondary-product-shot.jpg?v=1654530734',
-      width: 840,
-      altText: 'A bunch of shirts.'
+      height: 1024,
+      url: '/images/placeholders/t-shirt-man-front.png',
+      width: 1024,
+      altText: 'Image of An Exceptional Tee for Men'
     },
     {
-      height: 512,
-      url: 'https://cdn.shopify.com/s/files/1/0579/6744/4068/products/product-page-02-tertiary-product-shot-01.jpg?v=1654530699',
-      width: 768,
-      altText: 'Image of Basic Tee 6-Pack'
+      height: 1024,
+      url: '/images/placeholders/t-shirt-man-right.png',
+      width: 1024,
+      altText: 'Image of An Exceptional Tee for Men'
     },
     {
-      height: 512,
-      url: 'https://cdn.shopify.com/s/files/1/0579/6744/4068/products/product-page-02-tertiary-product-shot-02.jpg?v=1654530699',
-      width: 768,
-      altText: 'Image of Basic Tee 6-Pack'
+      height: 1024,
+      url: '/images/placeholders/t-shirt-man-right-close.png',
+      width: 1024,
+      altText: 'Image of An Exceptional Tee for Men'
     },
     {
-      height: 1960,
-      url: 'https://cdn.shopify.com/s/files/1/0579/6744/4068/products/product-page-02-featured-product-shot.jpg?v=1654530699',
-      width: 1536,
-      altText: 'Image of Basic Tee 6-Pack'
+      height: 1024,
+      url: '/images/placeholders/t-shirt-man-left.png',
+      width: 1024,
+      altText: 'Image of An Exceptional Tee for Men'
     }
   ],
   priceMin: { amount: 19200, currencyCode: 'USD' },
@@ -1321,14 +1321,149 @@ export const productPageProduct: ProductPageProduct = {
       name: 'Size',
       id: 'gid://shopify/ProductOption/8766172332132',
       values: [
-        { value: 'XXS', name: 'XXS', hasStock: false, description: 'The very smallest size' },
-        { value: 'XS', name: 'XS', hasStock: true, description: 'A fairly small size' },
-        { value: 'S', name: 'S', hasStock: true, description: 'A small size' },
-        { value: 'M', name: 'M', hasStock: true, description: 'Just about right for everybody' },
-        { value: 'L', name: 'L', hasStock: true, description: 'Getting bigger' },
-        { value: 'XL', name: 'XL', hasStock: true, description: 'And bigger...' },
-        { value: '2XL', name: '2XL', hasStock: true, description: 'Whoa, so big' },
-        { value: '3XL', name: '3XL', hasStock: true, description: 'No way!' }
+        {
+          value: 'XXS',
+          name: 'XXS',
+          hasStockFor: [],
+          hasStock: false,
+          description: 'The very smallest size'
+        },
+        {
+          value: 'XS',
+          name: 'XS',
+          hasStockFor: [
+            {
+              name: 'Color',
+              value: 'Gray'
+            },
+            {
+              name: 'Color',
+              value: 'White'
+            }
+          ],
+          hasStock: true,
+          description: 'A fairly small size'
+        },
+        {
+          value: 'S',
+          name: 'S',
+          hasStockFor: [
+            {
+              name: 'Color',
+              value: 'Black'
+            },
+            {
+              name: 'Color',
+              value: 'Gray'
+            },
+            {
+              name: 'Color',
+              value: 'White'
+            }
+          ],
+          hasStock: true,
+          description: 'A small size'
+        },
+        {
+          value: 'M',
+          name: 'M',
+          hasStockFor: [
+            {
+              name: 'Color',
+              value: 'Black'
+            },
+            {
+              name: 'Color',
+              value: 'Gray'
+            },
+            {
+              name: 'Color',
+              value: 'White'
+            }
+          ],
+          hasStock: true,
+          description: 'Just about right for everybody'
+        },
+        {
+          value: 'L',
+          name: 'L',
+          hasStockFor: [
+            {
+              name: 'Color',
+              value: 'Black'
+            },
+            {
+              name: 'Color',
+              value: 'Gray'
+            },
+            {
+              name: 'Color',
+              value: 'White'
+            }
+          ],
+          hasStock: true,
+          description: 'Getting bigger'
+        },
+        {
+          value: 'XL',
+          name: 'XL',
+          hasStockFor: [
+            {
+              name: 'Color',
+              value: 'Black'
+            },
+            {
+              name: 'Color',
+              value: 'Gray'
+            },
+            {
+              name: 'Color',
+              value: 'White'
+            }
+          ],
+          hasStock: true,
+          description: 'And bigger...'
+        },
+        {
+          value: '2XL',
+          name: '2XL',
+          hasStockFor: [
+            {
+              name: 'Color',
+              value: 'Black'
+            },
+            {
+              name: 'Color',
+              value: 'Gray'
+            },
+            {
+              name: 'Color',
+              value: 'White'
+            }
+          ],
+          hasStock: true,
+          description: 'Whoa, so big'
+        },
+        {
+          value: '3XL',
+          name: '3XL',
+          hasStockFor: [
+            {
+              name: 'Color',
+              value: 'Black'
+            },
+            {
+              name: 'Color',
+              value: 'Gray'
+            },
+            {
+              name: 'Color',
+              value: 'White'
+            }
+          ],
+          hasStock: true,
+          description: 'No way!'
+        }
       ]
     },
     {
@@ -1338,6 +1473,32 @@ export const productPageProduct: ProductPageProduct = {
         {
           value: 'Black',
           name: 'Black',
+          hasStockFor: [
+            {
+              name: 'Size',
+              value: 'S'
+            },
+            {
+              name: 'Size',
+              value: 'M'
+            },
+            {
+              name: 'Size',
+              value: 'L'
+            },
+            {
+              name: 'Size',
+              value: 'XL'
+            },
+            {
+              name: 'Size',
+              value: '2XL'
+            },
+            {
+              name: 'Size',
+              value: '3XL'
+            }
+          ],
           hasStock: true,
           class: 'bg-gray-900',
           selectedClass: 'ring-gray-900',
@@ -1346,6 +1507,36 @@ export const productPageProduct: ProductPageProduct = {
         {
           value: 'Gray',
           name: 'Gray',
+          hasStockFor: [
+            {
+              name: 'Size',
+              value: 'XS'
+            },
+            {
+              name: 'Size',
+              value: 'S'
+            },
+            {
+              name: 'Size',
+              value: 'M'
+            },
+            {
+              name: 'Size',
+              value: 'L'
+            },
+            {
+              name: 'Size',
+              value: 'XL'
+            },
+            {
+              name: 'Size',
+              value: '2XL'
+            },
+            {
+              name: 'Size',
+              value: '3XL'
+            }
+          ],
           hasStock: true,
           class: 'bg-gray-200',
           selectedClass: 'ring-gray-400',
@@ -1354,6 +1545,36 @@ export const productPageProduct: ProductPageProduct = {
         {
           value: 'White',
           name: 'White',
+          hasStockFor: [
+            {
+              name: 'Size',
+              value: 'XS'
+            },
+            {
+              name: 'Size',
+              value: 'S'
+            },
+            {
+              name: 'Size',
+              value: 'M'
+            },
+            {
+              name: 'Size',
+              value: 'L'
+            },
+            {
+              name: 'Size',
+              value: 'XL'
+            },
+            {
+              name: 'Size',
+              value: '2XL'
+            },
+            {
+              name: 'Size',
+              value: '3XL'
+            }
+          ],
           hasStock: true,
           class: 'bg-white',
           selectedClass: 'ring-gray-400',
@@ -1386,9 +1607,9 @@ export const productPageRelatedProducts: ProductPageRelatedProductsProduct[] = [
     description: 'A blouse for people on the go.',
     descriptionHtml: 'A blouse for people on the go.',
     featuredImage: {
-      height: 1058,
-      url: 'https://cdn.shopify.com/s/files/1/0579/6744/4068/products/blouse.jpg?v=1650570192',
-      width: 820,
+      height: 1024,
+      url: '/images/placeholders/t-shirt-woman-front.png',
+      width: 1024,
       altText: 'Image of Elegant Blouse'
     },
     priceMin: {
@@ -1412,18 +1633,48 @@ export const productPageRelatedProducts: ProductPageRelatedProductsProduct[] = [
             value: 'S',
             name: 'S',
             hasStock: null,
+            hasStockFor: [
+              {
+                name: 'Color',
+                value: 'Black'
+              },
+              {
+                name: 'Color',
+                value: 'White'
+              }
+            ],
             description: 'A small size'
           },
           {
             value: 'M',
             name: 'M',
             hasStock: null,
+            hasStockFor: [
+              {
+                name: 'Color',
+                value: 'Black'
+              },
+              {
+                name: 'Color',
+                value: 'White'
+              }
+            ],
             description: 'Just about right for everybody'
           },
           {
             value: 'L',
             name: 'L',
             hasStock: null,
+            hasStockFor: [
+              {
+                name: 'Color',
+                value: 'Black'
+              },
+              {
+                name: 'Color',
+                value: 'White'
+              }
+            ],
             description: 'Getting bigger'
           }
         ]
@@ -1436,6 +1687,20 @@ export const productPageRelatedProducts: ProductPageRelatedProductsProduct[] = [
             value: 'Black',
             name: 'Black',
             hasStock: null,
+            hasStockFor: [
+              {
+                name: 'Size',
+                value: 'S'
+              },
+              {
+                name: 'Size',
+                value: 'M'
+              },
+              {
+                name: 'Size',
+                value: 'L'
+              }
+            ],
             class: 'bg-gray-900',
             selectedClass: 'ring-gray-900',
             colorBg: '#111827'
@@ -1444,6 +1709,20 @@ export const productPageRelatedProducts: ProductPageRelatedProductsProduct[] = [
             value: 'White',
             name: 'White',
             hasStock: null,
+            hasStockFor: [
+              {
+                name: 'Size',
+                value: 'S'
+              },
+              {
+                name: 'Size',
+                value: 'M'
+              },
+              {
+                name: 'Size',
+                value: 'L'
+              }
+            ],
             class: 'bg-white',
             selectedClass: 'ring-gray-400',
             colorBg: '#ffffff'
@@ -1462,9 +1741,9 @@ export const productPageRelatedProducts: ProductPageRelatedProductsProduct[] = [
     descriptionHtml:
       '<p>The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.</p>\n<h3>Highlights<br data-mce-fragment="1">\n</h3>\n<ul>\n<li>Hand cut and sewn locally</li>\n<li>Dyed with our proprietary colors</li>\n<li>Pre-washed &amp; pre-shrunk</li>\n<li>Ultra-soft 100% cotton</li>\n</ul>\n<h3>Details<br data-mce-fragment="1">\n</h3>\n<p>The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.</p>',
     featuredImage: {
-      height: 1088,
-      url: 'https://cdn.shopify.com/s/files/1/0579/6744/4068/products/product-page-02-secondary-product-shot.jpg?v=1654530734',
-      width: 840,
+      height: 1024,
+      url: '/images/placeholders/t-shirt-woman-front.png',
+      width: 1024,
       altText: 'A bunch of shirts.'
     },
     priceMin: {
@@ -1487,49 +1766,144 @@ export const productPageRelatedProducts: ProductPageRelatedProductsProduct[] = [
           {
             value: 'XXS',
             name: 'XXS',
-            hasStock: null,
+            hasStockFor: [],
+            hasStock: false,
             description: 'The very smallest size'
           },
           {
             value: 'XS',
             name: 'XS',
-            hasStock: null,
+            hasStockFor: [
+              {
+                name: 'Color',
+                value: 'Gray'
+              },
+              {
+                name: 'Color',
+                value: 'White'
+              }
+            ],
+            hasStock: true,
             description: 'A fairly small size'
           },
           {
             value: 'S',
             name: 'S',
-            hasStock: null,
+            hasStockFor: [
+              {
+                name: 'Color',
+                value: 'Black'
+              },
+              {
+                name: 'Color',
+                value: 'Gray'
+              },
+              {
+                name: 'Color',
+                value: 'White'
+              }
+            ],
+            hasStock: true,
             description: 'A small size'
           },
           {
             value: 'M',
             name: 'M',
-            hasStock: null,
+            hasStockFor: [
+              {
+                name: 'Color',
+                value: 'Black'
+              },
+              {
+                name: 'Color',
+                value: 'Gray'
+              },
+              {
+                name: 'Color',
+                value: 'White'
+              }
+            ],
+            hasStock: true,
             description: 'Just about right for everybody'
           },
           {
             value: 'L',
             name: 'L',
-            hasStock: null,
+            hasStockFor: [
+              {
+                name: 'Color',
+                value: 'Black'
+              },
+              {
+                name: 'Color',
+                value: 'Gray'
+              },
+              {
+                name: 'Color',
+                value: 'White'
+              }
+            ],
+            hasStock: true,
             description: 'Getting bigger'
           },
           {
             value: 'XL',
             name: 'XL',
-            hasStock: null,
+            hasStockFor: [
+              {
+                name: 'Color',
+                value: 'Black'
+              },
+              {
+                name: 'Color',
+                value: 'Gray'
+              },
+              {
+                name: 'Color',
+                value: 'White'
+              }
+            ],
+            hasStock: true,
             description: 'And bigger...'
           },
           {
             value: '2XL',
             name: '2XL',
-            hasStock: null,
+            hasStockFor: [
+              {
+                name: 'Color',
+                value: 'Black'
+              },
+              {
+                name: 'Color',
+                value: 'Gray'
+              },
+              {
+                name: 'Color',
+                value: 'White'
+              }
+            ],
+            hasStock: true,
             description: 'Whoa, so big'
           },
           {
             value: '3XL',
             name: '3XL',
-            hasStock: null,
+            hasStockFor: [
+              {
+                name: 'Color',
+                value: 'Black'
+              },
+              {
+                name: 'Color',
+                value: 'Gray'
+              },
+              {
+                name: 'Color',
+                value: 'White'
+              }
+            ],
+            hasStock: true,
             description: 'No way!'
           }
         ]
@@ -1541,7 +1915,33 @@ export const productPageRelatedProducts: ProductPageRelatedProductsProduct[] = [
           {
             value: 'Black',
             name: 'Black',
-            hasStock: null,
+            hasStockFor: [
+              {
+                name: 'Size',
+                value: 'S'
+              },
+              {
+                name: 'Size',
+                value: 'M'
+              },
+              {
+                name: 'Size',
+                value: 'L'
+              },
+              {
+                name: 'Size',
+                value: 'XL'
+              },
+              {
+                name: 'Size',
+                value: '2XL'
+              },
+              {
+                name: 'Size',
+                value: '3XL'
+              }
+            ],
+            hasStock: true,
             class: 'bg-gray-900',
             selectedClass: 'ring-gray-900',
             colorBg: '#111827'
@@ -1549,7 +1949,37 @@ export const productPageRelatedProducts: ProductPageRelatedProductsProduct[] = [
           {
             value: 'Gray',
             name: 'Gray',
-            hasStock: null,
+            hasStockFor: [
+              {
+                name: 'Size',
+                value: 'XS'
+              },
+              {
+                name: 'Size',
+                value: 'S'
+              },
+              {
+                name: 'Size',
+                value: 'M'
+              },
+              {
+                name: 'Size',
+                value: 'L'
+              },
+              {
+                name: 'Size',
+                value: 'XL'
+              },
+              {
+                name: 'Size',
+                value: '2XL'
+              },
+              {
+                name: 'Size',
+                value: '3XL'
+              }
+            ],
+            hasStock: true,
             class: 'bg-gray-200',
             selectedClass: 'ring-gray-400',
             colorBg: '#333333'
@@ -1557,7 +1987,37 @@ export const productPageRelatedProducts: ProductPageRelatedProductsProduct[] = [
           {
             value: 'White',
             name: 'White',
-            hasStock: null,
+            hasStockFor: [
+              {
+                name: 'Size',
+                value: 'XS'
+              },
+              {
+                name: 'Size',
+                value: 'S'
+              },
+              {
+                name: 'Size',
+                value: 'M'
+              },
+              {
+                name: 'Size',
+                value: 'L'
+              },
+              {
+                name: 'Size',
+                value: 'XL'
+              },
+              {
+                name: 'Size',
+                value: '2XL'
+              },
+              {
+                name: 'Size',
+                value: '3XL'
+              }
+            ],
+            hasStock: true,
             class: 'bg-white',
             selectedClass: 'ring-gray-400',
             colorBg: '#ffffff'
@@ -1576,9 +2036,9 @@ export const productPageRelatedProducts: ProductPageRelatedProductsProduct[] = [
     descriptionHtml:
       '<meta charset="utf-8"><span>Don\'t compromise on snack-carrying capacity with this lightweight and spacious bag. The drawstring top keeps all your favorite chips, crisps, fries, biscuits, crackers, and cookies secure.</span>',
     featuredImage: {
-      height: 791,
-      url: 'https://cdn.shopify.com/s/files/1/0579/6744/4068/products/gymshorts.png?v=1650570316',
-      width: 860,
+      height: 1024,
+      url: '/images/placeholders/random-tea-kettle.png',
+      width: 1024,
       altText: 'Image of Mesh Gym Shorts'
     },
     priceMin: {
@@ -1595,13 +2055,81 @@ export const productPageRelatedProducts: ProductPageRelatedProductsProduct[] = [
     hasStock: true,
     variantOptions: [
       {
+        name: 'Size',
+        id: 'gid://shopify/ProductOption/8728583471204',
+        values: [
+          {
+            value: 'S',
+            name: 'S',
+            hasStock: null,
+            hasStockFor: [
+              {
+                name: 'Color',
+                value: 'Black'
+              },
+              {
+                name: 'Color',
+                value: 'White'
+              }
+            ],
+            description: 'A small size'
+          },
+          {
+            value: 'M',
+            name: 'M',
+            hasStock: null,
+            hasStockFor: [
+              {
+                name: 'Color',
+                value: 'Black'
+              },
+              {
+                name: 'Color',
+                value: 'White'
+              }
+            ],
+            description: 'Just about right for everybody'
+          },
+          {
+            value: 'L',
+            name: 'L',
+            hasStock: null,
+            hasStockFor: [
+              {
+                name: 'Color',
+                value: 'Black'
+              },
+              {
+                name: 'Color',
+                value: 'White'
+              }
+            ],
+            description: 'Getting bigger'
+          }
+        ]
+      },
+      {
         name: 'Color',
-        id: 'gid://shopify/ProductOption/8728584126564',
+        id: 'gid://shopify/ProductOption/8766561222756',
         values: [
           {
             value: 'Black',
             name: 'Black',
             hasStock: null,
+            hasStockFor: [
+              {
+                name: 'Size',
+                value: 'S'
+              },
+              {
+                name: 'Size',
+                value: 'M'
+              },
+              {
+                name: 'Size',
+                value: 'L'
+              }
+            ],
             class: 'bg-gray-900',
             selectedClass: 'ring-gray-900',
             colorBg: '#111827'
@@ -1610,41 +2138,23 @@ export const productPageRelatedProducts: ProductPageRelatedProductsProduct[] = [
             value: 'White',
             name: 'White',
             hasStock: null,
+            hasStockFor: [
+              {
+                name: 'Size',
+                value: 'S'
+              },
+              {
+                name: 'Size',
+                value: 'M'
+              },
+              {
+                name: 'Size',
+                value: 'L'
+              }
+            ],
             class: 'bg-white',
             selectedClass: 'ring-gray-400',
             colorBg: '#ffffff'
-          },
-          {
-            value: 'Red',
-            name: 'Red',
-            hasStock: null,
-            class: 'bg-red-500',
-            selectedClass: 'ring-red-300',
-            colorBg: 'red'
-          }
-        ]
-      },
-      {
-        name: 'Size',
-        id: 'gid://shopify/ProductOption/8749149356132',
-        values: [
-          {
-            value: 'S',
-            name: 'S',
-            hasStock: null,
-            description: 'A small size'
-          },
-          {
-            value: 'M',
-            name: 'M',
-            hasStock: null,
-            description: 'Just about right for everybody'
-          },
-          {
-            value: 'L',
-            name: 'L',
-            hasStock: null,
-            description: 'Getting bigger'
           }
         ]
       }
@@ -1660,9 +2170,9 @@ export const productPageRelatedProducts: ProductPageRelatedProductsProduct[] = [
     descriptionHtml:
       '<p>The Basic tee is an honest new take on a classic. The tee uses super soft, pre-shrunk cotton for true comfort and a dependable fit. They are hand cut and sewn locally, with a special dye technique that gives each tee its own look.</p>\n<div>\n<div><span>Looking to stock your closet? The Basic tee also comes in a 3-pack or 5-pack at a bundle discount.</span></div>\n</div>',
     featuredImage: {
-      height: 2088,
-      url: 'https://cdn.shopify.com/s/files/1/0579/6744/4068/products/product-page-01-featured-product-shot.jpg?v=1654790331',
-      width: 1392,
+      height: 1024,
+      url: '/images/placeholders/t-shirt-woman-front.png',
+      width: 1024,
       altText: 'Image of Basic Tee'
     },
     priceMin: {
@@ -1686,36 +2196,96 @@ export const productPageRelatedProducts: ProductPageRelatedProductsProduct[] = [
             value: 'XXS',
             name: 'XXS',
             hasStock: null,
+            hasStockFor: [
+              {
+                name: 'Color',
+                value: 'Black'
+              },
+              {
+                name: 'Color',
+                value: 'Heather Gray'
+              }
+            ],
             description: 'The very smallest size'
           },
           {
             value: 'XS',
             name: 'XS',
             hasStock: null,
+            hasStockFor: [
+              {
+                name: 'Color',
+                value: 'Black'
+              },
+              {
+                name: 'Color',
+                value: 'Heather Gray'
+              }
+            ],
             description: 'A fairly small size'
           },
           {
             value: 'S',
             name: 'S',
             hasStock: null,
+            hasStockFor: [
+              {
+                name: 'Color',
+                value: 'Black'
+              },
+              {
+                name: 'Color',
+                value: 'Heather Gray'
+              }
+            ],
             description: 'A small size'
           },
           {
             value: 'M',
             name: 'M',
             hasStock: null,
+            hasStockFor: [
+              {
+                name: 'Color',
+                value: 'Black'
+              },
+              {
+                name: 'Color',
+                value: 'Heather Gray'
+              }
+            ],
             description: 'Just about right for everybody'
           },
           {
             value: 'L',
             name: 'L',
             hasStock: null,
+            hasStockFor: [
+              {
+                name: 'Color',
+                value: 'Black'
+              },
+              {
+                name: 'Color',
+                value: 'Heather Gray'
+              }
+            ],
             description: 'Getting bigger'
           },
           {
             value: 'XL',
             name: 'XL',
             hasStock: null,
+            hasStockFor: [
+              {
+                name: 'Color',
+                value: 'Black'
+              },
+              {
+                name: 'Color',
+                value: 'Heather Gray'
+              }
+            ],
             description: 'And bigger...'
           }
         ]
@@ -1728,6 +2298,16 @@ export const productPageRelatedProducts: ProductPageRelatedProductsProduct[] = [
             value: 'Black',
             name: 'Black',
             hasStock: null,
+            hasStockFor: [
+              {
+                name: 'Size',
+                value: 'XS'
+              },
+              {
+                name: 'Size',
+                value: 'XL'
+              }
+            ],
             class: 'bg-gray-900',
             selectedClass: 'ring-gray-900',
             colorBg: '#111827'
@@ -1736,6 +2316,16 @@ export const productPageRelatedProducts: ProductPageRelatedProductsProduct[] = [
             value: 'Heather Gray',
             name: 'Heather Grey',
             hasStock: null,
+            hasStockFor: [
+              {
+                name: 'Size',
+                value: 'XS'
+              },
+              {
+                name: 'Size',
+                value: 'XL'
+              }
+            ],
             bgColor: 'bg-gray-400',
             selectedColor: 'ring-gray-400',
             colorBg: '#777777'

@@ -1,14 +1,13 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { graphql } from 'msw';
 import { AccountSubscriptions } from './AccountSubscriptions';
-import { subscriptions } from './fixtures';
 import {
-  getMyAddressPaymentMethodsResponse,
   getMyPaymentMethodsResponse,
+  getMySubscriptionListResponse,
   sendMyUpdatePaymentEmailMutation,
   updateMyPaymentMethodResponse
 } from './queries.fixtures';
-import { getSubscription } from './transforms';
+import { getSubscriptionList } from './transforms';
 
 const Meta: ComponentMeta<typeof AccountSubscriptions> = {
   title: 'Features / Account Subscriptions',
@@ -18,23 +17,29 @@ const Meta: ComponentMeta<typeof AccountSubscriptions> = {
   }
 };
 
-const Template: ComponentStory<typeof AccountSubscriptions> = (args) => <AccountSubscriptions {...args} />;
+const Template: ComponentStory<typeof AccountSubscriptions> = () => (
+  <AccountSubscriptions
+    subscriptions={getSubscriptionList(getMySubscriptionListResponse as any)}
+    refetchSubscriptionList={async () => {}}
+  />
+);
 
 export const _AccountSubscriptions = Template.bind({});
-
-_AccountSubscriptions.args = {
-  subscriptions: subscriptions.map(getSubscription)
-};
 
 _AccountSubscriptions.parameters = {
   msw: {
     handlers: {
+      subscriptions: [
+        graphql.query('GetMySubscriptionListQuery', (req, res, ctx) => {
+          return res(ctx.data(getMySubscriptionListResponse));
+        }),
+        graphql.query('GetMySubscriptionQuery', (req, res, ctx) => {
+          return res(ctx.data(getMySubscriptionListResponse.subscriptions[0]));
+        })
+      ],
       payments: [
         graphql.query('GetMyPaymentMethodsQuery', (req, res, ctx) => {
           return res(ctx.data(getMyPaymentMethodsResponse));
-        }),
-        graphql.query('GetMyAddressPaymentMethodsQuery', (req, res, ctx) => {
-          return res(ctx.data(getMyAddressPaymentMethodsResponse));
         }),
         graphql.mutation('SendMyUpdatePaymentEmailMutation', (req, res, ctx) => {
           return res(ctx.delay(1000), ctx.data(sendMyUpdatePaymentEmailMutation));

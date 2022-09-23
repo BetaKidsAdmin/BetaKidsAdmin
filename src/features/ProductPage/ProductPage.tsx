@@ -77,6 +77,7 @@ export const ProductPage = ({
           breadcrumbs={breadcrumbs}
           showBreadcrumbs={showBreadcrumbs}
           showReviewsLink={showReviewsIo}
+          trustpilotSummary={trustpilotSummary}
         />
       </div>
       <div className="bg-white overflow-hidden">{sections?.map(pageChildToComponent())}</div>

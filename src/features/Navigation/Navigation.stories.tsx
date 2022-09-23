@@ -4,8 +4,9 @@ import { rest } from 'msw';
 import { isMobileMenuOpenAtom, isSearchOpenAtom } from 'store';
 import { Navigation } from './Navigation';
 import { navigationResponse } from './queries.fixtures';
+import { getNavigation } from './transforms';
 
-const navigation = navigationResponse;
+const navigation = getNavigation(navigationResponse);
 
 const Meta: ComponentMeta<typeof Navigation> = {
   title: 'Features / Navigation',

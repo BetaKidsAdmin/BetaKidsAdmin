@@ -15,7 +15,8 @@ import {
   Shopify_MoneyV2,
   Shopify_SellingPlanInterval,
   Shopify_SellingPlanPricingPolicyAdjustmentType,
-  Shopify_SellingPlanPricingPolicyPercentageValue
+  Shopify_SellingPlanPricingPolicyPercentageValue,
+  Shopify_SellingPlanRecurringBillingPolicy
 } from 'types/takeshape';
 
 type Shopify_Image =
@@ -24,12 +25,9 @@ type Shopify_Image =
 type Shopify_SellingPlanPricingPolicy =
   ProductPageShopifyProductResponse['product']['sellingPlanGroups']['edges'][0]['node']['sellingPlans']['edges'][0]['node']['pricingPolicies'][0];
 
-type Shopify_SellingPlanRecurringBillingPolicy =
-  ProductPageShopifyProductResponse['product']['sellingPlanGroups']['edges'][0]['node']['sellingPlans']['edges'][0]['node']['billingPolicy'];
-
 type Shopify_Product = ProductPageShopifyProductResponse['product'];
 
-type Shopify_ProductVariant = ProductPageShopifyProductResponse['product']['variants']['edges'][0]['node'];
+type Shopify_ProductVariant = ProductPageShopifyProductResponse['product']['variants']['nodes'][0];
 
 type Shopify_ProductOption = ProductPageShopifyProductResponse['product']['options'][0];
 
@@ -80,7 +78,10 @@ function getSubscriptionInterval({
   maxCycles,
   minCycles,
   anchors
-}: Shopify_SellingPlanRecurringBillingPolicy) {
+}: Pick<
+  Shopify_SellingPlanRecurringBillingPolicy,
+  'interval' | 'intervalCount' | 'maxCycles' | 'minCycles' | 'anchors'
+>) {
   const subscriptionInterval = {
     anchor: anchors[0],
     intervalCount,
@@ -146,6 +147,7 @@ export function getProductVariantPriceOptions(
       hasDiscount: false,
       discountAmount: 0,
       discountType: 'PERCENTAGE',
+      intervalId: `DAY_0`,
       interval: 'DAY',
       intervalCount: 0,
       amountBeforeDiscount: amount,
@@ -159,12 +161,16 @@ export function getProductVariantPriceOptions(
     prices = prices
       .concat(
         sellingPlans.map((plan) => {
-          const subscriptionInterval = getSubscriptionInterval(plan.billingPolicy);
+          // TODO Don't know what happened to these types
+          const { interval, intervalCount, maxCycles, minCycles, anchor } = getSubscriptionInterval(
+            plan.billingPolicy as any
+          );
           const discount = getDiscount(amount, plan.pricingPolicies[0]);
+          const name = `${intervalCount} ${interval.toLowerCase()} subscription`;
 
           return {
-            id: `${id}_${subscriptionInterval.interval}_${subscriptionInterval.intervalCount}`,
-            name: discount.hasDiscount ? 'Subscribe & Save' : 'Subscribe',
+            id: `${id}_${interval}_${intervalCount}`,
+            name,
             merchandiseId: id,
             subscriptionId: plan.id,
             // This will only ever be 'percentage'
@@ -172,11 +178,12 @@ export function getProductVariantPriceOptions(
             discountType: discount.type,
             discountAmount: discount.amount,
             // Recharge forces each product to have the same interval for all sub options
-            interval: subscriptionInterval.interval,
-            intervalCount: subscriptionInterval.intervalCount,
-            intervalMaxCycles: subscriptionInterval.maxCycles ?? null,
-            intervalMinCycles: subscriptionInterval.minCycles ?? null,
-            intervalAnchor: subscriptionInterval.anchor ?? null,
+            intervalId: `${interval}_${intervalCount}`,
+            interval: interval,
+            intervalCount: intervalCount,
+            intervalMaxCycles: maxCycles ?? null,
+            intervalMinCycles: minCycles ?? null,
+            intervalAnchor: anchor ?? null,
             amountBeforeDiscount: amount,
             amount: discount.amountAfterDiscount,
             currencyCode: defaultCurrency
@@ -204,12 +211,12 @@ function getVariant(shopifyProduct: Shopify_Product, shopifyVariant: Shopify_Pro
     quantityAvailable: sellableOnlineQuantity,
     currentlyNotInStock: sellableOnlineQuantity === 0 && inventoryPolicy == 'CONTINUE',
     sku,
-    options: selectedOptions
+    options: selectedOptions.map(({ name, value }) => ({ name, value }))
   };
 }
 
 export function getProductVariants(shopifyProduct: Shopify_Product): ProductVariant[] {
-  return (shopifyProduct as ProductPageShopifyProductResponse['product']).variants.edges.map(({ node }) =>
+  return (shopifyProduct as ProductPageShopifyProductResponse['product']).variants.nodes.map((node) =>
     getVariant(shopifyProduct, node)
   );
 }
@@ -231,7 +238,7 @@ export function getSeo(shopifyProduct: Shopify_Product | ProductCategoryShopifyC
 
 export function getProductVariantOptions(
   options: Pick<Shopify_ProductOption, 'name' | 'id' | 'values'>[],
-  variants?: ProductVariant[]
+  variants?: Pick<ProductVariant, 'options' | 'available'>[]
 ) {
   return (
     options?.map(({ name, id, values }) => {
@@ -239,16 +246,23 @@ export function getProductVariantOptions(
         name,
         id,
         values: values.map((value) => {
-          const hasStock =
-            variants?.some((variant) => {
-              if (variant.options.find((o) => o.value === value)) {
-                return variant.available;
-              }
-            }) ?? null;
+          const hasStockFor =
+            variants
+              ?.filter((v) => {
+                if (v.options.find((o) => o.value === value)) {
+                  return v.available;
+                }
+              })
+              ?.flatMap((v) => {
+                return v.options.filter((o) => o.value !== value);
+              }) ?? [];
+
+          const hasStock = hasStockFor.length > 0;
 
           return {
             value,
             name: value,
+            hasStockFor,
             hasStock,
             ...productOptions?.[name.toLowerCase()]?.[value.toLowerCase()]
           };
@@ -385,6 +399,7 @@ export function getStorefrontProductVariantPriceOptions(
   if (!requiresSellingPlan) {
     prices.push({
       id: `${id}_DAY_0`,
+      intervalId: `DAY_0`,
       name: 'One-time purchase',
       merchandiseId: id,
       hasDiscount: false,
@@ -404,19 +419,21 @@ export function getStorefrontProductVariantPriceOptions(
     prices = prices
       .concat(
         sellingPlans.map((plan) => {
-          const subscriptionInterval = getStorefrontSubscriptionInterval(plan.options[0]);
+          const { interval, intervalCount } = getStorefrontSubscriptionInterval(plan.options[0]);
           const discount = getStorefrontDiscount(amount, plan.priceAdjustments[0]);
+          const name = `${intervalCount} ${interval.toLowerCase()} subscription`;
 
           return {
-            id: `${id}_${subscriptionInterval.interval}_${subscriptionInterval.intervalCount}`,
-            name: discount.hasDiscount ? 'Subscribe & Save' : 'Subscribe',
+            id: `${id}_${interval}_${intervalCount}`,
+            name,
             merchandiseId: id,
             subscriptionId: plan.id,
             hasDiscount: discount.hasDiscount,
             discountType: discount.type,
             discountAmount: discount.amount,
-            interval: subscriptionInterval.interval,
-            intervalCount: subscriptionInterval.intervalCount,
+            intervalId: `${interval}_${intervalCount}`,
+            interval: interval,
+            intervalCount: intervalCount,
             amountBeforeDiscount: amount,
             amount: discount.amountAfterDiscount,
             currencyCode: defaultCurrency
@@ -457,7 +474,7 @@ function getStorefrontProductVariant(
     quantityAvailable,
     currentlyNotInStock,
     sku,
-    options: selectedOptions
+    options: selectedOptions.map(({ name, value }) => ({ name, value }))
   };
 }
 
