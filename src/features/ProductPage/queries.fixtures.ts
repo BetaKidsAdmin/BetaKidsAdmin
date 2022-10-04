@@ -23,13 +23,11 @@ export const relatedProductsResponse: ProductPageRelatedProductsQueryResponse = 
         __typename: 'ProductPriceRange',
         maxVariantPrice: {
           __typename: 'MoneyV2',
-          // @ts-expect-error
           currencyCode: 'USD',
           amount: '31.0'
         },
         minVariantPrice: {
           __typename: 'MoneyV2',
-          // @ts-expect-error
           currencyCode: 'USD',
           amount: '29.0'
         }
@@ -70,13 +68,11 @@ export const relatedProductsResponse: ProductPageRelatedProductsQueryResponse = 
         __typename: 'ProductPriceRange',
         maxVariantPrice: {
           __typename: 'MoneyV2',
-          // @ts-expect-error
           currencyCode: 'USD',
           amount: '29.99'
         },
         minVariantPrice: {
           __typename: 'MoneyV2',
-          // @ts-expect-error
           currencyCode: 'USD',
           amount: '29.99'
         }
@@ -119,13 +115,11 @@ export const relatedProductsResponse: ProductPageRelatedProductsQueryResponse = 
         __typename: 'ProductPriceRange',
         maxVariantPrice: {
           __typename: 'MoneyV2',
-          // @ts-expect-error
           currencyCode: 'USD',
           amount: '140.0'
         },
         minVariantPrice: {
           __typename: 'MoneyV2',
-          // @ts-expect-error
           currencyCode: 'USD',
           amount: '140.0'
         }
@@ -168,13 +162,11 @@ export const relatedProductsResponse: ProductPageRelatedProductsQueryResponse = 
         __typename: 'ProductPriceRange',
         maxVariantPrice: {
           __typename: 'MoneyV2',
-          // @ts-expect-error
           currencyCode: 'USD',
           amount: '100.0'
         },
         minVariantPrice: {
           __typename: 'MoneyV2',
-          // @ts-expect-error
           currencyCode: 'USD',
           amount: '100.0'
         }
@@ -217,13 +209,11 @@ export const relatedProductsResponse: ProductPageRelatedProductsQueryResponse = 
         __typename: 'ProductPriceRange',
         maxVariantPrice: {
           __typename: 'MoneyV2',
-          // @ts-expect-error
           currencyCode: 'USD',
           amount: '40.0'
         },
         minVariantPrice: {
           __typename: 'MoneyV2',
-          // @ts-expect-error
           currencyCode: 'USD',
           amount: '40.0'
         }
@@ -266,13 +256,11 @@ export const relatedProductsResponse: ProductPageRelatedProductsQueryResponse = 
         __typename: 'ProductPriceRange',
         maxVariantPrice: {
           __typename: 'MoneyV2',
-          // @ts-expect-error
           currencyCode: 'USD',
           amount: '299.95'
         },
         minVariantPrice: {
           __typename: 'MoneyV2',
-          // @ts-expect-error
           currencyCode: 'USD',
           amount: '299.95'
         }
@@ -315,13 +303,11 @@ export const relatedProductsResponse: ProductPageRelatedProductsQueryResponse = 
         __typename: 'ProductPriceRange',
         maxVariantPrice: {
           __typename: 'MoneyV2',
-          // @ts-expect-error
           currencyCode: 'USD',
           amount: '119.95'
         },
         minVariantPrice: {
           __typename: 'MoneyV2',
-          // @ts-expect-error
           currencyCode: 'USD',
           amount: '119.95'
         }
@@ -364,13 +350,11 @@ export const relatedProductsResponse: ProductPageRelatedProductsQueryResponse = 
         __typename: 'ProductPriceRange',
         maxVariantPrice: {
           __typename: 'MoneyV2',
-          // @ts-expect-error
           currencyCode: 'USD',
           amount: '129.95'
         },
         minVariantPrice: {
           __typename: 'MoneyV2',
-          // @ts-expect-error
           currencyCode: 'USD',
           amount: '129.95'
         }
@@ -413,13 +397,11 @@ export const relatedProductsResponse: ProductPageRelatedProductsQueryResponse = 
         __typename: 'ProductPriceRange',
         maxVariantPrice: {
           __typename: 'MoneyV2',
-          // @ts-expect-error
           currencyCode: 'USD',
           amount: '129.95'
         },
         minVariantPrice: {
           __typename: 'MoneyV2',
-          // @ts-expect-error
           currencyCode: 'USD',
           amount: '129.95'
         }
@@ -462,13 +444,11 @@ export const relatedProductsResponse: ProductPageRelatedProductsQueryResponse = 
         __typename: 'ProductPriceRange',
         maxVariantPrice: {
           __typename: 'MoneyV2',
-          // @ts-expect-error
           currencyCode: 'USD',
           amount: '109.95'
         },
         minVariantPrice: {
           __typename: 'MoneyV2',
-          // @ts-expect-error
           currencyCode: 'USD',
           amount: '109.95'
         }

@@ -8,19 +8,20 @@ import { FeaturesGrid } from 'features/Global/FeaturesGrid/FeaturesGrid';
 import { NewsletterCenteredCardWithGraphic } from 'features/Global/NewsletterCenteredCardWithGraphic/NewsletterCenteredCardWithGraphic';
 import { TestimonialWithOverlappingImage } from 'features/Global/TestimonialWithOverlappingImage/TestimonialWithOverlappingImage';
 import { TrustpilotWithData } from 'features/ProductPage/Trustpilot/TrustpilotWIthData';
-import { Details, DetailsProps } from './Details/Details';
-import { Policies, PoliciesProps } from './Policies/Policies';
+import { Details } from './Details/Details';
+import { Policies } from './Policies/Policies';
 import { Product, ProductProps } from './Product/Product';
 import { RelatedProductsWithData } from './RelatedProducts/RelatedProductsWithData';
-import { ReviewsWithDataProps } from './Reviews/ReviewsWithData';
 import { ProductPageOptions } from './types';
 
-export type ProductPageProps = Omit<ProductProps, 'showFeaturedReviews' | 'showBreadcrumbs' | 'showReviewsLink'> &
-  PoliciesProps &
-  Omit<ReviewsWithDataProps, 'sku' | 'productName'> &
-  DetailsProps & {
-    options: ProductPageOptions;
-  };
+export type ProductPageProps = Omit<ProductProps, 'showFeaturedReviews' | 'showBreadcrumbs' | 'showReviewsLink'> & {
+  reviewsPerPage?: number;
+  reviewList: ReviewList | null;
+  trustpilotReviewList: ReviewList | null;
+  options: Omit<ProductPageOptions, 'component'>;
+  details: ProductPageDetails | null;
+  policies: ProductPagePolicies | null;
+};
 
 function pageChildToComponent() {
   const PageComponent = (component, index = 0) => {
@@ -68,7 +69,7 @@ export const ProductPage = ({
 
   return (
     <>
-      <div className="bg-white">
+      <div className="bg-background">
         <Product
           component={component}
           product={product}
@@ -80,29 +81,23 @@ export const ProductPage = ({
           trustpilotSummary={trustpilotSummary}
         />
       </div>
-      <div className="bg-white overflow-hidden">{sections?.map(pageChildToComponent())}</div>
-      {(showDetails || showPolicies) && (
-        <div className="bg-gray-50">
+      <div className="bg-background overflow-hidden">
+        {sections?.map(pageChildToComponent())}
+        {(showDetails || showPolicies) && (
           <div className="max-w-2xl mx-auto px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8">
             {details && showDetails && <Details details={details} />}
             {policies && showPolicies && <Policies policies={policies} />}
           </div>
-        </div>
-      )}
-      {(showTrustpilot || showRelatedProducts) && (
-        <div className="bg-white">
-          <Wrapper>
-            {showTrustpilot && (
-              <TrustpilotWithData
-                sku={'BK-31-2,BK-30'}
-                trustpilotReviewList={trustpilotReviewList}
-                trustpilotSummary={trustpilotSummary}
-              />
-            )}
-            {showRelatedProducts && <RelatedProductsWithData limit={4} productId={product.id} />}
-          </Wrapper>
-        </div>
-      )}
+        )}
+      </div>
+      <div className="bg-background">
+        <Wrapper>
+          {showTrustpilot && trustpilotReviewList && (
+            <TrustpilotWithData sku={'BK-31-2,BK-30'} reviewList={trustpilotReviewList} />
+          )}
+          {showRelatedProducts && <RelatedProductsWithData limit={4} productId={product.id} />}
+        </Wrapper>
+      </div>
     </>
   );
 };

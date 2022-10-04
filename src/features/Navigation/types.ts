@@ -21,20 +21,12 @@ export type NavigationSubsection = {
 
 export type NavigationSection = {
   name: string;
-  link: NavigationItem;
-  subsections: NavigationSubsection[];
+  link: NavigationItem | null;
+  subsections: NavigationSubsection[] | null;
 };
 
-export type HeaderNavigationLinks = {
-  links: NavigationItem[];
-};
-
-export type HeaderNavigation = {
+export type Navigation = {
   message: NavigationMessage;
-  navigation: HeaderNavigationLinks;
-};
-
-export type Header = {
-  header: HeaderNavigation;
-  currencies: NavigationCurrency[];
+  sections: NavigationSection[];
+  currencies: typeof currencyList;
 };

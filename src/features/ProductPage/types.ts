@@ -3,12 +3,9 @@ import { SetRequired } from 'type-fest';
 import { ProductBase } from 'types/product';
 import { Review, ReviewHighlights, ReviewList, ReviewRollup, ReviewStats } from 'types/review';
 import { ProductPageRelatedProductsQueryResponse } from 'types/storefront';
-import {
-  ProductPageShopifyProductResponse,
-  Shopify_Product,
-  Shopify_ProductConnection
-} from 'types/takeshape';
+import { ProductPageShopifyProductResponse, Shopify_Product, Shopify_ProductConnection } from 'types/takeshape';
 import { TrustpilotReviewList } from 'types/trustpilot';
+import { NonNullablePath } from 'types/util';
 
 export type ProductPageShopifyProductHandleNode = Pick<Shopify_Product, 'id' | 'handle'>;
 export type ProductPageShopifyProductHandleConnection = Pick<Shopify_ProductConnection, 'pageInfo'> & {
@@ -17,7 +14,10 @@ export type ProductPageShopifyProductHandleConnection = Pick<Shopify_ProductConn
 
 export type ProductPageShopifyProduct = ProductPageShopifyProductResponse['product'];
 
-export type ProductPageRelatedProductsShopifyProduct = ProductPageRelatedProductsQueryResponse['products'][0];
+export type ProductPageRelatedProductsShopifyProduct = NonNullablePath<
+  ProductPageRelatedProductsQueryResponse,
+  ['products', 0]
+>;
 
 export type ProductPageRelatedProductsProduct = ProductBase;
 
@@ -25,7 +25,7 @@ export type ProductPageDetail = {
   image: {
     url: string;
     altText: string;
-  };
+  } | null;
   description: string;
 };
 
@@ -41,7 +41,7 @@ export type ProductPagePolicy = {
   image: {
     url: string;
     altText: string;
-  };
+  } | null;
   description: string;
   name: string;
 };
@@ -72,9 +72,11 @@ export type ProductPageProduct = SetRequired<
   | 'hasOneTimePurchaseOption'
   | 'hasSubscriptionPurchaseOption'
   | 'hasStock'
-  | 'lineItemAttributes'
 >;
-export type ProductPageReviewsIoReviews = any;
+
+export type ResponseReviewsIoReviewList = NonNullablePath<ProductPageShopifyProductResponse, ['product', 'reviews']>;
+export type ResponseReviewsIoReview = NonNullablePath<ResponseReviewsIoReviewList, [0]>;
+
 export type ProductPageReviewsReviewList = ReviewList;
 export type ProductPageReviewsReview = Review;
 export type ProductPageReviewHighlights = ReviewHighlights;
@@ -84,3 +86,8 @@ export type ProductPageReviewsStats = ReviewStats;
 export type TrustpilotProductPageReviewsReviewList = TrustpilotReviewList;
 
 export type ProductPageBreadcrumbs = Breadcrumb[];
+
+export type ResponseCollection = NonNullablePath<
+  ProductPageShopifyProductResponse,
+  ['product', 'collections', 'nodes', 0]
+>;

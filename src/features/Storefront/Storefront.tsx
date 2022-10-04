@@ -5,6 +5,8 @@ import { FeaturesGrid } from 'features/Global/FeaturesGrid/FeaturesGrid';
 import { NewsletterCenteredCardWithGraphic } from 'features/Global/NewsletterCenteredCardWithGraphic/NewsletterCenteredCardWithGraphic';
 import { TestimonialWithOverlappingImage } from 'features/Global/TestimonialWithOverlappingImage/TestimonialWithOverlappingImage';
 import { GetStorefrontQueryResponse } from 'types/takeshape';
+import { NonNullablePath } from 'types/util';
+import { isNotNullish } from 'utils/types';
 import { Hero } from './Hero/Hero';
 import { Sale } from './Sale/Sale';
 import { Testimonials } from './Testimonials/Testimonials';
@@ -48,9 +50,10 @@ function storefrontChildToComponent() {
 }
 
 export interface StorefrontProps {
-  storefront: GetStorefrontQueryResponse['storefront'];
+  storefront: NonNullablePath<GetStorefrontQueryResponse, ['storefront']>;
 }
 
 export const Storefront = ({ storefront }: StorefrontProps) => {
-  return <div className="bg-background">{storefront?.components?.map(storefrontChildToComponent())}</div>;
+  const components = storefront.components?.filter(isNotNullish).map(storefrontChildToComponent());
+  return <div className="bg-background">{components}</div>;
 };

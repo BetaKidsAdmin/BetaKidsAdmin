@@ -22,6 +22,7 @@ export type ProductPriceOption = {
   name: string;
   merchandiseId: string;
   subscriptionId?: string;
+  intervalId: string;
   interval: 'DAY' | 'WEEK' | 'MONTH' | 'YEAR';
   intervalCount: number;
   intervalMaxCycles?: number | null;
@@ -81,7 +82,7 @@ export type ProductVariantOption = {
 
 export type ProductLineItemAttribute = {
   key: string;
-  values?: string[];
+  values: string[] | null;
 };
 
 export type ProductCore = {

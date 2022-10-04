@@ -1370,7 +1370,7 @@
       "authenticationType": "searchParams",
       "options": {
         "endpoint": "https://api.reviews.io/",
-        "spec": "https://raw.githubusercontent.com/takeshape/openapi-specs/main/specs/reviews.io/v0.1.0-2.yml",
+        "spec": "https://raw.githubusercontent.com/takeshape/openapi-specs/main/specs/reviews.io/v0.1.0-3.yml",
         "useRestfulNames": true
       }
     },
@@ -1478,7 +1478,7 @@
       "serviceType": "rest",
       "authenticationType": "searchParams",
       "options": {
-        "endpoint": "https://api.trustpilot.com"
+        "endpoint": "https://api.trustpilot.com/v1/product-reviews/business-units/5d2034d825ffd300017aaff5"
       },
       "authentication": "pUHyA+5fYrpIOMnezIYYEXpXResXQlyqftnVJ+jOrezZZjZK2kCSGs9CavxOqWTXg+hrckKTu4fTglMDeTS6T2U0UQttr3fn44MJbDXAhUu9spP6ZHdQsZBZRZePIEckHgr3EpKrlPBOZHHOUsGG"
     }
@@ -2309,73 +2309,10 @@
       "description": "Returns a list Policy in natural order.",
       "args": "TSListArgs<Policy>"
     },
-    "getTrustpilotProductReviews": {
-      "resolver": {
-        "name": "rest:get",
-        "service": "trustpilot",
-        "path": {
-          "ops": [
-            {
-              "path": "businessUnit",
-              "mapping": "$args.businessUnit"
-            }
-          ],
-          "serialize": {
-            "template": "/v1/product-reviews/business-units/{businessUnit}/reviews"
-          }
-        },
-        "searchParams": {
-          "ops": [
-            {
-              "path": "page",
-              "mapping": "$args.page"
-            },
-            {
-              "path": "perPage",
-              "mapping": "$args.perPage"
-            },
-            {
-              "path": "productUrl",
-              "mapping": "$args.productUrl"
-            },
-            {
-              "path": "sku",
-              "mapping": "$args.sku"
-            },
-            {
-              "path": "language",
-              "mapping": "$args.language"
-            },
-            {
-              "path": "stars",
-              "mapping": "$args.stars"
-            },
-            {
-              "path": "locale",
-              "mapping": "$args.locale"
-            },
-            {
-              "path": "attributeIds",
-              "mapping": "$args.attributeIds"
-            }
-          ]
-        },
-        "options": {
-          "retry": {
-            "limit": 10,
-            "statusCode": [
-              429
-            ]
-          }
-        }
-      },
+    "Trustpilot_listProductReviews": {
       "args": {
         "type": "object",
         "properties": {
-          "businessUnit": {
-            "type": "string",
-            "description": "The BusinessUnitId that owns the products."
-          },
           "page": {
             "type": "integer",
             "description": "The page to retrieve. If the page number requested is higher than the available number of pages an empty array will be returned.\nConstraints: The allowed range is minimum: 1, maximum: 2147483647\nDefault value: 1"
@@ -2420,20 +2357,96 @@
             },
             "description": "A comma-separated list of attribute ids"
           }
+        }
+      },
+      "resolver": {
+        "name": "rest:get",
+        "service": "trustpilot",
+        "path": "/reviews",
+        "searchParams": {
+          "ops": [
+            {
+              "path": "page",
+              "mapping": "$args.page"
+            },
+            {
+              "path": "perPage",
+              "mapping": "$args.perPage"
+            },
+            {
+              "path": "productUrl",
+              "mapping": "$args.productUrl"
+            },
+            {
+              "path": "sku",
+              "value": "BK-31-2,BK-30"
+            },
+            {
+              "path": "language",
+              "mapping": "$args.language"
+            },
+            {
+              "path": "stars",
+              "mapping": "$args.stars"
+            },
+            {
+              "path": "locale",
+              "mapping": "$args.locale"
+            },
+            {
+              "path": "attributeIds",
+              "mapping": "$args.attributeIds"
+            }
+          ]
         },
-        "required": [
-          "businessUnit"
-        ]
+        "options": {
+          "retry": {
+            "limit": 10,
+            "statusCode": [
+              429
+            ]
+          }
+        }
       },
       "shape": "TrustpilotProductReviews"
     },
-    "Recharge_getMyPaymentMethods": {
-      "shape": {
-        "type": "array",
-        "items": {
-          "@ref": "recharge:PaymentMethod"
+    "Trustpilot_getProductReviewsSummary": {
+      "args": {
+        "type": "object",
+        "properties": {
+          "sku": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The sku of the product. Optional only if productUrl is provided."
+          }
         }
       },
+      "resolver": {
+        "name": "rest:get",
+        "service": "trustpilot",
+        "path": "/",
+        "searchParams": {
+          "ops": [
+            {
+              "path": "sku",
+              "value": "BK-31-2,BK-30"
+            }
+          ]
+        },
+        "options": {
+          "retry": {
+            "limit": 10,
+            "statusCode": [
+              429
+            ]
+          }
+        }
+      },
+      "shape": "TrustpilotProductReviewsSummary"
+    },
+    "Recharge_getMyPaymentMethods": {
       "resolver": {
         "compose": [
           {
@@ -2464,14 +2477,25 @@
             }
           }
         ]
-      }
-    },
-    "Recharge_getMyAddressPaymentMethods": {
+      },
       "shape": {
         "type": "array",
         "items": {
           "@ref": "recharge:PaymentMethod"
         }
+      }
+    },
+    "Recharge_getMyAddressPaymentMethods": {
+      "args": {
+        "type": "object",
+        "properties": {
+          "addressId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "addressId"
+        ]
       },
       "resolver": {
         "compose": [
@@ -2539,25 +2563,14 @@
           }
         ]
       },
-      "args": {
-        "type": "object",
-        "properties": {
-          "addressId": {
-            "type": "number"
-          }
-        },
-        "required": [
-          "addressId"
-        ]
-      }
-    },
-    "Recharge_getMySubscriptions": {
       "shape": {
         "type": "array",
         "items": {
-          "@ref": "recharge:Subscription"
+          "@ref": "recharge:PaymentMethod"
         }
-      },
+      }
+    },
+    "Recharge_getMySubscriptions": {
       "resolver": {
         "compose": [
           {
@@ -2583,7 +2596,7 @@
             }
           },
           {
-            "if": "!isEmpty($claims.custom.customer_access_token)",
+            "if": "!isEmpty($resolvers.customer)",
             "id": "subscriptions",
             "name": "rest:get",
             "service": "recharge",
@@ -2620,10 +2633,26 @@
             }
           ]
         }
+      },
+      "shape": {
+        "type": "array",
+        "items": {
+          "@ref": "recharge:Subscription"
+        }
       }
     },
     "Recharge_getMySubscription": {
-      "shape": "Recharge_Subscription",
+      "args": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
       "resolver": {
         "compose": [
           {
@@ -2683,17 +2712,7 @@
           }
         ]
       },
-      "args": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id"
-        ]
-      }
+      "shape": "Recharge_Subscription"
     }
   },
   "mutations": {
@@ -3119,7 +3138,83 @@
       },
       "shape": "Klaviyo_200Ok"
     },
+    "Gorgias_createTicket": {
+      "args": "CreateTicketVariables",
+      "resolver": {
+        "compose": [
+          {
+            "id": "recaptcha",
+            "if": "isEmpty($claims.email)",
+            "name": "rest:post",
+            "service": "recaptcha",
+            "path": "/siteverify",
+            "searchParams": {
+              "ops": [
+                {
+                  "path": "response",
+                  "mapping": "$args.recaptchaToken"
+                }
+              ]
+            }
+          },
+          {
+            "id": "createTicket",
+            "if": "$resolvers.recaptcha.success == true || !isEmpty($claims.email)",
+            "name": "rest:post",
+            "service": "gorgias",
+            "path": "/tickets",
+            "json": {
+              "ops": [
+                {
+                  "path": "customer.email",
+                  "mapping": "$args.email"
+                },
+                {
+                  "path": "messages",
+                  "value": [
+                    {
+                      "channel": "email",
+                      "from_agent": false,
+                      "source": {
+                        "to": [
+                          {
+                            "address": "qw72eg20ez05v4dy@emails.gorgias.com"
+                          }
+                        ]
+                      },
+                      "via": "contact_form"
+                    }
+                  ]
+                },
+                {
+                  "path": "messages[0].body_text",
+                  "mapping": "$args.message"
+                },
+                {
+                  "path": "messages[0].source.from.address",
+                  "mapping": "$args.email"
+                },
+                {
+                  "path": "messages[0].source.from.name",
+                  "mapping": "$args.name"
+                }
+              ]
+            }
+          }
+        ],
+        "results": {
+          "ops": [
+            {
+              "path": "$",
+              "mapping": "$finalResolver"
+            }
+          ]
+        }
+      },
+      "shape": "CreateTicketResponse"
+    },
     "Zendesk_createTicket": {
+      "args": "CreateTicketVariables",
       "resolver": {
         "compose": [
           {
@@ -3170,7 +3265,6 @@
           ]
         }
       },
-      "args": "CreateTicketVariables",
       "shape": "CreateTicketResponse"
     },
     "Shopify_products": {
@@ -3360,6 +3454,22 @@
       "shape": "CreateCustomerPayload"
     },
     "recoverCustomerAccount": {
+      "args": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "The email address of the customer to recover."
+          },
+          "recaptchaToken": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "recaptchaToken"
+        ]
+      },
       "resolver": {
         "compose": [
           {
@@ -3385,26 +3495,10 @@
           }
         ]
       },
-      "args": {
-        "type": "object",
-        "properties": {
-          "email": {
-            "type": "string",
-            "description": "The email address of the customer to recover."
-          },
-          "recaptchaToken": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "email",
-          "recaptchaToken"
-        ]
-      },
       "shape": "ShopifyStorefront_CustomerRecoverPayload"
     },
     "updateProduct": {
-      "shape": "UpdateResult<Product>",
+      "args": "UpdateArgs<ProductInterface>",
       "resolver": {
         "compose": [
           {
@@ -3568,11 +3662,11 @@
           ]
         }
       },
-      "description": "Update Product. If the input has Shopify values and a Shopify ID, the Shopify product with that ID is updated.\nIf the input has Shopify values and no Shopify ID, a Shopify product is created.",
-      "args": "UpdateArgs<ProductInterface>"
+      "shape": "UpdateResult<Product>",
+      "description": "Update Product. If the input has Shopify values and a Shopify ID, the Shopify product with that ID is updated.\nIf the input has Shopify values and no Shopify ID, a Shopify product is created."
     },
     "createProduct": {
-      "shape": "CreateResult<Product>",
+      "args": "CreateArgs<ProductInterface>",
       "resolver": {
         "compose": [
           {
@@ -3690,28 +3784,28 @@
           ]
         }
       },
-      "description": "Create Product. If Shopify values are provided, a Shopify product is also created and the new product ID is saved.",
-      "args": "CreateArgs<ProductInterface>"
+      "shape": "CreateResult<Product>",
+      "description": "Create Product. If Shopify values are provided, a Shopify product is also created and the new product ID is saved."
     },
     "duplicateProduct": {
-      "shape": "DuplicateResult<Product>",
+      "args": "DuplicateArgs<Product>",
       "resolver": {
         "name": "takeshape:duplicate",
         "service": "takeshape:local",
         "shapeName": "Product"
       },
-      "description": "Duplicate Product",
-      "args": "DuplicateArgs<Product>"
+      "shape": "DuplicateResult<Product>",
+      "description": "Duplicate Product"
     },
     "deleteProduct": {
-      "shape": "DeleteResult<Product>",
+      "args": "DeleteArgs<Product>",
       "resolver": {
         "name": "takeshape:delete",
         "service": "takeshape:local",
         "shapeName": "Product"
       },
-      "description": "Delete Product",
-      "args": "DeleteArgs<Product>"
+      "shape": "DeleteResult<Product>",
+      "description": "Delete Product"
     },
     "updateProductPageDetails": {
       "args": "UpdateArgs<ProductPageDetails>",
@@ -4044,44 +4138,44 @@
       "description": "Delete Collection"
     },
     "updatePage": {
-      "shape": "UpdateResult<Page>",
+      "args": "UpdateArgs<Page>",
       "resolver": {
         "name": "takeshape:update",
         "service": "takeshape:local",
         "shapeName": "Page"
       },
-      "description": "Update Page",
-      "args": "UpdateArgs<Page>"
+      "shape": "UpdateResult<Page>",
+      "description": "Update Page"
     },
     "createPage": {
-      "shape": "CreateResult<Page>",
+      "args": "CreateArgs<Page>",
       "resolver": {
         "name": "takeshape:create",
         "service": "takeshape:local",
         "shapeName": "Page"
       },
-      "description": "Create Page",
-      "args": "CreateArgs<Page>"
+      "shape": "CreateResult<Page>",
+      "description": "Create Page"
     },
     "duplicatePage": {
-      "shape": "DuplicateResult<Page>",
+      "args": "DuplicateArgs<Page>",
       "resolver": {
         "name": "takeshape:duplicate",
         "service": "takeshape:local",
         "shapeName": "Page"
       },
-      "description": "Duplicate Page",
-      "args": "DuplicateArgs<Page>"
+      "shape": "DuplicateResult<Page>",
+      "description": "Duplicate Page"
     },
     "deletePage": {
-      "shape": "DeleteResult<Page>",
+      "args": "DeleteArgs<Page>",
       "resolver": {
         "name": "takeshape:delete",
         "service": "takeshape:local",
         "shapeName": "Page"
       },
-      "description": "Delete Page",
-      "args": "DeleteArgs<Page>"
+      "shape": "DeleteResult<Page>",
+      "description": "Delete Page"
     },
     "createMyProductReview": {
       "args": {
@@ -4365,6 +4459,17 @@
       "args": "DeleteArgs<Policy>"
     },
     "Recharge_sendMyUpdatePaymentEmail": {
+      "args": {
+        "type": "object",
+        "properties": {
+          "paymentMethodId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "paymentMethodId"
+        ]
+      },
       "resolver": {
         "compose": [
           {
@@ -4433,20 +4538,24 @@
           ]
         }
       },
+      "shape": "recharge:CreateNotificationResponse"
+    },
+    "Recharge_updateMySubscriptionPaymentMethod": {
       "args": {
         "type": "object",
         "properties": {
+          "addressId": {
+            "type": "string"
+          },
           "paymentMethodId": {
             "type": "string"
           }
         },
         "required": [
+          "addressId",
           "paymentMethodId"
         ]
       },
-      "shape": "recharge:CreateNotificationResponse"
-    },
-    "Recharge_updateMySubscriptionPaymentMethod": {
       "resolver": {
         "compose": [
           {
@@ -4535,25 +4644,23 @@
           }
         ]
       },
+      "shape": "recharge:Address"
+    },
+    "Recharge_skipMyCharge": {
       "args": {
         "type": "object",
         "properties": {
-          "addressId": {
+          "chargeId": {
             "type": "string"
           },
-          "paymentMethodId": {
+          "subscriptionId": {
             "type": "string"
           }
         },
         "required": [
-          "addressId",
-          "paymentMethodId"
+          "chargeId, subscriptionId"
         ]
       },
-      "shape": "recharge:Address"
-    },
-    "Recharge_skipMyCharge": {
-      "shape": "Recharge_Charge",
       "resolver": {
         "compose": [
           {
@@ -4638,6 +4745,9 @@
           ]
         }
       },
+      "shape": "Recharge_Charge"
+    },
+    "Recharge_unskipMyCharge": {
       "args": {
         "type": "object",
         "properties": {
@@ -4651,10 +4761,7 @@
         "required": [
           "chargeId, subscriptionId"
         ]
-      }
-    },
-    "Recharge_unskipMyCharge": {
-      "shape": "Recharge_Charge",
+      },
       "resolver": {
         "compose": [
           {
@@ -4739,23 +4846,24 @@
           ]
         }
       },
+      "shape": "Recharge_Charge"
+    },
+    "Recharge_setMyNextChargeDate": {
       "args": {
         "type": "object",
         "properties": {
-          "chargeId": {
+          "subscriptionId": {
             "type": "string"
           },
-          "subscriptionId": {
+          "date": {
             "type": "string"
           }
         },
         "required": [
-          "chargeId, subscriptionId"
+          "subscriptionId",
+          "date"
         ]
-      }
-    },
-    "Recharge_setMyNextChargeDate": {
-      "shape": "Recharge_Subscription",
+      },
       "resolver": {
         "compose": [
           {
@@ -4840,24 +4948,20 @@
           }
         ]
       },
+      "shape": "Recharge_Subscription"
+    },
+    "Recharge_cancelMySubscription": {
       "args": {
         "type": "object",
         "properties": {
-          "subscriptionId": {
-            "type": "string"
-          },
-          "date": {
+          "id": {
             "type": "string"
           }
         },
         "required": [
-          "subscriptionId",
-          "date"
+          "id"
         ]
-      }
-    },
-    "Recharge_cancelMySubscription": {
-      "shape": "Recharge_Subscription",
+      },
       "resolver": {
         "compose": [
           {
@@ -4942,21 +5046,9 @@
           ]
         }
       },
-      "args": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id"
-        ]
-      }
+      "shape": "Recharge_Subscription"
     },
     "Recharge_updateMyAddress": {
-      "shape": "recharge:Address",
-      "description": "Update an address, modifying the address for all uses.",
       "args": {
         "type": "object",
         "properties": {
@@ -5122,10 +5214,11 @@
             }
           }
         ]
-      }
+      },
+      "shape": "recharge:Address",
+      "description": "Update an address, modifying the address for all uses."
     },
     "Recharge_updateMyDeliveryFrequency": {
-      "shape": "recharge:Subscription",
       "args": {
         "type": "object",
         "properties": {
@@ -5236,10 +5329,10 @@
             }
           ]
         }
-      }
+      },
+      "shape": "recharge:Subscription"
     },
     "Recharge_updateMyProductOptions": {
-      "shape": "recharge:Subscription",
       "args": {
         "type": "object",
         "properties": {
@@ -5348,7 +5441,8 @@
             }
           ]
         }
-      }
+      },
+      "shape": "recharge:Subscription"
     }
   },
   "shapes": {
@@ -5548,7 +5642,12 @@
               }
             }
           }
-        }
+        },
+        "required": [
+          "listId",
+          "listName",
+          "subscribed"
+        ]
       }
     },
     "GetListMembersInput": {
@@ -5711,7 +5810,10 @@
             "title": "Sections",
             "@mapping": "takeshape:local:FooterNavigation.RcAzYGCEA"
           }
-        }
+        },
+        "required": [
+          "sections"
+        ]
       }
     },
     "FooterNewsletter": {
@@ -5898,10 +6000,6 @@
                 "@args": {
                   "type": "object",
                   "properties": {
-                    "businessUnit": {
-                      "type": "string",
-                      "description": "The BusinessUnitId that owns the products."
-                    },
                     "page": {
                       "type": "integer",
                       "description": "The page to retrieve. If the page number requested is higher than the available number of pages an empty array will be returned.\nConstraints: The allowed range is minimum: 1, maximum: 2147483647\nDefault value: 1"
@@ -5939,25 +6037,12 @@
                       },
                       "description": "A comma-separated list of attribute ids"
                     }
-                  },
-                  "required": [
-                    "businessUnit"
-                  ]
+                  }
                 },
                 "@resolver": {
                   "name": "rest:get",
                   "service": "trustpilot",
-                  "path": {
-                    "ops": [
-                      {
-                        "path": "businessUnit",
-                        "mapping": "$args.businessUnit"
-                      }
-                    ],
-                    "serialize": {
-                      "template": "/v1/product-reviews/business-units/{businessUnit}/reviews"
-                    }
-                  },
+                  "path": "/reviews",
                   "searchParams": {
                     "ops": [
                       {
@@ -5998,32 +6083,10 @@
               },
               "trustpilotReviewsSummary": {
                 "@ref": "local:TrustpilotProductReviewsSummary",
-                "@args": {
-                  "type": "object",
-                  "properties": {
-                    "businessUnit": {
-                      "type": "string",
-                      "description": "The BusinessUnitId that owns the products."
-                    }
-                  },
-                  "required": [
-                    "businessUnit"
-                  ]
-                },
                 "@resolver": {
                   "name": "rest:get",
                   "service": "trustpilot",
-                  "path": {
-                    "ops": [
-                      {
-                        "path": "businessUnit",
-                        "mapping": "$args.businessUnit"
-                      }
-                    ],
-                    "serialize": {
-                      "template": "/v1/product-reviews/business-units/{businessUnit}"
-                    }
-                  },
+                  "path": "/",
                   "searchParams": {
                     "ops": [
                       {
@@ -9186,7 +9249,11 @@
                     "displayName": {
                       "type": "string"
                     }
-                  }
+                  },
+                  "required": [
+                    "id",
+                    "displayName"
+                  ]
                 },
                 "language": {
                   "type": "string"
@@ -9203,7 +9270,14 @@
                     "@ref": "local:TrustpilotAttachment"
                   }
                 }
-              }
+              },
+              "required": [
+                "id",
+                "createdAt",
+                "stars",
+                "content",
+                "consumer"
+              ]
             }
           },
           "links": {
@@ -9212,7 +9286,11 @@
               "@ref": "local:TrustpilotLink"
             }
           }
-        }
+        },
+        "required": [
+          "productReviews",
+          "links"
+        ]
       }
     },
     "TrustpilotAttributeRating": {
@@ -9313,10 +9391,10 @@
               "oneStar": {
                 "type": "integer"
               },
-              "twoStar": {
+              "twoStars": {
                 "type": "integer"
               },
-              "threeStar": {
+              "threeStars": {
                 "type": "integer"
               },
               "fourStars": {
@@ -9325,7 +9403,15 @@
               "fiveStars": {
                 "type": "integer"
               }
-            }
+            },
+            "required": [
+              "total",
+              "oneStar",
+              "twoStars",
+              "threeStars",
+              "fourStars",
+              "fiveStars"
+            ]
           },
           "links": {
             "type": "array",
@@ -9333,7 +9419,12 @@
               "@ref": "local:TrustpilotLink"
             }
           }
-        }
+        },
+        "required": [
+          "starsAverage",
+          "numberOfReviews",
+          "links"
+        ]
       }
     },
     "Recharge_PaymentMethod": {
@@ -9370,7 +9461,13 @@
               "last4": {
                 "type": "string"
               }
-            }
+            },
+            "required": [
+              "brand",
+              "exp_month",
+              "exp_year",
+              "last4"
+            ]
           },
           "payment_type": {
             "type": "string"
@@ -9384,7 +9481,17 @@
           "updated_at": {
             "type": "string"
           }
-        }
+        },
+        "required": [
+          "id",
+          "customer_id",
+          "created_at",
+          "payment_details",
+          "payment_type",
+          "status",
+          "status_reason",
+          "updated_at"
+        ]
       }
     },
     "Recharge_CreateNotificationResponse": {
@@ -9594,7 +9701,33 @@
               }
             }
           }
-        }
+        },
+        "required": [
+          "id",
+          "charge_interval_frequency",
+          "created_at",
+          "customer_id",
+          "email",
+          "is_prepaid",
+          "is_skippable",
+          "is_swappable",
+          "order_interval_frequency",
+          "order_interval_unit",
+          "presentment_currency",
+          "price",
+          "product_title",
+          "quantity",
+          "recharge_product_id",
+          "shopify_product_id",
+          "sku_override",
+          "status",
+          "updated_at",
+          "variant_title",
+          "address",
+          "charges",
+          "rechargeProduct",
+          "shopifyProductVariant"
+        ]
       }
     },
     "Recharge_ChargeLineItem": {
@@ -9642,7 +9775,17 @@
           "price": {
             "type": "string"
           }
-        }
+        },
+        "required": [
+          "images",
+          "quantity",
+          "subscription_id",
+          "title",
+          "variant_title",
+          "shopify_product_id",
+          "shopify_variant_id",
+          "price"
+        ]
       }
     },
     "Recharge_Charge": {
@@ -9715,7 +9858,15 @@
           "address_id": {
             "type": "string"
           }
-        }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "scheduled_at",
+          "updated_at",
+          "line_items",
+          "currency"
+        ]
       }
     },
     "Recharge_Address": {
@@ -9735,6 +9886,9 @@
             "type": "string"
           },
           "city": {
+            "type": "string"
+          },
+          "company": {
             "type": "string"
           },
           "country": {
@@ -9769,7 +9923,17 @@
               }
             }
           }
-        }
+        },
+        "required": [
+          "id",
+          "address1",
+          "address2",
+          "city",
+          "first_name",
+          "last_name",
+          "province",
+          "zip"
+        ]
       }
     },
     "Recharge_Product": {
@@ -9794,9 +9958,17 @@
                   "type": "string"
                 }
               }
-            }
+            },
+            "required": [
+              "order_interval_frequency_options"
+            ]
           }
-        }
+        },
+        "required": [
+          "id",
+          "discount_amount",
+          "subscription_defaults"
+        ]
       }
     },
     "Recharge_Onetime": {

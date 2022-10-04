@@ -16,7 +16,7 @@ const apolloClient = createAnonymousTakeshapeApolloClient();
 const PagePage: NextPage = ({ globalSettings, page }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
 
-  if (router.isFallback) {
+  if (router.isFallback || !page) {
     return (
       <Layout globalSettings={globalSettings} seo={{ title: 'Page is loading...' }}>
         <PageLoader />
@@ -33,6 +33,10 @@ const PagePage: NextPage = ({ globalSettings, page }: InferGetStaticPropsType<ty
 
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   const slug = getSingle(params.page);
+
+  if (!slug) {
+    throw new Error(`Invalid props params`);
+  }
 
   const { globalSettings } = await getLayoutData();
 
@@ -67,6 +71,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
   });
 
   const params = getPageParams(data);
+
+  if (!params) {
+    throw new Error('Invalid path params');
+  }
 
   return {
     paths: params,

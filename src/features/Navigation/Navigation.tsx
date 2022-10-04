@@ -1,7 +1,6 @@
 import { Fragment } from 'react';
 import { NavigationMobileMenu } from './NavigationMobileMenu/NavigationMobileMenu';
 import { NavigationTop } from './NavigationTop/NavigationTop';
-import { Header as NavigationType } from './types';
 
 export interface NavigationProps extends NavigationType {}
 

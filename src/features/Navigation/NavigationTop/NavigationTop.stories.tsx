@@ -1,11 +1,11 @@
-import { ComponentMeta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { rest } from 'msw';
 import { isMobileMenuOpenAtom, isSearchOpenAtom } from 'store';
 import { navigationResponse } from '../queries.fixtures';
 import { getNavigation } from '../transforms';
 import { NavigationTop } from './NavigationTop';
 
-const navigation = getNavigation(navigationResponse);
+const navigation = getNavigation(navigationResponse)!;
 
 const Meta: ComponentMeta<typeof NavigationTop> = {
   title: 'Features / Navigation / Navigation Top',
@@ -35,11 +35,12 @@ const Meta: ComponentMeta<typeof NavigationTop> = {
   }
 };
 
-const Template = (args) => <NavigationTop {...args} />;
+const Template: ComponentStory<typeof NavigationTop> = (args) => <NavigationTop {...args} />;
 
 export const _Mobile = Template.bind({});
 _Mobile.args = {
- header: navigation.header,
+  message: navigation.message,
+  sections: navigation.sections,
   currencies: navigation.currencies
 };
 _Mobile.parameters = {
@@ -50,7 +51,8 @@ _Mobile.parameters = {
 
 export const _Tablet = Template.bind({});
 _Tablet.args = {
- header: navigation.header,
+  message: navigation.message,
+  sections: navigation.sections,
   currencies: navigation.currencies
 };
 _Tablet.parameters = {
@@ -61,7 +63,8 @@ _Tablet.parameters = {
 
 export const _Desktop = Template.bind({});
 _Desktop.args = {
-  header: navigation.header,
+  message: navigation.message,
+  sections: navigation.sections,
   currencies: navigation.currencies
 };
 _Desktop.parameters = {};

@@ -17,19 +17,19 @@ directory. [The instructions section of this README will teach you how to do tha
 
 | Category | Score |
 | -------- | ----- |
-| [Path: /](https://penny-7yq2iabxo-takeshape.vercel.app/) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1663193081667-12318.report.html) |
+| [Path: /](https://penny-79zjp2yiz-takeshape.vercel.app/) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1664554740820-14512.report.html) |
 | 🟢 Performance | 100 |
 | 🟢 Accessibility | 100 |
 | 🟢 Best practices | 100 |
 | 🟢 SEO | 100 |
 | 🟢 PWA | 100 |
-| [Path: /product/__lighthouse](https://penny-7yq2iabxo-takeshape.vercel.app/product/__lighthouse) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1663193082066-34599.report.html) |
-| 🟢 Performance | 99 |
+| [Path: /product/__lighthouse](https://penny-79zjp2yiz-takeshape.vercel.app/product/__lighthouse) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1664554741569-17154.report.html) |
+| 🟢 Performance | 100 |
 | 🟢 Accessibility | 100 |
 | 🟢 Best practices | 100 |
 | 🟢 SEO | 100 |
 | 🟢 PWA | 100 |
-| [Path: /collection/__lighthouse](https://penny-7yq2iabxo-takeshape.vercel.app/collection/__lighthouse) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1663193082491-42247.report.html) |
+| [Path: /collection/__lighthouse](https://penny-79zjp2yiz-takeshape.vercel.app/collection/__lighthouse) | [Report](https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1664554741965-9817.report.html) |
 | 🟢 Performance | 100 |
 | 🟢 Accessibility | 100 |
 | 🟢 Best practices | 100 |
@@ -93,6 +93,7 @@ Here are the frameworks, language and styling options we went with for this buil
 - [Apollo Client](https://www.apollographql.com/docs/react/) for efficient GraphQL queries against TakeShape
 - [Jotai](https://jotai.org/) for optimized component state management
 - [Storybook](https://storybook.js.org/) for rapid UI prototyping and review
+- [Tailwind CSS](https://tailwindcss.com/) for beautiful styles.
 
 ### Continuous Integration
 

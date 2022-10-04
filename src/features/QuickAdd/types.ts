@@ -1,6 +1,9 @@
 import { SetRequired } from 'type-fest';
 import { ProductBase } from 'types/product';
-import { Shopify_Product, Shopify_ProductVariantConnection } from 'types/takeshape';
+import {
+  Shopify_Product,
+  Shopify_ProductVariantConnection
+} from 'types/takeshape';
 
 export type QuickAddShopifyProduct = Pick<
   Shopify_Product,

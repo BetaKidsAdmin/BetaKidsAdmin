@@ -1,4 +1,4 @@
-import { TrustpilotReviewList, TrustpilotSummary } from 'types/trustpilot';
+import { ReviewList } from 'types/review';
 import {
   ProductPageBreadcrumbs,
   ProductPageDetails,
@@ -84,64 +84,59 @@ export const productPageReviewList: ProductPageReviewsReviewList = {
   perPage: 15,
   items: [
     {
-      id: 12535824,
+      id: '12535824',
       rating: 5,
       title: 'This is the best white t-shirt out there',
       body: "I've searched my entire life for a t-shirt that reflects every color in the visible spectrum. Scientists said it couldn't be done, but when I look at this shirt, I see white light bouncing right back into my eyes. Incredible!",
       createdAt: '2022-06-08T18:15:10.000Z',
-      timeAgo: '2 weeks ago',
-      reviewer: { firstName: 'Mark', lastName: 'Edwards', verifiedBuyer: 'yes', address: '""', imageUrl: '' }
+      reviewer: { name: 'Mark Edwards', imageUrl: null }
     },
     {
-      id: 12535819,
+      id: '12535819',
       rating: 4,
       title: 'Adds the perfect variety to my wardrobe',
       body: 'I used to be one of those unbearable minimalists who only wore the same black v-necks every day. Now, I have expanded my wardrobe with three new crewneck options! Leaving off one star only because I wish the heather gray was more gray.',
       createdAt: '2022-06-08T18:14:47.000Z',
-      timeAgo: '2 weeks ago',
-      reviewer: { firstName: 'Blake', lastName: 'Reid', verifiedBuyer: 'yes', address: '""', imageUrl: '' }
+      reviewer: { name: 'Blake Reid', imageUrl: null }
     },
     {
-      id: 12482047,
+      id: '12482047',
       rating: 5,
       title: 'All good things come in 6-Packs',
       body: 'Tasty beverages, strong abs that will never be seen due to aforementioned tasty beverages, and these Basic Tees!',
       createdAt: '2022-06-07T18:14:06.000Z',
-      timeAgo: '2 weeks ago',
-      reviewer: { firstName: 'Ben', lastName: 'Russel', verifiedBuyer: 'yes', address: '""', imageUrl: '' }
+      reviewer: { name: 'Ben Russel', imageUrl: null }
     }
-  ]
+  ],
+  hasNextPage: true
 };
 
 export const productPageReviewHighlights: ProductPageReviewHighlights = {
   stats: { average: 4.6667, count: 3 },
   featured: [
     {
-      id: 12535824,
+      id: '12535824',
       rating: 5,
       title: 'This is the best white t-shirt out there',
       body: "I've searched my entire life for a t-shirt that reflects every color in the visible spectrum. Scientists said it couldn't be done, but when I look at this shirt, I see white light bouncing right back into my eyes. Incredible!",
       createdAt: '2022-06-08T18:15:10.000Z',
-      timeAgo: '2 weeks ago',
-      reviewer: { firstName: 'Mark', lastName: 'Edwards', verifiedBuyer: 'yes', address: '""', imageUrl: '' }
+      reviewer: { name: 'Mark Edwards', imageUrl: null }
     },
     {
-      id: 12535819,
+      id: '12535819',
       rating: 4,
       title: 'Adds the perfect variety to my wardrobe',
       body: 'I used to be one of those unbearable minimalists who only wore the same black v-necks every day. Now, I have expanded my wardrobe with three new crewneck options! Leaving off one star only because I wish the heather gray was more gray.',
       createdAt: '2022-06-08T18:14:47.000Z',
-      timeAgo: '2 weeks ago',
-      reviewer: { firstName: 'Blake', lastName: 'Reid', verifiedBuyer: 'yes', address: '""', imageUrl: '' }
+      reviewer: { name: 'Blake Reid', imageUrl: null }
     },
     {
-      id: 12482047,
+      id: '12482047',
       rating: 5,
       title: 'All good things come in 6-Packs',
       body: 'Tasty beverages, strong abs that will never be seen due to aforementioned tasty beverages, and these Basic Tees!',
       createdAt: '2022-06-07T18:14:06.000Z',
-      timeAgo: '2 weeks ago',
-      reviewer: { firstName: 'Ben', lastName: 'Russel', verifiedBuyer: 'yes', address: '""', imageUrl: '' }
+      reviewer: { name: 'Ben Russel', imageUrl: null }
     }
   ]
 };
@@ -201,7 +196,6 @@ export const productPageProduct: ProductPageProduct = {
   priceMin: { amount: 19200, currencyCode: 'USD' },
   priceMax: { amount: 20000, currencyCode: 'USD' },
   variantsCount: 24,
-  lineItemAttributes: null,
   variants: [
     {
       id: 'gid://shopify/ProductVariant/40234670162020',
@@ -217,13 +211,14 @@ export const productPageProduct: ProductPageProduct = {
           discountType: 'PERCENTAGE',
           interval: 'DAY',
           intervalCount: 0,
+          intervalId: 'DAY_0',
           amountBeforeDiscount: 19200,
           amount: 19200,
           currencyCode: 'USD'
         },
         {
           id: 'gid://shopify/ProductVariant/40234670162020_DAY_30',
-          name: 'Subscribe & Save',
+          name: '30 day subscription',
           merchandiseId: 'gid://shopify/ProductVariant/40234670162020',
           subscriptionId: 'gid://shopify/SellingPlan/3034021988',
           hasDiscount: true,
@@ -231,6 +226,7 @@ export const productPageProduct: ProductPageProduct = {
           discountAmount: 10,
           interval: 'DAY',
           intervalCount: 30,
+          intervalId: 'DAY_30',
           intervalMaxCycles: null,
           intervalMinCycles: null,
           intervalAnchor: null,
@@ -263,13 +259,14 @@ export const productPageProduct: ProductPageProduct = {
           discountType: 'PERCENTAGE',
           interval: 'DAY',
           intervalCount: 0,
+          intervalId: 'DAY_0',
           amountBeforeDiscount: 19200,
           amount: 19200,
           currencyCode: 'USD'
         },
         {
           id: 'gid://shopify/ProductVariant/40234670194788_DAY_30',
-          name: 'Subscribe & Save',
+          name: '30 day subscription',
           merchandiseId: 'gid://shopify/ProductVariant/40234670194788',
           subscriptionId: 'gid://shopify/SellingPlan/3034021988',
           hasDiscount: true,
@@ -277,6 +274,7 @@ export const productPageProduct: ProductPageProduct = {
           discountAmount: 10,
           interval: 'DAY',
           intervalCount: 30,
+          intervalId: 'DAY_30',
           intervalMaxCycles: null,
           intervalMinCycles: null,
           intervalAnchor: null,
@@ -309,13 +307,14 @@ export const productPageProduct: ProductPageProduct = {
           discountType: 'PERCENTAGE',
           interval: 'DAY',
           intervalCount: 0,
+          intervalId: 'DAY_0',
           amountBeforeDiscount: 19200,
           amount: 19200,
           currencyCode: 'USD'
         },
         {
           id: 'gid://shopify/ProductVariant/40234670227556_DAY_30',
-          name: 'Subscribe & Save',
+          name: '30 day subscription',
           merchandiseId: 'gid://shopify/ProductVariant/40234670227556',
           subscriptionId: 'gid://shopify/SellingPlan/3034021988',
           hasDiscount: true,
@@ -323,6 +322,7 @@ export const productPageProduct: ProductPageProduct = {
           discountAmount: 10,
           interval: 'DAY',
           intervalCount: 30,
+          intervalId: 'DAY_30',
           intervalMaxCycles: null,
           intervalMinCycles: null,
           intervalAnchor: null,
@@ -355,13 +355,14 @@ export const productPageProduct: ProductPageProduct = {
           discountType: 'PERCENTAGE',
           interval: 'DAY',
           intervalCount: 0,
+          intervalId: 'DAY_0',
           amountBeforeDiscount: 19200,
           amount: 19200,
           currencyCode: 'USD'
         },
         {
           id: 'gid://shopify/ProductVariant/40234670260324_DAY_30',
-          name: 'Subscribe & Save',
+          name: '30 day subscription',
           merchandiseId: 'gid://shopify/ProductVariant/40234670260324',
           subscriptionId: 'gid://shopify/SellingPlan/3034021988',
           hasDiscount: true,
@@ -369,6 +370,7 @@ export const productPageProduct: ProductPageProduct = {
           discountAmount: 10,
           interval: 'DAY',
           intervalCount: 30,
+          intervalId: 'DAY_30',
           intervalMaxCycles: null,
           intervalMinCycles: null,
           intervalAnchor: null,
@@ -401,13 +403,14 @@ export const productPageProduct: ProductPageProduct = {
           discountType: 'PERCENTAGE',
           interval: 'DAY',
           intervalCount: 0,
+          intervalId: 'DAY_0',
           amountBeforeDiscount: 19200,
           amount: 19200,
           currencyCode: 'USD'
         },
         {
           id: 'gid://shopify/ProductVariant/40234670293092_DAY_30',
-          name: 'Subscribe & Save',
+          name: '30 day subscription',
           merchandiseId: 'gid://shopify/ProductVariant/40234670293092',
           subscriptionId: 'gid://shopify/SellingPlan/3034021988',
           hasDiscount: true,
@@ -415,6 +418,7 @@ export const productPageProduct: ProductPageProduct = {
           discountAmount: 10,
           interval: 'DAY',
           intervalCount: 30,
+          intervalId: 'DAY_30',
           intervalMaxCycles: null,
           intervalMinCycles: null,
           intervalAnchor: null,
@@ -447,13 +451,14 @@ export const productPageProduct: ProductPageProduct = {
           discountType: 'PERCENTAGE',
           interval: 'DAY',
           intervalCount: 0,
+          intervalId: 'DAY_0',
           amountBeforeDiscount: 19200,
           amount: 19200,
           currencyCode: 'USD'
         },
         {
           id: 'gid://shopify/ProductVariant/40234670325860_DAY_30',
-          name: 'Subscribe & Save',
+          name: '30 day subscription',
           merchandiseId: 'gid://shopify/ProductVariant/40234670325860',
           subscriptionId: 'gid://shopify/SellingPlan/3034021988',
           hasDiscount: true,
@@ -461,6 +466,7 @@ export const productPageProduct: ProductPageProduct = {
           discountAmount: 10,
           interval: 'DAY',
           intervalCount: 30,
+          intervalId: 'DAY_30',
           intervalMaxCycles: null,
           intervalMinCycles: null,
           intervalAnchor: null,
@@ -493,13 +499,14 @@ export const productPageProduct: ProductPageProduct = {
           discountType: 'PERCENTAGE',
           interval: 'DAY',
           intervalCount: 0,
+          intervalId: 'DAY_0',
           amountBeforeDiscount: 19200,
           amount: 19200,
           currencyCode: 'USD'
         },
         {
           id: 'gid://shopify/ProductVariant/40234670358628_DAY_30',
-          name: 'Subscribe & Save',
+          name: '30 day subscription',
           merchandiseId: 'gid://shopify/ProductVariant/40234670358628',
           subscriptionId: 'gid://shopify/SellingPlan/3034021988',
           hasDiscount: true,
@@ -507,6 +514,7 @@ export const productPageProduct: ProductPageProduct = {
           discountAmount: 10,
           interval: 'DAY',
           intervalCount: 30,
+          intervalId: 'DAY_30',
           intervalMaxCycles: null,
           intervalMinCycles: null,
           intervalAnchor: null,
@@ -539,13 +547,14 @@ export const productPageProduct: ProductPageProduct = {
           discountType: 'PERCENTAGE',
           interval: 'DAY',
           intervalCount: 0,
+          intervalId: 'DAY_0',
           amountBeforeDiscount: 19200,
           amount: 19200,
           currencyCode: 'USD'
         },
         {
           id: 'gid://shopify/ProductVariant/40234670391396_DAY_30',
-          name: 'Subscribe & Save',
+          name: '30 day subscription',
           merchandiseId: 'gid://shopify/ProductVariant/40234670391396',
           subscriptionId: 'gid://shopify/SellingPlan/3034021988',
           hasDiscount: true,
@@ -553,6 +562,7 @@ export const productPageProduct: ProductPageProduct = {
           discountAmount: 10,
           interval: 'DAY',
           intervalCount: 30,
+          intervalId: 'DAY_30',
           intervalMaxCycles: null,
           intervalMinCycles: null,
           intervalAnchor: null,
@@ -585,13 +595,14 @@ export const productPageProduct: ProductPageProduct = {
           discountType: 'PERCENTAGE',
           interval: 'DAY',
           intervalCount: 0,
+          intervalId: 'DAY_0',
           amountBeforeDiscount: 19200,
           amount: 19200,
           currencyCode: 'USD'
         },
         {
           id: 'gid://shopify/ProductVariant/40234670424164_DAY_30',
-          name: 'Subscribe & Save',
+          name: '30 day subscription',
           merchandiseId: 'gid://shopify/ProductVariant/40234670424164',
           subscriptionId: 'gid://shopify/SellingPlan/3034021988',
           hasDiscount: true,
@@ -599,6 +610,7 @@ export const productPageProduct: ProductPageProduct = {
           discountAmount: 10,
           interval: 'DAY',
           intervalCount: 30,
+          intervalId: 'DAY_30',
           intervalMaxCycles: null,
           intervalMinCycles: null,
           intervalAnchor: null,
@@ -631,13 +643,14 @@ export const productPageProduct: ProductPageProduct = {
           discountType: 'PERCENTAGE',
           interval: 'DAY',
           intervalCount: 0,
+          intervalId: 'DAY_0',
           amountBeforeDiscount: 19200,
           amount: 19200,
           currencyCode: 'USD'
         },
         {
           id: 'gid://shopify/ProductVariant/40234670456932_DAY_30',
-          name: 'Subscribe & Save',
+          name: '30 day subscription',
           merchandiseId: 'gid://shopify/ProductVariant/40234670456932',
           subscriptionId: 'gid://shopify/SellingPlan/3034021988',
           hasDiscount: true,
@@ -645,6 +658,7 @@ export const productPageProduct: ProductPageProduct = {
           discountAmount: 10,
           interval: 'DAY',
           intervalCount: 30,
+          intervalId: 'DAY_30',
           intervalMaxCycles: null,
           intervalMinCycles: null,
           intervalAnchor: null,
@@ -677,13 +691,14 @@ export const productPageProduct: ProductPageProduct = {
           discountType: 'PERCENTAGE',
           interval: 'DAY',
           intervalCount: 0,
+          intervalId: 'DAY_0',
           amountBeforeDiscount: 19200,
           amount: 19200,
           currencyCode: 'USD'
         },
         {
           id: 'gid://shopify/ProductVariant/40234670489700_DAY_30',
-          name: 'Subscribe & Save',
+          name: '30 day subscription',
           merchandiseId: 'gid://shopify/ProductVariant/40234670489700',
           subscriptionId: 'gid://shopify/SellingPlan/3034021988',
           hasDiscount: true,
@@ -691,6 +706,7 @@ export const productPageProduct: ProductPageProduct = {
           discountAmount: 10,
           interval: 'DAY',
           intervalCount: 30,
+          intervalId: 'DAY_30',
           intervalMaxCycles: null,
           intervalMinCycles: null,
           intervalAnchor: null,
@@ -723,13 +739,14 @@ export const productPageProduct: ProductPageProduct = {
           discountType: 'PERCENTAGE',
           interval: 'DAY',
           intervalCount: 0,
+          intervalId: 'DAY_0',
           amountBeforeDiscount: 19200,
           amount: 19200,
           currencyCode: 'USD'
         },
         {
           id: 'gid://shopify/ProductVariant/40234670555236_DAY_30',
-          name: 'Subscribe & Save',
+          name: '30 day subscription',
           merchandiseId: 'gid://shopify/ProductVariant/40234670555236',
           subscriptionId: 'gid://shopify/SellingPlan/3034021988',
           hasDiscount: true,
@@ -737,6 +754,7 @@ export const productPageProduct: ProductPageProduct = {
           discountAmount: 10,
           interval: 'DAY',
           intervalCount: 30,
+          intervalId: 'DAY_30',
           intervalMaxCycles: null,
           intervalMinCycles: null,
           intervalAnchor: null,
@@ -769,13 +787,14 @@ export const productPageProduct: ProductPageProduct = {
           discountType: 'PERCENTAGE',
           interval: 'DAY',
           intervalCount: 0,
+          intervalId: 'DAY_0',
           amountBeforeDiscount: 19200,
           amount: 19200,
           currencyCode: 'USD'
         },
         {
           id: 'gid://shopify/ProductVariant/40234670588004_DAY_30',
-          name: 'Subscribe & Save',
+          name: '30 day subscription',
           merchandiseId: 'gid://shopify/ProductVariant/40234670588004',
           subscriptionId: 'gid://shopify/SellingPlan/3034021988',
           hasDiscount: true,
@@ -783,6 +802,7 @@ export const productPageProduct: ProductPageProduct = {
           discountAmount: 10,
           interval: 'DAY',
           intervalCount: 30,
+          intervalId: 'DAY_30',
           intervalMaxCycles: null,
           intervalMinCycles: null,
           intervalAnchor: null,
@@ -815,13 +835,14 @@ export const productPageProduct: ProductPageProduct = {
           discountType: 'PERCENTAGE',
           interval: 'DAY',
           intervalCount: 0,
+          intervalId: 'DAY_0',
           amountBeforeDiscount: 19200,
           amount: 19200,
           currencyCode: 'USD'
         },
         {
           id: 'gid://shopify/ProductVariant/40234670620772_DAY_30',
-          name: 'Subscribe & Save',
+          name: '30 day subscription',
           merchandiseId: 'gid://shopify/ProductVariant/40234670620772',
           subscriptionId: 'gid://shopify/SellingPlan/3034021988',
           hasDiscount: true,
@@ -829,6 +850,7 @@ export const productPageProduct: ProductPageProduct = {
           discountAmount: 10,
           interval: 'DAY',
           intervalCount: 30,
+          intervalId: 'DAY_30',
           intervalMaxCycles: null,
           intervalMinCycles: null,
           intervalAnchor: null,
@@ -861,13 +883,14 @@ export const productPageProduct: ProductPageProduct = {
           discountType: 'PERCENTAGE',
           interval: 'DAY',
           intervalCount: 0,
+          intervalId: 'DAY_0',
           amountBeforeDiscount: 19200,
           amount: 19200,
           currencyCode: 'USD'
         },
         {
           id: 'gid://shopify/ProductVariant/40234670653540_DAY_30',
-          name: 'Subscribe & Save',
+          name: '30 day subscription',
           merchandiseId: 'gid://shopify/ProductVariant/40234670653540',
           subscriptionId: 'gid://shopify/SellingPlan/3034021988',
           hasDiscount: true,
@@ -875,6 +898,7 @@ export const productPageProduct: ProductPageProduct = {
           discountAmount: 10,
           interval: 'DAY',
           intervalCount: 30,
+          intervalId: 'DAY_30',
           intervalMaxCycles: null,
           intervalMinCycles: null,
           intervalAnchor: null,
@@ -907,13 +931,14 @@ export const productPageProduct: ProductPageProduct = {
           discountType: 'PERCENTAGE',
           interval: 'DAY',
           intervalCount: 0,
+          intervalId: 'DAY_0',
           amountBeforeDiscount: 19200,
           amount: 19200,
           currencyCode: 'USD'
         },
         {
           id: 'gid://shopify/ProductVariant/40234670686308_DAY_30',
-          name: 'Subscribe & Save',
+          name: '30 day subscription',
           merchandiseId: 'gid://shopify/ProductVariant/40234670686308',
           subscriptionId: 'gid://shopify/SellingPlan/3034021988',
           hasDiscount: true,
@@ -921,6 +946,7 @@ export const productPageProduct: ProductPageProduct = {
           discountAmount: 10,
           interval: 'DAY',
           intervalCount: 30,
+          intervalId: 'DAY_30',
           intervalMaxCycles: null,
           intervalMinCycles: null,
           intervalAnchor: null,
@@ -953,13 +979,14 @@ export const productPageProduct: ProductPageProduct = {
           discountType: 'PERCENTAGE',
           interval: 'DAY',
           intervalCount: 0,
+          intervalId: 'DAY_0',
           amountBeforeDiscount: 19200,
           amount: 19200,
           currencyCode: 'USD'
         },
         {
           id: 'gid://shopify/ProductVariant/40234670719076_DAY_30',
-          name: 'Subscribe & Save',
+          name: '30 day subscription',
           merchandiseId: 'gid://shopify/ProductVariant/40234670719076',
           subscriptionId: 'gid://shopify/SellingPlan/3034021988',
           hasDiscount: true,
@@ -967,6 +994,7 @@ export const productPageProduct: ProductPageProduct = {
           discountAmount: 10,
           interval: 'DAY',
           intervalCount: 30,
+          intervalId: 'DAY_30',
           intervalMaxCycles: null,
           intervalMinCycles: null,
           intervalAnchor: null,
@@ -999,13 +1027,14 @@ export const productPageProduct: ProductPageProduct = {
           discountType: 'PERCENTAGE',
           interval: 'DAY',
           intervalCount: 0,
+          intervalId: 'DAY_0',
           amountBeforeDiscount: 19200,
           amount: 19200,
           currencyCode: 'USD'
         },
         {
           id: 'gid://shopify/ProductVariant/40234670751844_DAY_30',
-          name: 'Subscribe & Save',
+          name: '30 day subscription',
           merchandiseId: 'gid://shopify/ProductVariant/40234670751844',
           subscriptionId: 'gid://shopify/SellingPlan/3034021988',
           hasDiscount: true,
@@ -1013,6 +1042,7 @@ export const productPageProduct: ProductPageProduct = {
           discountAmount: 10,
           interval: 'DAY',
           intervalCount: 30,
+          intervalId: 'DAY_30',
           intervalMaxCycles: null,
           intervalMinCycles: null,
           intervalAnchor: null,
@@ -1045,13 +1075,14 @@ export const productPageProduct: ProductPageProduct = {
           discountType: 'PERCENTAGE',
           interval: 'DAY',
           intervalCount: 0,
+          intervalId: 'DAY_0',
           amountBeforeDiscount: 19200,
           amount: 19200,
           currencyCode: 'USD'
         },
         {
           id: 'gid://shopify/ProductVariant/40234670784612_DAY_30',
-          name: 'Subscribe & Save',
+          name: '30 day subscription',
           merchandiseId: 'gid://shopify/ProductVariant/40234670784612',
           subscriptionId: 'gid://shopify/SellingPlan/3034021988',
           hasDiscount: true,
@@ -1059,6 +1090,7 @@ export const productPageProduct: ProductPageProduct = {
           discountAmount: 10,
           interval: 'DAY',
           intervalCount: 30,
+          intervalId: 'DAY_30',
           intervalMaxCycles: null,
           intervalMinCycles: null,
           intervalAnchor: null,
@@ -1091,13 +1123,14 @@ export const productPageProduct: ProductPageProduct = {
           discountType: 'PERCENTAGE',
           interval: 'DAY',
           intervalCount: 0,
+          intervalId: 'DAY_0',
           amountBeforeDiscount: 19200,
           amount: 19200,
           currencyCode: 'USD'
         },
         {
           id: 'gid://shopify/ProductVariant/40234670817380_DAY_30',
-          name: 'Subscribe & Save',
+          name: '30 day subscription',
           merchandiseId: 'gid://shopify/ProductVariant/40234670817380',
           subscriptionId: 'gid://shopify/SellingPlan/3034021988',
           hasDiscount: true,
@@ -1105,6 +1138,7 @@ export const productPageProduct: ProductPageProduct = {
           discountAmount: 10,
           interval: 'DAY',
           intervalCount: 30,
+          intervalId: 'DAY_30',
           intervalMaxCycles: null,
           intervalMinCycles: null,
           intervalAnchor: null,
@@ -1137,13 +1171,14 @@ export const productPageProduct: ProductPageProduct = {
           discountType: 'PERCENTAGE',
           interval: 'DAY',
           intervalCount: 0,
+          intervalId: 'DAY_0',
           amountBeforeDiscount: 19200,
           amount: 19200,
           currencyCode: 'USD'
         },
         {
           id: 'gid://shopify/ProductVariant/40234670850148_DAY_30',
-          name: 'Subscribe & Save',
+          name: '30 day subscription',
           merchandiseId: 'gid://shopify/ProductVariant/40234670850148',
           subscriptionId: 'gid://shopify/SellingPlan/3034021988',
           hasDiscount: true,
@@ -1151,6 +1186,7 @@ export const productPageProduct: ProductPageProduct = {
           discountAmount: 10,
           interval: 'DAY',
           intervalCount: 30,
+          intervalId: 'DAY_30',
           intervalMaxCycles: null,
           intervalMinCycles: null,
           intervalAnchor: null,
@@ -1183,13 +1219,14 @@ export const productPageProduct: ProductPageProduct = {
           discountType: 'PERCENTAGE',
           interval: 'DAY',
           intervalCount: 0,
+          intervalId: 'DAY_0',
           amountBeforeDiscount: 20000,
           amount: 20000,
           currencyCode: 'USD'
         },
         {
           id: 'gid://shopify/ProductVariant/40234670882916_DAY_30',
-          name: 'Subscribe & Save',
+          name: '30 day subscription',
           merchandiseId: 'gid://shopify/ProductVariant/40234670882916',
           subscriptionId: 'gid://shopify/SellingPlan/3034021988',
           hasDiscount: true,
@@ -1197,6 +1234,7 @@ export const productPageProduct: ProductPageProduct = {
           discountAmount: 10,
           interval: 'DAY',
           intervalCount: 30,
+          intervalId: 'DAY_30',
           intervalMaxCycles: null,
           intervalMinCycles: null,
           intervalAnchor: null,
@@ -1229,13 +1267,14 @@ export const productPageProduct: ProductPageProduct = {
           discountType: 'PERCENTAGE',
           interval: 'DAY',
           intervalCount: 0,
+          intervalId: 'DAY_0',
           amountBeforeDiscount: 20000,
           amount: 20000,
           currencyCode: 'USD'
         },
         {
           id: 'gid://shopify/ProductVariant/40234670915684_DAY_30',
-          name: 'Subscribe & Save',
+          name: '30 day subscription',
           merchandiseId: 'gid://shopify/ProductVariant/40234670915684',
           subscriptionId: 'gid://shopify/SellingPlan/3034021988',
           hasDiscount: true,
@@ -1243,6 +1282,7 @@ export const productPageProduct: ProductPageProduct = {
           discountAmount: 10,
           interval: 'DAY',
           intervalCount: 30,
+          intervalId: 'DAY_30',
           intervalMaxCycles: null,
           intervalMinCycles: null,
           intervalAnchor: null,
@@ -1275,13 +1315,14 @@ export const productPageProduct: ProductPageProduct = {
           discountType: 'PERCENTAGE',
           interval: 'DAY',
           intervalCount: 0,
+          intervalId: 'DAY_0',
           amountBeforeDiscount: 20000,
           amount: 20000,
           currencyCode: 'USD'
         },
         {
           id: 'gid://shopify/ProductVariant/40234670981220_DAY_30',
-          name: 'Subscribe & Save',
+          name: '30 day subscription',
           merchandiseId: 'gid://shopify/ProductVariant/40234670981220',
           subscriptionId: 'gid://shopify/SellingPlan/3034021988',
           hasDiscount: true,
@@ -1289,6 +1330,7 @@ export const productPageProduct: ProductPageProduct = {
           discountAmount: 10,
           interval: 'DAY',
           intervalCount: 30,
+          intervalId: 'DAY_30',
           intervalMaxCycles: null,
           intervalMinCycles: null,
           intervalAnchor: null,
@@ -2336,49 +2378,58 @@ export const productPageRelatedProducts: ProductPageRelatedProductsProduct[] = [
   }
 ];
 
-export const trustpilotSummary: TrustpilotSummary = {
-  average: 3.9,
-  total: 15
-};
-
-export const trustpilotSummaryEmpty: TrustpilotSummary = {
-  total: 0
-};
-
-export const trustpilotPageData: TrustpilotReviewList = {
+export const trustpilotPageData: ReviewList = {
+  stats: {
+    average: 5,
+    count: 3
+  },
+  perPage: 3,
+  totalPages: 2,
   items: [
     {
       id: 'id',
-      createdAt: 'today at 1:07 PM',
-      stars: 5,
-      content: 'Pretty good, I wish someone would feed me kibble though. I am a dog.',
-      consumer: {
-        displayName: 'Rye'
+      rating: 5,
+      title: 'Pretty good, I wish someone would feed me kibble though. I am a dog.',
+      body: 'Pretty good, I wish someone would feed me kibble though. I am a dog.',
+      createdAt: '2022-06-08T18:14:47.000Z',
+      reviewer: {
+        name: 'Rye',
+        imageUrl: null
       }
     },
     {
       id: 'id',
-      createdAt: 'last Monday at 1:07 PM',
-      stars: 1,
-      content: 'It never arrived even though I ordered it 2 months ago. I am very upset.',
-      consumer: {
-        displayName: 'Frito'
+      createdAt: '2022-06-08T18:14:47.000Z',
+      rating: 1,
+      title: 'It never arrived even though I ordered it 2 months ago. I am very upset.',
+      body: 'It never arrived even though I ordered it 2 months ago. I am very upset.',
+      reviewer: {
+        name: 'Frito',
+        imageUrl: null
       }
     },
     {
       id: 'id',
-      createdAt: '08/01/2022',
-      stars: 4,
-      content: 'I am going to escape again. I am a cat.',
-      consumer: {
-        displayName: 'Tuna'
+      createdAt: '2022-06-08T18:14:47.000Z',
+      rating: 4,
+      title: 'I am going to escape again. I am a cat.',
+      body: 'I am going to escape again. I am a cat.',
+      reviewer: {
+        name: 'Tuna',
+        imageUrl: null
       }
     }
   ],
-  nextPage: true
+  hasNextPage: true
 };
 
-export const trustpilotPageDataEmpty: TrustpilotReviewList = {
+export const trustpilotPageDataEmpty: ReviewList = {
+  stats: {
+    average: 0,
+    count: 0
+  },
+  perPage: 0,
+  totalPages: 0,
   items: [],
-  nextPage: false
+  hasNextPage: false
 };

@@ -6,7 +6,7 @@ import { Navigation } from './Navigation';
 import { navigationResponse } from './queries.fixtures';
 import { getNavigation } from './transforms';
 
-const navigation = getNavigation(navigationResponse);
+const navigation = getNavigation(navigationResponse)!;
 
 const Meta: ComponentMeta<typeof Navigation> = {
   title: 'Features / Navigation',
@@ -40,7 +40,8 @@ const Template: ComponentStory<typeof Navigation> = (args) => <Navigation {...ar
 
 export const _Navigation = Template.bind({});
 _Navigation.args = {
-  header: navigation.header,
+  message: navigation.message,
+  sections: navigation.sections,
   currencies: currencyList
 };
 

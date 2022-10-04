@@ -2,6 +2,9 @@ import { StarIcon } from '@heroicons/react/24/solid';
 import classNames from 'utils/classNames';
 
 export const ReviewsCounter = ({ trustpilotSummary }) => {
+  if (!trustpilotSummary) {
+    return null;
+  }
   return (
     <div className="mt-4">
       <h2 className="sr-only">Reviews</h2>

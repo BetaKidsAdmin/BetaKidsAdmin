@@ -6,7 +6,6 @@ import {
   reviewsIoReviewsPerPage,
   trustpilotReviewsPerPage
 } from 'config';
-import { trustpilotBusinessUnit } from 'config/trustpilot';
 import { ProductPage as ProductPageComponent } from 'features/ProductPage/ProductPage';
 import {
   ProductPageShopifyProductHandlesQuery,
@@ -64,7 +63,10 @@ const ProductPage: NextPage = ({
   }
 
   return (
-    <Layout globalSettings={globalSettings} seo={{ title: product.seo.title, description: product.seo.description }}>
+    <Layout
+      globalSettings={globalSettings}
+      seo={{ title: product.seo.title, description: product.seo.description, noindex }}
+    >
       <ProductPageComponent
         component={options.component}
         options={options}
@@ -88,19 +90,22 @@ const apolloClient = createAnonymousTakeshapeApolloClient();
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   const { globalSettings } = await getLayoutData();
 
-  let handle = getSingle(params.product);
+  let handle = getSingle(params?.product);
 
   if (lighthouseProductHandle && handle === lighthouseHandle) {
     handle = lighthouseProductHandle;
   }
 
   const { data, error } = await retryGraphqlThrottle<ProductPageShopifyProductResponse>(async () => {
+    if (!handle) {
+      throw new Error('Invalid getStaticProps params');
+    }
+
     return apolloClient.query<ProductPageShopifyProductResponse, ProductPageShopifyProductVariables>({
       query: ProductPageShopifyProductQuery,
       variables: {
         handle,
-        trustpilotReviewsPerPage: trustpilotReviewsPerPage,
-        trustpilotBusinessUnit
+        trustpilotReviewsPerPage: trustpilotReviewsPerPage
       }
     });
   });
@@ -138,23 +143,34 @@ export const getStaticPaths: GetStaticPaths = async () => {
   let paths: ReturnType<typeof getProductPageParams> = [];
 
   let hasNextPage = true;
-  let endCursor: string;
+  let endCursor: string | undefined;
 
   while (hasNextPage) {
+    let variables: ProductPageShopifyProductHandlesQueryVariables = {
+      first: 50
+    };
+
+    if (endCursor) {
+      variables.after = endCursor;
+    }
+
     const { data } = await apolloClient.query<
       ProductPageShopifyProductHandlesQueryResponse,
       ProductPageShopifyProductHandlesQueryVariables
     >({
       query: ProductPageShopifyProductHandlesQuery,
-      variables: {
-        first: 50,
-        after: endCursor
-      }
+      variables
     });
 
-    paths = [...paths, ...getProductPageParams(data)];
-    hasNextPage = data.products.pageInfo.hasNextPage;
-    endCursor = data.products.pageInfo.endCursor;
+    const pagePaths = getProductPageParams(data);
+
+    if (!pagePaths) {
+      throw new Error('Could not generate paths');
+    }
+
+    paths = [...paths, ...pagePaths];
+    hasNextPage = data.products?.pageInfo.hasNextPage ?? false;
+    endCursor = data.products?.pageInfo.endCursor ?? undefined;
   }
 
   // Add the lighthouse testing path, if configured

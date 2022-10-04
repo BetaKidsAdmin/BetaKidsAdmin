@@ -16,7 +16,7 @@ export const ProductPageShopifyProductHandlesQuery = gql`
 `;
 
 export const ProductPageShopifyProductQuery = gql`
-  query ProductPageShopifyProduct($handle: String!, $trustpilotReviewsPerPage: Int, $trustpilotBusinessUnit: String!) {
+  query ProductPageShopifyProduct($handle: String!, $trustpilotReviewsPerPage: Int) {
     product: productByHandleWithTtl(handle: $handle) {
       id
       handle
@@ -25,8 +25,10 @@ export const ProductPageShopifyProductQuery = gql`
       descriptionHtml
       tags
       requiresSellingPlan
-      trustpilotReviews(businessUnit: $trustpilotBusinessUnit, perPage: $trustpilotReviewsPerPage) {
+      totalInventory
+      trustpilotReviews(perPage: $trustpilotReviewsPerPage) {
         productReviews {
+          id
           content
           stars
           createdAt
@@ -38,10 +40,15 @@ export const ProductPageShopifyProductQuery = gql`
           rel
         }
       }
-      trustpilotReviewsSummary(businessUnit: $trustpilotBusinessUnit) {
+      trustpilotReviewsSummary {
         starsAverage
         numberOfReviews {
           total
+          fiveStars
+          fourStars
+          threeStars
+          twoStars
+          oneStar
         }
       }
       takeshape {
@@ -222,6 +229,7 @@ export const ProductPageShopifyProductQuery = gql`
             width
             height
             url
+            altText
           }
           price
           inventoryPolicy
@@ -242,52 +250,49 @@ export const ProductPageShopifyProductQuery = gql`
       }
       sellingPlanGroupCount
       sellingPlanGroups(first: 1) {
-        edges {
-          node {
-            sellingPlans(first: 5) {
-              edges {
-                node {
-                  id
-                  options
-                  pricingPolicies {
-                    ... on Shopify_SellingPlanFixedPricingPolicy {
-                      adjustmentType
-                      adjustmentValue {
-                        ... on Shopify_MoneyV2 {
-                          currencyCode
-                          amount
-                        }
-                        ... on Shopify_SellingPlanPricingPolicyPercentageValue {
-                          percentage
-                        }
-                      }
+        nodes {
+          sellingPlans(first: 5) {
+            nodes {
+              id
+              options
+              pricingPolicies {
+                ... on Shopify_SellingPlanFixedPricingPolicy {
+                  adjustmentType
+                  adjustmentValue {
+                    ... on Shopify_MoneyV2 {
+                      currencyCode
+                      amount
                     }
-                    ... on Shopify_SellingPlanRecurringPricingPolicy {
-                      adjustmentType
-                      adjustmentValue {
-                        ... on Shopify_MoneyV2 {
-                          currencyCode
-                          amount
-                        }
-                        ... on Shopify_SellingPlanPricingPolicyPercentageValue {
-                          percentage
-                        }
-                      }
+                    ... on Shopify_SellingPlanPricingPolicyPercentageValue {
+                      percentage
                     }
                   }
-                  billingPolicy {
-                    ... on Shopify_SellingPlanRecurringBillingPolicy {
-                      anchors {
-                        day
-                        month
-                        type
-                      }
-                      maxCycles
-                      minCycles
-                      intervalCount
-                      interval
+                }
+                ... on Shopify_SellingPlanRecurringPricingPolicy {
+                  adjustmentType
+                  adjustmentValue {
+                    ... on Shopify_MoneyV2 {
+                      currencyCode
+                      amount
+                    }
+                    ... on Shopify_SellingPlanPricingPolicyPercentageValue {
+                      percentage
                     }
                   }
+                }
+              }
+              billingPolicy {
+                ... on Shopify_SellingPlanRecurringBillingPolicy {
+                  anchors {
+                    day
+                    month
+                    type
+                    cutoffDay
+                  }
+                  maxCycles
+                  minCycles
+                  intervalCount
+                  interval
                 }
               }
             }
@@ -305,9 +310,10 @@ export const ProductPageReviewPageQuery = gql`
 `;
 
 export const TrustpilotProductPageReviewPageQuery = gql`
-  query TrustpilotProductPageReviewPageQuery($businessUnit: String!, $sku: [String!], $page: Int!, $perPage: Int!) {
-    reviewData: getTrustpilotProductReviews(businessUnit: $businessUnit, sku: $sku, page: $page, perPage: $perPage) {
+  query TrustpilotProductPageReviewPageQuery($sku: [String!], $page: Int!, $perPage: Int!) {
+    reviews: Trustpilot_listProductReviews(sku: $sku, page: $page, perPage: $perPage) {
       productReviews {
+        id
         content
         stars
         createdAt
@@ -317,6 +323,22 @@ export const TrustpilotProductPageReviewPageQuery = gql`
       }
       links {
         rel
+      }
+    }
+    summary: Trustpilot_getProductReviewsSummary(sku: $sku) {
+      starsAverage
+      numberOfReviews {
+        total
+        fiveStars
+        fourStars
+        threeStars
+        twoStars
+        oneStar
+      }
+      links {
+        rel
+        href
+        method
       }
     }
   }

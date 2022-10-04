@@ -14,16 +14,11 @@ export const defaultProductImage = {
   altText: 'Default product image'
 };
 
-export const enableReviewsIo = false;
-export const reviewsIoReviewsPerPage = 3;
-export const enableTrustpilot = true;
-export const trustpilotReviewsPerPage = 3;
-
 /* Collections */
 export const collectionsPageSize = 12;
 
 /* Product Options - LUTs to decorate options */
-export const productOptions = {
+export const productOptions: Record<string, Record<string, Record<string, string>>> = {
   color: {
     white: { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400', colorBg: '#ffffff' },
     gray: { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400', colorBg: '#333333' },

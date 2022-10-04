@@ -7,8 +7,7 @@ import {
   productPageProduct,
   productPageReviewHighlights,
   productPageReviewList,
-  trustpilotPageData,
-  trustpilotSummary
+  trustpilotPageData
 } from './fixtures';
 import { ProductPage } from './ProductPage';
 import { relatedProductsResponse } from './queries.fixtures';
@@ -26,7 +25,8 @@ _ProductPage.args = {
   component: 'withImageGrid',
   options: {
     showDetails: true,
-    showReviews: true,
+    showReviewsIo: true,
+    showTrustpilot: false,
     showRelatedProducts: true,
     showPolicies: true,
     showBreadcrumbs: true
@@ -37,7 +37,6 @@ _ProductPage.args = {
   details: productPageDetails,
   policies: productPagePolicies,
   breadcrumbs: productPageBreadcrumbs,
-  trustpilotSummary,
   trustpilotReviewList: trustpilotPageData
 };
 
