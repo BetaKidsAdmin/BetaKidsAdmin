@@ -1,6 +1,6 @@
 [
   {
-    "projectId": "06ccc3dc-a9da-4f5b-9142-5a104db52ee3",
+    "projectId": "e6942252-2648-44e1-a793-f1d77edb40c9",
     "conditions": {},
     "updated": 1656001468015,
     "permissions": {
@@ -8,7 +8,7 @@
       "Statement": [
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Query.collectionByHandleWithTtl"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Query.collectionByHandleWithTtl"
           ],
           "Effect": "Allow",
           "Action": [
@@ -17,7 +17,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Query.collectionsWithTtl"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Query.collectionsWithTtl"
           ],
           "Effect": "Allow",
           "Action": [
@@ -26,7 +26,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Query.getFooter"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Query.getFooter"
           ],
           "Effect": "Allow",
           "Action": [
@@ -35,7 +35,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Query.getNavigation"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Query.getNavigation"
           ],
           "Effect": "Allow",
           "Action": [
@@ -44,7 +44,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Query.productsWithTtl"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Query.productsWithTtl"
           ],
           "Effect": "Allow",
           "Action": [
@@ -53,7 +53,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Query.productByHandleWithTtl"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Query.productByHandleWithTtl"
           ],
           "Effect": "Allow",
           "Action": [
@@ -62,7 +62,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Query.getStorefront"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Query.getStorefront"
           ],
           "Effect": "Allow",
           "Action": [
@@ -71,7 +71,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Query.getPageList"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Query.getPageList"
           ],
           "Effect": "Allow",
           "Action": [
@@ -80,7 +80,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Query.getAssetList"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Query.getAssetList"
           ],
           "Effect": "Allow",
           "Action": [
@@ -89,7 +89,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Query.search"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Query.search"
           ],
           "Effect": "Allow",
           "Action": [
@@ -98,7 +98,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Query.getTrustpilotProductReviews"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Query.getTrustpilotProductReviews"
           ],
           "Effect": "Allow",
           "Action": [
@@ -107,7 +107,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Mutation.addMembers"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Mutation.addMembers"
           ],
           "Effect": "Allow",
           "Action": [
@@ -116,7 +116,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Mutation.createCart"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Mutation.createCart"
           ],
           "Effect": "Allow",
           "Action": [
@@ -125,7 +125,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Mutation.createCustomer"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Mutation.createCustomer"
           ],
           "Effect": "Allow",
           "Action": [
@@ -134,7 +134,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Mutation.recoverCustomerAccount"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Mutation.recoverCustomerAccount"
           ],
           "Effect": "Allow",
           "Action": [
@@ -143,7 +143,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Mutation.Gorgias_createTicket"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Mutation.Gorgias_createTicket"
           ],
           "Effect": "Allow",
           "Action": [
@@ -152,7 +152,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Mutation.Zendesk_createTicket"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Mutation.Zendesk_createTicket"
           ],
           "Effect": "Allow",
           "Action": [
@@ -161,7 +161,7 @@
         },
         {
           "Resource": [
-            "ts:shape:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:*"
+            "ts:shape:e6942252-2648-44e1-a793-f1d77edb40c9:*"
           ],
           "Effect": "Allow",
           "Action": [
@@ -174,7 +174,7 @@
     "name": "anonymous"
   },
   {
-    "projectId": "06ccc3dc-a9da-4f5b-9142-5a104db52ee3",
+    "projectId": "e6942252-2648-44e1-a793-f1d77edb40c9",
     "conditions": {
       "ForAllValues:StringEquals": {
         "claims:provider": [
@@ -188,7 +188,7 @@
       "Statement": [
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Query.getMyAdminCustomer"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Query.getMyAdminCustomer"
           ],
           "Effect": "Allow",
           "Action": [
@@ -197,7 +197,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Query.getMyLoyaltyCard"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Query.getMyLoyaltyCard"
           ],
           "Effect": "Allow",
           "Action": [
@@ -206,7 +206,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Query.getMyNewsletterSubscriptions"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Query.getMyNewsletterSubscriptions"
           ],
           "Effect": "Allow",
           "Action": [
@@ -215,7 +215,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Mutation.subscribeMyEmailToNewsletter"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Mutation.subscribeMyEmailToNewsletter"
           ],
           "Effect": "Allow",
           "Action": [
@@ -224,7 +224,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Mutation.unsubscribeMyEmailFromNewsletter"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Mutation.unsubscribeMyEmailFromNewsletter"
           ],
           "Effect": "Allow",
           "Action": [
@@ -233,7 +233,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Mutation.addMembers"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Mutation.addMembers"
           ],
           "Effect": "Allow",
           "Action": [
@@ -242,7 +242,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Mutation.Gorgias_createTicket"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Mutation.Gorgias_createTicket"
           ],
           "Effect": "Allow",
           "Action": [
@@ -251,7 +251,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Mutation.Zendesk_createTicket"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Mutation.Zendesk_createTicket"
           ],
           "Effect": "Allow",
           "Action": [
@@ -260,7 +260,7 @@
         },
         {
           "Resource": [
-            "ts:shape:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:*"
+            "ts:shape:e6942252-2648-44e1-a793-f1d77edb40c9:*"
           ],
           "Effect": "Allow",
           "Action": [
@@ -269,7 +269,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Mutation.createMyProductReview"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Mutation.createMyProductReview"
           ],
           "Effect": "Allow",
           "Action": [
@@ -278,7 +278,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Query.Recharge_getMyPaymentMethods"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Query.Recharge_getMyPaymentMethods"
           ],
           "Effect": "Allow",
           "Action": [
@@ -287,7 +287,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Query.Recharge_getMySubscription"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Query.Recharge_getMySubscription"
           ],
           "Effect": "Allow",
           "Action": [
@@ -296,7 +296,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Query.Recharge_getMyAddressPaymentMethods"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Query.Recharge_getMyAddressPaymentMethods"
           ],
           "Effect": "Allow",
           "Action": [
@@ -305,7 +305,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Mutation.Recharge_sendMyUpdatePaymentEmail"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Mutation.Recharge_sendMyUpdatePaymentEmail"
           ],
           "Effect": "Allow",
           "Action": [
@@ -314,7 +314,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Mutation.Recharge_updateMySubscriptionPaymentMethod"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Mutation.Recharge_updateMySubscriptionPaymentMethod"
           ],
           "Effect": "Allow",
           "Action": [
@@ -323,7 +323,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Mutation.Recharge_updateMyAddress"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Mutation.Recharge_updateMyAddress"
           ],
           "Effect": "Allow",
           "Action": [
@@ -332,7 +332,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Mutation.Recharge_skipMyCharge"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Mutation.Recharge_skipMyCharge"
           ],
           "Effect": "Allow",
           "Action": [
@@ -341,7 +341,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Mutation.Recharge_unskipMyCharge"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Mutation.Recharge_unskipMyCharge"
           ],
           "Effect": "Allow",
           "Action": [
@@ -350,7 +350,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Mutation.Recharge_cancelMySubscription"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Mutation.Recharge_cancelMySubscription"
           ],
           "Effect": "Allow",
           "Action": [
@@ -359,7 +359,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Mutation.Recharge_setMyNextChargeDate"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Mutation.Recharge_setMyNextChargeDate"
           ],
           "Effect": "Allow",
           "Action": [
@@ -368,7 +368,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Mutation.Recharge_updateMyDeliveryFrequency"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Mutation.Recharge_updateMyDeliveryFrequency"
           ],
           "Effect": "Allow",
           "Action": [
@@ -377,7 +377,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Mutation.Recharge_updateMyProductOptions"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Mutation.Recharge_updateMyProductOptions"
           ],
           "Effect": "Allow",
           "Action": [
@@ -390,7 +390,7 @@
     "name": "authenticated"
   },
   {
-    "projectId": "06ccc3dc-a9da-4f5b-9142-5a104db52ee3",
+    "projectId": "e6942252-2648-44e1-a793-f1d77edb40c9",
     "conditions": {},
     "updated": 1652374767855,
     "permissions": {
@@ -398,7 +398,7 @@
       "Statement": [
         {
           "Resource": [
-            "ts:workflow:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:*"
+            "ts:workflow:e6942252-2648-44e1-a793-f1d77edb40c9:*"
           ],
           "Effect": "Allow",
           "Action": [
@@ -407,7 +407,7 @@
         },
         {
           "Resource": [
-            "ts:workflow-step:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:*"
+            "ts:workflow-step:e6942252-2648-44e1-a793-f1d77edb40c9:*"
           ],
           "Effect": "Allow",
           "Action": [
@@ -416,7 +416,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Query.*"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Query.*"
           ],
           "Effect": "Allow",
           "Action": [
@@ -425,7 +425,7 @@
         },
         {
           "Resource": [
-            "ts:graphql:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:Mutation.*"
+            "ts:graphql:e6942252-2648-44e1-a793-f1d77edb40c9:Mutation.*"
           ],
           "Effect": "Allow",
           "Action": [
@@ -434,7 +434,7 @@
         },
         {
           "Resource": [
-            "ts:shape:06ccc3dc-a9da-4f5b-9142-5a104db52ee3:*"
+            "ts:shape:e6942252-2648-44e1-a793-f1d77edb40c9:*"
           ],
           "Effect": "Allow",
           "Action": [

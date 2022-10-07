@@ -2,9 +2,9 @@
   "$schema": "https://schema.takeshape.io/project-schema",
   "dataKey": "AQIDAHi9nATJb1LYgj5u7ShOGp43y2H6TuckRKGDlwTU4b6ryQE3F753UJC+EN+T6NA+sECOAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMEqXfFd6xB3H7ALoIAgEQgDsvrzZF7f6VjxJyNpDMrgKOxnBnPoX+1WefE8ckQNX4ZtZPzSBCYkNwIWY7C5Va9RIwWSxbNKNShoRfEQ==",
   "projectId": "e6942252-2648-44e1-a793-f1d77edb40c9",
-  "version": 128,
+  "version": 139,
   "created": "2022-07-25T07:27:22.404Z",
-  "updated": "2022-09-22T14:46:20.395Z",
+  "updated": "2022-10-04T13:27:07.673Z",
   "defaultLocale": "en-us",
   "locales": [
     "en-us"
@@ -1348,7 +1348,8 @@
       "authenticationType": "bearer",
       "options": {
         "endpoint": "https://api.rechargeapps.com"
-      }
+      },
+      "authentication": "7uv6VUDEFYRkCJ6oZP16/vgHxKB235syqSTp//7/IiLOe4FMMVUPC0mBmQzUFX/MRRahDxVKJ4JXjsRFPxnhjhE+kfYd+2DXOJRuzdWkWywjhVQrq6Gcn5nOaGY2VfiNvP9Z8pZJsjbKWC0r2wd6pkgSm/LEneFDhGiuiD1ODkJbhnm/rzz9AymVoI6MatgVySFpw/fu8f1Z37GyFIo="
     },
     "gorgias": {
       "id": "gorgias",

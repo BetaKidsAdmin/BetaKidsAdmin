@@ -1,5 +1,5 @@
-name: Penny Ecommerce
-description: "This pattern is for our Penny starter. It composes 9 popular e-commerce services into a single GraphQL API. Services include Shopify, OpenID, Klaviyo, REVIEWS.io, Voucherify, ShipEngine, Gorgias, and reCAPTCHA."
+name: Beta Kids Ecommerce
+description: ''
 icon: dollar-sign
 color: "#95bf46"
 categories:

@@ -3,7 +3,7 @@ import Layout from 'layouts/Account';
 import { getLayoutData } from 'layouts/getLayoutData';
 import { InferGetStaticPropsType, NextPage } from 'next';
 
-const AccountSubscriptionsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({globalSettings}) => {
+const AccountSubscriptionsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ globalSettings }) => {
   return (
     <Layout globalSettings={globalSettings} seo={{ title: 'Subscriptions' }}>
       <AccountSubscriptions />

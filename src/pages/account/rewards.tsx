@@ -16,11 +16,11 @@ const AccountRewardsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps
   );
 
   if (!loyaltyCard) {
-    return null;
+    return <Layout globalSettings={globalSettings} seo={{ title: 'Rewards' }}></Layout>;
   }
 
   return (
-    <Layout  globalSettings={globalSettings} seo={{ title: 'Rewards' }}>
+    <Layout globalSettings={globalSettings} seo={{ title: 'Rewards' }}>
       <AccountReferrals />
       {loyaltyCard && <AccountLoyaltyCard loyaltyCard={loyaltyCard} />}
     </Layout>
