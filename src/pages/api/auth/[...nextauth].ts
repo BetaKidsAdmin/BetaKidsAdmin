@@ -11,6 +11,7 @@ import {
   takeshapeAuthAudience,
   takeshapeAuthIssuer
 } from 'config';
+import sha1 from 'crypto-js/sha1';
 import {
   AuthCustomerAccessTokenCreateMutation,
   AuthCustomerAccessTokenCreateWithMultipassMutation,
@@ -237,14 +238,25 @@ const nextAuthConfig: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      const { firstName, lastName, shopifyCustomerAccessToken } = token;
+      const { firstName, lastName, sub, shopifyCustomerAccessToken } = token;
+
+      const currentData = new Date().toISOString();
+      const userId = sub.match(/shopify\/Customer\/(.{13})/).pop();
+      const loyaltyLionHash = sha1(
+        +userId + currentData + session.user.email + process.env.NEXT_PUBLIC_LOYALTY_LION_SECRET
+      ).toString();
 
       return {
         ...session,
         user: {
           ...session.user,
+          id: userId,
           firstName,
-          lastName
+          lastName,
+          loyaltyLionAuth: {
+            date: currentData,
+            token: loyaltyLionHash
+          }
         },
         shopifyCustomerAccessToken
       };
