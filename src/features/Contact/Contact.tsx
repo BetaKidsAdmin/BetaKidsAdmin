@@ -44,6 +44,7 @@ export const Contact = (props: React.PropsWithChildren<ContactProps>) => {
   const onSubmit = useCallback(
     async (formValues: ContactForm, recaptchaToken: string) => {
       const { firstName, lastName, company, email, phoneNumber, message } = formValues;
+      console.log('formValues', formValues);
 
       const result = await createTicket({
         variables: {
@@ -56,6 +57,7 @@ export const Contact = (props: React.PropsWithChildren<ContactProps>) => {
           recaptchaToken
         }
       });
+      console.log('result', result);
       const { id } = result.data?.createTicket ?? {};
       if (id) {
         setSuccess(`Thank you for reaching out! Created ticket #${id}.`);
