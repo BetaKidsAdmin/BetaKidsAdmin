@@ -14,6 +14,7 @@ const IndexPage: NextPage = ({ globalSettings, storefront }: InferGetStaticProps
       seo={{ title: 'A Beta Glucan Gummy to help boost your kids Immune System' }}
       globalSettings={globalSettings}
     >
+      {console.log('env', process.env.NEXT_PUBLIC_TAKESHAPE_AUTH_ISSUER)}
       <Storefront storefront={storefront} />
     </Layout>
   );
