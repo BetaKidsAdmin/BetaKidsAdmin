@@ -9,7 +9,10 @@ export const useRecaptcha = <T>() => {
   const executeRecaptcha = useCallback((callback: (status: string) => void) => {
     if (recaptchaSiteKey && recaptchaRef.current) {
       callbackRef.current = callback;
-      recaptchaRef.current.execute();
+      const getToken = recaptchaRef.current.execute();
+      getToken.then((token) => {
+        callback(token);
+      });
     } else {
       // eslint-disable-next-line no-console
       console.warn('Recaptcha is not configured.');

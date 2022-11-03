@@ -2,9 +2,9 @@
   "$schema": "https://schema.takeshape.io/project-schema",
   "dataKey": "AQIDAHi9nATJb1LYgj5u7ShOGp43y2H6TuckRKGDlwTU4b6ryQE3F753UJC+EN+T6NA+sECOAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMEqXfFd6xB3H7ALoIAgEQgDsvrzZF7f6VjxJyNpDMrgKOxnBnPoX+1WefE8ckQNX4ZtZPzSBCYkNwIWY7C5Va9RIwWSxbNKNShoRfEQ==",
   "projectId": "e6942252-2648-44e1-a793-f1d77edb40c9",
-  "version": 140,
+  "version": 145,
   "created": "2022-07-25T07:27:22.404Z",
-  "updated": "2022-10-10T10:36:08.878Z",
+  "updated": "2022-10-24T08:38:22.398Z",
   "defaultLocale": "en-us",
   "locales": [
     "en-us"
@@ -1458,7 +1458,8 @@
       "authenticationType": "searchParams",
       "options": {
         "endpoint": "https://www.google.com/recaptcha/api"
-      }
+      },
+      "authentication": "YdUIxYQSAf2D0l1Ghgc7DeeaVttdWhZCnwLWVIt8Gh4gDpMqGOZ1oHiAhkN6d7n25DnbjfRA7YQdJBLDBoZvoYsHv7UmdistBsI/vWBHO0RrzFQG/fWhxy5mscI5OQfLm83xi1JPU3N2JV5M62DFfpGmMjYl7vk="
     },
     "zendesk": {
       "id": "zendesk",
@@ -3009,7 +3010,7 @@
             "if": "$resolvers.recaptcha.success == true || !isEmpty($claims.email)",
             "name": "rest:post",
             "service": "zendesk",
-            "path": "/api/v2/requests",
+            "path": "/api/v2/requests.json",
             "json": {
               "ops": [
                 {
@@ -3019,6 +3020,10 @@
                 {
                   "path": "request.requester.email",
                   "mapping": "$args.email"
+                },
+                {
+                  "path": "request.subject",
+                  "value": "Website Contact Form"
                 },
                 {
                   "path": "request.comment.body",
